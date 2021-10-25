@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/native'
 
 
@@ -13,23 +13,29 @@ const secCol = Configurations.colors.secCol
 
 const MenuCont = styled.View`
 height:${props => props.height};
-width:45%;
+width:100%;
 align-items:flex-end;
 background-color:${props => props.color};
 `
 const IconCell = styled.Pressable`
+
 width:30%;
+
 flex-direction:row;
 background-color:green;
+align-items:center;
 justify-content:space-around;
 `  
 
 const OptCont = styled.View`
-width:100%;
-height:90%;
+width:50%;
+max-height:800px;
+height:500px;
+
 background-color:red;
+right:${props=> props.right};
 justify-content:space-around;
-display:none;
+display:${props => props.display};
 `
 
 const OptCell = styled.Pressable`
@@ -50,10 +56,27 @@ export const SubMenu = (
     }
 )=> {
 
-    const [height, setHeight] = useState('15%')
-    const [card, setCard] = useState(true)
+    const [height, setHeight] = useState('5%')
+    const [right, setRight] = useState('-50%')
+    const [menu, setMenu] = useState(true)
+    const [display, setDisplay] = useState('flex')
 
 
+       const menuHeight = ()=>
+    {
+        if(menu)
+        {
+            // setHeight('90%')
+            setRight ('0%')
+            // setDisplay('flex')
+        }
+        else{
+            // setHeight('5%')
+            setRight ('-50%')
+            // setDisplay('none')
+        }
+    }
+    
 
     return (
         <MenuCont 
@@ -64,12 +87,17 @@ export const SubMenu = (
 
 
 
-                <IconCell onPress = {()=> {alert('maafuc')}}> 
-                    <FontAwesomeIcon icon={faCoffee} size={35} color="white" /> 
+                <IconCell onPress = {()=> {
+                    setMenu(!menu) 
+                    menuHeight()
+                }}> 
+                    <FontAwesomeIcon icon={faEllipsisV} size={35} color="white" /> 
                 </IconCell>
 
 
-                <OptCont>
+                <OptCont 
+                    display = {display}
+                    right =   {right}>
                     <OptCell>
                         <FontAwesomeIcon icon={faCoffee} size = {30} color='white'/>
                         <TextCont>Option1</TextCont>
