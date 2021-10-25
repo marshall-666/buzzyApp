@@ -1,17 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import RecBtn from './comps/RecBtn';
-import JointCreate from './comps/JoinCreate';
-import AppHeader  from './comps/AppHeader';
-import  AppTimePicker  from './comps/AppTimePicker';
-import JointCreateScreen from './comps/JoinCreate';
-// export {default} from './storybook'; 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BtnAndHeaderScreen from './screens/BtnAndHeaderScreen';
-import TimePickerScreen from './screens/TimePickerScreen';
-import JoinCreateScreen from './screens/JoinCreateScreen';
+
 
 export {default}from './storybook'
 
