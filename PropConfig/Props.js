@@ -1,5 +1,5 @@
-export const Configurations = [
-    colors = 
+export const Configurations = {
+    colors: 
         {
             primCol : '#35579F',
             secCol  : '#1E315C',
@@ -8,11 +8,11 @@ export const Configurations = [
 
         },
     
-    texts = 
+    texts:
         {
             head    : 'Heading',
             subHead : 'SubHeading',
 
         },
 
-]
+    }
