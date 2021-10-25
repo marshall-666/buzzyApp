@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to buzzy bee lets start developing</Text>
+      
       {/* <Task/> */}
       <SubMenu/>
       <StatusBar style="auto" />
