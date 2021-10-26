@@ -2,6 +2,7 @@ import React from "react";
 import {View, TouchableOpacity, Text} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
@@ -10,8 +11,7 @@ display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
 border:1px solid #C4C4C4;
-border-top-right-radius:${(props) => props.borderTopRightRadius};
-border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
+border-radius:20px;
 overflow:hidden;
 `
 const EventColour = Styled.View`
@@ -39,21 +39,19 @@ height:100%;
 `
 
 
-const GroupEventCard = ({
+const IndividualEventCard = ({
     backgroundColor="#FFFFFF",
-    borderTopRightRadius="20px",
-    borderBottomRightRadius="0",
-    EventBackgroundColor="#EFF32A",
-    EventTitle="Buzzy Bee",
-    EventDescrip="come up with marketing scheme",
-    EventDueDate="September 23rd 5:00pm",
+    EventBackgroundColor="#D63030",
+    EventTitle="Basketball Practice",
+    EventDescrip="Town Center Field #5",
+    EventDueDate="September 24th 7:00pm",
     onGroupPress=()=>{},
-    NumOfGroupMembers="+3 people"
+    onChatPress=()=>{},
 
 
 }) => {
   return (
-  <CardCont backgroundColor={backgroundColor} borderTopRightRadius={borderTopRightRadius} borderBottomRightRadius={borderBottomRightRadius}>
+  <CardCont backgroundColor={backgroundColor}>
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
       <Text style={{fontSize:30}}>{EventTitle}</Text>
@@ -63,9 +61,11 @@ const GroupEventCard = ({
     
     <IconCont>
       <TouchableOpacity onPress={onGroupPress}>
-        <MaterialIcons name="group" size={55} color="black" />
+        <MaterialIcons name="group" size={50} color="black" />
       </TouchableOpacity>
-      <Text>{NumOfGroupMembers}</Text>
+      <TouchableOpacity onPress={onChatPress}>
+        <Entypo name="chat" size={45} color="black" />
+      </TouchableOpacity>
     </IconCont>
   
   
@@ -76,4 +76,4 @@ const GroupEventCard = ({
 
 
 
-export default GroupEventCard;
+export default IndividualEventCard;

@@ -44,11 +44,10 @@ const GroupEventCard = ({
     borderTopRightRadius="20px",
     borderBottomRightRadius="0",
     EventBackgroundColor="#EFF32A",
-    EventTitle="Buzzy Bee",
-    EventDescrip="come up with marketing scheme",
-    EventDueDate="September 23rd 5:00pm",
+    EventTitle="MDIA 3109",
+    EventDescrip="Finish Beast Composition",
+    EventDueDate="Due: September 22nd",
     onGroupPress=()=>{},
-    NumOfGroupMembers="+3 people"
 
 
 }) => {
@@ -60,16 +59,6 @@ const GroupEventCard = ({
       <Text>{EventDescrip}</Text> 
       <Text>{EventDueDate}</Text>  
     </TextCont>
-    
-    <IconCont>
-      <TouchableOpacity onPress={onGroupPress}>
-        <MaterialIcons name="group" size={55} color="black" />
-      </TouchableOpacity>
-      <Text>{NumOfGroupMembers}</Text>
-    </IconCont>
-  
-  
-  
   </CardCont>
   );
 };
