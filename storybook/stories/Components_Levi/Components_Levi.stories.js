@@ -4,10 +4,10 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import { Text,TouchableOpacity } from 'react-native';
 import CenterView from '../CenterView';
-import RecBtn from '../../../Comps/RecBtn';
-import AppHeader from '../../../Comps/AppHeader';
-import AppTimePicker from '../../../Comps/AppTimePicker'
-import JoinCreate from '../../../Comps/JoinCreate'
+import RecBtn from '../../../comps/RecBtn';
+import AppHeader from '../../../comps/AppHeader';
+import AppTimePicker from '../../../comps/AppTimePicker'
+import JoinCreate from '../../../comps/JoinCreate'
 
 storiesOf('Components_Levi', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
