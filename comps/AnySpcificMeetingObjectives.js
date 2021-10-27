@@ -6,7 +6,7 @@ const AnySpcificMeetingObjectives = ({
     meetingObjectives
 }) => {
     return (
-        <View style={{width: '100%',}}>
+        <View style={{flex: 1}}>
             <View style={{flexDirection: 'row'}}>
                 <Ionicons name="checkmark-sharp" size={18} color="white" />
                 <Ionicons name="checkmark-sharp" size={18} color="white" />
@@ -16,7 +16,7 @@ const AnySpcificMeetingObjectives = ({
                 <TextInput
                     value={meetingObjectives}
                 />
-                <Text style={{color: '#dbdbdb'}}>Type any objectives your team should complete during this meeting!</Text>
+                <Text style={{color: '#dbdbdb', padding: 10}}>Type any objectives your team should complete during this meeting!</Text>
             </View>
         </View>
     )
@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
         width: '90%',
         height: 200,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        // justifyContent: 'flex-end',
         backgroundColor: '#fff',
         borderRadius: 15,
     }
