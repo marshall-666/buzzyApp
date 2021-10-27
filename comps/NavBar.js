@@ -70,3 +70,5 @@ const NavBar = ({
 
 
 export default NavBar;
+
+//Change to const export
