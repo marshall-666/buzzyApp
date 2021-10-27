@@ -2,15 +2,16 @@ import React from 'react'
 import { Image } from 'react-native'
 
 const Ellipse = ({
-    imgUrl = '../assets/icon.png',
+    imgUrl = 'https://thumbs.dreamstime.com/b/beautiful-woman-headshot-over-white-background-101850107.jpg',
 }) => {
     return (
         <Image 
-            source={require(imgUrl)}
+            source={{uri:imgUrl}}
             style={{
                 width: 100,
                 height: 100,
                 borderRadius: 50,
+                margin: 10,
             }}
         />
     )

@@ -1,25 +1,18 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 
 const MembersInGroupCard = ({
-    memberName,
-    imgUrl,
+    memberName = 'Member\'s name',
+    imgUrl = 'https://thumbs.dreamstime.com/b/beautiful-woman-headshot-over-white-background-101850107.jpg',
 }) => {
     return (
-        <View 
-            style={{
-                width: '90%',
-                flexDirection: 'row', 
-                borderWidth: 1, 
-                borderColor:'#c4c4c4'
-            }}
-        >
+        <View style={styles.backBox}>
             <EllipseSmall imgUrl={imgUrl}/>
-            <Text>{memberName}</Text>
-            <AntDesign name="calendar" size={20} color="black" />
-            <Feather name="at-sign" size={20} color="black" />
+            <Text style={styles.nameText}>{memberName}</Text>
+            <AntDesign name="calendar" size={20} color="black" style={{margin: 10}}/>
+            <Feather name="at-sign" size={20} color="black" style={{margin: 10}}/>
         </View>
     )
 }
@@ -28,16 +21,33 @@ export default MembersInGroupCard
 
 
 const EllipseSmall = ({
-    imgUrl = '../assets/icon.png',
+    imgUrl,
 }) => {
     return (
         <Image 
-            source={require(imgUrl)}
+            source={{uri:imgUrl}}
             style={{
                 width: 40,
                 height: 40,
                 borderRadius: 20,
+                margin: 10,
             }}
         />
     )
 }
+
+const styles = StyleSheet.create({
+    backBox: {
+        width: '90%',
+        height: 60,
+        alignItems: 'center',
+        flexDirection: 'row', 
+        borderWidth: 1, 
+        borderColor:'#c4c4c4',
+        backgroundColor: '#fff',
+    },
+    nameText: {
+        width: '55%',
+        padding: 10,
+    }
+})
