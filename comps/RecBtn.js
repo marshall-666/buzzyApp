@@ -19,7 +19,7 @@ font-size:24px;
 
 `
 
-const RecBtn = ({onBtnPress=()=>{},
+const RecBtn = ({onRecBtnPress=()=>{},
   text = 'Create Group',
   RecBtnColor='#FCCA12',
   bradius=10,
@@ -28,16 +28,17 @@ const RecBtn = ({onBtnPress=()=>{},
 }) => {
   return (
   
-    <TouchableOpacity  onPress={onBtnPress}>
+    
    
     <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width}>
-      {/* <TouchableOpacity
-        onPress={onBtnPress}
-      > */}
+      <TouchableOpacity
+        onPress={onRecBtnPress}
+      >
+      
         <TextInput>{text}</TextInput>
-      {/* </TouchableOpacity> */}
+      </TouchableOpacity>
     </BtnCon>
-     </TouchableOpacity>
+    
   );
 };
 

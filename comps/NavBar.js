@@ -22,9 +22,10 @@ background-color:${(props) => props.circleBackgroundColor};
 display:flex;
 justify-content:center;
 align-items:center;
-height:100%;
+height:90%;
 width:16%;
 top:-5%;
+border:5px solid #35579F
 `
 
 

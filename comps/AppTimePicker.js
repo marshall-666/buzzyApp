@@ -52,13 +52,16 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
   return (
     <View style={styles.container}>
-      <Text> {text}  </Text>
-      <View style={{margin:20}}> 
+      <Text  style={{color:"#ffffff"}}> {text}  </Text>
+      <View style={styles.buttonCon}>
+      <View style={{marginRight:20}}> 
         <Button onPress={showDatepicker} title="Set date " />
       </View>
       <View>
         <Button onPress={showTimepicker} title="Set time " />
       </View>
+      </View>
+     
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -76,11 +79,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 };
 const styles = StyleSheet.create({
   container: {
-    height:100,
-    backgroundColor: '#fff',
+    height:60,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonCon:{
+    display:'flex',
+    flexDirection:'row',
+    marginTop:20
+  }
 });
 
 export default AppTimePicker

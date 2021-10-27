@@ -18,18 +18,18 @@ font-size:24px;
 
 `
 const TaskInput =Styled.Text`
-font-size:24px;
+font-size:18px;
 text-align:center
 
 `
 const TaskBtn = ({
   onBtnPress=()=>{},
-  text = '3',
+  taskNum = '3',
   RecBtnColor='#E5E5E5',
   bradius=42.5,
   height=85,
   width=85,
-  task="Course"
+  taskCate="Course"
 }) => {
   return (
     <View>
@@ -38,11 +38,11 @@ const TaskBtn = ({
     >
     <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width} >
      
-        <TextInput>{text}</TextInput>
+        <TextInput>{taskNum}</TextInput>
       
     </BtnCon>
     </TouchableOpacity>
-    <TaskInput>{task}</TaskInput>
+    <TaskInput>{taskCate}</TaskInput>
      </View>
   );
 };
