@@ -1,7 +1,7 @@
 import React from "react";
 import {View, TouchableOpacity, Text} from 'react-native';
 import Styled from "styled-components/native";
-import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
@@ -39,7 +39,7 @@ height:100%;
 `
 
 
-const CourseEventCard = ({
+const GroupEventCard = ({
     backgroundColor="#FFFFFF",
     borderTopRightRadius="20px",
     borderBottomRightRadius="0",
@@ -47,7 +47,7 @@ const CourseEventCard = ({
     EventTitle="MDIA 3109",
     EventDescrip="Finish Beast Composition",
     EventDueDate="Due: September 22nd",
-    onEditPress=()=>{},
+    onGroupPress=()=>{},
 
 
 }) => {
@@ -59,18 +59,10 @@ const CourseEventCard = ({
       <Text>{EventDescrip}</Text> 
       <Text>{EventDueDate}</Text>  
     </TextCont>
-
-    <IconCont>
-      <TouchableOpacity onPress={onEditPress}>
-      <Entypo name="edit" size={50} color="black" />
-      </TouchableOpacity>
-    </IconCont>
-  
   </CardCont>
-
   );
 };
 
 
 
-export default CourseEventCard;
+export default GroupEventCard;

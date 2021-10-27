@@ -6,7 +6,6 @@ import NavBar from '../../../comps/NavBar';
 import GroupEventCard from '../../../comps/GroupEventCard';
 import IndividualEventCard from '../../../comps/IndividualEventCard';
 import CourseEventCard from '../../../comps/CourseEventCard';
-import MeetingTimeCard from '../../../comps/MeetingTimeCard';
 
 storiesOf('Components_Nick', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
@@ -14,7 +13,6 @@ storiesOf('Components_Nick', module)
   .add('GroupEventCard', () => <GroupEventCard/>)
   .add('IndividualEventCard', () => <IndividualEventCard/>)
   .add('CourseEventCard', () => <CourseEventCard/>)
-  .add('MeetingTimeCardCard', () => <MeetingTimeCard/>)
 
   
   
