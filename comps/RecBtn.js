@@ -5,17 +5,18 @@ import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import  Styled from "styled-components/native";
 
 
-const BtnCon = Styled.View`
-width:${(props)=>props.width}px;
-height:${(props)=>props.height}px;
+const BtnCon = Styled.TouchableOpacity`
+width:${(props)=>props.width};
+height:${(props)=>props.height};
 background-color:${(props)=>props.bgc};
 justify-content:center;
 align-items:center;
 border-radius:${(props)=>props.bradius}px
-
 `
 const TextInput =Styled.Text`
 font-size:24px;
+margin-right:30px
+margin-left:30px
 
 `
 
@@ -23,21 +24,20 @@ const RecBtn = ({onRecBtnPress=()=>{},
   text = 'Create Group',
   RecBtnColor='#FCCA12',
   bradius=10,
-  height=75,
-  width=275
+  height="12%",
+  width="100%"
 }) => {
   return (
   
     
-   
-    <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width}>
-      <TouchableOpacity
-        onPress={onRecBtnPress}
-      >
+   <View style={styles.container}>
+ <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width}  onPress={onRecBtnPress}>
       
-        <TextInput>{text}</TextInput>
-      </TouchableOpacity>
+        <TextInput>{text}</TextInput>       
+      
     </BtnCon>
+   </View>
+   
     
   );
 };
@@ -45,3 +45,10 @@ const RecBtn = ({onRecBtnPress=()=>{},
 
 
 export default RecBtn;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+   
+  },
+ 
+});

@@ -1,12 +1,13 @@
 
 import styled from "@emotion/styled-base";
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View, Button, Picker } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
 import NavBar from "./NavBar";
 import RecBtn from "./RecBtn";
+import {Picker} from '@react-native-picker/picker';
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -14,14 +15,15 @@ height:${(props) => props.height}px;
 background-color:${(props) => props.bgc};
 justify-content:center;
 align-items:center;
-border-radius:${(props) => props.bradius}px;
-display:flex;
+border-top-left-radius:25px ;
+border-top-right-radius:25px;
+display:flex
 flex-wrap:wrap;
 flex-direction:row;
 `
 const TextCon = Styled.View`
 display:flex;
-height:50%;
+height:55%;
 width:300px;
 justify-content:flex-start;
 flex-direction:column;
@@ -38,7 +40,7 @@ marginLeft:0;
 const TextInput2 = Styled.Text`
 font-size:18px;
 color:#ffffff;
-padding-top:10px
+padding-top:5%
 `
 const TextInput3 = Styled.TextInput`
 width:100%;
@@ -49,18 +51,22 @@ width:100%;
 color:#ffffff;
 `
 const TimeCon = Styled.View`
-height:10%;
+height:15%;
 `
 const ButtonCon = Styled.View`
-margin-top:10%
+margin-top:10%;
+width:100%;
+justify-content:center;
+align-items:center;
+
 `
 
 const TaskTable = ({
 
   text = 'Create Group',
   CardColor = '#35579F',
-  bradius = 25,
-  height = 600,
+
+  height = 650,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },
@@ -68,10 +74,9 @@ const TaskTable = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
-    <CardCon bgc={CardColor} bradius={bradius} height={height} width={width}>
+    <CardCon bgc={CardColor}  height={height} width={width}>
 
       <TextCon>
-        
           <TextInput1 >  <Text style={{marginRight:50}}>Create Task </Text>
           <FontAwesome5 name="edit" size={22} color="white" />
           </TextInput1>
@@ -104,22 +109,17 @@ const TaskTable = ({
         // onChangeText={text => setText(text)}
         // defaultValue={text}
         ></TextInput3>
+      <TextInput2>
+         Time and Date
+        </TextInput2>
       </TextCon>
       <TimeCon>
         <AppTimePicker />
       </TimeCon>
       <ButtonCon>
-
       <RecBtn onRecBtnPress={onRecBtnPress} />
       </ButtonCon>
-     
-     
-
-      
-     
-
-
-
+    
     </CardCon>
   );
 };

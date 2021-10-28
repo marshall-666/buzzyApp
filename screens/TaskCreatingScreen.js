@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text,ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
 import RecBtn from '../comps/RecBtn';
-const CardWrapper = styled.View`
-margin-left:10px;
-margin-top:4%;
-margin-bottom:4%;
+
+
+const Wrapper =styled.ScrollView`
+height:100;
+`
+const TaskButtonWrapper = styled.View`
+justify-content:center
+margin:3.5%;
+margin-top:5%;
+margin-bottom:5%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
@@ -19,12 +25,12 @@ flex-direction:row;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-margin-top:725px;
-height:100%;
+top:92.5%;
+height:100%
 width:100%
-left:18px
+left:5%
 `
-const fakeDate = [{
+const taskCategory = [{
   id: 1,
   taskNum: "8",
   taskCate: "Courses",
@@ -42,29 +48,37 @@ const fakeDate = [{
 ]
 
 const TaskCreatingScreen = ({ navigation }) => {
-  const [tasks, setTasks] = useState(fakeDate)
-  // setTasks()
+  const [tasks, setTasks] = useState(taskCategory)
+ 
+  
   return (
+  
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
       <AppHeader text="Task" />
-      <CardWrapper>
-        {
+
+      <Wrapper> 
+      <TaskButtonWrapper>
+       
+              {
           tasks.map((o, i) => (
-            <CardWrapper key={i}>
+            <TaskButtonWrapper key={i}>
               <TaskBtn id={o.id} taskNum={o.taskNum} taskCate={o.taskCate} />
-            </CardWrapper>
+            </TaskButtonWrapper>
           )
           )
         }
-      </CardWrapper>
-      <TaskTable onRecBtnPress={()=>navigation.navigate('Taskboard')} />
-      
-       <NavBarCon>
-
        
+      </TaskButtonWrapper>
+      <TaskTable onRecBtnPress={()=>navigation.navigate('Taskboard')} />
+       
+    </Wrapper>
+       <NavBarCon>
           <NavBar />
+
           </NavBarCon>
     </View>
+   
+
   );
 }
 

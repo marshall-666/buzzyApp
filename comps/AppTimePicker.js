@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Button, Platform, StyleSheet, Text} from 'react-native';
+import {View, Button, Platform, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -18,22 +18,22 @@ import DateTimePicker from '@react-native-community/datetimepicker';
     
     let tempDate =new Date(currentDate);
     let m=tempDate.getMonth()
-    if (m===0){fm="January";}
-        else if (m===1){fm="February";}
-        else if (m===2){fm="March";}
-        else if (m===3){fm="April";}
+    if (m===0){fm="Jan";}
+        else if (m===1){fm="Feb";}
+        else if (m===2){fm="Mar";}
+        else if (m===3){fm="Apr";}
         else if (m===4){fm="May";}
         else if (m===5){fm="Jun";}
-        else if (m===6){fm="July";}
-        else if (m===7){fm="August";}
-        else if (m===8){fm="September";}
-        else if (m===9){fm="October";}
-        else if (m===10){fm="November";}
-        else if (m===11){fm="December";}
-    let fDate= fm+ '/'+tempDate.getDate()+'/'+tempDate.getFullYear();
+        else if (m===6){fm="Jul";}
+        else if (m===7){fm="Aug";}
+        else if (m===8){fm="Sep";}
+        else if (m===9){fm="Oct";}
+        else if (m===10){fm="Nov";}
+        else if (m===11){fm="Dec";}
+    let fDate= fm+' ' + '/'+' '+tempDate.getDate()+' '+'/'+' '+tempDate.getFullYear();
     let fTime= tempDate.getHours()+':' +tempDate.getMinutes();
     
-    setText( fTime+ " " +fDate)
+    setText( fTime+ "   " +fDate)
 
   };
 
@@ -52,13 +52,17 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
   return (
     <View style={styles.container}>
-      <Text  style={{color:"#ffffff"}}> {text}  </Text>
+      <Text  style={{color:"#ffffff", fontSize:20}}> {text}  </Text>
       <View style={styles.buttonCon}>
       <View style={{marginRight:20}}> 
-        <Button onPress={showDatepicker} title="Set date " />
+        <TouchableOpacity style={styles.button} onPress={showDatepicker} >
+        <Text>Set Date</Text>
+        </TouchableOpacity>
       </View>
       <View>
-        <Button onPress={showTimepicker} title="Set time " />
+        <TouchableOpacity style={styles.button} onPress={showTimepicker}  >
+        <Text>Set Time</Text>
+        </TouchableOpacity>
       </View>
       </View>
      
@@ -86,8 +90,15 @@ const styles = StyleSheet.create({
   buttonCon:{
     display:'flex',
     flexDirection:'row',
-    marginTop:20
-  }
+    marginTop:25
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 7.5,
+    borderRadius:10,
+    width: 95
+  },
 });
 
 export default AppTimePicker
