@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:27.5%;
+height:90px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -15,7 +15,7 @@ border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
 overflow:hidden;
 `
 const EventColour = Styled.View`
-width:5%;
+width:4%;
 height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `

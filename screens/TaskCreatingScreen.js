@@ -7,8 +7,25 @@ import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
-import RecBtn from '../comps/RecBtn';
+// import {taskCategory} from '../data/category'
 
+const taskCategory = [
+  {
+  id: 1,
+  taskNum: "8",
+  taskCate: "Courses",
+},
+{
+  id: 2,
+  taskNum: "3",
+  taskCate: "Events",
+},
+{
+  id: 3,
+  taskNum: "10",
+  taskCate: "Tasks",
+}
+]
 
 const Wrapper =styled.ScrollView`
 height:100;
@@ -30,22 +47,7 @@ height:100%
 width:100%
 left:5%
 `
-const taskCategory = [{
-  id: 1,
-  taskNum: "8",
-  taskCate: "Courses",
-},
-{
-  id: 2,
-  taskNum: "3",
-  taskCate: "Events",
-},
-{
-  id: 3,
-  taskNum: "10",
-  taskCate: "Tasks",
-}
-]
+
 
 const TaskCreatingScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(taskCategory)
@@ -55,10 +57,8 @@ const TaskCreatingScreen = ({ navigation }) => {
   
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
       <AppHeader text="Task" />
-
       <Wrapper> 
       <TaskButtonWrapper>
-       
               {
           tasks.map((o, i) => (
             <TaskButtonWrapper key={i}>

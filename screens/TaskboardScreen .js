@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -9,6 +7,13 @@ import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import CourseEventCard from '../comps/CourseEventCard';
 import GroupEventCard from '../comps/GroupEventCard';
+import IndividualEventCard from '../comps/IndividualEventCard';
+import {category} from '../data/category'
+import {coursesData} from '../data/tasks'
+import {groupsData} from '../data/tasks'
+import {eventsData} from '../data/tasks'
+
+
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
@@ -17,6 +22,8 @@ margin-bottom:4%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
+justify-content:space-between;
+width:75%;
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -43,133 +50,68 @@ width:100%;
 `
 
 
-const taskCategory = {
-  Course: {
-    id: 1,
-    taskNum: "8",
-    taskCate: "Courses",
-  },
-  Group: {
-    id: 2,
-    taskNum: "3",
-    taskCate: "Events",
-  },
-  Event: {
-    id: 3,
-    taskNum: "10",
-    taskCate: "Tasks",
-  }
-}
-const groupsData=[
-  {
-    id: 1,
-    EventTitle: "Workshop",
-    EventDescrip: "project 2 meeting",
-    EventDueDate:"Nov 05st"
-},
-{
-  id: 2,
-  EventTitle: "Coaching lesson",
-  EventDescrip: "PHP && Database",
-  EventDueDate:"Nov 3st"
-},
-{
-  id: 3,
-  EventTitle: "Meeting",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 4,
-  EventTitle: "Meeting",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
 
-]
-
-const coursesData=[
-  {
-    id: 1,
-    EventTitle: "MDIA 3109",
-    EventDescrip: "Advance Phoshop",
-    EventDueDate:"Oct 31st"
-},
-{
-  id: 2,
-  EventTitle: "FMGT 1152",
-  EventDescrip: "Accounting for th Manager",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 3,
-  EventTitle: "MDIA 3126",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
-{
-  id:4,
-  EventTitle: "MKTG 1219",
-  EventDescrip: "Professional Sles Skills",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 5,
-  EventTitle: "COMP 3130",
-  EventDescrip: "Web Development 3",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 6,
-  EventTitle: "MDIA 3106",
-  EventDescrip: "Design 2",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 7,
-  EventTitle: "MDIA 3103",
-  EventDescrip: "Project 2",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 8,
-  EventTitle: "COMP 2200",
-  EventDescrip: "Business communication",
-  EventDueDate:"Oct 31st"
-}
-]
 const TaskboardScreen = ({ navigation }) => {
-  const [tasks, setTasks] = useState(taskCategory)
+  const [tasks, setTasks] = useState(category)
   const [courses, setCourses] = useState(coursesData)
   const [groups, setGroups] = useState(groupsData)
+  const [events, setEvents] = useState(eventsData)
   const [showcourses, setShowCourses] = useState(showcourses)
   const [course, setCourse] = useState(false)
   const [group, setGroup] = useState(false)
   const [event, setEvent] = useState(false)
+  const [coursebgc, setCourseBgc] = useState(false)
+  const [eventbgc, setEventBgc] = useState(false)
+  const [groupbgc, setGroupBgc] = useState(false)
+  
+  // const randomColors = () => {
+  //   const randomColor = Math.floor(Math.random() * 16777215)
+  //     .toString(16)
+  //     .padStart(6, '0');
+  //   return `#${randomColor}`;
+  // };
+  var randomColor = require('randomcolor'); // import the script
+  var color = randomColor(); // a hex code for an attractive color
+  randomColor({
+    luminosity: 'bright',
+    format: 'rgb' // e.g. 'rgb(225,200,20)'
+ });
 
   const coursePress =()=>{
     setCourse(true)
     setGroup(false)
     setEvent(false)
+    setCourseBgc(true)
+    setEventBgc(false)
+    setGroupBgc(false)
   }
   const groupPress =()=>{
     setGroup(true)
     setCourse(false)
     setEvent(false)
+    setGroupBgc(true)
+    setEventBgc(false)
+    setCourseBgc(false)
+
   }
   const eventPress =()=>{
     setEvent(true)
     setCourse(false)
     setGroup(false)
+    setCourseBgc(false)
+    setEventBgc(true)
+    setGroupBgc(false)
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
       <AppHeader text="Task" />
       <TaskButtonsWrapper>
 
-      <TaskBtn  taskNum={taskCategory.Course.taskNum} taskCate={taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
-      <TaskBtn taskNum={taskCategory.Group.taskNum} taskCate={taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn taskNum={taskCategory.Event.taskNum} taskCate={taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
+  <TaskBtn  taskBtnColor={coursebgc?"yellow":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
+      
+      
+      <TaskBtn taskBtnColor={groupbgc?"yellow":"#E5E5E5"} tas taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
+      <TaskBtn taskBtnColor={eventbgc?"yellow":"#E5E5E5"} tastaskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
       
       </TaskButtonsWrapper>
       <TaskCardArea/>   
@@ -177,7 +119,7 @@ const TaskboardScreen = ({ navigation }) => {
       {
       courses.map((o, i) => (
      
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate}/>
+<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
 
       )
       )
@@ -187,7 +129,17 @@ const TaskboardScreen = ({ navigation }) => {
       {
       groups.map((o, i) => (
      
-<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate}/>
+<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
+
+      )
+      )
+      }
+      </TaskCardsWrapper>) : null}
+      { event ? (<TaskCardsWrapper>
+      {
+      events.map((o, i) => (
+     
+<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
 
       )
       )

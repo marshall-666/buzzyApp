@@ -77,8 +77,7 @@ const TaskTable = ({
     <CardCon bgc={CardColor}  height={height} width={width}>
 
       <TextCon>
-          <TextInput1 >  <Text style={{marginRight:50}}>Create Task </Text>
-          <FontAwesome5 name="edit" size={22} color="white" />
+          <TextInput1 ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color="white" />
           </TextInput1>
         <TextInput2>
           Task Name

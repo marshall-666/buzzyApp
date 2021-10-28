@@ -25,7 +25,7 @@ text-align:center
 const TaskBtn = ({
   onBtnPress=()=>{},
   taskNum = '3',
-  RecBtnColor='#E5E5E5',
+  taskBtnColor='#E5E5E5',
   bradius=42.5,
   height=85,
   width=85,
@@ -36,7 +36,7 @@ const TaskBtn = ({
     <TouchableOpacity
     onPress={onBtnPress}
     >
-    <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width} >
+    <BtnCon bgc={taskBtnColor} bradius={bradius} height={height} width={width} >
      
         <TextInput>{taskNum}</TextInput>
       

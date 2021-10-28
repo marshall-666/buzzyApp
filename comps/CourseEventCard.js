@@ -2,10 +2,12 @@ import React from "react";
 import {View, TouchableOpacity, Text} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 
 const CardCont = Styled.View`
 width:90%;
-height:17.5%;
+height:90px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -15,7 +17,7 @@ border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
 overflow:hidden;
 `
 const EventColour = Styled.View`
-width:5%;
+width:4%;
 height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `
@@ -55,7 +57,7 @@ const GroupEventCard = ({
   <CardCont backgroundColor={backgroundColor} borderTopRightRadius={borderTopRightRadius} borderBottomRightRadius={borderBottomRightRadius}>
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
-      <Text style={{fontSize:20}}>{EventTitle}</Text>
+      <Text><Text style={{fontSize:20}}>{EventTitle}</Text>  <FontAwesome5 name="edit" size={22} color="black" iconStyle={{marginLeft: 50}} /></Text> 
       <Text style={{fontSize:14}}>{EventDescrip}</Text> 
       <Text style={{fontSize:14}}>{EventDueDate}</Text>  
     </TextCont>
