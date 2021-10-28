@@ -10,13 +10,15 @@ const primCol = Configurations.colors.primCol
 
 const CardCont = styled.View`
 background-color:${primCol};
+height:400px;
+width100%;
 `
 
 const ButPress = styled.Pressable``
 
 const HeadTxt = styled.Text``
 
-export const  CreateGroup = ()=> {
+export const  FuncName = ()=> {
     return (
         <CardCont>
             <HeadTxt>

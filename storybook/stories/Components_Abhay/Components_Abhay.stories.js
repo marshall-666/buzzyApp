@@ -6,12 +6,15 @@ import { SubMenu } from '../../../comps/SubMenu';
 import {Task} from '../../../comps/Task'
 import {ChatBar} from '../../../comps/ChatBar'
 import {CreateGroup} from  '../../../comps/CreateGroup'
+import {Calendar} from '../../../comps/Calendar'
+
 storiesOf('Components_Abhay', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
   .add('Task Card', () => <Task/>)
   .add('statusSubMenu', () => <SubMenu/>)
   .add('Chat Bar', () => <ChatBar/>)
   .add ('Create group', ()=> <CreateGroup/>)
+  .add ('Calendar', ()=> <Calendar/>)
  
 
   
