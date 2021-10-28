@@ -10,12 +10,14 @@ import { faCameraRetro } from '@fortawesome/free-solid-svg-icons'
 const butCol = Configurations.colors.butCol
 
 const ChatCont = styled.View`
+width:100%;
 flex-direction:row;
-background-color:green;
+align-items:center;
+justify-content:space-around;
 `
 const InpButCont = styled.View`
 flex-direction: row
-border: 1px solid grey;
+
 background-color:white;
 justify-content:space-between;
 width:90%;
@@ -25,28 +27,41 @@ background-color:${props => props.btnCol};
 height:45px;
 border-radius:5px;
 align-items:center
-justify-content:center;
-width:150px;
-`
 
+justify-content:center;
+width:100px;
+`
+const TextBox = styled.TextInput`
+border:1px solid grey;
+width:70%;
+flex-wrap:wrap;
+`
+const CamCont = styled.Pressable``
 
 export const ChatBar =({
-    btnCol = butCol
+    btnCol = butCol,
+    onCamPress = ()=>{}
 }
     
     )=> {
     return (
         <ChatCont>
-           
-           <FontAwesomeIcon icon={faCameraRetro} size = {30}/>
+           <CamCont onPress={()=>{onCamPress}}>
+            <FontAwesomeIcon icon={faCameraRetro} size = {30}/>
+           </CamCont>
            <InpButCont>
-                <TextInput placeholder="Type Your Message here"/>
+                <TextBox 
+                    multiline
+                    numberOfLines={4}
+                    placeholder="Type Your Message here"
+                    />
                 <SendBut 
-                btnCol={btnCol} 
-                onPress = {()=>{}}>
-                    <Text>Send</Text>
+                    btnCol={btnCol} 
+                    onPress = {()=>{}}>
+                        <Text>Send</Text>
+                </SendBut>
 
-                    </SendBut>
+                        
             </InpButCont>
         </ChatCont>
     )
