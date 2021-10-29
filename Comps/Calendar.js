@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { View, Text, TextInput,Pressable, TouchableOpacity } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { View, Text, TextInput,Pressable, TouchableOpacity, Button } from 'react-native'
 import styled from 'styled-components/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
@@ -21,21 +21,65 @@ const timeToString =(time)=> {
     return date.toISOString().split('T')[0];
   }
 
+const trialPush = {
+        '2021-12-01': 
+          [
+            {name:'wasaaaaaaaap', dueDaTE:'THIS SHIT WORKS!!'},
+            {name:'REALLY???', dueDaTE:'GODDAMN SON'}
+          
+          ],
+        '2021-12-02': 
+          [
+            {name:'good work', dueDaTE:'See you next week'},
+            {name:'REALLY???', dueDaTE:'GODDAMN SON'}
+          
+          ],
+        '2021-12-03': 
+          [
+            {name:'wasaaaaaaaap', dueDaTE:'THIS SHIT WORKS!!'},
+            {name:'REALLY???', dueDaTE:'GODDAMN SON'}
+          
+          ]
+        }
+    
+
 
 export const  Calendar = ()=> {
-    const [items, setItems] = useState({
-      '2021-10-25': 
-      [
-        {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
-        {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
-        {name:'Levi Is Awesome', dueDaTE:'He codes a lot'}
-      
-      ],
-      '2021-10-28': [{name:'But he needs some sleep', dueDaTE:'so he can rest'}]
+    const [items, setItems] = useState(
+      {
+        '2021-10-25': 
+          [
+            {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
+            {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
+            {name:'Levi Is Awesome', dueDaTE:'He codes a lot'}
+          
+          ],
+
+        '2021-10-28': 
+          [
+            {name:'But he needs some sleep', dueDaTE:'so he can rest'},
+            {name:'But he needs some sleep', dueDaTE:'so he can rest'}
+          
+          ],
+
+        '2021-11-01': 
+          [
+            {name:'Nick is a little Bitch', dueDaTE:'due at 7:00pm'},
+            {name:'But he is also a good coder', dueDaTE:'meet at whereevr'}
+          
+          ]
     })
 
- 
-
+ const  loadItems=(day) =>{
+    
+      for (let i = -15; i < 85; i++) {
+        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        const strTime = timeToString(time);
+        if (!items[strTime]) {
+          items[strTime] = [];
+        }
+      }
+    }
     
   const renderItem = (item)=>
   {
@@ -50,13 +94,20 @@ export const  Calendar = ()=> {
 
     return (
         <View style ={{flex:1, width:'100%',}}>
-             <Agenda
+             <Agenda style ={{backgroundColor:'red'}}
        
         items={items}
-        // loadItemsForMonth={loadItems}
+        
+        loadItemsForMonth={loadItems}
         // selected={'2017-05-16'}
         renderItem={renderItem}
  />
+
+ <Button 
+ title="Add Task"
+ onPress={()=>{
+   setItems( {...items, ...trialPush})
+ }} />
 
         </View>
     )
