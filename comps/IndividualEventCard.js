@@ -6,16 +6,15 @@ import { Entypo } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:20%;
+height:90px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
 border:1px solid #C4C4C4;
-border-radius:20px;
 overflow:hidden;
 `
 const EventColour = Styled.View`
-width:8%;
+width:4%;
 height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `
@@ -54,17 +53,17 @@ const IndividualEventCard = ({
   <CardCont backgroundColor={backgroundColor}>
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
-      <Text style={{fontSize:30}}>{EventTitle}</Text>
+      <Text style={{fontSize:24}}>{EventTitle.substr(0,15)}</Text>
       <Text>{EventDescrip}</Text> 
       <Text>{EventDueDate}</Text>  
     </TextCont>
     
     <IconCont>
       <TouchableOpacity onPress={onGroupPress}>
-        <MaterialIcons name="group" size={50} color="black" />
+        <MaterialIcons name="group" size={35} color="black" />
       </TouchableOpacity>
       <TouchableOpacity onPress={onChatPress}>
-        <Entypo name="chat" size={45} color="black" />
+        <Entypo name="chat" size={35} color="black" />
       </TouchableOpacity>
     </IconCont>
   
