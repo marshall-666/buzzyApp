@@ -22,7 +22,7 @@ display:${props => props.calDisplay}
 `
 
 const AgendaWrapper = styled.View`
-height:100%;
+height:80%;
 width:100%;
 display:${props => props.agendaDisplay}
 `
@@ -177,7 +177,7 @@ const DashboardScreen = ({navigation }) => {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
       <AppHeader 
         text="Task"
-        onMenuPress={()=>{
+        onBackPress={()=>{
           setCalDisplay('flex') 
           setAgendaDisplay('none')}} />
       <Wrapper calDisplay={calDisplay}> 
