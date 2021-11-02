@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 
@@ -11,8 +11,12 @@ const MembersInGroupCard = ({
         <View style={styles.backBox}>
             <EllipseSmall imgUrl={imgUrl}/>
             <Text style={styles.nameText}>{memberName}</Text>
-            <AntDesign name="calendar" size={20} color="black" style={{margin: 10}}/>
-            <Feather name="at-sign" size={20} color="black" style={{margin: 10}}/>
+            <TouchableHighlight onPress={() => alert('Navigate to Calendar')}>
+                <AntDesign name="calendar" size={20} color="black" style={{margin: 10}}/>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => alert('Navigate to Chatting')}>
+                <Feather name="at-sign" size={20} color="black" style={{margin: 10}}/>
+            </TouchableHighlight>
         </View>
     )
 }

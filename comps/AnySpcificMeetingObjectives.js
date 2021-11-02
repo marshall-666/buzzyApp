@@ -3,7 +3,8 @@ import { Text, View, StyleSheet, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 const AnySpcificMeetingObjectives = ({
-    meetingObjectives
+    meetingObjectives,
+    setMeetingObjectives,
 }) => {
     return (
         <View style={{flex: 1}}>
@@ -15,6 +16,7 @@ const AnySpcificMeetingObjectives = ({
             <View style={styles.midBox}>
                 <TextInput
                     value={meetingObjectives}
+                    onChangeText={setMeetingObjectives(meetingObjectives)}
                 />
                 <Text style={{color: '#dbdbdb', padding: 10}}>Type any objectives your team should complete during this meeting!</Text>
             </View>
