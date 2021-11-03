@@ -194,7 +194,10 @@ const TaskboardScreen = ({ navigation }) => {
       }
       </TaskCardsWrapper>) : null}
       <NavBarCon>
-      <NavBar  addEventPress={()=>navigation.navigate('TaskCreating') }/>
+      <NavBar  
+      addEventPress={()=>navigation.navigate('TaskCreating') }
+      onCoursesPress={()=>navigation.navigate('CourseInfoScreen') }
+      />
       </NavBarCon>
       
     </View>
