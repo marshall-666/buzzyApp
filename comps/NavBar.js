@@ -6,6 +6,8 @@ import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import  {Configurations} from'../PropConfig/Props'
+
 
 const BarCont = Styled.View`
 width:90%;
@@ -22,17 +24,17 @@ background-color:${(props) => props.circleBackgroundColor};
 display:flex;
 justify-content:center;
 align-items:center;
-height:100%;
-width:16%;
-top:-5%;
-border:5px solid #35579F
+height:70px;
+width:70px;
+top:-6%;
+border:6px solid #94BDD4
 `
 
 
 
 const NavBar = ({
-    backgroundColor="#1E315C",
-    circleBackgroundColor="#FCCA12",
+   
+    
     onCalendarPress = () => {},
     onHomePress = () => {},
     addEventPress = () => {},
@@ -40,7 +42,7 @@ const NavBar = ({
     onGroupsPress = () => {},
 }) => {
   return (
-  <BarCont backgroundColor={backgroundColor}>
+  <BarCont backgroundColor={Configurations.colors.secCol}>
       <TouchableOpacity onPress={onCalendarPress}>
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
@@ -49,7 +51,7 @@ const NavBar = ({
       </TouchableOpacity>
       
       <YellowCircle 
-      circleBackgroundColor={circleBackgroundColor}
+      circleBackgroundColor={Configurations.colors.butCol}
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>

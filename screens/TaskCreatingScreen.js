@@ -8,6 +8,7 @@ import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
 // import {taskCategory} from '../data/category'
+import  {Configurations} from'../PropConfig/Props'
 
 const taskCategory = [
   {
@@ -28,7 +29,7 @@ const taskCategory = [
 ]
 
 const Wrapper =styled.ScrollView`
-height:100;
+height:30%;
 `
 const TaskButtonWrapper = styled.View`
 justify-content:center

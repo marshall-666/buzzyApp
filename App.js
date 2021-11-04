@@ -15,7 +15,7 @@ export default function App() {
   return (
     <NavigationContainer>
        <StatusBar style="auto" />
-    <Stack.Navigator initialRouteName="Login" screenOptions={{
+    <Stack.Navigator initialRouteName="TaskCreating" screenOptions={{
     headerShown: false
   }}>
       <Stack.Screen name="Login" component={LoginScreen}  />

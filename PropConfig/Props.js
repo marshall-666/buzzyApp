@@ -1,10 +1,10 @@
 export const Configurations = {
     colors: 
         {
-            primCol : '#35579F',
-            secCol  : '#1E315C',
-            backCol : '#E5E5E5',
-            butCol : '#FCCA12',
+            primCol : '#94BDD4',
+            secCol  : '#3D5A80',
+            backCol : '#F5F5E1',
+            butCol : '#FFDD5F',
 
         },
     

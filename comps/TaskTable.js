@@ -1,5 +1,4 @@
-
-import styled from "@emotion/styled-base";
+// import styled from "@emotion/styled-base";
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
@@ -8,6 +7,8 @@ import AppTimePicker from "./AppTimePicker";
 import NavBar from "./NavBar";
 import RecBtn from "./RecBtn";
 import {Picker} from '@react-native-picker/picker';
+import  {Configurations} from'../PropConfig/Props'
+
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -23,7 +24,7 @@ flex-direction:row;
 `
 const TextCon = Styled.View`
 display:flex;
-height:55%;
+height:90%;
 width:300px;
 justify-content:flex-start;
 flex-direction:column;
@@ -32,41 +33,31 @@ flex-wrap:wrap;
 
 const TextInput1 = Styled.Text`
 font-size:24px;
-color:#ffffff;
-width:100%
+color:${(props) => props.tColor};
 padding-top:3%
 marginLeft:0;
 `
 const TextInput2 = Styled.Text`
 font-size:18px;
-color:#ffffff;
 padding-top:5%
 `
 const TextInput3 = Styled.TextInput`
 width:100%;
-color:#ffffff;
 `
 const PickerCon = Styled.Picker`
 width:100%;
-color:#ffffff;
 `
 const TimeCon = Styled.View`
 height:15%;
 `
 const ButtonCon = Styled.View`
-margin-top:10%;
-width:100%;
-justify-content:center;
-align-items:center;
-
+margin-top:-200px
 `
-
 const TaskTable = ({
 
   text = 'Create Group',
-  CardColor = '#35579F',
 
-  height = 650,
+  height = 800,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },
@@ -74,13 +65,13 @@ const TaskTable = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
-    <CardCon bgc={CardColor}  height={height} width={width}>
+    <CardCon bgc={Configurations.colors.primCol}  height={height} width={width}>
 
       <TextCon>
-          <TextInput1 ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color="white" />
+          <TextInput1  tColor={Configurations.colors.secCol}   ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol}/>
           </TextInput1>
-        <TextInput2>
-          Task Name
+        <TextInput2  style={{color:Configurations.colors.secCol}} >
+          Task Name 
         </TextInput2>
         <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
           placeholder="Type the task name"
@@ -88,7 +79,7 @@ const TaskTable = ({
         // defaultValue={text}
         >
         </TextInput3>
-        <TextInput2>
+        <TextInput2 style={{color:Configurations.colors.secCol}} >
           Task Category
         </TextInput2>
         <PickerCon
@@ -100,22 +91,27 @@ const TaskTable = ({
           <Picker.Item label="Groups" value="Groups" />
           <Picker.Item label="Events" value="Events" />
         </PickerCon>
-        <TextInput2>
+        <TextInput2 style={{color:Configurations.colors.secCol}} >
           Location
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
+        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color:Configurations.colors.secCol }}
           placeholder="Type the Location"
         // onChangeText={text => setText(text)}
         // defaultValue={text}
         ></TextInput3>
-      <TextInput2>
+      <TextInput2 style={{color:Configurations.colors.secCol}} >
          Start Time
         </TextInput2>
-      </TextCon>
-      <TimeCon>
+        <TimeCon>
         <AppTimePicker />
       </TimeCon>
-      
+        <TextInput2 style={{color:Configurations.colors.secCol}} >
+         End Time
+        </TextInput2>
+        <TimeCon>
+        <AppTimePicker />
+      </TimeCon>
+      </TextCon>
       <ButtonCon>
       <RecBtn onRecBtnPress={onRecBtnPress} />
       </ButtonCon>

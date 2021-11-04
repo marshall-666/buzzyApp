@@ -4,7 +4,7 @@ import React from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
 import { Entypo } from '@expo/vector-icons';
-
+import  {Configurations} from'../PropConfig/Props'
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -32,7 +32,6 @@ display:${(props) => props.dispaly};
 `
 const AppHeader = ({
   text = 'Settings',
-  headColor = '#1E315C',
   height = 95,
   width = '100%',
   onMenuPress = () => { },
@@ -42,7 +41,7 @@ const AppHeader = ({
   textAlign = 'left'
 }) => {
   return (
-    <CardCon bgc={headColor} height={height} width={width}>
+    <CardCon bgc={Configurations.colors.secCol} height={height} width={width}>
       <TouchableOpacity onPress={onBackPress}>
         <IconInut dispaly={display}>
           <Entypo name="arrow-with-circle-left" size={24} color="white" />

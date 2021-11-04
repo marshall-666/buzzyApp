@@ -7,6 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
 import NavBar from "./NavBar";
 import RecBtn from "./RecBtn";
+import  {Configurations} from'../PropConfig/Props'
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -58,9 +59,8 @@ margin-top:10%
 const TaskCardArea = ({
 
   text = 'Create Group',
-  CardColor = '#35579F',
   bradius = 25,
-  height = 650,
+  height = 800,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },
@@ -68,7 +68,7 @@ const TaskCardArea = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
-    <CardCon bgc={CardColor} bradius={bradius} height={height} width={width}>
+    <CardCon  bgc={Configurations.colors.primCol} bradius={bradius} height={height} width={width}>
 
       
       

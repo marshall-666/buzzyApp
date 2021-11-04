@@ -7,6 +7,7 @@ import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
+import  {Configurations} from'../PropConfig/Props'
 
 
 
@@ -45,9 +46,6 @@ top:300px
 height:52.5%;
 width:100%;
 `
-
-
-
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -64,7 +62,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor:Configurations.colors.backCol }}>
       <AppHeader text="Welcome" display="none" />
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
@@ -165,23 +163,21 @@ const styles = StyleSheet.create({
     zIndex: 3,
     fontSize:55,
     fontWeight:'bold',
-    color:'yellow',
+    color:  Configurations.colors.butCol,
     marginLeft:-30,
     marginTop:90
   },
   title2: {
     fontSize: 18,
     fontWeight: '600',
-    color: 'white',
-    // marginLeft:20,
+    color:  Configurations.colors.secCol,
     alignSelf: 'flex-start',
     paddingBottom:5,
   },
   title3: {
     fontSize: 18,
     fontWeight: '600',
-    color: 'white',
-    // marginLeft:20,
+    color:  Configurations.colors.secCol,
     alignSelf: 'center',
     paddingBottom:5,
   },
@@ -202,6 +198,7 @@ const styles = StyleSheet.create({
   honeycomb: {
     marginLeft: -60,
     marginTop: -35,
+    opacity:.4
   },
   D2L: {
     width: 50,
@@ -225,7 +222,7 @@ const styles = StyleSheet.create({
   title4: {
     fontSize: 18,
     fontWeight: '400',
-    color: '#B4B4B4',
+    color:  Configurations.colors.secCol,
     alignSelf: 'center',
     paddingBottom: '-17.5%',
  
