@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, TextInput } from 'react-native'
+import RecBtn from './RecBtn'
 
 const JoinAGroupCard = ({
     // groupName,
@@ -32,6 +33,9 @@ const JoinAGroupCard = ({
                 onChangeText={() => setGroupLink(groupLink)}
             />
             <View style={styles.devider}/>
+            <View style={styles.btnContainer}>
+                <RecBtn height={50} width={'80%'}/>
+            </View>
         </View>
     )
 }
@@ -41,7 +45,8 @@ export default JoinAGroupCard
 const styles = StyleSheet.create({
     container: {
         width: '85%',
-        minHeight: 450,
+        minHeight: 600,
+        // height: '80%',
         backgroundColor: '#35579f',
         padding: 15,
         borderRadius: 25,
@@ -71,5 +76,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         marginLeft: 15,
         marginTop: 5,
+    },
+    btnContainer: {
+        flex: 1,
+        marginTop: 50,
+        alignItems: 'center'
     }
 })
