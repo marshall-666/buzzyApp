@@ -23,7 +23,7 @@ display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
-width:75%;
+width:80%;
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -63,6 +63,9 @@ const TaskboardScreen = ({ navigation }) => {
   const [coursebgc, setCourseBgc] = useState(false)
   const [eventbgc, setEventBgc] = useState(false)
   const [groupbgc, setGroupBgc] = useState(false)
+  const [textColorC, setTextColorC] = useState(false)
+  const [textColorG, setTextColorG] = useState(false)
+  const [textColorE, setTextColorE] = useState(false)
   
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
@@ -84,6 +87,11 @@ const TaskboardScreen = ({ navigation }) => {
     setCourseBgc(true)
     setEventBgc(false)
     setGroupBgc(false)
+    setTextColorC(true)
+    setTextColorG(false)
+    setTextColorE(false)
+
+
   }
   const groupPress =()=>{
     setGroup(true)
@@ -92,6 +100,9 @@ const TaskboardScreen = ({ navigation }) => {
     setGroupBgc(true)
     setEventBgc(false)
     setCourseBgc(false)
+    setTextColorC(false)
+    setTextColorE(false)
+    setTextColorG(true)
 
   }
   const eventPress =()=>{
@@ -101,17 +112,21 @@ const TaskboardScreen = ({ navigation }) => {
     setCourseBgc(false)
     setEventBgc(true)
     setGroupBgc(false)
+    setTextColorC(false)
+    setTextColorE(true)
+    setTextColorG(false)
+
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
       <AppHeader text="Task" display="none" />
       <TaskButtonsWrapper>
 
-  <TaskBtn  taskBtnColor={coursebgc?"yellow":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
+  <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
       
       
-      <TaskBtn taskBtnColor={groupbgc?"yellow":"#E5E5E5"} tas taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn taskBtnColor={eventbgc?"yellow":"#E5E5E5"} tastaskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
+      <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"} tas taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
+      <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} tastaskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
       
       </TaskButtonsWrapper>
       <TaskCardArea/>   
