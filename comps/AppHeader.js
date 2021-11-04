@@ -11,11 +11,12 @@ width:${(props) => props.width};
 height:${(props) => props.height};
 background-color:${(props) => props.bgc};
 justify-content:space-between;
-align-items:center;
+align-items:flex-end;
 display:flex;
 flex-direction:row;
 padding-left:5%;
 padding-right:5%;
+padding-bottom:2%
 `
 
 const TextInput = Styled.Text`
@@ -27,7 +28,7 @@ color:#ffffff;
 const AppHeader = ({
   text = 'Settings',
   headColor = '#1E315C',
-  height = '7.5%',
+  height = '10%',
   width = '100%',
   onMenuPress = () => { },
   onBackPress = () => { },

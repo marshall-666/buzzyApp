@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, SafeAreaView, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 
 import AnySpcificMeetingObjectives from './comps/AnySpcificMeetingObjectives'
 import Ellipse from './comps/Ellipse'
@@ -9,7 +9,7 @@ import MembersInGroupCard from './comps/MembersInGroupCard'
 
 const App = () => {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Text>Warren comps</Text>
             {/* <MembersInGroupCard/>
             <MembersInGroupCard/>
@@ -18,7 +18,7 @@ const App = () => {
             {/* <AnySpcificMeetingObjectives/> */}
             {/* <Ellipse/> */}
             {/* <JoinAGroupCard/> */}
-        </SafeAreaView>
+        </View>
     )
 }
 
