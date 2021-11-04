@@ -17,8 +17,8 @@ import {eventsData} from '../data/tasks'
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
-margin-top:4%;
-margin-bottom:4%;
+margin-top:8%;
+margin-bottom:8%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
@@ -44,7 +44,7 @@ left:5%
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
-top:280px
+top:300px
 height:52.5%;
 width:100%;
 `
@@ -104,7 +104,7 @@ const TaskboardScreen = ({ navigation }) => {
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-      <AppHeader text="Task" />
+      <AppHeader text="Task" display="none" />
       <TaskButtonsWrapper>
 
   <TaskBtn  taskBtnColor={coursebgc?"yellow":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>

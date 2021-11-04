@@ -109,12 +109,13 @@ const TaskTable = ({
         // defaultValue={text}
         ></TextInput3>
       <TextInput2>
-         Time and Date
+         Start Time
         </TextInput2>
       </TextCon>
       <TimeCon>
         <AppTimePicker />
       </TimeCon>
+      
       <ButtonCon>
       <RecBtn onRecBtnPress={onRecBtnPress} />
       </ButtonCon>

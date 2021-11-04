@@ -60,7 +60,7 @@ const TaskCardArea = ({
   text = 'Create Group',
   CardColor = '#35579F',
   bradius = 25,
-  height = 600,
+  height = 650,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },

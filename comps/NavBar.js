@@ -9,7 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 const BarCont = Styled.View`
 width:90%;
-height:7%;
+height:60px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -23,7 +23,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100%;
-width:15%;
+width:16%;
 top:-5%;
 border:5px solid #35579F
 `
