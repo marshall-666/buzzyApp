@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, Text, TextInput } from 'react-native'
 
 const JoinAGroupCard = ({
-    groupName,
-    setGroupName,
-    groupLink,
-    setGroupLink,
+    // groupName,
+    // setGroupName,
+    // groupLink,
+    // setGroupLink,
 }) => {
+    const [groupName, setGroupName] = useState()
+    const [groupLink, setGroupLink] = useState()
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Join a group</Text>
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     inputText: {
         paddingLeft: 15,
         marginTop: 30,
+        color: '#fff'
     },
     devider: {
         width: '85%',
