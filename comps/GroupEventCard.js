@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:20%;
+height:90px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -15,7 +15,7 @@ border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
 overflow:hidden;
 `
 const EventColour = Styled.View`
-width:8%;
+width:4%;
 height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `
@@ -41,7 +41,7 @@ height:100%;
 
 const GroupEventCard = ({
     backgroundColor="#FFFFFF",
-    borderTopRightRadius="20px",
+    borderTopRightRadius=0,
     borderBottomRightRadius="0",
     EventBackgroundColor="#EFF32A",
     EventTitle="Buzzy Bee",
@@ -56,7 +56,7 @@ const GroupEventCard = ({
   <CardCont backgroundColor={backgroundColor} borderTopRightRadius={borderTopRightRadius} borderBottomRightRadius={borderBottomRightRadius}>
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
-      <Text style={{fontSize:30}}>{EventTitle}</Text>
+      <Text style={{fontSize:24}}>{EventTitle}</Text>
       <Text>{EventDescrip}</Text> 
       <Text>{EventDueDate}</Text>  
     </TextCont>

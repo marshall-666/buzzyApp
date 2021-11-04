@@ -13,25 +13,23 @@ const secCol = Configurations.colors.secCol
 
 const MenuCont = styled.View`
 height:${props => props.height};
-width:100%;
+
 align-items:flex-end;
-background-color:${props => props.color};
+background-color:red;
 `
 const IconCell = styled.Pressable`
-
-width:30%;
-
 flex-direction:row;
-background-color:green;
-align-items:center;
+
+margin-top:-30px;
 justify-content:space-around;
 `  
 
 const OptCont = styled.View`
-width:50%;
+width:250px;
 max-height:800px;
 height:500px;
-
+position:absolute;
+z-index:2000;
 background-color:red;
 right:${props=> props.right};
 justify-content:space-around;
@@ -56,8 +54,8 @@ export const SubMenu = (
     }
 )=> {
 
-    const [height, setHeight] = useState('5%')
-    const [right, setRight] = useState('-50%')
+    const [height, setHeight] = useState('0%')
+    const [right, setRight] = useState('-400px')
     const [menu, setMenu] = useState(true)
     const [display, setDisplay] = useState('flex')
 
@@ -67,12 +65,12 @@ export const SubMenu = (
         if(menu)
         {
             // setHeight('90%')
-            setRight ('0%')
+            setRight ('-5%')
             // setDisplay('flex')
         }
         else{
             // setHeight('5%')
-            setRight ('-50%')
+            setRight ('-400px')
             // setDisplay('none')
         }
     }
@@ -91,7 +89,7 @@ export const SubMenu = (
                     setMenu(!menu) 
                     menuHeight()
                 }}> 
-                    <FontAwesomeIcon icon={faEllipsisV} size={35} color="white" /> 
+                    <FontAwesomeIcon icon={faEllipsisV} size={30} color="white" /> 
                 </IconCell>
 
 
