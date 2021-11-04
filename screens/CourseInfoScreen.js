@@ -10,24 +10,24 @@ import {taskCardArea} from '../comps/taskCardArea'
 const Wrapper = styled.View`
 display:flex;
 height:100%;
-width 100%;
+width:100%;
 flex-direction:column
 justify-content:space-between;
-
 `;
 
 
 const CourseCardWrapper =styled.View`
-display:flex;
-flex-direction:column;
-justify-content:space-evenly;
-align-items:center;
-height:85%;
+height:80%;
 width:100%;
+flex-direction:column;
+justify-content:space-center;
+align-items:center;
 background-color:#35579F;
-border-radius:25px;
-
+border-top-right-radius: 25px;
+border-top-left-radius: 25px;
+flex:0.9;
 `
+
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -45,15 +45,20 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-      <AppHeader text="Courses" />
-      <CourseCardWrapper> 
-        <Task/>
-        <Task/>
-        <Task/>
-        <NavBarCon>
-            <NavBar/>
-        </NavBarCon>
-      </CourseCardWrapper>
+    <AppHeader text="Courses" />
+  
+        <CourseCardWrapper> 
+            <ScrollView  style={{width:'100%', height:'100%'}}contentContainerStyle={{width:'100%', height:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'1em'}}>
+            <Task/>
+            <Task/>
+            <Task/>
+            <Task/>
+            <Task/>
+            </ScrollView>
+            <NavBarCon>
+                <NavBar/>
+            </NavBarCon>
+        </CourseCardWrapper>  
     </Wrapper>
    
 
