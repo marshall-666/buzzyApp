@@ -204,12 +204,28 @@ const DashboardScreen = ({navigation }) => {
     <AgendaWrapper agendaDisplay = {agendaDisplay} > 
       <View style ={{flex:1, width:'100%',}}>
              <Agenda 
-                style ={{backgroundColor:'red'}}
+
        
                 items={items}
                 loadItemsForMonth={loadItems}
                 renderItem={renderItem}
                 selected={daySelect}
+theme={{ 
+      calendarBackground: 'green',
+      agendaKnobColor: 'red',
+      backgroundColor: 'yellow',
+      // agendaDayTextColor: 
+      // agendaDayNumColor: 
+      // agendaTodayColor: 
+      // monthTextColor: 
+      // textDefaultColor: 
+      // todayBackgroundColor: 
+      // textSectionTitleColor: 
+      selectedDayBackgroundColor: 'pink'
+      // dayTextColor: 
+      // dotColor: 
+      // textDisabledColor: 
+    }}
                 
  />
 
@@ -231,6 +247,8 @@ const DashboardScreen = ({navigation }) => {
 
   );
 }
+
+
 export default DashboardScreen
 
 
