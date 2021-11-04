@@ -3,6 +3,7 @@ import styled from "@emotion/styled-base";
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
+import { SubMenu } from "./SubMenu";
 import { Entypo } from '@expo/vector-icons'; 
 
 
@@ -36,12 +37,13 @@ const AppHeader = ({
 }) => {
   return (
     <CardCon bgc={headColor}  height={height} width={width}>
-<TouchableOpacity  onPress={onMenuPress}>
+<TouchableOpacity  onPress={onBackPress}>
 <Entypo name="arrow-with-circle-left" size={24} color="white" />
 </TouchableOpacity>
 <TextInput>{text}</TextInput>
-<TouchableOpacity onPress={onBackPress}>
-<Entypo name="dots-three-vertical" size={24} color="white" />
+<TouchableOpacity onPress={onMenuPress}>
+{/* <Entypo name="dots-three-vertical" size={24} color="white" /> */}
+    <SubMenu/>
         </TouchableOpacity>
     </CardCon>
   );
