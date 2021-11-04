@@ -16,7 +16,7 @@ const JoinAGroupCard = ({
                 placeholderTextColor='#aaaaaa'
                 style={styles.inputText}
                 value={groupName}
-                onChangeText={setGroupName(groupName)}
+                onChangeText={() => setGroupName(groupName)}
             />
             <View style={styles.devider}/>
             <Text style={{color: '#c7c7c7', fontSize: 18, textAlign:'center', marginVertical: 50}}>OR</Text>
@@ -26,7 +26,7 @@ const JoinAGroupCard = ({
                 placeholderTextColor='#aaaaaa'
                 style={styles.inputText}
                 value={groupLink}
-                onChangeText={setGroupLink(groupLink)}
+                onChangeText={() => setGroupLink(groupLink)}
             />
             <View style={styles.devider}/>
         </View>

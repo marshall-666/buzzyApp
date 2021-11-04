@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TaskCreatingScreen from './screens/TaskCreatingScreen';
 import TaskboardScreen from './screens/TaskboardScreen '
+import GroupPageOnLoadScreen from './screens/GroupPageOnLoadScreen';
+import JoinGroupScreen from './screens/JoinGroupScreen';
 
 // export {default}from './storybook'
 
@@ -17,6 +19,8 @@ export default function App() {
     
     <NavigationContainer>
        <StatusBar style="auto" />
+      {/* <GroupPageOnLoadScreen/> */}
+      {/* <JoinGroupScreen/> */}
     <Stack.Navigator initialRouteName="Taskboard" screenOptions={{
     headerShown: false
   }}>
