@@ -56,7 +56,7 @@ const TaskCreatingScreen = ({ navigation }) => {
   
   return (
   
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol }}>
       <AppHeader text="Task"  display="none" />
       <Wrapper> 
       <TaskButtonWrapper>

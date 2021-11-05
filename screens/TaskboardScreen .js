@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, View, Text } from 'react-native';
+import React, { useState, useEffect,useContext } from 'react';
+import { Button, View, Text,StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -12,7 +12,9 @@ import {category} from '../data/category'
 import {coursesData} from '../data/tasks'
 import {groupsData} from '../data/tasks'
 import {eventsData} from '../data/tasks'
-
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import fapp from '../firebase/firebase';
+import { Configurations } from '../PropConfig/Props'
 
 
 const TaskButtonsWrapper = styled.View`
@@ -67,6 +69,7 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
   
+
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
   //     .toString(16)
@@ -117,9 +120,19 @@ const TaskboardScreen = ({ navigation }) => {
     setTextColorG(false)
 
   }
+  const { user } = useContext(AuthenticatedUserContext);
+  const handleSignOut = async () => {
+    try {
+      await fapp.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-      <AppHeader text="Task" display="none" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
+      <AppHeader text="Task" display="none"  onMenuPress={handleSignOut}/>
       <TaskButtonsWrapper>
 
   <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
@@ -127,7 +140,10 @@ const TaskboardScreen = ({ navigation }) => {
       <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
       
       </TaskButtonsWrapper>
-      <TaskCardArea/>   
+      <TaskCardArea/> 
+     
+    
+     <Text style={styles.title}>Welcome {user.email}!</Text>  
      { course ? (<TaskCardsWrapper>
       {
       courses.map((o, i) => (
@@ -166,5 +182,20 @@ const TaskboardScreen = ({ navigation }) => {
   );
 }
 
+const styles = StyleSheet.create({
+  title: {
+    position:'absolute',
+     zIndex:3,
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#fff',
+    marginTop:300
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    color: '#fff'
+  }
+});
 
 export default TaskboardScreen

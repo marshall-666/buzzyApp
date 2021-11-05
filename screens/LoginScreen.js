@@ -7,8 +7,8 @@ import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
-import  {Configurations} from'../PropConfig/Props'
-
+import { Configurations } from '../PropConfig/Props'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const LogoWrapper = styled.View`
 margin-left:10px;
@@ -61,12 +61,38 @@ const LoginScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-
+  const onLoginPress = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("Singed in user: ", user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("An error occured: ", errorCode, errorMessage);
+    });
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        navigation.navigate('Taskboard')
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+    
+  }
 
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor:Configurations.colors.backCol }} >
-      <AppHeader text="Welcome" display="none"/>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
+      <AppHeader text="Welcome" display="none" />
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
@@ -75,58 +101,57 @@ const LoginScreen = ({ navigation }) => {
       </LogoWrapper>
       <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
       <View style={styles.inpuTable}>
-      <Text style={styles.title2}>Email</Text>
-      <InputField
-        inputStyle={{
-          fontSize: 14
-        }}
-        containerStyle={{
-          backgroundColor: Configurations.colors.primCol,
-          marginBottom: '6%',
-          borderBottomWidth: 1,
+        <Text style={styles.title2}>Email</Text>
+        <InputField
+          inputStyle={{
+            fontSize: 14
+          }}
+          containerStyle={{
+            backgroundColor: Configurations.colors.primCol,
+            marginBottom: '6%',
+            borderBottomWidth: 1,
 
-        }}
-        leftIcon='email'
-        placeholder='username@my.bcit.ca'
-        autoCapitalize='none'
-        keyboardType='email-address'
-        textContentType='emailAddress'
-        autoFocus={true}
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-      <Text style={styles.title2}>Password</Text>
-      <InputField
-        inputStyle={{
-          fontSize: 14
-        }}
-        containerStyle={{
-          backgroundColor:Configurations.colors.primCol,
-          marginBottom: '8%',
-          borderBottomWidth: 1,
-        }}
-        leftIcon='lock'
-        placeholder='*************'
-        autoCapitalize='none'
-        autoCorrect={false}
-        secureTextEntry={passwordVisibility}
-        textContentType='password'
-        rightIcon={rightIcon}
-        value={password}
-        onChangeText={text => setPassword(text)}
-        handlePasswordVisibility={handlePasswordVisibility}
-      />
-      <Text style={styles.title3}>Forgot Password?</Text>
-      <Text style={styles.button}>
-      <RecBtn text="Login" />
-         </Text>
-      <Text style={styles.title3}>OR</Text>
-  </View>
-  <Image source={require("../assets/D2L.png")} style={styles.D2L} />
-  <View style={styles.container3}>
-      <Text style={styles.title4}>Don’t have an account yet?</Text>
-      <Text style={styles.title5} onPress={() => navigation.navigate('SignUp') }>Signup</Text>
-      <Text style={styles.title5} onPress={() => navigation.navigate('Taskboard') }>Taskdoashboard</Text>
+          }}
+          leftIcon='email'
+          placeholder='username@my.bcit.ca'
+          autoCapitalize='none'
+          keyboardType='email-address'
+          textContentType='emailAddress'
+          autoFocus={true}
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+        <Text style={styles.title2}>Password</Text>
+        <InputField
+          inputStyle={{
+            fontSize: 14
+          }}
+          containerStyle={{
+            backgroundColor: Configurations.colors.primCol,
+            marginBottom: '8%',
+            borderBottomWidth: 1,
+          }}
+          leftIcon='lock'
+          placeholder='*************'
+          autoCapitalize='none'
+          autoCorrect={false}
+          secureTextEntry={passwordVisibility}
+          textContentType='password'
+          rightIcon={rightIcon}
+          value={password}
+          onChangeText={text => setPassword(text)}
+          handlePasswordVisibility={handlePasswordVisibility}
+        />
+        <Text style={styles.title3}>Forgot Password?</Text>
+        <Text style={styles.button}>
+          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+        </Text>
+        <Text style={styles.title3}>OR</Text>
+      </View>
+      <Image source={require("../assets/D2L.png")} style={styles.D2L} />
+      <View style={styles.container3}>
+        <Text style={styles.title4}>Don’t have an account yet?</Text>
+        <Text style={styles.title5} onPress={() => navigation.navigate('SignUp')}>Signup</Text>
         </View>
     </View>
   );
@@ -139,20 +164,20 @@ const styles = StyleSheet.create({
   inpuTable: {
     position: 'absolute',
     zIndex: 4,
-    fontSize:55,
-    fontWeight:'bold',
-    color:'yellow',
-    marginLeft:-30,
-    marginTop:350
+    fontSize: 55,
+    fontWeight: 'bold',
+    color: 'yellow',
+    marginLeft: -30,
+    marginTop: 350
   },
   Logoin: {
     position: 'absolute',
     zIndex: 3,
-    fontSize:55,
-    fontWeight:'bold',
-    color:Configurations.colors.butCol,
-    marginLeft:-30,
-    marginTop:90
+    fontSize: 55,
+    fontWeight: 'bold',
+    color: Configurations.colors.butCol,
+    marginLeft: -30,
+    marginTop: 90
   },
   title2: {
     fontSize: 18,
@@ -160,38 +185,38 @@ const styles = StyleSheet.create({
     color: Configurations.colors.secCol,
     // marginLeft:20,
     alignSelf: 'flex-start',
-    paddingBottom:5,
+    paddingBottom: 5,
   },
   title3: {
     fontSize: 18,
     fontWeight: '600',
-    color:  Configurations.colors.secCol,
+    color: Configurations.colors.secCol,
     // marginLeft:20,
     alignSelf: 'center',
-    paddingBottom:5,
+    paddingBottom: 5,
   },
   button: {
-    flex:1,
-    textAlign:'center',
-    marginTop:20
-    
+    flex: 1,
+    textAlign: 'center',
+    marginTop: 20
+
   },
   logo: {
     position: 'absolute',
     width: 150,
     height: 150,
     zIndex: 3,
-    marginLeft:200,
+    marginLeft: 200,
     // marginTop:0,
   },
   honeycomb: {
     marginLeft: -60,
     marginTop: -35,
-    opacity:.4
+    opacity: .4
   },
   D2L: {
     width: 50,
-    height:  50,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 740,
@@ -201,29 +226,29 @@ const styles = StyleSheet.create({
   container3: {
     position: 'absolute',
     zIndex: 4,
-    display:'flex',
-    flexDirection:'row',
-    flexWrap:'wrap',
-    justifyContent:'center',
-    alignItems:'center',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 810,
   },
   title4: {
     fontSize: 18,
     fontWeight: '400',
-    color:  Configurations.colors.secCol,
+    color: Configurations.colors.secCol,
     alignSelf: 'center',
     paddingBottom: '-17.5%',
- 
+
   },
   title5: {
     fontSize: 18,
     fontWeight: '700',
     color: 'orange',
-    marginLeft:10,
+    marginLeft: 10,
     alignSelf: 'center',
     paddingBottom: '-17.5%',
- 
+
   },
 
 });
