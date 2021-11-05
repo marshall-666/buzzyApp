@@ -9,6 +9,8 @@ import AppHeader from '../../../comps/AppHeader';
 import AppTimePicker from '../../../comps/AppTimePicker';
 import JoinCreate from '../../../comps/JoinCreate';
 import TaskBtn from '../../../comps/taskBtn'
+import TaskTable from '../../../comps/TaskTable'
+
 
 storiesOf('Components_Levi', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
@@ -17,5 +19,6 @@ storiesOf('Components_Levi', module)
   .add('AppHeader', () => <AppHeader/>)
   .add('AppTimePicker', () => <AppTimePicker/>)
   .add('JoinCreateCard', () => <JoinCreate/>)
+  .add('TaskTable', () => <TaskTable/>)
 
   

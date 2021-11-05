@@ -146,7 +146,11 @@ const TaskboardScreen = ({ navigation }) => {
       }
       </TaskCardsWrapper>) : null}
       <NavBarCon>
-      <NavBar  addEventPress={()=>navigation.navigate('TaskCreating') }/>
+      <NavBar  
+          addEventPress={()=>navigation.navigate('TaskCreating')}
+          
+      
+      />
       </NavBarCon>
       
     </View>
