@@ -4,7 +4,7 @@ import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar'
 import { Task } from '../comps/Task';
-import {taskCardArea} from '../comps/taskCardArea'
+import {taskCardArea} from '../comps/TaskCardArea'
 
 
 const Wrapper = styled.View`
@@ -20,7 +20,7 @@ const CourseCardWrapper =styled.View`
 height:80%;
 width:100%;
 flex-direction:column;
-justify-content:space-center;
+justify-content:center;
 align-items:center;
 background-color:#35579F;
 border-top-right-radius: 25px;
@@ -45,10 +45,13 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-    <AppHeader text="Courses" />
+    <AppHeader onMenuPress={()=>navigation.navigate('AccountScreen')} text="Courses" />
   
         <CourseCardWrapper> 
-            <ScrollView  style={{width:'100%', height:'100%'}}contentContainerStyle={{width:'100%', height:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'1em'}}>
+            <ScrollView  style={{width:'100%', height:'100%'}} contentContainerStyle={{width:'100%', height:'150%', display:'flex', justifyContent:'space-evenly', alignItems:'center', background:'green',}}>
+            <Task/>
+            <Task/>
+            <Task/>
             <Task/>
             <Task/>
             <Task/>

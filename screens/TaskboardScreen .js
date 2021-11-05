@@ -6,7 +6,7 @@ import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
-import TaskCardArea from '../comps/taskCardArea';
+import TaskCardArea from '../comps/TaskCardArea';
 import CourseEventCard from '../comps/CourseEventCard';
 import GroupEventCard from '../comps/GroupEventCard';
 
@@ -164,7 +164,7 @@ const TaskboardScreen = ({ navigation }) => {
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-      <AppHeader text="Task" />
+      <AppHeader text="Task"/>
       <TaskButtonsWrapper>
 
       <TaskBtn  taskNum={taskCategory.Course.taskNum} taskCate={taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
@@ -197,6 +197,7 @@ const TaskboardScreen = ({ navigation }) => {
       <NavBar  
       addEventPress={()=>navigation.navigate('TaskCreating') }
       onCoursesPress={()=>navigation.navigate('CourseInfoScreen') }
+      onGroupsPress={()=>navigation.navigate('AccountScreen')}
       />
       </NavBarCon>
       

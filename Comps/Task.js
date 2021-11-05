@@ -57,7 +57,7 @@ justify-content:space-around;
 
 export const Task = ({})=> {
     // states to change the height of the task card.
-    const [height, setHeight] = useState('15%')
+    const [height, setHeight] = useState('5%')
     const [card, setCard] = useState(true)
 
     // state to display the content of the card only when its expanded.
@@ -73,7 +73,7 @@ export const Task = ({})=> {
             setDisplay('flex')
         }
         else{
-            setHeight('15%')
+            setHeight('5%')
             setDisplay('none')
         }
     }

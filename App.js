@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TaskCreatingScreen from './screens/TaskCreatingScreen';
 import TaskboardScreen from './screens/TaskboardScreen '
 import CourseInfoScreen from './screens/CourseInfoScreen';
-
+import AccountScreen from './screens/AccountScreen'
 // export {default}from './storybook'
 
 export default function App() {
@@ -26,6 +26,7 @@ export default function App() {
       <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
       <Stack.Screen name="CourseInfoScreen" component={CourseInfoScreen}  />
+      <Stack.Screen name="AccountScreen" component={AccountScreen}  />
     </Stack.Navigator>
   </NavigationContainer>
   
