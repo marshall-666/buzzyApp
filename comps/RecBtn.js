@@ -7,27 +7,27 @@ import  {Configurations} from'../PropConfig/Props'
 
 
 const BtnCon = Styled.TouchableOpacity`
-width:${(props)=>props.width};
+width:${(props)=>props.width}px;
 height:${(props)=>props.height}px;
 background-color:${(props)=>props.bgc};
 justify-content:center;
 align-items:center;
-border-radius:${(props)=>props.bradius}px
+border-radius:${(props)=>props.bradius}px;
+margin:10px
 `
 const TextInput =Styled.Text`
 font-size:24px;
-margin-right:30px
-margin-left:30px
+margin-right:20px
+margin-left:20px
 
 `
 
 const RecBtn = ({
   onRecBtnPress=()=>{},
   text = 'Create Group',
-
   bradius=10,
   height=85,
-  width="100%"
+  width=200
 }) => {
   return (
   
@@ -49,8 +49,7 @@ const RecBtn = ({
 export default RecBtn;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-   
+    flex: 1
   },
  
 });

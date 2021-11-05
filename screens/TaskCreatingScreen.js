@@ -75,7 +75,6 @@ const TaskCreatingScreen = ({ navigation }) => {
     </Wrapper>
        <NavBarCon>
           <NavBar />
-
           </NavBarCon>
     </View>
    

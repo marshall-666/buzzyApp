@@ -9,9 +9,6 @@ import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import  {Configurations} from'../PropConfig/Props'
 
-
-
-
 const LogoWrapper = styled.View`
 margin-left:10px;
 margin-top:8%;
@@ -48,9 +45,27 @@ width:100%;
 `
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
+  const [school, setSchool] = useState('');
+  const [user, setUser] = useState('');
+  const [program, setProgram] = useState('');
+  const [set, setSet] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
   const [password, setPassword] = useState('');
+  const [page1, setPage1] = useState(true)
+  const [page2, setPage2] = useState(false)
+
+const continuePress=()=>{
+  setPage1(false)
+  setPage2(true)
+}
+const backPress=()=>{
+  setPage1(true)
+  setPage2(false)
+}
+const submitPress=()=>{
+
+}
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
       setRightIcon('eye-off');
@@ -70,14 +85,14 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.Logoin}>SignUp</Text>
       </LogoWrapper>
       <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
-      <View style={styles.inpuTable}>
+   {page1 ?  ( <View style={styles.inpuTable}>
       <Text style={styles.title2}>Email</Text>
       <InputField
         inputStyle={{
           fontSize: 14
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: Configurations.colors.primCol,
           marginBottom: '6%',
           borderBottomWidth: 1,
 
@@ -97,12 +112,12 @@ const SignUpScreen = ({ navigation }) => {
           fontSize: 14
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: Configurations.colors.primCol,
           marginBottom: '8%',
           borderBottomWidth: 1,
         }}
-        leftIcon='lock'
-        placeholder='*************'
+        leftIcon='human-greeting'
+        placeholder='Bill Lin'
         autoCapitalize='none'
         autoCorrect={false}
         secureTextEntry={passwordVisibility}
@@ -118,7 +133,7 @@ const SignUpScreen = ({ navigation }) => {
           fontSize: 14
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: Configurations.colors.primCol,
           marginBottom: '8%',
           borderBottomWidth: 1,
         }}
@@ -134,9 +149,67 @@ const SignUpScreen = ({ navigation }) => {
         handlePasswordVisibility={handlePasswordVisibility}
       />
       <Text style={styles.button}>
-      <RecBtn text="Continue" height="75px"   width="200px"/>
+      <RecBtn text="Continue" height="75"   width="200"  onRecBtnPress={continuePress}/>
          </Text>
-  </View>
+  </View> ): null}
+  {page2 ?  ( <View style={styles.inpuTable}>
+      <Text style={styles.title2}>School</Text>
+      <InputField
+        inputStyle={{
+          fontSize: 14
+        }}
+        containerStyle={{
+          backgroundColor: Configurations.colors.primCol,
+          marginBottom: '6%',
+          borderBottomWidth: 1,
+
+        }}
+        leftIcon='school'
+        placeholder='BCIT'
+        autoCapitalize='none'
+        autoFocus={true}
+        value={school}
+        onChangeText={text => setSchool(text)}
+      />
+      <Text style={styles.title2}>Program</Text>
+      <InputField
+        inputStyle={{
+          fontSize: 14
+        }}
+        containerStyle={{
+          backgroundColor: Configurations.colors.primCol,
+          marginBottom: '8%',
+          borderBottomWidth: 1,
+        }}
+        leftIcon='book-open'
+        placeholder='MDDD'
+        autoCapitalize='none'
+        value={program}
+        onChangeText={text => setProgram(text)}
+        handlePasswordVisibility={handlePasswordVisibility}
+      />
+      <Text style={styles.title2}>Set</Text>
+      <InputField
+        inputStyle={{
+          fontSize: 14
+        }}
+        containerStyle={{
+          backgroundColor: Configurations.colors.primCol,
+          marginBottom: '8%',
+          borderBottomWidth: 1,
+        }}
+        leftIcon='account-group-outline'
+        placeholder='A, B, or C'
+        autoCapitalize='none'
+        value={set}
+        onChangeText={text => setSet(text)}
+        handlePasswordVisibility={handlePasswordVisibility}
+      />
+      <Text style={styles.button}>
+      <RecBtn text="Back" height="75"   width="120"  onRecBtnPress={backPress}/>
+      <RecBtn text="Submit" height="75"   width="150"  onRecBtnPress={submitPress}/>
+         </Text>
+  </View> ): null}
   <View style={styles.container3}>
       <Text style={styles.title4}>I have an account.</Text>
       <Text style={styles.title5} onPress={() => navigation.navigate('Login') }>Login</Text>
@@ -184,8 +257,7 @@ const styles = StyleSheet.create({
   button: {
     flex:1,
     textAlign:'center',
-    marginTop:20
-    
+    marginTop:20,
   },
   logo: {
     position: 'absolute',

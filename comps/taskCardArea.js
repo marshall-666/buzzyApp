@@ -19,6 +19,7 @@ border-radius:${(props) => props.bradius}px;
 display:flex;
 flex-wrap:wrap;
 flex-direction:row;
+box-shadow: 5px -100px  black;
 `
 const TextCon = Styled.View`
 display:flex;

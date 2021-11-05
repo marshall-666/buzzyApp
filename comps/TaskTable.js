@@ -55,7 +55,7 @@ margin-top:-200px
 `
 const TaskTable = ({
 
-  text = 'Create Group',
+  text = 'Create ',
 
   height = 800,
   width = "100%",
@@ -113,7 +113,7 @@ const TaskTable = ({
       </TimeCon>
       </TextCon>
       <ButtonCon>
-      <RecBtn onRecBtnPress={onRecBtnPress} />
+      <RecBtn onRecBtnPress={onRecBtnPress} text={text}/>
       </ButtonCon>
     
     </CardCon>

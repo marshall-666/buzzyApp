@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:90px;
+height:120px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -43,7 +43,8 @@ const IndividualEventCard = ({
     EventBackgroundColor="#D63030",
     EventTitle="Basketball Practice",
     EventDescrip="Town Center Field #5",
-    EventDueDate="September 24th 7:00pm",
+    EventStartTime="September 24th 5:00pm",
+    EventDueTime="September 24th 7:00pm",
     onGroupPress=()=>{},
     onChatPress=()=>{},
 
@@ -54,8 +55,9 @@ const IndividualEventCard = ({
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
       <Text style={{fontSize:24}}>{EventTitle.substr(0,15)}</Text>
-      <Text>{EventDescrip}</Text> 
-      <Text>{EventDueDate}</Text>  
+      <Text style={{fontSize:14}}>{EventDescrip}</Text> 
+      <Text style={{fontSize:14}}>{EventStartTime}</Text> 
+      <Text style={{fontSize:14}}>{EventDueTime}</Text>  
     </TextCont>
     
     <IconCont>

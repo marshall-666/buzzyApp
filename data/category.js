@@ -4,7 +4,7 @@ export const category = {
   taskCategory: {
     Course: {
       id: 1,
-      taskNum: "8",
+      taskNum: "11",
       taskCate: "Courses",
     },
     Group: {
@@ -25,17 +25,17 @@ export const category = {
 export const taskCategory = [
   {
   id: 1,
-  taskNum: "8",
+  taskNum: "11",
   taskCate: "Courses",
 },
 {
   id: 2,
   taskNum: "3",
-  taskCate: "Events",
+  taskCate: "Groups",
 },
 {
   id: 3,
   taskNum: "10",
-  taskCate: "Tasks",
+  taskCate: "Events",
 }
 ]

@@ -81,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
           fontSize: 14
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: Configurations.colors.primCol,
           marginBottom: '6%',
           borderBottomWidth: 1,
 
@@ -101,7 +101,7 @@ const LoginScreen = ({ navigation }) => {
           fontSize: 14
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor:Configurations.colors.primCol,
           marginBottom: '8%',
           borderBottomWidth: 1,
         }}
@@ -118,7 +118,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <Text style={styles.title3}>Forgot Password?</Text>
       <Text style={styles.button}>
-      <RecBtn text="Login" height="75px"   width="200px"/>
+      <RecBtn text="Login" />
          </Text>
       <Text style={styles.title3}>OR</Text>
   </View>
