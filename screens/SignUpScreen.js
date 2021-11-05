@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, Image, StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
-import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
-import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import  {Configurations} from'../PropConfig/Props'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import ErrorMessage from '../comps/ErrorMessage'
+import fapp from '../firebase/firebase';
+
 
 const LogoWrapper = styled.View`
 margin-left:10px;
@@ -46,7 +48,7 @@ width:100%;
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
-  const [user, setUser] = useState('');
+  const [users, setUsers] = useState('');
   const [program, setProgram] = useState('');
   const [set, setSet] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -54,6 +56,8 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [page1, setPage1] = useState(true)
   const [page2, setPage2] = useState(false)
+  const [signupError, setSignupError] = useState('');
+
 
 const continuePress=()=>{
   setPage1(false)
@@ -63,9 +67,27 @@ const backPress=()=>{
   setPage1(true)
   setPage2(false)
 }
-const submitPress=()=>{
+const submitPress = async () => {
+  const auth = getAuth();
 
-}
+  try {
+    if (email !== '' && password !== '') {
+      await createUserWithEmailAndPassword(auth,email, password);
+    }
+  } catch (error) {
+    setSignupError(error.message);
+  }
+  navigation.navigate('Login')
+  // firebase
+  //     .auth()
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then(userCredentials => {
+  //       const user = userCredentials.user;
+  //       console.log('Registered with:', user.email);
+  //     })
+  //     .catch(error => alert(error.message))
+};
+
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
       setRightIcon('eye-off');
@@ -120,11 +142,8 @@ const submitPress=()=>{
         placeholder='Bill Lin'
         autoCapitalize='none'
         autoCorrect={false}
-        secureTextEntry={passwordVisibility}
-        textContentType='password'
-        rightIcon={rightIcon}
-        value={password}
-        onChangeText={text => setPassword(text)}
+        value={users}
+        onChangeText={text => setUsers(text)}
         handlePasswordVisibility={handlePasswordVisibility}
       />
       <Text style={styles.title2}>Password</Text>

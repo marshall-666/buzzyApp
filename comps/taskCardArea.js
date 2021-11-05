@@ -71,9 +71,6 @@ const TaskCardArea = ({
   return (
     <CardCon  bgc={Configurations.colors.primCol} bradius={bradius} height={height} width={width}>
 
-      
-      
-     
 
 
 

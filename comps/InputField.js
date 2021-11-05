@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import  {Configurations} from'../PropConfig/Props'
 
 const InputField = ({
   leftIcon,
