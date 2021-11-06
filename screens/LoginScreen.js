@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text, Image, StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
-import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
-import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { ErrorInfo } from '../comps/ErrorInfo'
 
 const LogoWrapper = styled.View`
 margin-left:10px;
@@ -45,13 +44,13 @@ height:52.5%;
 width:100%;
 `
 
-
-
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
       setRightIcon('eye-off');
@@ -63,16 +62,22 @@ const LoginScreen = ({ navigation }) => {
   };
   const onLoginPress = () => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log("Singed in user: ", user);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("An error occured: ", errorCode, errorMessage);
-    });
+    if (email !== '' && password !== '') {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("Singed in user: ", user);
+        })
+    }
+    else {
+      signInWithEmailAndPassword(auth, email, password)
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("An error occured: ", errorCode, errorMessage);
+          // setLoginError(error.message);
+        });
+    }
     const user = auth.currentUser;
     onAuthStateChanged(auth, (user) => {
       if (user !== null) {
@@ -86,7 +91,7 @@ const LoginScreen = ({ navigation }) => {
         // ...
       }
     });
-    
+
   }
 
 
@@ -144,6 +149,8 @@ const LoginScreen = ({ navigation }) => {
         />
         <Text style={styles.title3}>Forgot Password?</Text>
         <Text style={styles.button}>
+          {loginError ? <ErrorInfo error={loginError} visible={true} /> : null}
+
           <RecBtn text="Login" onRecBtnPress={onLoginPress} />
         </Text>
         <Text style={styles.title3}>OR</Text>
@@ -152,7 +159,7 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.container3}>
         <Text style={styles.title4}>Don’t have an account yet?</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('SignUp')}>Signup</Text>
-        </View>
+      </View>
     </View>
   );
 }
@@ -164,7 +171,7 @@ const styles = StyleSheet.create({
   inpuTable: {
     position: 'absolute',
     zIndex: 4,
-    fontSize: 55,
+    fontSize: 48,
     fontWeight: 'bold',
     color: 'yellow',
     marginLeft: -30,
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
     zIndex: 3,
     fontSize: 55,
     fontWeight: 'bold',
-    color: Configurations.colors.butCol,
+    color: Configurations.colors.secCol,
     marginLeft: -30,
     marginTop: 90
   },

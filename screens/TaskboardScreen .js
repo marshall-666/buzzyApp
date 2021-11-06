@@ -68,7 +68,7 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorC, setTextColorC] = useState(false)
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
-  
+  const [welcome, setWelcome]=useState(true)
 
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
@@ -93,6 +93,7 @@ const TaskboardScreen = ({ navigation }) => {
     setTextColorC(true)
     setTextColorG(false)
     setTextColorE(false)
+    setWelcome(false)
 
 
   }
@@ -106,7 +107,7 @@ const TaskboardScreen = ({ navigation }) => {
     setTextColorC(false)
     setTextColorE(false)
     setTextColorG(true)
-
+      setWelcome(false)
   }
   const eventPress =()=>{
     setEvent(true)
@@ -118,6 +119,7 @@ const TaskboardScreen = ({ navigation }) => {
     setTextColorC(false)
     setTextColorE(true)
     setTextColorG(false)
+    setWelcome(false)
 
   }
   const { user } = useContext(AuthenticatedUserContext);
@@ -132,7 +134,7 @@ const TaskboardScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
-      <AppHeader text="Task" display="none"  onMenuPress={handleSignOut}/>
+      <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
       <TaskButtonsWrapper>
 
   <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
@@ -143,7 +145,7 @@ const TaskboardScreen = ({ navigation }) => {
       <TaskCardArea/> 
      
     
-     <Text style={styles.title}>Welcome {user.email}!</Text>  
+    {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
      { course ? (<TaskCardsWrapper>
       {
       courses.map((o, i) => (

@@ -14,5 +14,12 @@ export const Configurations = {
             subHead : 'SubHeading',
 
         },
+        colors2: 
+        {
+            primCol : '#BEE3DB',
+            secCol  : '#FFD6BA',
+            backCol : '#FAF9F9',
+            butCol : '#F2E5B6',
 
+        },
     }

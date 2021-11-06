@@ -8,10 +8,9 @@ const Stack = createNativeStackNavigator();
 
 export default function TaskboardStack() {
   return (
-    <Stack.Navigator  screenOptions={{headerTitle: 'Taskboard', headerShown: false}}>
-   
+    <Stack.Navigator screenOptions={{ headerTitle: 'Taskboard', headerShown: false }}>
       <Stack.Screen name='Taskboard' component={TaskboardScreen} />
-      <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
+      <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
     </Stack.Navigator>
   );
 }
