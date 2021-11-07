@@ -62,22 +62,20 @@ const LoginScreen = ({ navigation }) => {
   };
   const onLoginPress = () => {
     const auth = getAuth();
+  
     if (email !== '' && password !== '') {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log("Singed in user: ", user);
         })
-    }
-    else {
-      signInWithEmailAndPassword(auth, email, password)
         .catch((error) => {
-          // const errorCode = error.code;
+          const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("An error occured: ",  errorMessage);
           setLoginError(errorMessage);
+
         });
-    }
+      }
     const user = auth.currentUser;
     onAuthStateChanged(auth, (user) => {
       if (user !== null) {
