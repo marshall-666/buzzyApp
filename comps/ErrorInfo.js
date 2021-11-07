@@ -11,9 +11,9 @@ const ErrorInfo = ({ error, visible }) => {
 
 const styles = StyleSheet.create({
   errorText: {
-    color: '#fdca40',
-    fontSize: 20,
-    marginBottom: 10,
+    color: 'red',
+    fontSize: 18,
+    marginBottom: 0,
     fontWeight: '600'
   }
 });

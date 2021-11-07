@@ -1,9 +1,11 @@
-import React, { useState, createContext } from 'react';
-
+import React, { useState, createContext,useEffect } from 'react';
 export const AuthenticatedUserContext = createContext({});
+
 
 export const AuthenticatedUserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+
 
   return (
     <AuthenticatedUserContext.Provider value={{ user, setUser }}>
@@ -11,3 +13,5 @@ export const AuthenticatedUserProvider = ({ children }) => {
     </AuthenticatedUserContext.Provider>
   );
 };
+
+

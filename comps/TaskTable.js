@@ -56,12 +56,14 @@ margin-top:-200px
 const TaskTable = ({
 
   text = 'Create ',
-
   height = 800,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },
-  onRecBtnPress=()=>{}
+  onRecBtnPress=()=>{},
+  TaskName,
+  LoCation,
+
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
@@ -75,8 +77,8 @@ const TaskTable = ({
         </TextInput2>
         <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
           placeholder="Type the task name"
-        // onChangeText={text => setText(text)}
-        // defaultValue={text}
+        onChangeText={ TaskName}
+        defaultValue={text}
         >
         </TextInput3>
         <TextInput2 style={{color:Configurations.colors.secCol}} >
@@ -96,8 +98,8 @@ const TaskTable = ({
         </TextInput2>
         <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color:Configurations.colors.secCol }}
           placeholder="Type the Location"
-        // onChangeText={text => setText(text)}
-        // defaultValue={text}
+        onChangeText={LoCation}
+        defaultValue={text}
         ></TextInput3>
       <TextInput2 style={{color:Configurations.colors.secCol}} >
          Start Time

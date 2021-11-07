@@ -42,7 +42,7 @@ background-color:${props => props.Mbgc};
 position:absolute;
 zIndex:5
 margin-left:333px
-margin-top:60px
+margin-top:55px
 border-radius:15px
 opacity:0.95
 `
@@ -57,7 +57,7 @@ padding:30%
 
 const AppHeader = ({
   text = 'Settings',
-  height = 95,
+  height = 90,
   width = '100%',
   onBackPress = () => { },
   onAccountPress = () => { },
@@ -99,17 +99,17 @@ const onMenuPressOp =()=>{
     </TouchableOpacity>
     <FunCont>
     <TouchableOpacity onPress={onAccountPress}>
-    <MaterialCommunityIcons name="account" size={28} color="white" />
+    <MaterialCommunityIcons name="account" size={30} color="white" />
     </TouchableOpacity>
     <TouchableOpacity onPress={onSettingPress}>
-    <AntDesign name="setting" size={28} color="white" />
+    <AntDesign name="setting" size={30} color="white" />
     </TouchableOpacity>
 
     <TouchableOpacity onPress={onAboutPress}>
-    <FontAwesome name="users" size={22} color="white" />
+    <FontAwesome name="users" size={24} color="white" />
     </TouchableOpacity>
     <TouchableOpacity onPress={onLogoutPress}>
-    <MaterialCommunityIcons name="logout" size={28} color="white" />
+    <MaterialCommunityIcons name="logout" size={30} color="white" />
     </TouchableOpacity>
     
     </FunCont>

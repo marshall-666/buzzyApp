@@ -13,6 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig)
-const fapp =  getAuth(app)
+const fireAuth =  getAuth(app)
 
-export default fapp
+export default fireAuth

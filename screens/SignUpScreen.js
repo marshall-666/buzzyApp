@@ -7,8 +7,7 @@ import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import fapp from '../firebase/firebase';
-import { ErrorInfo } from '../comps/ErrorInfo'
+import  ErrorInfo  from '../comps/ErrorInfo'
 
 
 const LogoWrapper = styled.View`
@@ -70,26 +69,19 @@ const SignUpScreen = ({ navigation }) => {
   const submitPress = async () => {
     const auth = getAuth();
 
-    try {
+    
       if (email !== '' && password !== '') {
         await createUserWithEmailAndPassword(auth, email, password);
-        navigation.navigate('Login')
+        
       }
-    } catch (error) {
-      // setSignupError(error.message);
+    else{ createUserWithEmailAndPassword(auth, email, password)
+      .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("An error occured: ", errorCode, errorMessage);
-    }
+      setSignupError(errorCode,errorMessage);
+    })}
 
-    // firebase
-    //     .auth()
-    //     .createUserWithEmailAndPassword(email, password)
-    //     .then(userCredentials => {
-    //       const user = userCredentials.user;
-    //       console.log('Registered with:', user.email);
-    //     })
-    //     .catch(error => alert(error.message))
   };
 
   const handlePasswordVisibility = () => {
@@ -121,7 +113,6 @@ const SignUpScreen = ({ navigation }) => {
             backgroundColor: Configurations.colors.primCol,
             marginBottom: '6%',
             borderBottomWidth: 1,
-
           }}
           leftIcon='email'
           placeholder='username@my.bcit.ca'
@@ -228,6 +219,8 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setSet(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
+          {signupError ? <ErrorInfo error={signupError} visible={true} /> : null}
+
         <Text style={styles.button}>
           <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
           <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} />

@@ -7,10 +7,10 @@ import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
 // import {taskCategory} from '../data/category'
 import { Configurations } from '../PropConfig/Props'
-import fapp from '../firebase/firebase';
+import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-
-
+import fireStore from '../firebase/fireStore';
+import { doc, setDoc } from "firebase/firestore"; 
 const taskCategory = [
   {
     id: 1,
@@ -57,11 +57,31 @@ const TaskCreatingScreen = ({ navigation }) => {
   const { user } = useContext(AuthenticatedUserContext);
   const handleSignOut = async () => {
     try {
-      await fapp.signOut();
+      await fireAuth.signOut();
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const [taskName  , SetTaskName] = useState("");
+  // const [taskType , settaskType] = useState("");
+  // const [location , SetLocatione] = useState("");
+  // const [startTime , SetStartTime] = useState("");
+  // const [endTime , SetEndTime] = useState("");
+  const onHandleCreate = () => {
+     
+  //   await setDoc(doc(fireStore, "event", "LA"), {
+  //     TaskName: taskName,
+  //     TaskType: taskType,
+  //     Location: location,
+  //     StartTime: startTime,
+  //     EndTime: endTime,
+  //   });
+  //   const eventsRef = doc(fireStore, 'events', 'BJ');
+  //  setDoc(eventsRef, { capital: true }, { merge: true });
+       navigation.navigate('Taskboard')
+  }
+
 
   return (
 
@@ -79,7 +99,7 @@ const TaskCreatingScreen = ({ navigation }) => {
           }
 
         </TaskButtonWrapper>
-        <TaskTable onRecBtnPress={() => navigation.navigate('Taskboard')} />
+        <TaskTable onRecBtnPress={onHandleCreate}  />
 
       </Wrapper>
       <NavBarCon>

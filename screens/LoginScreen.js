@@ -7,7 +7,7 @@ import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { ErrorInfo } from '../comps/ErrorInfo'
+import  ErrorInfo  from '../comps/ErrorInfo'
 
 const LogoWrapper = styled.View`
 margin-left:10px;
@@ -72,10 +72,10 @@ const LoginScreen = ({ navigation }) => {
     else {
       signInWithEmailAndPassword(auth, email, password)
         .catch((error) => {
-          const errorCode = error.code;
+          // const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("An error occured: ", errorCode, errorMessage);
-          // setLoginError(error.message);
+          console.log("An error occured: ",  errorMessage);
+          setLoginError(errorMessage);
         });
     }
     const user = auth.currentUser;
@@ -115,7 +115,6 @@ const LoginScreen = ({ navigation }) => {
             backgroundColor: Configurations.colors.primCol,
             marginBottom: '6%',
             borderBottomWidth: 1,
-
           }}
           leftIcon='email'
           placeholder='username@my.bcit.ca'

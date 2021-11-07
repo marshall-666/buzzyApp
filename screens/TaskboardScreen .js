@@ -13,9 +13,9 @@ import {coursesData} from '../data/tasks'
 import {groupsData} from '../data/tasks'
 import {eventsData} from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-import fapp from '../firebase/firebase';
+import fireAuth from '../firebase/fireAuth';
 import { Configurations } from '../PropConfig/Props'
-
+import fireStore from '../firebase/fireStore';
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
@@ -125,13 +125,11 @@ const TaskboardScreen = ({ navigation }) => {
   const { user } = useContext(AuthenticatedUserContext);
   const handleSignOut = async () => {
     try {
-      await fapp.signOut();
+      await fireAuth.signOut();
     } catch (error) {
       console.log(error);
     }
   };
-
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
       <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
@@ -150,7 +148,7 @@ const TaskboardScreen = ({ navigation }) => {
       {
       courses.map((o, i) => (
      
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()} />
 
       )
       )
