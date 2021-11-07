@@ -59,21 +59,25 @@ const TaskCreatingScreen = ({ navigation }) => {
       <AppHeader text="Task" />
       <Wrapper> 
       <TaskButtonWrapper>
-              {
+      {
           tasks.map((o, i) => (
             <TaskButtonWrapper key={i}>
               <TaskBtn id={o.id} taskNum={o.taskNum} taskCate={o.taskCate} />
             </TaskButtonWrapper>
           )
           )
-        }
+      }
        
       </TaskButtonWrapper>
-      <TaskTable onRecBtnPress={()=>navigation.navigate('Taskboard')} />
+      <TaskTable 
+        onRecBtnPress={()=>navigation.navigate('Taskboard')} 
+      
+      />
        
     </Wrapper>
        <NavBarCon>
-          <NavBar />
+          <NavBar 
+    />
 
           </NavBarCon>
     </View>
