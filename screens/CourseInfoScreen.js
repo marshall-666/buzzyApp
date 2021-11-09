@@ -4,7 +4,6 @@ import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar'
 import { Task } from '../comps/Task';
-import {taskCardArea} from '../comps/TaskCardArea'
 
 
 const Wrapper = styled.View`

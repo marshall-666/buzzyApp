@@ -5,7 +5,7 @@ import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 import AuthStack from './AuthStack';
 import TaskStack from './TaskStack';
-
+import TaskCreatingScreen from '../screens/TaskCreatingScreen';
 
 
 
@@ -38,7 +38,7 @@ export default function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {user ?  <TaskStack /> : <AuthStack />}
+      <TaskCreatingScreen/>
     </NavigationContainer>
   );
 }

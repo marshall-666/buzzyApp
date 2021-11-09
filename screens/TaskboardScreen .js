@@ -4,7 +4,7 @@ import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
-import TaskCardArea from '../comps/TaskCardArea';
+import TaskCardArea from '../comps/taskCardArea';
 import CourseEventCard from '../comps/CourseEventCard';
 import GroupEventCard from '../comps/GroupEventCard';
 import IndividualEventCard from '../comps/IndividualEventCard';
