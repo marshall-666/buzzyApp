@@ -23,7 +23,7 @@ padding-bottom:2%
 
 const TextInput = Styled.Text`
 font-size:${(props) => props.fontSize}px;
-width:350px
+width:95%
 text-align:${(props) => props.textAlign};
 color:#ffffff;
 margin-bottom:-5px
@@ -41,7 +41,7 @@ justify-content:space-between
 background-color:${props => props.Mbgc};
 position:absolute;
 zIndex:5
-margin-left:333px
+margin-left:76%
 margin-top:55px
 border-radius:15px
 opacity:0.95

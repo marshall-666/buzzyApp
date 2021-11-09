@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, Image, StyleSheet } from 'react-native';
+import { Button, View, Text, Image, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
@@ -10,7 +10,6 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebas
 import  ErrorInfo  from '../comps/ErrorInfo'
 
 const LogoWrapper = styled.View`
-margin-left:10px;
 margin-top:8%;
 margin-bottom:8%;
 display:flex;
@@ -18,14 +17,13 @@ flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
 width:75%;
-height:150px
+height:17%
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
 `
 const CourseEventCardWrapper = styled.View`
 height:100%;
-
 `
 const NavBarCon = styled.View`
 position:absolute;
@@ -82,19 +80,17 @@ const LoginScreen = ({ navigation }) => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        navigation.navigate('Taskboard')
+        // navigation.navigate('Taskboard')
         // ...
       } else {
         // User is signed out
         // ...
       }
     });
-
   }
-
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
+    <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
       <AppHeader text="Welcome" display="none" />
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
@@ -102,7 +98,10 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.Logoin}>Login</Text>
         <Text style={styles.Logoin}>Login</Text>
       </LogoWrapper>
-      <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
+  
+      <TaskCardArea style={{ position: 'absolute', zIndex: 3 }} />
+
+      
       <View style={styles.inpuTable}>
         <Text style={styles.title2}>Email</Text>
         <InputField
@@ -157,7 +156,8 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.title4}>Don’t have an account yet?</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('SignUp')}>Signup</Text>
       </View>
-    </View>
+
+    </KeyboardAvoidingView>
   );
 }
 

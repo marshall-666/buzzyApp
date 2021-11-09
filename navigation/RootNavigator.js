@@ -11,7 +11,7 @@ import TaskStack from './TaskStack';
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
@@ -23,6 +23,7 @@ export default function RootNavigator() {
         console.log(error);
       }
     });
+    
     // unsubscribe auth listener on unmount
     return unsubscribeAuth;
   }, []);
@@ -35,6 +36,7 @@ export default function RootNavigator() {
       </View>
     );
   }
+
 
   return (
     <NavigationContainer>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, Image, StyleSheet } from 'react-native';
+import { Button, View, Text, Image, StyleSheet,KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
@@ -7,7 +7,8 @@ import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import  ErrorInfo  from '../comps/ErrorInfo'
+import ErrorInfo from '../comps/ErrorInfo'
+import LottieView from 'lottie-react-native';
 
 
 const LogoWrapper = styled.View`
@@ -19,7 +20,7 @@ flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
 width:75%;
-height:150px
+height:17%
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -58,6 +59,7 @@ const SignUpScreen = ({ navigation }) => {
   const [signupError, setSignupError] = useState('');
 
 
+
   const continuePress = () => {
     setPage1(false)
     setPage2(true)
@@ -68,21 +70,22 @@ const SignUpScreen = ({ navigation }) => {
   }
   const submitPress = async () => {
     const auth = getAuth();
-      if (email !== '' && password !== '') {
-        await createUserWithEmailAndPassword(auth, email, password)
+    if (email !== '' && password !== '') {
+      await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
+         
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
-      setSignupError(errorCode,errorMessage);
+          setSignupError(errorCode, errorMessage);
 
         });
-      }
+    }
   };
 
   const handlePasswordVisibility = () => {
@@ -96,7 +99,8 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+    <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <AppHeader text="Welcome" display="none" />
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
@@ -220,7 +224,7 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setSet(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-          {signupError ? <ErrorInfo error={signupError} visible={true} /> : null}
+        {signupError ? <ErrorInfo error={signupError} visible={true} /> : null}
 
         <Text style={styles.button}>
           <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
@@ -231,7 +235,7 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.title4}>I have an account.</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('Login')}>Login</Text>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

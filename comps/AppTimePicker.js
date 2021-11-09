@@ -50,6 +50,7 @@ import  {Configurations} from'../PropConfig/Props'
   const showTimepicker = () => {
     showMode('time');
   };
+ 
 
   return (
     <View style={styles.container}>
@@ -75,7 +76,8 @@ import  {Configurations} from'../PropConfig/Props'
           is24Hour={true}
           display="spinner"
           onChange={onChange}
-          style={{width: 320, backgroundColor: "white"}}
+          style={{width: 320, backgroundcolor: "grey"}}
+          
         />
       )}
   

@@ -131,7 +131,8 @@ const TaskboardScreen = ({ navigation }) => {
     }
   };
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
+    <View  behavior="height" keyboardVerticalOffset={-250}
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
       <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
       <TaskButtonsWrapper>
 

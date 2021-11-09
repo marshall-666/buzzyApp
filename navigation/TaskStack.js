@@ -32,7 +32,7 @@ export default function TaskboardStack() {
           source={require('../assets/welcome.json')}
           autoPlay={true}
         />
-        <Text style={styles.title}><Text style={styles.title1}>Register Successful!</Text>
+        <Text style={styles.title}><Text style={styles.title1}>Welcom to BuzzyBee</Text>
         </Text>
       </View>
     )
