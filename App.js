@@ -18,16 +18,16 @@ export default function App() {
     
     
     <NavigationContainer>
-       <StatusBar style="auto" />
-      {/* <GroupPageOnLoadScreen/> */}
-      {/* <JoinGroupScreen/> */}
-    <Stack.Navigator initialRouteName="Taskboard" screenOptions={{
-    headerShown: false
-  }}>
-      <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
-      <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
+      <StatusBar style="auto" />
+        <Stack.Navigator initialRouteName="Taskboard" screenOptions={{
+          headerShown: false
+        }}>
+        <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
+        <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
+        <Stack.Screen name="GroupHome" component={GroupPageOnLoadScreen}  />
+        <Stack.Screen name="JoinGroup" component={JoinGroupScreen}  />
 
-    </Stack.Navigator>
+      </Stack.Navigator>
   </NavigationContainer>
   
   );
