@@ -27,7 +27,8 @@ export default function App() {
         }}>
         <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
         <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
-        <Stack.Screen name="GroupHome" component={GroupPageOnLoadScreen}  />
+        
+        <Stack.Screen name="GroupLoad" component={GroupPageOnLoadScreen}  />
         <Stack.Screen name="JoinGroup" component={JoinGroupScreen}  />
         <Stack.Screen name="CreateGroup" component={CreateGroupScreen}  />
 

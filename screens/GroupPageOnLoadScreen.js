@@ -4,12 +4,23 @@ import AppHeader from '../comps/AppHeader'
 import JoinCreate from '../comps/JoinCreate'
 import NavBar from '../comps/NavBar'
 
-const GroupPageOnLoadScreen = () => {
+const GroupPageOnLoadScreen = ({
+    navigation
+}) => {
+
+    const onJoinPress = () => {
+        navigation.navigate('JoinGroup')
+    }
+
+    const onCreatePress = () => {
+        navigation.navigate('CreateGroup')
+    }
+
     return (
         <View style={styles.container}>
             <AppHeader text='Groups'/>
             <View style={styles.midDiv}>
-                <JoinCreate />
+                <JoinCreate onJoinPress={onJoinPress} onCreatePress={onCreatePress}/>
             </View>
             <NavBar/>
         </View>
