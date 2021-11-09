@@ -7,7 +7,7 @@ const InGroupButton = ({
 }) => {
     return (
         <TouchableHighlight style={styles.container} onPress={handleBtnOnPress}>
-            <Text style={{color: '#3D5A80'}}>{btnText}</Text>
+            <Text style={{color: '#3D5A80', paddingHorizontal: 20, textAlign: 'center'}}>{btnText}</Text>
         </TouchableHighlight>
     )
 }

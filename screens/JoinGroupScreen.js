@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
 
 import AppHeader from '../comps/AppHeader'
 import JoinAGroupCard from '../comps/JoinAGroupCard'
@@ -14,6 +14,7 @@ const JoinGroupScreen = ({
     }
 
     return (
+        // <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'position' : 'height'} style={styles.container}>
         <View style={styles.container}>
             <AppHeader text='Groups'/>
             <View style={styles.midDiv}>
@@ -21,6 +22,7 @@ const JoinGroupScreen = ({
             </View>
             <NavBar/>
         </View>
+        // </KeyboardAvoidingView>
     )
 }
 
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'center'
     },
     midDiv: {
         width: '100%',

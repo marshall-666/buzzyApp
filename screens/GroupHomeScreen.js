@@ -14,7 +14,7 @@ const GroupHomeScreen = ({
 }) => {
 
     const handleBtnOnPress =()=> {
-        alert('Pressed')
+        alert('Navigate to the function')
     }
 
     return (
@@ -27,29 +27,29 @@ const GroupHomeScreen = ({
                 <View style={styles.lowerDiv}>
                     <View style={styles.membersView}>
                         <Text style={{fontSize: 24, padding: 28, color: '#ffffff'}}>Members - {memberNum}</Text>
+                        <MembersInGroupCard topRightCorner={15}/>
                         <MembersInGroupCard/>
                         <MembersInGroupCard/>
                         <MembersInGroupCard/>
                         <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
+                        <MembersInGroupCard bottomRightCorner={15}/>
                     </View>
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
                         <Text style={{fontSize: 24, padding: 28, color: '#ffffff', width: '100%', textAlign: 'center'}}>{groupName}</Text>
                         <View style={{flexDirection: 'row'}}>
                             <InGroupButton handleBtnOnPress = {handleBtnOnPress}/>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress}/>
+                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
                         </View>
                         <View style={{flexDirection: 'row'}}>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress}/>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress}/>
+                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'MEMBERS SCHEDULES'}/>
+                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'TIMES'}/>
                         </View>
                     </View>
                     <View style={{width: '100%', paddingBottom: 150}}>
                         <Text style={{fontSize: 20, padding: 28, color: '#ffffff', width: '100%', textAlign: 'center'}}>Upcoming Events for {groupName}</Text>
+                        <GroupEventCard borderTopRightRadius={15}/>
                         <GroupEventCard/>
-                        <GroupEventCard/>
-                        <GroupEventCard/>
+                        <GroupEventCard borderBottomRightRadius={15}/>
                     </View>
                 </View>
             </ScrollView>

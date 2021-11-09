@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 
 import AppHeader from '../comps/AppHeader'
 import { CreateGroup } from '../comps/CreateGroup'
@@ -14,6 +14,7 @@ const CreateGroupScreen = ({
     }
 
     return (
+        // <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'position' : 'height'} style={styles.container}>
         <View style={styles.container}>
             <AppHeader text='Groups'/>
             <View style={styles.midDiv}>
@@ -21,6 +22,7 @@ const CreateGroupScreen = ({
             </View>
             <NavBar/>
         </View>
+        // </KeyboardAvoidingView>
     )
 }
 
