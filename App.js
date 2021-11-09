@@ -4,9 +4,18 @@ import Routes from './navigation/index';
 import LottieView from 'lottie-react-native';
 import { Configurations } from './PropConfig/Props'
 
+import GroupPageOnLoadScreen from './screens/GroupPageOnLoadScreen';
+import JoinGroupScreen from './screens/JoinGroupScreen';
+import CreateGroupScreen from './screens/CreateGroupScreen';
+
+import DashboardScreen from './screens/DashboardScreen'
+import AgendaScreen  from './screens/AgendaScreen'
+
 // export {default}from './storybook'
 
+
 export default function App() {
+
   const [load, setLoad]=useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -36,7 +45,30 @@ export default function App() {
   else{
   return <Routes />
   }
+
+  // const Stack = createNativeStackNavigator();
+  // return (
+    
+  //   <NavigationContainer>
+  //     <StatusBar style="auto" />
+  //       <Stack.Navigator initialRouteName="Taskboard" screenOptions={{
+  //         headerShown: false
+  //       }}>
+  //       <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
+  //       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
+        
+  //       <Stack.Screen name="GroupLoad" component={GroupPageOnLoadScreen}  />
+  //       <Stack.Screen name="JoinGroup" component={JoinGroupScreen}  />
+  //       <Stack.Screen name="CreateGroup" component={CreateGroupScreen}  />
+
+  //     </Stack.Navigator>
+  // </NavigationContainer>
+
+  // );
+
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -52,3 +84,8 @@ const styles = StyleSheet.create({
     fontWeight:'600'
   },
 });
+
+
+
+
+

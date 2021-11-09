@@ -1,4 +1,5 @@
 {
+  "name": "buzzyApp",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -10,13 +11,22 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@eva-design/eva": "^2.1.1",
     "@expo/vector-icons": "^12.0.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-native-fontawesome": "^0.2.7",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-firebase/app": "^13.0.1",
     "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+<<<<<<< HEAD
     "dotenv": "^10.0.0",
+=======
+    "@ui-kitten/components": "^5.1.1",
+    "axios": "^0.23.0",
+>>>>>>> 42d7f63a11f6e839042526e3a80b106fa9760ebe
     "expo": "~43.0.0",
     "expo-constants": "^12.1.3",
     "expo-status-bar": "~1.1.0",
@@ -27,7 +37,12 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.2",
+    "react-native-calendars": "^1.1268.0",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.8.0",
+    "react-native-svg": "^12.1.1",
     "react-native-web": "0.17.1",
+    "storybook": "^6.3.12",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
