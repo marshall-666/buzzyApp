@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, Text, TextInput } from 'react-native'
+import RecBtn from './RecBtn'
 
 const JoinAGroupCard = ({
-    groupName,
-    setGroupName,
-    groupLink,
-    setGroupLink,
+    // groupName,
+    // setGroupName,
+    // groupLink,
+    // setGroupLink,
 }) => {
+    const [groupName, setGroupName] = useState()
+    const [groupLink, setGroupLink] = useState()
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Join a group</Text>
@@ -16,7 +20,7 @@ const JoinAGroupCard = ({
                 placeholderTextColor='#aaaaaa'
                 style={styles.inputText}
                 value={groupName}
-                onChangeText={setGroupName(groupName)}
+                onChangeText={() => setGroupName(groupName)}
             />
             <View style={styles.devider}/>
             <Text style={{color: '#c7c7c7', fontSize: 18, textAlign:'center', marginVertical: 50}}>OR</Text>
@@ -26,9 +30,12 @@ const JoinAGroupCard = ({
                 placeholderTextColor='#aaaaaa'
                 style={styles.inputText}
                 value={groupLink}
-                onChangeText={setGroupLink(groupLink)}
+                onChangeText={() => setGroupLink(groupLink)}
             />
             <View style={styles.devider}/>
+            <View style={styles.btnContainer}>
+                <RecBtn height={50} width={'80%'}/>
+            </View>
         </View>
     )
 }
@@ -38,7 +45,8 @@ export default JoinAGroupCard
 const styles = StyleSheet.create({
     container: {
         width: '85%',
-        minHeight: 450,
+        minHeight: 600,
+        // height: '80%',
         backgroundColor: '#35579f',
         padding: 15,
         borderRadius: 25,
@@ -60,6 +68,7 @@ const styles = StyleSheet.create({
     inputText: {
         paddingLeft: 15,
         marginTop: 30,
+        color: '#fff'
     },
     devider: {
         width: '85%',
@@ -67,5 +76,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         marginLeft: 15,
         marginTop: 5,
+    },
+    btnContainer: {
+        flex: 1,
+        marginTop: 50,
+        alignItems: 'center'
     }
 })

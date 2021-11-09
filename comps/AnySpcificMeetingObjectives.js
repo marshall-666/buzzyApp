@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 const AnySpcificMeetingObjectives = ({
-    meetingObjectives,
-    setMeetingObjectives,
+    // meetingObjectives,
+    // setMeetingObjectives,
 }) => {
+    const [meetingObjectives, setMeetingObjectives] = useState()
+
     return (
         <View style={{flex: 1}}>
             <View style={{flexDirection: 'row'}}>
@@ -15,8 +17,10 @@ const AnySpcificMeetingObjectives = ({
             </View>
             <View style={styles.midBox}>
                 <TextInput
+                    placeholder='Enter here'
                     value={meetingObjectives}
-                    onChangeText={setMeetingObjectives(meetingObjectives)}
+                    onChangeText={() => setMeetingObjectives(meetingObjectives)}
+                    style={{width: '70%', height: '60%'}}
                 />
                 <Text style={{color: '#dbdbdb', padding: 10}}>Type any objectives your team should complete during this meeting!</Text>
             </View>
@@ -30,10 +34,11 @@ const styles = StyleSheet.create({
     midBox: {
         width: '90%',
         height: 200,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
+        // flexDirection: 'row',
+        alignItems: 'flex-start',
         // justifyContent: 'flex-end',
         backgroundColor: '#fff',
         borderRadius: 15,
+        padding: 10
     }
 })
