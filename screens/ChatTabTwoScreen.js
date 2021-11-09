@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, FlatList, SafeAreaView } from 'react-native';
+import { useRoute } from '@react-navigation/core';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
+import { Message } from '../comps/Message';
+import ChatRoom from '../assets/dummy-data/Chat'
+import {ChatBar} from '../comps/ChatBar'
 
 
 
-
+console.log(ChatRoom.messgaes)
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
 margin-top:4%;
@@ -45,10 +49,11 @@ width:100%;
 
 
 const ChatTabTwo = ({ navigation }) => {
-
+const route = useRoute();
+console.warn("Displaying person number", route.params?.id)
 
   return (
-    <View 
+    <SafeAreaView 
         style=
         {{ 
             flex: 1, 
@@ -78,11 +83,18 @@ const ChatTabTwo = ({ navigation }) => {
             height: 55
 
         }}
-     title="TAB TWO"
+     title="Single Thread"
      onPress={()=>{navigation.navigate('ChatTabTwo')}}/>
 
-      
-    </View>
+        <FlatList 
+          data={ChatRoom.messages}
+          renderItem={({item})=> <Message message={item}
+          />}
+          inverted
+          />
+      <ChatBar/>
+     {/* <Message message={ChatRoom.messages[0]}/> */}
+    </SafeAreaView>
   );
 }
 

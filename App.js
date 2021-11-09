@@ -20,15 +20,13 @@ export default function App() {
     
     <NavigationContainer>
        <StatusBar style="auto" />
-    <Stack.Navigator initialRouteName="ChatTabOne" screenOptions={{
-    headerShown: false
-  }}>
+    <Stack.Navigator initialRouteName="ChatTabTwo">
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
       <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}/>
       <Stack.Screen name="Agenda" component={AgendaScreen}/>
-      <Stack.Screen name="ChatTabTwo" component={ChatTabOne}/>
       <Stack.Screen name="ChatTabOne" component={ChatTabTwo}/>
+      <Stack.Screen name="ChatTabTwo" component={ChatTabOne}/>
       
 
     </Stack.Navigator>
