@@ -11,7 +11,7 @@ import TaskStack from './TaskStack';
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
@@ -29,7 +29,7 @@ export default function RootNavigator() {
   }, []);
   
 
-   if (isLoading) {
+   if (isLoading ) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size='large' />

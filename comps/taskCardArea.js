@@ -66,10 +66,6 @@ const TaskCardArea = ({
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
     <CardCon  bgc={Configurations.colors.primCol} bradius={bradius} height={height} width={width}>
-
-
-
-
     </CardCon>
   );
 };
