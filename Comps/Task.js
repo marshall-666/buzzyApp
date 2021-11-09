@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { View, Text,Pressable } from 'react-native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee, faCalendarAlt, faLocationArrow, faChalkboardTeacher, faUsers } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/native'
 
 // main container for the component within with everything resides.
@@ -87,7 +85,6 @@ export const Task = ({})=> {
                setCard(!card) 
                taskHeight()
             }}>
-                <FontAwesomeIcon icon={ faCoffee } />
                 <Text>
                 something goes here
                 </Text>
@@ -97,22 +94,18 @@ export const Task = ({})=> {
        
             <Content display={display}>
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faCalendarAlt } size= {45} />
                     <Text>Whatevr text you add</Text>
                 </ContentCell>
                 
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faLocationArrow } size= {45} />
                     <Text>Whatevr text you add</Text>
                 </ContentCell>
                 
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faChalkboardTeacher} size= {45} />
                     <Text>Whatevr text you add</Text>
                 </ContentCell>
                 
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faUsers} size= {45} />
                     <Text>Whatevr text you add</Text>
                 </ContentCell>
 
