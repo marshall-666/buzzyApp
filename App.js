@@ -7,31 +7,33 @@ import TaskCreatingScreen from './screens/TaskCreatingScreen';
 import TaskboardScreen from './screens/TaskboardScreen '
 import DashboardScreen from './screens/DashboardScreen'
 import AgendaScreen  from './screens/AgendaScreen'
-export {default}from './storybook'
+import ChatTabOne from './screens/ChatTabOneScreen';
+import ChatTabTwo from './screens/ChatTabTwoScreen'
+// export {default}from './storybook'
 
-// export default function App() {
-//   const Stack = createNativeStackNavigator();
-//   return (
+export default function App() {
+  const Stack = createNativeStackNavigator();
+  return (
     
   
     
     
-//     <NavigationContainer>
-//        <StatusBar style="auto" />
-//     <Stack.Navigator initialRouteName="Dashboard" screenOptions={{
-//     headerShown: false
-//   }}>
-//       <Stack.Screen name="Dashboard" component={DashboardScreen} />
-//       <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
-//       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}/>
-//       <Stack.Screen name="Agenda" component={AgendaScreen}/>
+    <NavigationContainer>
+       <StatusBar style="auto" />
+    <Stack.Navigator initialRouteName="ChatTabTwo">
+      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
+      <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}/>
+      <Stack.Screen name="Agenda" component={AgendaScreen}/>
+      <Stack.Screen name="ChatTabOne" component={ChatTabTwo}/>
+      <Stack.Screen name="ChatTabTwo" component={ChatTabOne}/>
       
 
-//     </Stack.Navigator>
-//   </NavigationContainer>
+    </Stack.Navigator>
+  </NavigationContainer>
   
-//   );
-// }
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

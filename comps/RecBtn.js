@@ -21,7 +21,7 @@ margin-left:30px
 `
 
 const RecBtn = ({onRecBtnPress=()=>{},
-  text = 'Create Group',
+  text = 'Create Task',
   RecBtnColor='#FCCA12',
   bradius=10,
   height="12%",

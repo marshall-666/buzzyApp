@@ -6,6 +6,10 @@ import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigation } from "@react-navigation/native";
+
 
 const BarCont = Styled.View`
 width:90%;
@@ -31,17 +35,21 @@ border:5px solid #35579F
 
 
 const NavBar = ({
+    
     backgroundColor="#1E315C",
     circleBackgroundColor="#FCCA12",
     onCalendarPress = () => {},
     onHomePress = () => {},
-    addEventPress = () => {},
+    
     onCoursesPress = () => {},
     onGroupsPress = () => {},
 }) => {
+  const navigation = useNavigation()
+
+  // const onEventPress = () => {navigation.navigate('TaskCreating')}
   return (
   <BarCont backgroundColor={backgroundColor}>
-      <TouchableOpacity onPress={onCalendarPress}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
       <TouchableOpacity onPress={onHomePress}>
@@ -53,10 +61,10 @@ const NavBar = ({
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
-        <TouchableOpacity onPress={addEventPress}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('TaskCreating')}}>
             <AntDesign name="plus" size={35} color="black" />
         </TouchableOpacity>
-      </YellowCircle>
+      </YellowCircle>    
       
       <TouchableOpacity onPress={onCoursesPress}>
         <FontAwesome5 name="book" size={28} color="white" />

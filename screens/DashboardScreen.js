@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
+import {Task} from '../comps/Task'
 import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
@@ -12,9 +13,10 @@ import { Agenda } from 'react-native-calendars'
 import { Configurations } from '../PropConfig/Props'
 import { SelectedDay } from '../data/test';
 import { Calendar } from 'react-native-calendars';
+
 // import {taskCategory} from '../data/category'
 
-
+const secCol = Configurations.colors.secCol;
 
 const Wrapper =styled.ScrollView`
 
@@ -133,11 +135,13 @@ const DashboardScreen = ({navigation }) => {
   const renderItem = (item)=>
   {
     return (
-        <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
-            <Text> {item.name}</Text>
-            <Text> {item.dueDaTE}</Text>
+        // <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
+        //     <Text> {item.name}</Text>
+        //     <Text> {item.dueDaTE}</Text>
 
-          </View>
+        //   </View>
+
+        <Task/>
     )
   }
   
@@ -172,6 +176,16 @@ const DashboardScreen = ({navigation }) => {
       
   };
 
+  const onEventPress = ()=>
+  {
+    navigation.navigate('TaskCreating')
+  }
+
+  const onCalendarPress = ()=>
+  {
+    navigation.navigate('Dashboard')
+  }
+
   return (
   
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
@@ -183,12 +197,44 @@ const DashboardScreen = ({navigation }) => {
       <Wrapper calDisplay={calDisplay}> 
 
         <Calendar 
+
+theme={{
+  backgroundColor: '#ffffff',
+  calendarBackground: '#94bdd4',
+  textSectionTitleColor: 'black',
+  textSectionTitleDisabledColor: '#d9e1e8',
+  selectedDayBackgroundColor: '#00adf5',
+  selectedDayTextColor: '#ffffff',
+  todayTextColor: '#00adf5',
+  dayTextColor: '#2d4150',
+  textDisabledColor: '#d9e1e8',
+  dotColor: '#00adf5',
+  selectedDotColor: '#ffffff',
+  arrowColor: '#ffffff',
+  disabledArrowColor: '#d9e1e8',
+  monthTextColor: 'blue',
+  indicatorColor: 'blue',
+  // textDayFontFamily: 'monospace',
+  // textMonthFontFamily: 'monospace',
+  // textDayHeaderFontFamily: 'monospace',
+  // textDayFontWeight: '300',
+  // textMonthFontWeight: 'bold',
+  // textDayHeaderFontWeight: '300',
+  textDayFontSize: 16,
+  textMonthFontSize: 16,
+  textDayHeaderFontSize: 16
+}}
+
+
+
+
         // onDayLongPress={()=>{setSelectCol('green')}}
         onDayPress={onDayPress}
                 style=
                 {{
                     maxWidth: 400,
-                    width:400
+                    width:400,
+                    height: 600
                 }}
                 markedDates={{
             [selected]: {
@@ -213,7 +259,7 @@ const DashboardScreen = ({navigation }) => {
 theme={{ 
       calendarBackground: 'green',
       agendaKnobColor: 'red',
-      backgroundColor: 'yellow',
+      backgroundColor: '#fad',
       // agendaDayTextColor: 
       // agendaDayNumColor: 
       // agendaTodayColor: 
@@ -237,10 +283,13 @@ theme={{
 
         </View>
       </AgendaWrapper>   
-{/*     
+    
        <NavBarCon>
-          <NavBar/>
-        </NavBarCon> */}
+          <NavBar 
+            // addEventPress={onEventPress}
+            // onCalendarPress={onCalendarPress}
+            />
+        </NavBarCon>
 
     </View>
    

@@ -9,9 +9,10 @@ import styled from 'styled-components/native'
 const TaskCont = styled.View`
 width:90%;
 height:${props => props.height};
-background-color:red;
 border-radius:10px;
 align-items:center;
+margin-top:10px;
+margin-bottom:10px;
 `
 
 // divider
@@ -57,7 +58,7 @@ justify-content:space-around;
 
 export const Task = ({})=> {
     // states to change the height of the task card.
-    const [height, setHeight] = useState('15%')
+    const [height, setHeight] = useState('5%')
     const [card, setCard] = useState(true)
 
     // state to display the content of the card only when its expanded.
@@ -73,7 +74,7 @@ export const Task = ({})=> {
             setDisplay('flex')
         }
         else{
-            setHeight('15%')
+            setHeight('5%')
             setDisplay('none')
         }
     }

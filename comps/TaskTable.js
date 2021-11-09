@@ -1,7 +1,7 @@
 
 import styled from "@emotion/styled-base";
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Button, TextInput } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
@@ -73,16 +73,33 @@ const TaskTable = ({
   onRecBtnPress=()=>{}
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
+  const [textValue, setTextValue] = useState("null")
+
   return (
     <CardCon bgc={CardColor}  height={height} width={width}>
 
       <TextCon>
-          <TextInput1 ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color="white" />
+          <TextInput1 >
+            <Text>
+              Create Task 
+            </Text> 
+          
+            <FontAwesome5 name="edit" size={22} color="white" />
+            
           </TextInput1>
         <TextInput2>
           Task Name
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
+        
+        <TextInput3 
+          style=
+          {{ 
+            height: 40, 
+            borderBottomWidth: 1, 
+            borderBottomColor: 'white', 
+          }}
+          onChangeText = {()=>{setTextValue()}}
+          value = {textValue}
           placeholder="Type the task name"
         // onChangeText={text => setText(text)}
         // defaultValue={text}
@@ -107,16 +124,19 @@ const TaskTable = ({
           placeholder="Type the Location"
         // onChangeText={text => setText(text)}
         // defaultValue={text}
-        ></TextInput3>
+        >
+          
+        </TextInput3>
       <TextInput2>
          Time and Date
-        </TextInput2>
+      </TextInput2>
+      
       </TextCon>
       <TimeCon>
         <AppTimePicker />
       </TimeCon>
       <ButtonCon>
-      <RecBtn onRecBtnPress={onRecBtnPress} />
+      <RecBtn onRecBtnPress={()=>{console.log(TextInput3.value)}} />
       </ButtonCon>
     
     </CardCon>
