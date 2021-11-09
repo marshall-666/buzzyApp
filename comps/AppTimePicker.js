@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Button, Platform, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import  {Configurations} from'../PropConfig/Props'
 
 
 
@@ -52,7 +53,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
   return (
     <View style={styles.container}>
-      <Text  style={{color:"#ffffff", fontSize:20}}> {text}  </Text>
+      <Text  style={{color:"#ffffff", fontSize:20, color:Configurations.colors.secCol }}> {text}  </Text>
       <View style={styles.buttonCon}>
       <View style={{marginRight:20}}> 
         <TouchableOpacity style={styles.button} onPress={showDatepicker} >
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     height:60,
     alignItems: 'center',
     justifyContent: 'center',
+    margin:15
   },
   buttonCon:{
     display:'flex',

@@ -1,36 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TaskCreatingScreen from './screens/TaskCreatingScreen';
-import TaskboardScreen from './screens/TaskboardScreen '
-import CourseInfoScreen from './screens/CourseInfoScreen';
-import AccountScreen from './screens/AccountScreen'
+import Routes from './navigation/index';
+import LottieView from 'lottie-react-native';
+import { Configurations } from './PropConfig/Props'
+
+
 // export {default}from './storybook'
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
-  return (
-    
+  const [load, setLoad]=useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(false);
+    }, 3000);
   
-    
-    
-    <NavigationContainer>
-       <StatusBar style="auto" />
-    <Stack.Navigator initialRouteName="Taskboard" screenOptions={{
-    headerShown: false
-  }}>
-      <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
-      <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}  />
-      <Stack.Screen name="CourseInfoScreen" component={CourseInfoScreen}  />
-      <Stack.Screen name="AccountScreen" component={AccountScreen}  />
-    </Stack.Navigator>
-  </NavigationContainer>
-  
-  );
+  })
+  if (load === true) {
+    return (
+      <View style={styles.container}>
+        <LottieView
+          ref={(ref) => {
+            anim = ref
+          }}
+          style={{
+            width: 350,
+            height: 350,
+            backgroundColor: '#fff',
+          }}
+          source={require('./assets/load.json')}
+          autoPlay={true}
+        />
+         <Text style={styles.title2} >BuzzyBee </Text>
+      </View>
+    )
+  }
+  else{
+  return <Routes />
+  }
 }
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +44,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title2: {
+    width:'100%',
+    color: Configurations.colors.secCol,
+    textAlign:'center',
+    fontSize:40,
+    fontWeight:'600'
   },
 });
 
