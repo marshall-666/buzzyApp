@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, View, Text } from 'react-native';
+import React, { useState, useEffect,useContext } from 'react';
+import { Button, View, Text,StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -12,18 +12,20 @@ import {category} from '../data/category'
 import {coursesData} from '../data/tasks'
 import {groupsData} from '../data/tasks'
 import {eventsData} from '../data/tasks'
-
-
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import fireAuth from '../firebase/fireAuth';
+import { Configurations } from '../PropConfig/Props'
+import fireStore from '../firebase/fireStore';
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
-margin-top:4%;
-margin-bottom:4%;
+margin-top:8%;
+margin-bottom:8%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
-width:75%;
+width:80%;
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -44,7 +46,7 @@ left:5%
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
-top:280px
+top:300px
 height:52.5%;
 width:100%;
 `
@@ -63,7 +65,11 @@ const TaskboardScreen = ({ navigation }) => {
   const [coursebgc, setCourseBgc] = useState(false)
   const [eventbgc, setEventBgc] = useState(false)
   const [groupbgc, setGroupBgc] = useState(false)
-  
+  const [textColorC, setTextColorC] = useState(false)
+  const [textColorG, setTextColorG] = useState(false)
+  const [textColorE, setTextColorE] = useState(false)
+  const [welcome, setWelcome]=useState(true)
+
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
   //     .toString(16)
@@ -84,6 +90,12 @@ const TaskboardScreen = ({ navigation }) => {
     setCourseBgc(true)
     setEventBgc(false)
     setGroupBgc(false)
+    setTextColorC(true)
+    setTextColorG(false)
+    setTextColorE(false)
+    setWelcome(false)
+
+
   }
   const groupPress =()=>{
     setGroup(true)
@@ -92,7 +104,10 @@ const TaskboardScreen = ({ navigation }) => {
     setGroupBgc(true)
     setEventBgc(false)
     setCourseBgc(false)
-
+    setTextColorC(false)
+    setTextColorE(false)
+    setTextColorG(true)
+      setWelcome(false)
   }
   const eventPress =()=>{
     setEvent(true)
@@ -101,25 +116,40 @@ const TaskboardScreen = ({ navigation }) => {
     setCourseBgc(false)
     setEventBgc(true)
     setGroupBgc(false)
+    setTextColorC(false)
+    setTextColorE(true)
+    setTextColorG(false)
+    setWelcome(false)
+
   }
+  const { user } = useContext(AuthenticatedUserContext);
+  const handleSignOut = async () => {
+    try {
+      await fireAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-      <AppHeader text="Task" />
+    <View  
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
+      <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
       <TaskButtonsWrapper>
 
-  <TaskBtn  taskBtnColor={coursebgc?"yellow":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
-      
-      
-      <TaskBtn taskBtnColor={groupbgc?"yellow":"#E5E5E5"} tas taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn taskBtnColor={eventbgc?"yellow":"#E5E5E5"} tastaskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
+  <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
+      <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
+      <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
       
       </TaskButtonsWrapper>
-      <TaskCardArea/>   
+      <TaskCardArea/> 
+     
+    
+    {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
      { course ? (<TaskCardsWrapper>
       {
       courses.map((o, i) => (
      
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
+<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()} />
 
       )
       )
@@ -129,7 +159,7 @@ const TaskboardScreen = ({ navigation }) => {
       {
       groups.map((o, i) => (
      
-<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
+<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
 
       )
       )
@@ -139,7 +169,7 @@ const TaskboardScreen = ({ navigation }) => {
       {
       events.map((o, i) => (
      
-<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate} EventBackgroundColor= {randomColor()}/>
+<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
 
       )
       )
@@ -157,5 +187,20 @@ const TaskboardScreen = ({ navigation }) => {
   );
 }
 
+const styles = StyleSheet.create({
+  title: {
+    position:'absolute',
+     zIndex:3,
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#fff',
+    marginTop:300
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    color: '#fff'
+  }
+});
 
 export default TaskboardScreen

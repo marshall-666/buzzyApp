@@ -3,10 +3,7 @@ import styled from "@emotion/styled-base";
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import AppTimePicker from "./AppTimePicker";
-import NavBar from "./NavBar";
-import RecBtn from "./RecBtn";
+import  {Configurations} from'../PropConfig/Props'
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -18,6 +15,7 @@ border-radius:${(props) => props.bradius}px;
 display:flex;
 flex-wrap:wrap;
 flex-direction:row;
+box-shadow: 5px -5px grey;
 `
 const TextCon = Styled.View`
 display:flex;
@@ -58,9 +56,8 @@ margin-top:10%
 const TaskCardArea = ({
 
   text = 'Create Group',
-  CardColor = '#35579F',
   bradius = 25,
-  height = 600,
+  height = 800,
   width = "100%",
   onJoinPress = () => { },
   onCreatePress = () => { },
@@ -68,14 +65,7 @@ const TaskCardArea = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
-    <CardCon bgc={CardColor} bradius={bradius} height={height} width={width}>
-
-      
-      
-     
-
-
-
+    <CardCon  bgc={Configurations.colors.primCol} bradius={bradius} height={height} width={width}>
     </CardCon>
   );
 };

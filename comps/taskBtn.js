@@ -9,27 +9,27 @@ width:${(props)=>props.width}px;
 height:${(props)=>props.height}px;
 background-color:${(props)=>props.bgc};
 justify-content:center;
-align-items:center;
+align-items:flex-start;
 border-radius:${(props)=>props.bradius}px;
-border: 7px solid grey;
+padding:10px
 `
 const TextInput =Styled.Text`
-font-size:24px;
-
+font-size:32px;
+color:${(props)=>props.textColor}
 `
 const TaskInput =Styled.Text`
-font-size:18px;
-text-align:center
-
+font-size:14px;
+color:${(props)=>props.textColor}
 `
 const TaskBtn = ({
   onBtnPress=()=>{},
   taskNum = '3',
   taskBtnColor='#E5E5E5',
-  bradius=42.5,
-  height=85,
-  width=85,
-  taskCate="Course"
+  bradius=15,
+  height=100,
+  width=100,
+  taskCate="Course",
+  textColor="black"
 }) => {
   return (
     <View>
@@ -38,11 +38,11 @@ const TaskBtn = ({
     >
     <BtnCon bgc={taskBtnColor} bradius={bradius} height={height} width={width} >
      
-        <TextInput>{taskNum}</TextInput>
-      
+        <TextInput textColor={textColor}>{taskNum}</TextInput>
+        <TaskInput textColor={textColor}>{taskCate}</TaskInput>
     </BtnCon>
     </TouchableOpacity>
-    <TaskInput>{taskCate}</TaskInput>
+    {/* <TaskInput>{taskCate}</TaskInput> */}
      </View>
   );
 };
