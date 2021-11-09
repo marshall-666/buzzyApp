@@ -3,40 +3,53 @@ import styled from "@emotion/styled-base";
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import  Styled from "styled-components/native";
+import  {Configurations} from'../PropConfig/Props'
 
 
-const BtnCon = Styled.View`
+const BtnCon = Styled.TouchableOpacity`
 width:${(props)=>props.width}px;
 height:${(props)=>props.height}px;
 background-color:${(props)=>props.bgc};
 justify-content:center;
 align-items:center;
-border-radius:${(props)=>props.bradius}px
-
+border-radius:${(props)=>props.bradius}px;
+margin:10px
 `
 const TextInput =Styled.Text`
 font-size:24px;
+margin-right:20px
+margin-left:20px
 
 `
 
-const RecBtn = ({btnonPress=()=>{},
+const RecBtn = ({
+  onRecBtnPress=()=>{},
   text = 'Create Group',
-  RecBtnColor='#FCCA12',
   bradius=10,
-  height=75,
-  width=275
+  height=85,
+  width=200
 }) => {
   return (
-    <BtnCon bgc={RecBtnColor} bradius={bradius} height={height} width={width}>
-      <TouchableOpacity
-        onPress={btnonPress}
-      >
-        <TextInput>{text}</TextInput>
-      </TouchableOpacity>
+  
+    
+   <View style={styles.container}>
+ <BtnCon bgc={Configurations.colors.butCol} bradius={bradius} height={height} width={width}  onPress={onRecBtnPress}>
+      
+        <TextInput>{text}</TextInput>       
+      
     </BtnCon>
+   </View>
+   
+    
   );
 };
 
 
 
 export default RecBtn;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+ 
+});
