@@ -5,12 +5,19 @@ import AppHeader from '../comps/AppHeader'
 import JoinAGroupCard from '../comps/JoinAGroupCard'
 import NavBar from '../comps/NavBar'
 
-const JoinGroupScreen = () => {
+const JoinGroupScreen = ({
+    navigation
+}) => {
+
+    const onRecBtnPress = () => {
+        navigation.navigate('GroupHome')
+    }
+
     return (
         <View style={styles.container}>
             <AppHeader text='Groups'/>
             <View style={styles.midDiv}>
-                <JoinAGroupCard />
+                <JoinAGroupCard onRecBtnPress={onRecBtnPress}/>
             </View>
             <NavBar/>
         </View>
