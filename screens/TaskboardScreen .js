@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useState, useEffect,useContext } from 'react';
+import { Button, View, Text,StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -9,14 +7,25 @@ import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
 import CourseEventCard from '../comps/CourseEventCard';
 import GroupEventCard from '../comps/GroupEventCard';
+import IndividualEventCard from '../comps/IndividualEventCard';
+import {category} from '../data/category'
+import {coursesData} from '../data/tasks'
+import {groupsData} from '../data/tasks'
+import {eventsData} from '../data/tasks'
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import fireAuth from '../firebase/fireAuth';
+import { Configurations } from '../PropConfig/Props'
+import fireStore from '../firebase/fireStore';
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
-margin-top:4%;
-margin-bottom:4%;
+margin-top:8%;
+margin-bottom:8%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
+justify-content:space-between;
+width:80%;
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -37,147 +46,109 @@ left:5%
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
-top:280px
+top:300px
 height:52.5%;
 width:100%;
 `
 
 
-const taskCategory = {
-  Course: {
-    id: 1,
-    taskNum: "8",
-    taskCate: "Courses",
-  },
-  Group: {
-    id: 2,
-    taskNum: "3",
-    taskCate: "Events",
-  },
-  Event: {
-    id: 3,
-    taskNum: "10",
-    taskCate: "Tasks",
-  }
-}
-const groupsData=[
-  {
-    id: 1,
-    EventTitle: "Workshop",
-    EventDescrip: "project 2 meeting",
-    EventDueDate:"Nov 05st"
-},
-{
-  id: 2,
-  EventTitle: "Coaching lesson",
-  EventDescrip: "PHP && Database",
-  EventDueDate:"Nov 3st"
-},
-{
-  id: 3,
-  EventTitle: "Meeting",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 4,
-  EventTitle: "Meeting",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
 
-]
-
-const coursesData=[
-  {
-    id: 1,
-    EventTitle: "MDIA 3109",
-    EventDescrip: "Advance Phoshop",
-    EventDueDate:"Oct 31st"
-},
-{
-  id: 2,
-  EventTitle: "FMGT 1152",
-  EventDescrip: "Accounting for th Manager",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 3,
-  EventTitle: "MDIA 3126",
-  EventDescrip: "Asset Design & Intergration",
-  EventDueDate:"Oct 31st"
-},
-{
-  id:4,
-  EventTitle: "MKTG 1219",
-  EventDescrip: "Professional Sles Skills",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 5,
-  EventTitle: "COMP 3130",
-  EventDescrip: "Web Development 3",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 6,
-  EventTitle: "MDIA 3106",
-  EventDescrip: "Design 2",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 7,
-  EventTitle: "MDIA 3103",
-  EventDescrip: "Project 2",
-  EventDueDate:"Oct 31st"
-},
-{
-  id: 8,
-  EventTitle: "COMP 2200",
-  EventDescrip: "Business communication",
-  EventDueDate:"Oct 31st"
-}
-]
 const TaskboardScreen = ({ navigation }) => {
-  const [tasks, setTasks] = useState(taskCategory)
+  const [tasks, setTasks] = useState(category)
   const [courses, setCourses] = useState(coursesData)
   const [groups, setGroups] = useState(groupsData)
+  const [events, setEvents] = useState(eventsData)
   const [showcourses, setShowCourses] = useState(showcourses)
   const [course, setCourse] = useState(false)
   const [group, setGroup] = useState(false)
   const [event, setEvent] = useState(false)
+  const [coursebgc, setCourseBgc] = useState(false)
+  const [eventbgc, setEventBgc] = useState(false)
+  const [groupbgc, setGroupBgc] = useState(false)
+  const [textColorC, setTextColorC] = useState(false)
+  const [textColorG, setTextColorG] = useState(false)
+  const [textColorE, setTextColorE] = useState(false)
+  const [welcome, setWelcome]=useState(true)
+
+  // const randomColors = () => {
+  //   const randomColor = Math.floor(Math.random() * 16777215)
+  //     .toString(16)
+  //     .padStart(6, '0');
+  //   return `#${randomColor}`;
+  // };
+  var randomColor = require('randomcolor'); // import the script
+  var color = randomColor(); // a hex code for an attractive color
+  randomColor({
+    luminosity: 'bright',
+    format: 'rgb' // e.g. 'rgb(225,200,20)'
+ });
 
   const coursePress =()=>{
     setCourse(true)
     setGroup(false)
     setEvent(false)
+    setCourseBgc(true)
+    setEventBgc(false)
+    setGroupBgc(false)
+    setTextColorC(true)
+    setTextColorG(false)
+    setTextColorE(false)
+    setWelcome(false)
+
+
   }
   const groupPress =()=>{
     setGroup(true)
     setCourse(false)
     setEvent(false)
+    setGroupBgc(true)
+    setEventBgc(false)
+    setCourseBgc(false)
+    setTextColorC(false)
+    setTextColorE(false)
+    setTextColorG(true)
+      setWelcome(false)
   }
   const eventPress =()=>{
     setEvent(true)
     setCourse(false)
     setGroup(false)
+    setCourseBgc(false)
+    setEventBgc(true)
+    setGroupBgc(false)
+    setTextColorC(false)
+    setTextColorE(true)
+    setTextColorG(false)
+    setWelcome(false)
+
   }
+  const { user } = useContext(AuthenticatedUserContext);
+  const handleSignOut = async () => {
+    try {
+      await fireAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-      <AppHeader text="Task" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
+      <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
       <TaskButtonsWrapper>
 
-      <TaskBtn  taskNum={taskCategory.Course.taskNum} taskCate={taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
-      <TaskBtn taskNum={taskCategory.Group.taskNum} taskCate={taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn taskNum={taskCategory.Event.taskNum} taskCate={taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
+  <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
+      <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
+      <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
       
       </TaskButtonsWrapper>
-      <TaskCardArea/>   
+      <TaskCardArea/> 
+     
+    
+    {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
      { course ? (<TaskCardsWrapper>
       {
       courses.map((o, i) => (
      
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate}/>
+<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()} />
 
       )
       )
@@ -187,7 +158,17 @@ const TaskboardScreen = ({ navigation }) => {
       {
       groups.map((o, i) => (
      
-<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventDueDate={o.EventDueDate}/>
+<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+
+      )
+      )
+      }
+      </TaskCardsWrapper>) : null}
+      { event ? (<TaskCardsWrapper>
+      {
+      events.map((o, i) => (
+     
+<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
 
       )
       )
@@ -201,5 +182,20 @@ const TaskboardScreen = ({ navigation }) => {
   );
 }
 
+const styles = StyleSheet.create({
+  title: {
+    position:'absolute',
+     zIndex:3,
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#fff',
+    marginTop:300
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    color: '#fff'
+  }
+});
 
 export default TaskboardScreen

@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:27.5%;
+height:120px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -15,7 +15,7 @@ border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
 overflow:hidden;
 `
 const EventColour = Styled.View`
-width:5%;
+width:4%;
 height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `
@@ -46,7 +46,8 @@ const GroupEventCard = ({
     EventBackgroundColor="#EFF32A",
     EventTitle="Buzzy Bee",
     EventDescrip="come up with marketing scheme",
-    EventDueDate="September 23rd 5:00pm",
+    EventStartTime="September 24th 5:00pm",
+    EventDueTime="September 24th 7:00pm",
     onGroupPress=()=>{},
     NumOfGroupMembers="+3 people"
 
@@ -57,8 +58,9 @@ const GroupEventCard = ({
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
       <Text style={{fontSize:24}}>{EventTitle}</Text>
-      <Text>{EventDescrip}</Text> 
-      <Text>{EventDueDate}</Text>  
+      <Text style={{fontSize:14}}>{EventDescrip}</Text> 
+      <Text style={{fontSize:14}}>{EventStartTime}</Text> 
+      <Text style={{fontSize:14}}>{EventDueTime}</Text>   
     </TextCont>
     
     <IconCont>
