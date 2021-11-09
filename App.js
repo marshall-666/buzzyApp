@@ -7,7 +7,8 @@ import TaskCreatingScreen from './screens/TaskCreatingScreen';
 import TaskboardScreen from './screens/TaskboardScreen '
 import DashboardScreen from './screens/DashboardScreen'
 import AgendaScreen  from './screens/AgendaScreen'
-import NavBar from './comps/NavBar';
+import ChatTabOne from './screens/ChatTabOneScreen';
+import ChatTabTwo from './screens/ChatTabTwoScreen'
 // export {default}from './storybook'
 
 export default function App() {
@@ -19,16 +20,13 @@ export default function App() {
     
     <NavigationContainer>
        <StatusBar style="auto" />
-    <Stack.Navigator initialRouteName="Dashboard" screenOptions={{
-    headerShown: false
-  }}>
+    <Stack.Navigator initialRouteName="ChatTabTwo">
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
       <Stack.Screen name="Taskboard" component={TaskboardScreen}  />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen}/>
       <Stack.Screen name="Agenda" component={AgendaScreen}/>
-      <Stack.Screen name="NavBar" component={NavBar}/>
-      
-
+      <Stack.Screen name="ChatTabOne" component={ChatTabTwo}/>
+      <Stack.Screen name="ChatTabTwo" component={ChatTabOne}/>
       
 
     </Stack.Navigator>

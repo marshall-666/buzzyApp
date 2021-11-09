@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, TextInput, Pressable, Button } from 'react-native'
+import { useState } from 'react'
+import { View, Text, TextInput, Pressable, Button, KeyboardAvoidingView, Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { Configurations } from '../PropConfig/Props'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -32,7 +33,7 @@ justify-content:center;
 width:100px;
 `
 const TextBox = styled.TextInput`
-border:1px solid grey;
+
 width:70%;
 flex-wrap:wrap;
 `
@@ -44,25 +45,57 @@ export const ChatBar =({
 }
     
     )=> {
+        const [message, setMessage] = useState('hhh')
+        
+        const sendMessage = ()=>
+        {
+            console.warn("sending:", message)
+            setMessage('')
+        }
+
+        const onPlusClick = ()=>
+        {
+            console.warn("Type a message to send")
+        }
+
+        const onPress = ()=> 
+        {
+            if (message)
+            {
+                sendMessage();
+            }
+            else {
+                onPlusClick();
+            }
+        }
     return (
-        <ChatCont>
+        <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={95}>
            <CamCont onPress={()=>{onCamPress}}>
-            <FontAwesomeIcon icon={faCameraRetro} size = {30}/>
+            {/* <FontAwesomeIcon icon={faCameraRetro} size = {30}/> */}
            </CamCont>
            <InpButCont>
+
+               <View 
+                
+               style={{flex:1, justifyContent:'center'}}>
                 <TextBox 
+                    value={message}
+                    onChangeText = {setMessage}
                     multiline
                     numberOfLines={4}
                     placeholder="Type Your Message here"
                     />
+                </View>
                 <SendBut 
                     btnCol={btnCol} 
-                    onPress = {()=>{}}>
+                    onPress = {onPress}>
                         <Text>Send</Text>
                 </SendBut>
 
                         
             </InpButCont>
-        </ChatCont>
+        </KeyboardAvoidingView>
     )
 }
