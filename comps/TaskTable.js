@@ -6,9 +6,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
 import NavBar from "./NavBar";
 import RecBtn from "./RecBtn";
-import {Picker} from '@react-native-picker/picker';
+// import {Picker} from '@react-native-picker/picker';
 import  {Configurations} from'../PropConfig/Props'
-
+import ModalSelector from 'react-native-modal-selector'
 
 const CardCon = Styled.View`
 width:${(props) => props.width};
@@ -44,7 +44,7 @@ padding-top:5%
 const TextInput3 = Styled.TextInput`
 width:100%;
 `
-const PickerCon = Styled.Picker`
+const PickerCon = Styled.View`
 width:100%;
 `
 const TimeCon = Styled.View`
@@ -66,6 +66,17 @@ const TaskTable = ({
 
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
+  let index = 0;
+  const data = [
+      { key: index++, section: true, label: 'Type' },
+      { key: index++, label: 'Courses' },
+      { key: index++, label: 'Groups' },
+      { key: index++, label: 'Events' },
+      // etc...
+      // Can also add additional custom keys which are passed to the onChange callback
+      // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
+  ];
+
   return (
     <CardCon bgc={Configurations.colors.primCol}  height={height} width={width}>
 
@@ -84,15 +95,24 @@ const TaskTable = ({
         <TextInput2 style={{color:Configurations.colors.secCol}} >
           Task Category
         </TextInput2>
-        <PickerCon
+        <ModalSelector
+                    data={data}
+                    initValue="Coures"
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                    borderBottomWidth="none" />
+
+        {/* <PickerCon style={{ height: "18%", width: "100%", overflow: 'hidden', backgroundColor: 'red',}}>
+        <Picker
           selectedValue={selectedValue}
-          style={{ height: 50, width: "100%" }}
+          
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
           <Picker.Item label="Courses" value="Courses" />
           <Picker.Item label="Groups" value="Groups" />
           <Picker.Item label="Events" value="Events" />
-        </PickerCon>
+        </Picker>
+        </PickerCon> */}
+       
         <TextInput2 style={{color:Configurations.colors.secCol}} >
           Location
         </TextInput2>
