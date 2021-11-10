@@ -94,7 +94,6 @@ const LoginScreen = ({ navigation }) => {
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
         <Text style={styles.Logoin}>Login</Text>
-        <Text style={styles.Logoin}>Login</Text>
       </LogoWrapper>
   
       <TaskCardArea style={{ position: 'absolute', zIndex: 3 }} />
