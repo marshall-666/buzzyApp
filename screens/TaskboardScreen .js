@@ -1,5 +1,5 @@
-import React, { useState, useEffect,useContext } from 'react';
-import { Button, View, Text,StyleSheet } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { Button, View, Text, StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -8,10 +8,10 @@ import TaskCardArea from '../comps/taskCardArea';
 import CourseEventCard from '../comps/CourseEventCard';
 import GroupEventCard from '../comps/GroupEventCard';
 import IndividualEventCard from '../comps/IndividualEventCard';
-import {category} from '../data/category'
-import {coursesData} from '../data/tasks'
-import {groupsData} from '../data/tasks'
-import {eventsData} from '../data/tasks'
+import { category } from '../data/category'
+import { coursesData } from '../data/tasks'
+import { groupsData } from '../data/tasks'
+import { eventsData } from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireAuth from '../firebase/fireAuth';
 import { Configurations } from '../PropConfig/Props'
@@ -19,8 +19,8 @@ import fireStore from '../firebase/fireStore';
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
-margin-top:8%;
-margin-bottom:8%;
+margin-top:30%;
+margin-bottom:10%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
@@ -30,7 +30,7 @@ width:80%;
 const TaskButtonWrapper = styled.View`
 margin:3%
 `
-const CourseEventCardWrapper =styled.View`
+const CourseEventCardWrapper = styled.View`
 height:100%;
 
 `
@@ -68,7 +68,7 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorC, setTextColorC] = useState(false)
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
-  const [welcome, setWelcome]=useState(true)
+  const [welcome, setWelcome] = useState(true)
 
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
@@ -81,9 +81,9 @@ const TaskboardScreen = ({ navigation }) => {
   randomColor({
     luminosity: 'bright',
     format: 'rgb' // e.g. 'rgb(225,200,20)'
- });
+  });
 
-  const coursePress =()=>{
+  const coursePress = () => {
     setCourse(true)
     setGroup(false)
     setEvent(false)
@@ -97,7 +97,7 @@ const TaskboardScreen = ({ navigation }) => {
 
 
   }
-  const groupPress =()=>{
+  const groupPress = () => {
     setGroup(true)
     setCourse(false)
     setEvent(false)
@@ -107,9 +107,9 @@ const TaskboardScreen = ({ navigation }) => {
     setTextColorC(false)
     setTextColorE(false)
     setTextColorG(true)
-      setWelcome(false)
+    setWelcome(false)
   }
-  const eventPress =()=>{
+  const eventPress = () => {
     setEvent(true)
     setCourse(false)
     setGroup(false)
@@ -131,71 +131,73 @@ const TaskboardScreen = ({ navigation }) => {
     }
   };
   return (
-    <View  
-    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
-      <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
+    <View
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+      <View style={styles.header}>
+        <AppHeader text="Task" display="none" onLogoutPress={handleSignOut} />
+      </View>
       <TaskButtonsWrapper>
-
-  <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
-      <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
-      
+        <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc ? "#3D5A80" : "#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate} onBtnPress={coursePress} />
+        <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc ? "#3D5A80" : "#E5E5E5"} taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate} onBtnPress={groupPress} />
+        <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc ? "#3D5A80" : "#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate} onBtnPress={eventPress} />
       </TaskButtonsWrapper>
-      <TaskCardArea/> 
-     
-    
-    {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
-     { course ? (<TaskCardsWrapper>
-      {
-      courses.map((o, i) => (
-     
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()} />
+      <TaskCardArea />
+      {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text> : null}
+      {course ? (<TaskCardsWrapper>
+        {
+          courses.map((o, i) => (
+            <CourseEventCard key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor={randomColor()} />
 
-      )
-      )
-      }
+          )
+          )
+        }
       </TaskCardsWrapper>) : null}
-      { group ? (<TaskCardsWrapper>
-      {
-      groups.map((o, i) => (
-     
-<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+      {group ? (<TaskCardsWrapper>
+        {
+          groups.map((o, i) => (
 
-      )
-      )
-      }
+            <GroupEventCard key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor={randomColor()} />
+
+          )
+          )
+        }
       </TaskCardsWrapper>) : null}
-      { event ? (<TaskCardsWrapper>
-      {
-      events.map((o, i) => (
-     
-<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+      {event ? (<TaskCardsWrapper>
+        {
+          events.map((o, i) => (
 
-      )
-      )
-      }
+            <IndividualEventCard key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor={randomColor()} />
+
+          )
+          )
+        }
       </TaskCardsWrapper>) : null}
       <NavBarCon>
-      <NavBar  addEventPress={()=>navigation.navigate('TaskCreating') }/>
+        <NavBar addEventPress={() => navigation.navigate('TaskCreating')} />
       </NavBarCon>
-      
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   title: {
-    position:'absolute',
-     zIndex:3,
+    position: 'absolute',
+    zIndex: 3,
     fontSize: 24,
     fontWeight: '600',
     color: '#fff',
-    marginTop:300
+    marginTop: 300
   },
   text: {
     fontSize: 16,
     fontWeight: 'normal',
     color: '#fff'
+  },
+  header: {
+    position: 'absolute',
+    zIndex: 10,
+
   }
 });
 
