@@ -9,11 +9,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native";
+import  {Configurations} from'../PropConfig/Props'
 
 
 const BarCont = Styled.View`
 width:90%;
-height:7%;
+height:60px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -26,18 +27,17 @@ background-color:${(props) => props.circleBackgroundColor};
 display:flex;
 justify-content:center;
 align-items:center;
-height:100%;
-width:15%;
-top:-5%;
-border:5px solid #35579F
+height:70px;
+width:70px;
+top:-6%;
+border:6px solid #94BDD4
 `
 
 
 
 const NavBar = ({
+   
     
-    backgroundColor="#1E315C",
-    circleBackgroundColor="#FCCA12",
     onCalendarPress = () => {},
     onHomePress = () => {},
     
@@ -57,7 +57,7 @@ const NavBar = ({
       </TouchableOpacity>
       
       <YellowCircle 
-      circleBackgroundColor={circleBackgroundColor}
+      circleBackgroundColor={Configurations.colors.butCol}
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>

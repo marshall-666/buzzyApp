@@ -7,7 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:90px;
+height:120px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -48,7 +48,8 @@ const GroupEventCard = ({
     EventBackgroundColor="#EFF32A",
     EventTitle="MDIA 3109",
     EventDescrip="Finish Beast Composition",
-    EventDueDate="Due: September 22nd",
+    EventStartTime="September 24th 5:00pm",
+    EventDueTime="September 24th 7:00pm",
     onGroupPress=()=>{},
 
 
@@ -59,7 +60,8 @@ const GroupEventCard = ({
     <TextCont>
       <Text><Text style={{fontSize:20}}>{EventTitle}</Text>  <FontAwesome5 name="edit" size={22} color="black" iconStyle={{marginLeft: 50}} /></Text> 
       <Text style={{fontSize:14}}>{EventDescrip}</Text> 
-      <Text style={{fontSize:14}}>{EventDueDate}</Text>  
+      <Text style={{fontSize:14}}>{EventStartTime}</Text> 
+      <Text style={{fontSize:14}}>{EventDueTime}</Text>  
     </TextCont>
   </CardCont>
   );
