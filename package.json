@@ -20,6 +20,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^13.0.1",
     "@react-native-picker/picker": "^2.1.0",
+    "@react-navigation/core": "^6.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@ui-kitten/components": "^5.1.1",

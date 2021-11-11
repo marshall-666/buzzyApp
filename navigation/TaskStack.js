@@ -6,7 +6,10 @@ import LottieView from 'lottie-react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import { Configurations } from '../PropConfig/Props'
 import DashboardScreen from '../screens/DashboardScreen';
-
+import CourseInfoScreen from '../screens/CourseInfoScreen';
+import GroupHomeScreen from '../screens/GroupHomeScreen';
+import AllChats from '../screens/AllChatsScreen';
+import SingleChatThread from '../screens/SingleChatThreadScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +46,13 @@ export default function TaskboardStack() {
     <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerTitle: 'Taskboard', headerShown: false }}>
       <Stack.Screen name='Taskboard' component={TaskboardScreen} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
+      
+      {/* dashboard flow */}
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="CourseInfo" component={CourseInfoScreen} />
+      <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
+      <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
+      {/* dashboard flow ends */}
     </Stack.Navigator>
   );
 }

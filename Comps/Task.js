@@ -54,7 +54,14 @@ justify-content:space-around;
 
 
 
-export const Task = ({})=> {
+export const Task = ({
+    title='Title',
+    days= "Monday",
+    time = "Sometime",
+    location="sw14",
+    instructor="Henry Leung",
+    group= "see groups"
+})=> {
     // states to change the height of the task card.
     const [height, setHeight] = useState('5%')
     const [card, setCard] = useState(true)
@@ -86,27 +93,33 @@ export const Task = ({})=> {
                taskHeight()
             }}>
                 <Text>
-                something goes here
+                {title}
                 </Text>
             </TaskHeader>
             <Divider></Divider>
           
        
             <Content display={display}>
+                
+                
                 <ContentCell> 
-                    <Text>Whatevr text you add</Text>
+                    <View>
+                        <Text>{days}</Text>
+                        <Text>{time}</Text>
+                    </View>
+                    
+                    
                 </ContentCell>
                 
                 <ContentCell> 
-                    <Text>Whatevr text you add</Text>
+                    <Text>{location}</Text>
                 </ContentCell>
                 
                 <ContentCell> 
-                    <Text>Whatevr text you add</Text>
+                    <Text>{instructor}</Text>
                 </ContentCell>
-                
                 <ContentCell> 
-                    <Text>Whatevr text you add</Text>
+                    <Text>{group}</Text>
                 </ContentCell>
 
 

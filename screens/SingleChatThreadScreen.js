@@ -48,7 +48,7 @@ width:100%;
 
 
 
-const ChatTabTwo = ({ navigation }) => {
+const SingleChatThread = ({ navigation }) => {
 const route = useRoute();
 console.warn("Displaying person number", route.params?.id)
 
@@ -73,7 +73,7 @@ console.warn("Displaying person number", route.params?.id)
     
         }}
      title="TAB ONE" 
-     onPress={()=>{navigation.navigate('ChatTabOne')}}/>
+     onPress={()=>{navigation.navigate('AllChats')}}/>
     
     <Button 
         style=
@@ -84,7 +84,7 @@ console.warn("Displaying person number", route.params?.id)
 
         }}
      title="Single Thread"
-     onPress={()=>{navigation.navigate('ChatTabTwo')}}/>
+     onPress={()=>{navigation.navigate('SingleChatThread')}}/>
 
         <FlatList 
           data={ChatRoom.messages}
@@ -99,4 +99,4 @@ console.warn("Displaying person number", route.params?.id)
 }
 
 
-export default ChatTabTwo
+export default SingleChatThread;

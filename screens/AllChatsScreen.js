@@ -47,7 +47,7 @@ width:100%;
 
 
 
-const ChatTabOne = ({ navigation }) => {
+const AllChats = ({ navigation }) => {
 
 
   return (
@@ -73,7 +73,7 @@ const ChatTabOne = ({ navigation }) => {
     
         }}
      title="TAB ONE" 
-     onPress={()=>{navigation.navigate('ChatTabOne')}}/>
+     onPress={()=>{navigation.navigate('AllChats')}}/>
     
     <Button 
         style=
@@ -84,7 +84,7 @@ const ChatTabOne = ({ navigation }) => {
 
         }}
      title="chats"
-     onPress={()=>{navigation.navigate('ChatTabTwo')}}/>
+     onPress={()=>{navigation.navigate('SingleChatThread')}}/>
 
     <View style={{flex:1}}>
           
@@ -101,4 +101,4 @@ const ChatTabOne = ({ navigation }) => {
 }
 
 
-export default ChatTabOne
+export default AllChats;
