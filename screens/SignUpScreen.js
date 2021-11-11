@@ -101,7 +101,7 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
-      <AppHeader text="Welcome" display="none" />
+     <AppHeader text="Welcome" displayBack="none" textAlign='center' menuDisplay='none'/>
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
@@ -224,7 +224,7 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setSet(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        {signupError ? <ErrorInfo error={signupError} visible={true} /> : null}
+        {signupError ?<Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
 
         <Text style={styles.button}>
           <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
@@ -276,10 +276,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   button: {
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 20,
-  },
+    height:'30%',
+     marginTop: '1%',
+   alignSelf:'center'
+   },
   logo: {
     position: 'absolute',
     width: 150,

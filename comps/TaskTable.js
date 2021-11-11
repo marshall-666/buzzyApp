@@ -43,9 +43,11 @@ padding-top:5%
 `
 const TextInput3 = Styled.TextInput`
 width:100%;
+
 `
 const PickerCon = Styled.View`
 width:100%;
+margin-top:10px
 `
 const TimeCon = Styled.View`
 height:15%;
@@ -95,12 +97,13 @@ const TaskTable = ({
         <TextInput2 style={{color:Configurations.colors.secCol}} >
           Task Category
         </TextInput2>
+        <PickerCon>
         <ModalSelector
                     data={data}
                     initValue="Coures"
                     onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     borderBottomWidth="none" />
-
+</PickerCon>
         {/* <PickerCon style={{ height: "18%", width: "100%", overflow: 'hidden', backgroundColor: 'red',}}>
         <Picker
           selectedValue={selectedValue}

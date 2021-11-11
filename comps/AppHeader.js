@@ -23,7 +23,7 @@ padding-bottom:2%
 
 const TextInput = Styled.Text`
 font-size:${(props) => props.fontSize}px;
-width:80%
+width:90%
 text-align:${(props) => props.textAlign};
 color:#ffffff;
 margin-bottom:-5px
@@ -34,11 +34,16 @@ display:${(props) => props.dispaly};
 width:30px
 height:30px
 `
+const IconInut2 = Styled.Text`
+display:${(props) => props.dispalyR};
+width:30px
+height:30px
+`
 
 const MenuCont = Styled.View`
 height:${props => props.Mheight}px;
 width:${props => props.Mwidth}px;
-display:${props=>props.menuDisplay};
+display:${props => props.menuDisplay};
 flex-direction:column;
 align-items:center;
 justify-content:space-between
@@ -69,11 +74,11 @@ const AppHeader = ({
   onSettingPress = () => { },
   onLogoutPress = () => { },
   fontSize = 36,
-  display = 'flex',
+  displayBack = 'flex',
   textAlign = 'left',
   Mwidth = 100,
   Mheight = 0,
-  menuDisplay='flex'
+  menuDisplay = 'flex'
 }) => {
   const [menuOp, setMenuOp] = useState(false)
 
@@ -89,19 +94,22 @@ const AppHeader = ({
     <View>
       <CardCon bgc={Configurations.colors.secCol} height={height} width={width}>
         <TouchableOpacity onPress={onBackPress} >
-          <IconInut dispaly={display} >
+          <IconInut dispaly={displayBack} >
             <Entypo name="arrow-with-circle-left" size={30} color="white" />
           </IconInut>
         </TouchableOpacity>
         <TextInput fontSize={fontSize} textAlign={textAlign}>{text}
         </TextInput>
+
         <TouchableOpacity onPress={onMenuPressOp} >
-        
-        <Entypo name="dots-three-vertical" size={24} color="white" />
-    
+          <IconInut2 dispalyR={menuDisplay}>
+            <Entypo name="dots-three-vertical" size={24} color="white" />
+          </IconInut2>
+
+
         </TouchableOpacity>
       </CardCon>
-      < MenuCont Mheight={menuOp ? 400 : 0} menuDisplay={menuOp ? 'flex': 'none' }   Mwidth={Mwidth} Mbgc={Configurations.colors.secCol}>
+      < MenuCont Mheight={menuOp ? 400 : 0} menuDisplay={menuOp ? 'flex' : 'none'} Mwidth={Mwidth} Mbgc={Configurations.colors.secCol}>
         <TouchableOpacity onPress={onMenuPressCl}>
           <Entypo name="dots-three-horizontal" size={24} color="white" />
         </TouchableOpacity>

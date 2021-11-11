@@ -38,11 +38,15 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-native-calendars": "^1.1268.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
     "react-native-svg": "^12.1.1",
 =======
+=======
+    "react-native-modal-datetime-picker": "^13.0.0",
+>>>>>>> 50bcbf6aacbde50815569d1abf862276e1e8e713
     "react-native-modal-selector": "^2.1.0",
 >>>>>>> dc2945ab4eba8522f46b238fea8b2376c7edcf3a
     "react-native-web": "0.17.1",
