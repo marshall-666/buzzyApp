@@ -72,7 +72,9 @@ import { Fontisto } from '@expo/vector-icons';
         </TouchableOpacity>
       </View>
       </View>
-      <View  style={{width: '50%',height:40, backgroundcolor: "grey", marginTop:10,borderWidth:0, overflow:'hidden'}}>
+      <View  style={{width: '50%',height:40, backgroundcolor: "grey", marginTop:10, 
+      alignContent:'center',justifyContent:'center',
+      overflow:'hidden'}}>
       {show ? (
         <DateTimePicker
           testID="dateTimePicker"
@@ -81,7 +83,7 @@ import { Fontisto } from '@expo/vector-icons';
           is24Hour={true}
           display="default"
           onChange={onChange} 
-          style={{height:20, }}
+          style={{height:40, width:100,alignSelf:'center'}}
         />
       ):null}
        </View>
