@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
-      <AppHeader text="Welcome" display="none" />
+      <AppHeader text="Welcome" displayBack="none" textAlign='center' menuDisplay='none'/>
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
@@ -139,12 +139,13 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.title3}>Forgot Password?</Text>
-        <Text style={styles.button}>
-          {loginError ? <ErrorInfo error={loginError} visible={true} /> : null}
-
-          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+        <Text style={styles.title3}>Forgot Password?
+        
         </Text>
+        {loginError ? <Text><ErrorInfo error={loginError} visible={true} /></Text> : null}
+        <View style={styles.button}>
+          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+        </View>
         <Text style={styles.title3}>OR</Text>
         <Image source={require("../assets/D2L.png")} style={styles.D2L} />
       <View style={styles.container3}>
@@ -193,12 +194,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Configurations.colors.secCol,
     alignSelf: 'center',
-    marginTop: '-2.5%'
+    marginTop: '-2.5%',
   },
   button: {
-    flex: 1,
-    textAlign: 'center',
-    marginTop: '1%'
+   height:'30%',
+    marginTop: '1%',
+  alignSelf:'center'
 
   },
   logo: {

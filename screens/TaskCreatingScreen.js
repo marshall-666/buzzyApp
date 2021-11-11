@@ -89,7 +89,7 @@ const TaskCreatingScreen = ({ navigation }) => {
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <View style={styles.header}>
-        <AppHeader text="Task" display="none" onLogoutPress={handleSignOut} />
+        <AppHeader text="Task" displayBack="none" onLogoutPress={handleSignOut} />
       </View>
       <Wrapper>
         <TaskButtonWrapper>

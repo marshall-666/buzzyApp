@@ -134,7 +134,7 @@ const TaskboardScreen = ({ navigation }) => {
     <View
       style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <View style={styles.header}>
-        <AppHeader text="Task" display="none" onLogoutPress={handleSignOut} />
+        <AppHeader text="Task" displayBack="none" onLogoutPress={handleSignOut} />
       </View>
       <TaskButtonsWrapper>
         <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc ? "#3D5A80" : "#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate} onBtnPress={coursePress} />
