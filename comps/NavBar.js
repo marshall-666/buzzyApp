@@ -69,7 +69,7 @@ const NavBar = ({
       <TouchableOpacity onPress={()=>{navigation.navigate('CourseInfo')}}>
         <FontAwesome5 name="book" size={28} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onGroupsPress}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>
         <MaterialIcons name="group" size={35} color="white" />
       </TouchableOpacity>
   </BarCont>

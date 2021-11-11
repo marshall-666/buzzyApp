@@ -11,39 +11,6 @@ import chatRoom from '../assets/dummy-data/ChatRoom'
 
 
 
-const TaskButtonsWrapper = styled.View`
-margin-left:10px;
-margin-top:4%;
-margin-bottom:4%;
-display:flex;
-flex-wrap:nowrap;
-flex-direction:row;
-justify-content:space-between;
-width:75%;
-`
-const TaskButtonWrapper = styled.View`
-margin:3%
-`
-const CourseEventCardWrapper =styled.View`
-height:100%;
-
-`
-const NavBarCon = styled.View`
-position:absolute;
-z-index:2;
-top:92.5%;
-height:100%
-width:100%
-left:5%
-`
-
-const TaskCardsWrapper = styled.ScrollView`
-position:absolute;
-z-index:2;
-top:280px
-height:52.5%;
-width:100%;
-`
 
 
 

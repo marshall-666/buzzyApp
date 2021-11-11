@@ -10,6 +10,7 @@ import CourseInfoScreen from '../screens/CourseInfoScreen';
 import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
 import SingleChatThread from '../screens/SingleChatThreadScreen';
+import AllGroupsScreen from '../screens/AllGroupsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,8 @@ export default function TaskboardStack() {
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
       <Stack.Screen name="CourseInfo" component={CourseInfoScreen} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
+      <Stack.Screen name="AllGroups" component={AllGroupsScreen} />
+
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       {/* dashboard flow ends */}
     </Stack.Navigator>

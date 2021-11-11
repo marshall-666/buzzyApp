@@ -66,7 +66,7 @@ const AppHeader = ({
   onLogoutPress = () => { },
   fontSize = 36,
   display = 'flex',
-  textAlign = 'left',
+  textAlign = 'center',
   Mwidth=100,
   Mheight=0
 }) => {

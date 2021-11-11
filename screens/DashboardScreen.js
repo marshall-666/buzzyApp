@@ -255,52 +255,54 @@ const DashboardScreen = ({navigation }) => {
           
         <Calendar 
 
-theme={{
-  backgroundColor: '#ffffff',
-  calendarBackground: '#94bdd4',
-  textSectionTitleColor: 'black',
-  textSectionTitleDisabledColor: '#d9e1e8',
-  selectedDayBackgroundColor: '#F5F5E1',
-  selectedDayTextColor: 'black',
-  todayTextColor: 'white',
-  dayTextColor: '#2d4150',
-  textDisabledColor: '#d9e1e8',
-  dotColor: '#00adf5',
-  selectedDotColor: '#ffffff',
-  arrowColor: '#ffffff',
-  disabledArrowColor: '#d9e1e8',
-  monthTextColor: 'blue',
-  indicatorColor: 'blue',
-  // textDayFontFamily: 'monospace',
-  // textMonthFontFamily: 'monospace',
-  // textDayHeaderFontFamily: 'monospace',
-  // textDayFontWeight: '300',
-  // textMonthFontWeight: 'bold',
-  // textDayHeaderFontWeight: '300',
-  textDayFontSize: 16,
-  textMonthFontSize: 16,
-  textDayHeaderFontSize: 16
-}}
+          theme=
+          {{
+            backgroundColor: '#ffffff',
+            calendarBackground: '#94bdd4',
+            textSectionTitleColor: 'black',
+            textSectionTitleDisabledColor: '#d9e1e8',
+            selectedDayBackgroundColor: '#F5F5E1',
+            selectedDayTextColor: 'black',
+            todayTextColor: 'white',
+            dayTextColor: '#2d4150',
+            textDisabledColor: '#d9e1e8',
+            dotColor: '#00adf5',
+            selectedDotColor: '#ffffff',
+            arrowColor: '#ffffff',
+            disabledArrowColor: '#d9e1e8',
+            monthTextColor: 'blue',
+            indicatorColor: 'blue',
+            // textDayFontFamily: 'monospace',
+            // textMonthFontFamily: 'monospace',
+            // textDayHeaderFontFamily: 'monospace',
+            // textDayFontWeight: '300',
+            // textMonthFontWeight: 'bold',
+            // textDayHeaderFontWeight: '300',
+            textDayFontSize: 16,
+            textMonthFontSize: 16,
+            textDayHeaderFontSize: 16
+          }}
 
 
 
 
         // onDayLongPress={()=>{setSelectCol('green')}}
-        onDayPress={onDayPress}
-                style=
-                {{
-                    maxWidth: 400,
-                    width:400,
-                    height: 400
+          onDayPress={onDayPress}
+            style=
+              {{
+                maxWidth: 400,
+                width:400,
+                height: 400
+              }}
+            markedDates=
+              {{
+                        [selected]: {
+                          selected: true,
+                          disableTouchEvent: false,
+                          selectedColor: selectCol ,
+                          selectedTextColor: 'black'
+                        }
                 }}
-                markedDates={{
-            [selected]: {
-              selected: true,
-              disableTouchEvent: false,
-              selectedColor: selectCol ,
-              selectedTextColor: 'black'
-            }
-          }}
           />
 
           {/* functions on 211-230============= */}
