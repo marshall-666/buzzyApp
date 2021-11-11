@@ -11,6 +11,8 @@ display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
 border:1px solid #C4C4C4;
+border-radius:15px;
+margin:10px;
 overflow:hidden;
 `
 const EventColour = Styled.View`

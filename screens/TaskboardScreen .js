@@ -132,47 +132,98 @@ const TaskboardScreen = ({ navigation }) => {
   };
   return (
     <View  
-    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start',backgroundColor: Configurations.colors.backCol  }}>
-      <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
-      <TaskButtonsWrapper>
+      style={{ 
+      flex: 1, 
+      alignItems: 'center', 
+      justifyContent: 'flex-start',
+      backgroundColor: Configurations.colors.backCol  }}>
+    
+    <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
+    
+    <TaskButtonsWrapper>
 
-  <TaskBtn textColor={textColorC ? "#ffffff" : "black"} taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Course.taskNum} taskCate={category.taskCategory.Course.taskCate}  onBtnPress={coursePress}/>
-      <TaskBtn textColor={textColorG ? "#ffffff" : "black"} taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  taskNum={category.taskCategory.Group.taskNum} taskCate={category.taskCategory.Group.taskCate}   onBtnPress={groupPress}/>
-      <TaskBtn textColor={textColorE ? "#ffffff" : "black"} taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} taskNum={category.taskCategory.Event.taskNum} taskCate={category.taskCategory.Event.taskCate}  onBtnPress={eventPress}/>
+  <TaskBtn 
+     textColor={textColorC ? "#ffffff" : "black"} 
+     taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} 
+     taskNum={category.taskCategory.Course.taskNum} 
+     taskCate={category.taskCategory.Course.taskCate}  
+     onBtnPress={coursePress}
+  />
+    
+  <TaskBtn 
+    textColor={textColorG ? "#ffffff" : "black"} 
+    taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  
+    taskNum={category.taskCategory.Group.taskNum} 
+    taskCate={category.taskCategory.Group.taskCate}   
+    onBtnPress={groupPress}
+  />
+  
+  <TaskBtn 
+    textColor={textColorE ? "#ffffff" : "black"} 
+    taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} 
+    taskNum={category.taskCategory.Event.taskNum} 
+    taskCate={category.taskCategory.Event.taskCate}  
+    onBtnPress={eventPress}
+  />
       
-      </TaskButtonsWrapper>
-      <TaskCardArea/> 
+  </TaskButtonsWrapper>
+  <TaskCardArea/> 
      
     
-    {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
-     { course ? (<TaskCardsWrapper>
-      {
-      courses.map((o, i) => (
+  {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
      
-<CourseEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()} />
-
-      )
-      )
-      }
-      </TaskCardsWrapper>) : null}
-      { group ? (<TaskCardsWrapper>
-      {
-      groups.map((o, i) => (
+  { course ? (<TaskCardsWrapper>
+    {
+      courses.map((o, i) => 
+      (
      
-<GroupEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+        <CourseEventCard  
+          key={i} id={o.id} 
+          EventTitle={o.EventTitle} 
+          EventDescrip={o.EventDescrip} 
+          EventStartTime={o.EventStartTime} 
+          EventDueTime={o.EventDueTime} 
+          EventBackgroundColor= {randomColor()} 
+          />
 
-      )
-      )
-      }
+      ))
+    }
       </TaskCardsWrapper>) : null}
+
+
+  { group ? (<TaskCardsWrapper>
+    {
+      groups.map((o, i) => 
+      ( 
+     
+        <GroupEventCard  
+          key={i} id={o.id} 
+          EventTitle={o.EventTitle} 
+          EventDescrip={o.EventDescrip} 
+          EventStartTime={o.EventStartTime} 
+          EventDueTime={o.EventDueTime} 
+          EventBackgroundColor= {randomColor()}
+        />
+
+      ))
+    }
+      </TaskCardsWrapper>) : null}
+
+
       { event ? (<TaskCardsWrapper>
       {
-      events.map((o, i) => (
-     
-<IndividualEventCard  key={i} id={o.id} EventTitle={o.EventTitle} EventDescrip={o.EventDescrip} EventStartTime={o.EventStartTime} EventDueTime={o.EventDueTime} EventBackgroundColor= {randomColor()}/>
+        events.map((o, i) => 
+        (
+      
+          <IndividualEventCard  
+          key={i} id={o.id} 
+          EventTitle={o.EventTitle} 
+          EventDescrip={o.EventDescrip} 
+          EventStartTime={o.EventStartTime} 
+          EventDueTime={o.EventDueTime} 
+          EventBackgroundColor= {randomColor()}/>
 
-      )
-      )
+        ))
       }
       </TaskCardsWrapper>) : null}
       <NavBarCon>

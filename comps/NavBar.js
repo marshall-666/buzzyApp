@@ -48,7 +48,7 @@ const NavBar = ({
 
   // const onEventPress = () => {navigation.navigate('TaskCreating')}
   return (
-  <BarCont backgroundColor={backgroundColor}>
+  <BarCont backgroundColor={Configurations.colors.secCol}>
       <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
