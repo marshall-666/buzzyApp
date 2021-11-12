@@ -19,7 +19,7 @@ import fireStore from '../firebase/fireStore';
 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
-margin-top:30%;
+margin-top:14%;
 margin-bottom:10%;
 display:flex;
 flex-wrap:nowrap;

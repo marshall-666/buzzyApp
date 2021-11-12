@@ -6,7 +6,7 @@ import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  {Configurations} from'../PropConfig/Props'
 
@@ -52,9 +52,7 @@ const NavBar = ({
       <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
-    name: 'Taskboard',
-  }))}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Taskboard')}}>
         <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
       
