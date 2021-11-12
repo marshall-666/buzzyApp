@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
-      <AppHeader text="Welcome" displayBack="none" textAlign='center' menuDisplay='none'/>
+      <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none'/>
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />

@@ -19,13 +19,16 @@
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-firebase/app": "^13.0.1",
     "@react-native-picker/picker": "^2.1.0",
+    "@react-navigation/core": "^6.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+<<<<<<< HEAD
     "dotenv": "^10.0.0",
     "@ui-kitten/components": "^5.1.1",
     "axios": "^0.23.0",
+=======
+>>>>>>> 4f2ee376c2fda05c93b706c85a0e45bd3589cdb0
     "expo": "~43.0.0",
-    "expo-constants": "^12.1.3",
     "expo-status-bar": "~1.1.0",
     "firebase": "^9.3.0",
     "lottie-react-native": "^4.0.3",
@@ -34,11 +37,14 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.2",
+<<<<<<< HEAD
     "react-native-calendars": "^1.1268.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
     "react-native-svg": "12.1.1",
     "react-native-modal-datetime-picker": "^13.0.0",
+=======
+>>>>>>> 4f2ee376c2fda05c93b706c85a0e45bd3589cdb0
     "react-native-modal-selector": "^2.1.0",
     "react-native-web": "0.17.1",
     "storybook": "^6.3.12",
