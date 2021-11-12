@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { ScrollView, StyleSheet, Text, View, FlatList } from 'react-native'
 import AppHeader from '../comps/AppHeader'
 import { Agenda } from 'react-native-calendars'
@@ -9,12 +9,14 @@ import GroupEventCard from '../comps/CourseEventCard'
 import { Task } from '../comps/Task'
 import {ListAvatar} from '../comps/ListAvatar'
 import { Members } from '../data/Members'
-
+import { GroupsData } from '../data/GroupsData'
+import { EventsMembTwo } from '../data/Events'
 
 
 const MembersScheduleScreen = ({
     navigation,
-    route
+    route,
+    GroupsData
 }) => {
     
     // route is a parameter provided by react navigation.
@@ -24,34 +26,35 @@ const MembersScheduleScreen = ({
     // Now that that information is acessible on the screen, 
     // I can use that information to dynamically displat different schedules
 
+    
+    console.warn(route);
 
-    let member = route.params.id
-    console.warn(member)
+    const members = route.params.info;
+    console.warn(members);
+    
+    
+    // useEffect (()=>{
+    //     var member = route.params
+    //     console.warn(member)
+        
+        
+    //     // console.warn(member)
+    //     if (member == 1)
+    //     (
+    //         setItems(items)
+    //     )
+    //     if (member== 2)
+    //     {
+    //         setItems(EventsMembTwo)
+    //     }
+
+    // },[])
+
+
 
     const [items, setItems] = useState(
-        {
-          '2021-10-25': 
-            [
-              {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
-              {name:'Levi Is Awesome', dueDaTE:'He codes a lot'},
-              {name:'Levi Is Awesome', dueDaTE:'He codes a lot'}
-            
-            ],
-          '2021-10-28': 
-            [
-              {name:'But he needs some sleep', dueDaTE:'so he can rest'},
-              {name:'But he needs some sleep', dueDaTE:'so he can rest'}
-            
-            ],
-          '2021-11-30': 
-            [],
-          '2021-11-01': 
-            [
-              {name:'Nick is a whine child', dueDaTE:'due at 7:00pm'},
-              {name:'But he is also a good coder', dueDaTE:'meet at whereevr'}
-            
-            ]
-      })
+       EventsMembTwo
+      )
 
       const timeToString =(time)=> {
         const date = new Date(time);
@@ -96,6 +99,7 @@ const MembersScheduleScreen = ({
                 renderItem={({item})=> 
                     <ListAvatar 
                         Members={item}
+                        
                         // onPress={console.warn('hey you pressed on')}
                         // onPress={onPress}
                 
@@ -104,32 +108,7 @@ const MembersScheduleScreen = ({
                 }
                 />
 
-            <Agenda 
-                items={items}
-                loadItemsForMonth={loadItems}
-                renderItem={renderItem}
-                // selected={daySelect}
-                
-                theme=
-                {{ 
-                  calendarBackground: 'green',
-                  agendaKnobColor: 'red',
-                  backgroundColor: '#fad',
-              // agendaDayTextColor: 
-              // agendaDayNumColor: 
-              // agendaTodayColor: 
-              // monthTextColor: 
-              // textDefaultColor: 
-              // todayBackgroundColor: 
-              // textSectionTitleColor: 
-              selectedDayBackgroundColor: 'pink'
-              // dayTextColor: 
-              // dotColor: 
-              // textDisabledColor: 
-                }}
-                
- />
-              
+           
         </ScrollView>
     )
 }

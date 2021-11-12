@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, Image, View, Pressable, ActivityIndicator } from "react-native";
 import { useNavigation } from '@react-navigation/core';
 import {GroupsData} from '../data/GroupsData';
+import { Members } from '../data/Members';
 
 
  export const GroupThread = ({GroupsData})=>
@@ -11,7 +12,7 @@ import {GroupsData} from '../data/GroupsData';
     const onPress = ()=>
     {
         console.warn('pressed', group.name, group.id)
-        navigation.navigate('GroupHome', {id: GroupsData.id})
+        navigation.navigate('GroupHome', {id: GroupsData.id, name: GroupsData.members})
     }
      const group = GroupsData.groups;
     //  console.warn(GroupsData.groups.name)

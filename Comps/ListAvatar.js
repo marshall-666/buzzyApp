@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Image, View, Pressable, ActivityIndicator } from "react-native";
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
 
 
@@ -12,11 +12,6 @@ import { useNavigation } from '@react-navigation/core';
     {
         console.warn('pressed', Members.name, Members.id)
         navigation.navigate('MembersSchedule', {id: Members.id})
-        
-        if(Members.id === 1)
-        {
-            console.warn("this might work")
-        }
     }
      
 
