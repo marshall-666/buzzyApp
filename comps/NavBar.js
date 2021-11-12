@@ -7,6 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import  {Configurations} from'../PropConfig/Props'
+import { useNavigation,CommonActions  } from '@react-navigation/native';
 
 
 const BarCont = Styled.View`
@@ -39,17 +40,20 @@ const NavBar = ({
     onHomePress = () => {},
     addEventPress = () => {},
     onCoursesPress = () => {},
-    onGroupsPress = () => {},
+    // onGroupsPress = () => {},
+    // GroupHome,
 }) => {
 
-
+  const navigation = useNavigation();
 
   return (
   <BarCont backgroundColor={Configurations.colors.secCol}>
       <TouchableOpacity onPress={onCalendarPress}>
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onHomePress}>
+      <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
+    name: 'Dashboard',
+  }))}>
         <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
       
@@ -58,7 +62,9 @@ const NavBar = ({
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
-        <TouchableOpacity onPress={addEventPress}>
+        <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
+    name: 'TaskCreating',
+  }))}>
             <AntDesign name="plus" size={35} color="black" />
         </TouchableOpacity>
       </YellowCircle>
@@ -66,7 +72,9 @@ const NavBar = ({
       <TouchableOpacity onPress={onCoursesPress}>
         <FontAwesome5 name="book" size={28} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onGroupsPress}>
+      <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
+    name: 'GroupHome',
+  }))}>
         <MaterialIcons name="group" size={35} color="white" />
       </TouchableOpacity>
   </BarCont>

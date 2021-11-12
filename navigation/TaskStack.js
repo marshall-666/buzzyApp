@@ -5,6 +5,9 @@ import TaskCreatingScreen from "../screens/TaskCreatingScreen"
 import LottieView from 'lottie-react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import { Configurations } from '../PropConfig/Props'
+import GroupPageOnLoadScreen from '../screens/GroupPageOnLoadScreen';
+import GroupHomeScreen from '../screens/GroupHomeScreen';
+import DashboardScreen from '../screens/DashboardScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -42,6 +45,8 @@ export default function TaskboardStack() {
     <Stack.Navigator screenOptions={{ headerTitle: 'Taskboard', headerShown: false }}>
       <Stack.Screen name='Taskboard' component={TaskboardScreen} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
+      <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} />
     </Stack.Navigator>
   );
 }
