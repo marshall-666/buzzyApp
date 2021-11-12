@@ -8,7 +8,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useNavigation } from "@react-navigation/native";
 import  {Configurations} from'../PropConfig/Props'
 import { useNavigation,CommonActions  } from '@react-navigation/native';
 
@@ -55,7 +54,7 @@ const NavBar = ({
         <Foundation name="calendar" size={35} color="white"/>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
-    name: 'Dashboard',
+    name: 'Taskboard',
   }))}>
         <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
@@ -65,7 +64,9 @@ const NavBar = ({
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
-        <TouchableOpacity onPress={()=>{navigation.navigate('TaskCreating')}}>
+        <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
+    name: 'TaskCreating',
+  }))}>
             <AntDesign name="plus" size={35} color="black" />
         </TouchableOpacity>
       </YellowCircle>    
