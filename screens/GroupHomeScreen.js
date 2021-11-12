@@ -37,11 +37,14 @@ const GroupHomeScreen = ({
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
                         <Text style={{fontSize: 24, padding: 28, color: '#ffffff', width: '100%', textAlign: 'center'}}>{groupName}</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <InGroupButton handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
+                            <InGroupButton 
+                                handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
+                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
                         </View>
                         <View style={{flexDirection: 'row'}}>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'MEMBERS SCHEDULES'}/>
+                            <InGroupButton 
+                                handleBtnOnPress = {()=>{navigation.navigate('MembersSchedule')}} 
+                                btnText={'MEMBERS SCHEDULES'}/>
                             <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'TIMES'}/>
                         </View>
                     </View>

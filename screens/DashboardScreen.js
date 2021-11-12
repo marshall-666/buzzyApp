@@ -366,29 +366,30 @@ const DashboardScreen = ({navigation }) => {
 
     <AgendaWrapper agendaDisplay = {agendaDisplay} > 
       <View style ={{flex:1, width:'100%',}}>
+        
              <Agenda 
-
-       
                 items={items}
                 loadItemsForMonth={loadItems}
                 renderItem={renderItem}
                 selected={daySelect}
-theme={{ 
-      calendarBackground: 'green',
-      agendaKnobColor: 'red',
-      backgroundColor: '#fad',
-      // agendaDayTextColor: 
-      // agendaDayNumColor: 
-      // agendaTodayColor: 
-      // monthTextColor: 
-      // textDefaultColor: 
-      // todayBackgroundColor: 
-      // textSectionTitleColor: 
-      selectedDayBackgroundColor: 'pink'
-      // dayTextColor: 
-      // dotColor: 
-      // textDisabledColor: 
-    }}
+                
+                theme=
+                {{ 
+                  calendarBackground: 'green',
+                  agendaKnobColor: 'red',
+                  backgroundColor: '#fad',
+              // agendaDayTextColor: 
+              // agendaDayNumColor: 
+              // agendaTodayColor: 
+              // monthTextColor: 
+              // textDefaultColor: 
+              // todayBackgroundColor: 
+              // textSectionTitleColor: 
+              selectedDayBackgroundColor: 'pink'
+              // dayTextColor: 
+              // dotColor: 
+              // textDisabledColor: 
+                }}
                 
  />
 

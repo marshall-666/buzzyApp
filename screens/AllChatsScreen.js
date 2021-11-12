@@ -48,7 +48,6 @@ const AllChats = ({ navigation }) => {
             backgroundColor: 'red',
             width: 100,
             height: 55
-
         }}
      title="chats"
      onPress={()=>{navigation.navigate('SingleChatThread')}}/>

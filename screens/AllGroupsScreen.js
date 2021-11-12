@@ -22,7 +22,6 @@ const AllGroupsScreen = () => {
          </View>
 
          <NavBar/>
-
         
      </View>
     )
