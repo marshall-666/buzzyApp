@@ -12,6 +12,7 @@ justify-content:center;
 align-items:flex-start;
 border-radius:${(props)=>props.bradius}px;
 padding:10px
+box-shadow: 0 3px 5px rgba(0, 0, 0 , 0.3);
 `
 const TextInput =Styled.Text`
 font-size:32px;

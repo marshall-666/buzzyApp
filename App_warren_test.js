@@ -37,10 +37,7 @@ export default function App() {
   );
 }
 
-<<<<<<< HEAD
 // export default App
-=======
->>>>>>> 42d7f63a11f6e839042526e3a80b106fa9760ebe
 
 const styles = StyleSheet.create({
   container: {

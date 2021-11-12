@@ -34,13 +34,16 @@ border:6px solid #94BDD4
 
 const NavBar = ({
    
-    
+  
     onCalendarPress = () => {},
     onHomePress = () => {},
     addEventPress = () => {},
     onCoursesPress = () => {},
     onGroupsPress = () => {},
 }) => {
+
+
+
   return (
   <BarCont backgroundColor={Configurations.colors.secCol}>
       <TouchableOpacity onPress={onCalendarPress}>
