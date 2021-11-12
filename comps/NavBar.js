@@ -10,7 +10,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native";
 import  {Configurations} from'../PropConfig/Props'
-import { useNavigation,CommonActions  } from '@react-navigation/native';
 
 
 const BarCont = Styled.View`
