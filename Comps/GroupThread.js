@@ -11,7 +11,7 @@ import { Members } from '../data/Members';
     const navigation = useNavigation();
     const onPress = ()=>
     {
-        console.warn('pressed', group.name, group.id)
+        // console.warn('pressed', group.name, group.id)
         navigation.navigate('GroupHome', {id: GroupsData.id, name: GroupsData.members})
     }
      const group = GroupsData.groups;

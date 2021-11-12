@@ -9,7 +9,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  {Configurations} from'../PropConfig/Props'
-import { useNavigation,CommonActions  } from '@react-navigation/native';
 
 
 const BarCont = Styled.View`
