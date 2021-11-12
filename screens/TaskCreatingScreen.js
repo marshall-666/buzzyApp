@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, View, Text, ScrollView ,KeyboardAvoidingView } from 'react-native';
+import { Button, View, Text, ScrollView ,KeyboardAvoidingView,StyleSheet } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -36,8 +36,8 @@ width:100%
 const TaskButtonWrapper = styled.View`
 justify-content:center
 margin:3.5%;
-margin-top:5%;
-margin-bottom:5%;
+margin-top:17.5%;
+margin-bottom:4.5%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
@@ -88,7 +88,9 @@ const TaskCreatingScreen = ({ navigation }) => {
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
-      <AppHeader text="Task" display="none" onLogoutPress={handleSignOut} />
+      <View style={styles.header}>
+        <AppHeader text="Task" displayBack="none" onLogoutPress={handleSignOut} />
+      </View>
       <Wrapper>
         <TaskButtonWrapper>
           {
@@ -112,6 +114,12 @@ const TaskCreatingScreen = ({ navigation }) => {
 
   );
 }
+const styles=StyleSheet.create({
+  header: {
+    position: 'absolute',
+    zIndex: 10,
 
+  }
+})
 
 export default TaskCreatingScreen

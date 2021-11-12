@@ -20,7 +20,7 @@ const GroupHomeScreen = ({
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}}>
-                <AppHeader text='Groups'/>
+                <AppHeader text='Groups' textAlign='center' displayBack='none'/>
                 <View style={styles.midDiv}>
                     <Text style={{fontSize: 30}}>{groupName}</Text>
                 </View>
