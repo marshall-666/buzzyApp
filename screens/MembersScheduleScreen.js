@@ -17,7 +17,7 @@ const MembersScheduleScreen = ({
     route
 }) => {
     
-    // route is a parameter given by react navigation.
+    // route is a parameter provided by react navigation.
     // I logged route and discovered the architecture of the data being passed over from the list avatar component.
     // id was stored under an object called params.
     // I assigned the variable member to route.params.id
