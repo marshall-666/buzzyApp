@@ -10,9 +10,14 @@ import GroupEventCard from '../comps/CourseEventCard'
 const GroupHomeScreen = ({
     navigation,
     groupName='Default Group',
-    memberNum=5
+    memberNum=5,
+    route
 }) => {
 
+    // information coming in from the GroupThread Component.
+    // GroupsData.id and GroupsData.members
+    console.warn(route.params)
+    const memberInfo = route.params
     const handleBtnOnPress =()=> {
         alert('Navigate to the function')
     }
@@ -24,9 +29,14 @@ const GroupHomeScreen = ({
                 <View style={styles.midDiv}>
                     <Text style={{fontSize: 30}}>{groupName}</Text>
                 </View>
+
                 <View style={styles.lowerDiv}>
+                    
                     <View style={styles.membersView}>
-                        <Text style={{fontSize: 24, padding: 28, color: '#ffffff'}}>Members - {memberNum}</Text>
+                        <Text style={{fontSize: 24, padding: 28, color: '#ffffff'}}>
+                                Members - {memberNum}
+                        </Text>
+                        
                         <MembersInGroupCard topRightCorner={15}/>
                         <MembersInGroupCard/>
                         <MembersInGroupCard/>
@@ -34,23 +44,56 @@ const GroupHomeScreen = ({
                         <MembersInGroupCard/>
                         <MembersInGroupCard bottomRightCorner={15}/>
                     </View>
+                    
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
-                        <Text style={{fontSize: 24, padding: 28, color: '#ffffff', width: '100%', textAlign: 'center'}}>{groupName}</Text>
+                        <Text style=
+                            {{
+                                fontSize: 24, 
+                                padding: 28, 
+                                color: '#ffffff', 
+                                width: '100%', 
+                                textAlign: 'center'
+                            }}>
+                            {groupName}
+                        </Text>
+                        
+
                         <View style={{flexDirection: 'row'}}>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress}/>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
+                            <InGroupButton 
+                                handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
+                            
+                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
                         </View>
+                            
                         <View style={{flexDirection: 'row'}}>
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'MEMBERS SCHEDULES'}/>
+                            <InGroupButton 
+                                handleBtnOnPress = {()=>{navigation.navigate('MembersSchedule', {info : memberInfo})}} 
+                                btnText={'MEMBERS SCHEDULES'}/>
+                                {/* memberinfo being passed over to the Members schedule page. */}
+
+                                
                             <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'TIMES'}/>
                         </View>
+                    
                     </View>
+                        
                     <View style={{width: '100%', paddingBottom: 150}}>
-                        <Text style={{fontSize: 20, padding: 28, color: '#ffffff', width: '100%', textAlign: 'center'}}>Upcoming Events for {groupName}</Text>
+                        <Text style=
+                            {{
+                                fontSize: 20, 
+                                padding: 28, 
+                                color: '#ffffff', 
+                                width: '100%', 
+                                textAlign: 'center'
+                            }}> 
+                                Upcoming Events for {groupName}
+                        </Text>
                         <GroupEventCard borderTopRightRadius={15}/>
                         <GroupEventCard/>
                         <GroupEventCard borderBottomRightRadius={15}/>
                     </View>
+                                
+
                 </View>
             </ScrollView>
             <NavBar/>

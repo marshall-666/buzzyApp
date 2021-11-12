@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+
 import styled from 'styled-components/native'
 
 
@@ -97,22 +96,22 @@ export const SubMenu = (
                     display = {display}
                     right =   {right}>
                     <OptCell>
-                        <FontAwesomeIcon icon={faCoffee} size = {30} color='white'/>
+                        
                         <TextCont>Option1</TextCont>
                     </OptCell>
                     
                     <OptCell>
-                        <FontAwesomeIcon icon={faCoffee} size = {30} color='white'/>
+                        
                         <TextCont>Option1</TextCont>
                     </OptCell>
                     
                     <OptCell>
-                        <FontAwesomeIcon icon={faCoffee} size = {30} color='white'/>
+                        
                         <TextCont>Option1</TextCont>
                     </OptCell>
                 
                     <OptCell>
-                        <FontAwesomeIcon icon={faCoffee} size = {30} color='white'/>
+                        
                         <TextCont>Option1</TextCont>
                     </OptCell>
                 </OptCont>

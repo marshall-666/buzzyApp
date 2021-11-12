@@ -5,6 +5,8 @@ export const Configurations = {
             secCol  : '#3D5A80',
             backCol : '#F5F5E1',
             butCol : '#FFDD5F',
+            accColOne: '#EC8B1A',
+            lightBg:'#F5F5E1'
 
         },
     

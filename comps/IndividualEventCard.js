@@ -3,6 +3,8 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+
 
 const CardCont = Styled.View`
 width:90%;
@@ -11,6 +13,8 @@ display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
 border:1px solid #C4C4C4;
+border-radius:15px;
+margin:10px;
 overflow:hidden;
 `
 const EventColour = Styled.View`
@@ -50,6 +54,7 @@ const IndividualEventCard = ({
 
 
 }) => {
+  const navigation = useNavigation();
   return (
   <CardCont backgroundColor={backgroundColor}>
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
@@ -61,7 +66,7 @@ const IndividualEventCard = ({
     </TextCont>
     
     <IconCont>
-      <TouchableOpacity onPress={onGroupPress}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('GroupHome')}}>
         <MaterialIcons name="group" size={35} color="black" />
       </TouchableOpacity>
       <TouchableOpacity onPress={onChatPress}>

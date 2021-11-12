@@ -5,9 +5,13 @@ import TaskCreatingScreen from "../screens/TaskCreatingScreen"
 import LottieView from 'lottie-react-native';
 import { View, StyleSheet, Text } from 'react-native';
 import { Configurations } from '../PropConfig/Props'
-import GroupPageOnLoadScreen from '../screens/GroupPageOnLoadScreen';
-import GroupHomeScreen from '../screens/GroupHomeScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import CourseInfoScreen from '../screens/CourseInfoScreen';
+import GroupHomeScreen from '../screens/GroupHomeScreen';
+import AllChats from '../screens/AllChatsScreen';
+import SingleChatThread from '../screens/SingleChatThreadScreen';
+import AllGroupsScreen from '../screens/AllGroupsScreen';
+import MembersScheduleScreen from '../screens/MembersScheduleScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -42,11 +46,28 @@ export default function TaskboardStack() {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerTitle: 'Taskboard', headerShown: false }}>
+    <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerTitle: 'Taskboard', headerShown: false }}>
       <Stack.Screen name='Taskboard' component={TaskboardScreen} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
-      <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
+      
+      {/* dashboard flow */}
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="CourseInfo" component={CourseInfoScreen} />
+      <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
+      <Stack.Screen name="AllGroups" component={AllGroupsScreen} />
+      <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
+      <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
+      
+      {/* dashboard flow ends */}
+
+      {/* Other group flows */}
+          
+          {/* Members schedules */}
+
+      {/* Other group flows */}
+
+
+
     </Stack.Navigator>
   );
 }

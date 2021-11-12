@@ -19,7 +19,3 @@ storiesOf('Components_Abhay', module)
   .add ('CalAgenda', ()=> <CalAgenda/>)
   .add ('HomeCalendar', ()=> <HomeCalendar/>)
   .add ('TimeCalendar', ()=> <TimeCalendar/>)
- 
-
-  
-  

@@ -1,6 +1,6 @@
 // import styled from "@emotion/styled-base";
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Button, TextInput } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
@@ -88,7 +88,16 @@ const TaskTable = ({
         <TextInput2  style={{color:Configurations.colors.secCol}} >
           Task Name 
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
+        
+        <TextInput3 
+          style=
+          {{ 
+            height: 40, 
+            borderBottomWidth: 1, 
+            borderBottomColor: 'white', 
+          }}
+          onChangeText = {()=>{setTextValue()}}
+          value = {textValue}
           placeholder="Type the task name"
         onChangeText={ TaskName}
         defaultValue={text}
