@@ -52,9 +52,11 @@ function AllGroups() {
       
       
       <Drawer.Screen name='AllGroups' component={AllGroupsScreen} />
-      <Drawer.Screen name="Account" component={TaskCreatingScreen} />
-      <Drawer.Screen name="Setting" component={TaskCreatingScreen} />
-      <Drawer.Screen name="Logout" component={TaskCreatingScreen} />
+      <Drawer.Screen name="Account" component={AccountScreen} />
+      <Drawer.Screen name="Logout" component={LogoutScreen} />
+      
+      
+      
     </Drawer.Navigator>
   );
 }
