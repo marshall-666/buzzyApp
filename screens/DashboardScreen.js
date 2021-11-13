@@ -243,11 +243,11 @@ const DashboardScreen = ({navigation }) => {
     }}>
 
 
-      <AppHeader 
+      {/* <AppHeader 
         text="Task"
         onBackPress={()=>{
           setCalDisplay('flex') 
-          setAgendaDisplay('none')}} />
+          setAgendaDisplay('none')}} /> */}
       <Wrapper calDisplay={calDisplay}> 
     
       <ToDate/>

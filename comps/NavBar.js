@@ -9,7 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer,useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  {Configurations} from'../PropConfig/Props'
-
+import { Octicons } from '@expo/vector-icons'; 
 
 const BarCont = Styled.View`
 width:90%;
@@ -50,10 +50,11 @@ const NavBar = ({
   return (
   <BarCont backgroundColor={Configurations.colors.secCol}>
       <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
-        <Foundation name="calendar" size={35} color="white"/>
+      <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{navigation.navigate('Taskboard')}}>
-        <Foundation name="home" size={35} color="white"/>
+        
+        <FontAwesome5 name="tasks" size={30} color="white" />
       </TouchableOpacity>
       
       <YellowCircle 
@@ -61,15 +62,13 @@ const NavBar = ({
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
-        <TouchableOpacity onPress={() => navigation.dispatch( CommonActions.navigate({
-    name: 'TaskCreating',
-  }))}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('TaskCreating')}}>
             <AntDesign name="plus" size={35} color="black" />
         </TouchableOpacity>
       </YellowCircle>    
       
       <TouchableOpacity onPress={()=>{navigation.navigate('CourseInfo')}}>
-        <FontAwesome5 name="book" size={28} color="white" />
+      <Octicons name="comment-discussion" size={35} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>
         <MaterialIcons name="group" size={35} color="white" />

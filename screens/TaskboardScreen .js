@@ -123,13 +123,13 @@ const TaskboardScreen = ({ navigation }) => {
 
   }
   const { user } = useContext(AuthenticatedUserContext);
-  const handleSignOut = async () => {
-    try {
-      await fireAuth.signOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSignOut = async () => {
+  //   try {
+  //     await fireAuth.signOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <View  
       style={{ 
@@ -138,7 +138,6 @@ const TaskboardScreen = ({ navigation }) => {
       justifyContent: 'flex-start',
       backgroundColor: Configurations.colors.backCol  }}>
     
-    <AppHeader text="Task" display="none"  onLogoutPress={handleSignOut}/>
     
     <TaskButtonsWrapper>
 

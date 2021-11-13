@@ -1,7 +1,5 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-
-import AppHeader from '../comps/AppHeader'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import InGroupButton from '../comps/InGroupButton'
@@ -25,7 +23,7 @@ const GroupHomeScreen = ({
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}}>
-                <AppHeader text='Groups' textAlign='center' displayBack='none'/>
+
                 <View style={styles.midDiv}>
                     <Text style={{fontSize: 30}}>{groupName}</Text>
                 </View>

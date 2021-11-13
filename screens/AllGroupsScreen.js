@@ -11,7 +11,7 @@ const AllGroupsScreen = () => {
     return (
         <View style={{flex:1}}>
 
-         <AppHeader text="Groups"/>   
+         
 
 
          <View style={styles.thread}>

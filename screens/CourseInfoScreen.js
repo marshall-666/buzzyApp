@@ -44,8 +44,7 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-    <AppHeader onMenuPress={()=>navigation.navigate('AccountScreen')} text="Courses" />
-  
+
         <CourseCardWrapper> 
             <ScrollView  
               style=
