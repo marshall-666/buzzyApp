@@ -4,6 +4,9 @@ import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import AppHeader from '../comps/AppHeader'
 import { CreateGroup } from '../comps/CreateGroup'
 import NavBar from '../comps/NavBar'
+import { Configurations } from '../PropConfig/Props'
+
+const lightBg = Configurations.colors.lightBg
 
 const CreateGroupScreen = ({
     navigation
@@ -16,7 +19,6 @@ const CreateGroupScreen = ({
     return (
         // <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'position' : 'height'} style={styles.container}>
         <View style={styles.container}>
-            <AppHeader text='Groups'/>
             <View style={styles.midDiv}>
                 <CreateGroup handlePress={handlePress}/>
             </View>
@@ -32,10 +34,11 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        backgroundColor:lightBg
     },
     midDiv: {
-        width: '100%',
+        width: '95%',
         paddingTop: 30,
         alignItems: 'center',
         marginBottom: 50,

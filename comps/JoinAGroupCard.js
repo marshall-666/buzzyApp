@@ -7,6 +7,7 @@ const JoinAGroupCard = ({
     // setGroupName,
     // groupLink,
     // setGroupLink,
+    text="Create Group",
     onRecBtnPress=()=>{},
 }) => {
     const [groupName, setGroupName] = useState()
@@ -35,7 +36,7 @@ const JoinAGroupCard = ({
             />
             <View style={styles.devider}/>
             <View style={styles.btnContainer}>
-                <RecBtn height={50} width={'80%'} onRecBtnPress={onRecBtnPress}/>
+                <RecBtn text={text} height={50} width={'80'} onRecBtnPress={onRecBtnPress}/>
             </View>
         </View>
     )

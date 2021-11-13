@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, TextInput,Pressable, TouchableOpacity, Button } from 'react-native'
 import styled from 'styled-components/native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { Configurations } from '../PropConfig/Props'
 import { Agenda } from 'react-native-calendars'
 import { SelectedDay } from '../data/test'

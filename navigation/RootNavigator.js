@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, ActivityIndicator,StyleSheet } from 'react-native';
+import { View, ActivityIndicator,StyleSheet,Text } from 'react-native';
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 import AuthStack from './AuthStack';
 import TaskStack from './TaskStack';
-
-
+import DashboardScreen from './CalendarStack'
 
 
 export default function RootNavigator() {
@@ -38,9 +37,12 @@ export default function RootNavigator() {
   }
 
 
+  
+
   return (
     <NavigationContainer>
       {user ?  <TaskStack /> : <AuthStack />}
+     
     </NavigationContainer>
   );
 }

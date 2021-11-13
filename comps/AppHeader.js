@@ -49,11 +49,11 @@ align-items:center;
 justify-content:space-between
 background-color:${props => props.Mbgc};
 position:absolute;
-zIndex:10
+zIndex:5
 margin-left:70%
 margin-top:12.5%
 border-radius:15px
-opacity:0.95
+opacity:1
 `
 const FunCont = Styled.View`
 height:90%
@@ -78,7 +78,7 @@ const AppHeader = ({
   textAlign = 'left',
   Mwidth = 100,
   Mheight = 0,
-  menuDisplay = 'flex'
+  displayR = 'flex'
 }) => {
   const [menuOp, setMenuOp] = useState(false)
 
@@ -102,7 +102,7 @@ const AppHeader = ({
         </TextInput>
 
         <TouchableOpacity onPress={onMenuPressOp} >
-          <IconInut2 dispalyR={menuDisplay}>
+          <IconInut2 dispalyR={displayR}>
             <Entypo name="dots-three-vertical" size={24} color="white" />
           </IconInut2>
 

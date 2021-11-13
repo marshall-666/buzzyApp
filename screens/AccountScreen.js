@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, View, Text, Image, StyleSheet,KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
@@ -8,19 +8,18 @@ import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import ErrorInfo from '../comps/ErrorInfo'
-import LottieView from 'lottie-react-native';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+
 
 
 const LogoWrapper = styled.View`
-margin-left:10px;
-margin-top:8%;
-margin-bottom:8%;
+margin-bottom:15%;
 display:flex;
-flex-wrap:nowrap;
+flex-wrap:wrap;
 flex-direction:row;
-justify-content:space-between;
+justify-content:center;
 width:75%;
-height:17%
+height:20%
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -45,7 +44,7 @@ top:300px
 height:52.5%;
 width:100%;
 `
-const SignUpScreen = ({ navigation }) => {
+const AccountScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
   const [users, setUsers] = useState('');
@@ -97,18 +96,38 @@ const SignUpScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-
+  const { user } = useContext(AuthenticatedUserContext);
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
-     <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none'/>
       <LogoWrapper>
-        <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
-        <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
-        <Text style={styles.Logoin}>SignUp</Text>
+        
+        <Text style={styles.User}> Hi {user.email}</Text> 
+        
+        <Image source={require("../assets/avatar.jpg")} style={styles.tinyLogo}/>
+        
       </LogoWrapper>
+      
       <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
-      {page1 ? (<View style={styles.inpuTable}>
+        <View style={styles.inpuTable}>
+        <Text style={styles.title2}>User Name</Text>
+        <InputField
+          inputStyle={{
+            fontSize: 14
+          }}
+          containerStyle={{
+            backgroundColor: Configurations.colors.primCol,
+            marginBottom: '2.5%',
+            borderBottomWidth: 1,
+          }}
+          leftIcon='human-greeting'
+          placeholder='Bill Lin'
+          autoCapitalize='none'
+          autoCorrect={false}
+          value={users}
+          onChangeText={text => setUsers(text)}
+          handlePasswordVisibility={handlePasswordVisibility}
+        />
         <Text style={styles.title2}>Email</Text>
         <InputField
           inputStyle={{
@@ -116,7 +135,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
           containerStyle={{
             backgroundColor: Configurations.colors.primCol,
-            marginBottom: '6%',
+            marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
           leftIcon='email'
@@ -128,24 +147,7 @@ const SignUpScreen = ({ navigation }) => {
           value={email}
           onChangeText={text => setEmail(text)}
         />
-        <Text style={styles.title2}>User Name</Text>
-        <InputField
-          inputStyle={{
-            fontSize: 14
-          }}
-          containerStyle={{
-            backgroundColor: Configurations.colors.primCol,
-            marginBottom: '8%',
-            borderBottomWidth: 1,
-          }}
-          leftIcon='human-greeting'
-          placeholder='Bill Lin'
-          autoCapitalize='none'
-          autoCorrect={false}
-          value={users}
-          onChangeText={text => setUsers(text)}
-          handlePasswordVisibility={handlePasswordVisibility}
-        />
+        
         <Text style={styles.title2}>Password</Text>
         <InputField
           inputStyle={{
@@ -153,7 +155,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
           containerStyle={{
             backgroundColor: Configurations.colors.primCol,
-            marginBottom: '8%',
+            marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
           leftIcon='lock'
@@ -167,70 +169,48 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.button}>
-          <RecBtn text="Continue" height="75" width="200" onRecBtnPress={continuePress} />
-        </Text>
-      </View>) : null}
-      {page2 ? (<View style={styles.inpuTable}>
-        <Text style={styles.title2}>School</Text>
+        <Text style={styles.title2}>Birthday</Text>
         <InputField
           inputStyle={{
             fontSize: 14
           }}
           containerStyle={{
             backgroundColor: Configurations.colors.primCol,
-            marginBottom: '6%',
-            borderBottomWidth: 1,
-
-          }}
-          leftIcon='school'
-          placeholder='BCIT'
-          autoCapitalize='none'
-          autoFocus={true}
-          value={school}
-          onChangeText={text => setSchool(text)}
-        />
-        <Text style={styles.title2}>Program</Text>
-        <InputField
-          inputStyle={{
-            fontSize: 14
-          }}
-          containerStyle={{
-            backgroundColor: Configurations.colors.primCol,
-            marginBottom: '8%',
+            marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
-          leftIcon='book-open'
-          placeholder='MDDD'
+          leftIcon='human-greeting'
+          placeholder='MM/DD/YYYY'
           autoCapitalize='none'
-          value={program}
-          onChangeText={text => setProgram(text)}
+          autoCorrect={false}
+          value={users}
+          onChangeText={text => setUsers(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.title2}>Set</Text>
+        <Text style={styles.title2}>Gender</Text>
         <InputField
           inputStyle={{
             fontSize: 14
           }}
           containerStyle={{
             backgroundColor: Configurations.colors.primCol,
-            marginBottom: '8%',
+            marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
-          leftIcon='account-group-outline'
-          placeholder='A, B, or C'
+          leftIcon='human-greeting'
+          placeholder='Male/Female'
           autoCapitalize='none'
-          value={set}
-          onChangeText={text => setSet(text)}
+          autoCorrect={false}
+          value={users}
+          onChangeText={text => setUsers(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        {signupError ?<Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
-
         <Text style={styles.button}>
-          <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
-          <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} />
+          <RecBtn text="Save Updates" height="75" width="200" onRecBtnPress={continuePress} />
         </Text>
-      </View>) : null}
+        
+      </View>
+     
       <View style={styles.container3}>
         <Text style={styles.title4}>I have an account.</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('Login')}>Login</Text>
@@ -240,7 +220,7 @@ const SignUpScreen = ({ navigation }) => {
 }
 
 
-export default SignUpScreen
+export default AccountScreen
 
 const styles = StyleSheet.create({
   inpuTable: {
@@ -250,84 +230,40 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'yellow',
     marginLeft: -30,
-    marginTop: 350
+    marginTop: 240
   },
-  Logoin: {
-    position: 'absolute',
-    zIndex: 3,
-    fontSize: 48,
+  User: {
+    fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginLeft: -30,
-    marginTop: 90
+    marginTop: 20
   },
   title2: {
     fontSize: 18,
     fontWeight: '600',
     color: Configurations.colors.secCol,
     alignSelf: 'flex-start',
-    paddingBottom: 5,
+    
   },
   title3: {
     fontSize: 18,
     fontWeight: '600',
     color: Configurations.colors.secCol,
     alignSelf: 'center',
-    paddingBottom: 5,
+    paddingBottom: 0,
   },
   button: {
     height:'30%',
      marginTop: '1%',
    alignSelf:'center'
    },
-  logo: {
-    position: 'absolute',
+   tinyLogo: {
     width: 150,
     height: 150,
-    zIndex: 3,
-    marginLeft: 200,
-    // marginTop:0,
+    borderRadius:75,
+    marginBottom:30,
+    marginTop:10
   },
-  honeycomb: {
-    marginLeft: -60,
-    marginTop: -35,
-    opacity: .4
-  },
-  D2L: {
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 740,
-    position: 'absolute',
-    zIndex: 4,
-  },
-  container3: {
-    position: 'absolute',
-    zIndex: 4,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 810,
-  },
-  title4: {
-    fontSize: 18,
-    fontWeight: '400',
-    color: Configurations.colors.secCol,
-    alignSelf: 'center',
-    paddingBottom: '-17.5%',
-
-  },
-  title5: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: 'orange',
-    marginLeft: 10,
-    alignSelf: 'center',
-    paddingBottom: '-17.5%',
-
-  },
+  
 
 });

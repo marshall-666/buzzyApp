@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text,ScrollView } from 'react-native';
+import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppHeader from '../comps/AppHeader';
+
 import TaskBtn from '../comps/taskBtn';
+import {Task} from '../comps/Task'
 import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
 import { HomeCalendar } from '../comps/Calendar';
+import IndividualEventCard from '../comps/IndividualEventCard';
 import { Agenda } from 'react-native-calendars'
 import { Configurations } from '../PropConfig/Props'
 import { SelectedDay } from '../data/test';
 import { Calendar } from 'react-native-calendars';
+import { groupsData } from '../data/tasks';
+import {coursesData} from '../data/tasks';
+import {eventsData} from '../data/tasks'
+import {category} from '../data/category'
+import { ToDate } from '../comps/ToDate';
+
+
+
 // import {taskCategory} from '../data/category'
+
+const colors = Configurations.colors;
+const secCol = colors.secCol;
 
 
 
@@ -44,6 +58,12 @@ height:100%
 width:100%
 left:5%
 `
+const TaskBtnCont = styled.View`
+flex-direction:row;
+padding:20px;
+justify-content:space-evenly;
+`
+
 // ========================agenda comments===========================
 const selectedDay = SelectedDay
 const primCol = Configurations.colors.primCol
@@ -89,8 +109,17 @@ const trialPush = {
 const DashboardScreen = ({navigation }) => {
 
 
-  const [calDisplay, setCalDisplay] = useState('flex')
-  const [agendaDisplay, setAgendaDisplay] = useState('none')
+  const [calDisplay, setCalDisplay] = useState('flex');
+  const [agendaDisplay, setAgendaDisplay] = useState('none');
+
+
+  // state for switching between courses groups and events
+  const [courses, setCourses] = useState(true);
+  const [groups, setGroups] = useState(false);
+  const [events, setEvents] = useState(false);
+
+  // relatable code on line 286-294, 211-230
+
 
   const [items, setItems] = useState(
       {
@@ -101,7 +130,6 @@ const DashboardScreen = ({navigation }) => {
             {name:'Levi Is Awesome', dueDaTE:'He codes a lot'}
           
           ],
-
         '2021-10-28': 
           [
             {name:'But he needs some sleep', dueDaTE:'so he can rest'},
@@ -110,7 +138,6 @@ const DashboardScreen = ({navigation }) => {
           ],
         '2021-11-30': 
           [],
-
         '2021-11-01': 
           [
             {name:'Nick is a whine child', dueDaTE:'due at 7:00pm'},
@@ -133,17 +160,19 @@ const DashboardScreen = ({navigation }) => {
   const renderItem = (item)=>
   {
     return (
-        <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
-            <Text> {item.name}</Text>
-            <Text> {item.dueDaTE}</Text>
+        // <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
+        //     <Text> {item.name}</Text>
+        //     <Text> {item.dueDaTE}</Text>
 
-          </View>
+        //   </View>
+
+        <Task/>
     )
   }
   
   const [selected, setSelected] = useState({});
   const [daySelect, setDaySelect] = useState(undefined)
-  const [selectCol, setSelectCol] = useState('blue')
+  const [selectCol, setSelectCol] = useState('#F5F5E1')
   
   
   
@@ -167,65 +196,202 @@ const DashboardScreen = ({navigation }) => {
     }
     else
     {
-      setSelectCol('blue')
+      setSelectCol('#F5F5E1')
     }
       
   };
 
+  const onEventPress = ()=>
+  {
+    navigation.navigate('TaskCreating')
+  }
+
+  const onCalendarPress = ()=>
+  {
+    navigation.navigate('Dashboard')
+  }
+
+  const coursePress =()=> 
+  {
+    setCourses(true);
+    setGroups(false);
+    setEvents(false);
+  }
+  
+  const groupPress =()=> 
+  {
+    setCourses(false);
+    setGroups(true);
+    setEvents(false);
+  }
+  
+  const eventPress =()=> 
+  {
+    setCourses(false);
+    setGroups(false);
+    setEvents(true);
+  }
+
+
+
   return (
   
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
-      <AppHeader 
+    <View style=
+    {{ 
+      flex: 1, 
+      alignItems: 'center', 
+      justifyContent: 'flex-start', 
+      backgroundColor: primCol
+    }}>
+
+
+      {/* <AppHeader 
         text="Task"
         onBackPress={()=>{
           setCalDisplay('flex') 
-          setAgendaDisplay('none')}} />
+          setAgendaDisplay('none')}} /> */}
       <Wrapper calDisplay={calDisplay}> 
-
+    
+      <ToDate/>
+ 
+          
         <Calendar 
-        // onDayLongPress={()=>{setSelectCol('green')}}
-        onDayPress={onDayPress}
-                style=
-                {{
-                    maxWidth: 400,
-                    width:400
-                }}
-                markedDates={{
-            [selected]: {
-              selected: true,
-              disableTouchEvent: false,
-              selectedColor: selectCol ,
-              selectedTextColor: 'white'
-            }
+
+          theme=
+          {{
+            backgroundColor: '#ffffff',
+            calendarBackground: '#94bdd4',
+            textSectionTitleColor: 'black',
+            textSectionTitleDisabledColor: '#d9e1e8',
+            selectedDayBackgroundColor: '#F5F5E1',
+            selectedDayTextColor: 'black',
+            todayTextColor: 'white',
+            dayTextColor: '#2d4150',
+            textDisabledColor: '#d9e1e8',
+            dotColor: '#00adf5',
+            selectedDotColor: '#ffffff',
+            arrowColor: '#ffffff',
+            disabledArrowColor: '#d9e1e8',
+            monthTextColor: 'blue',
+            indicatorColor: 'blue',
+            // textDayFontFamily: 'monospace',
+            // textMonthFontFamily: 'monospace',
+            // textDayHeaderFontFamily: 'monospace',
+            // textDayFontWeight: '300',
+            // textMonthFontWeight: 'bold',
+            // textDayHeaderFontWeight: '300',
+            textDayFontSize: 16,
+            textMonthFontSize: 16,
+            textDayHeaderFontSize: 16
           }}
+
+
+
+
+        // onDayLongPress={()=>{setSelectCol('green')}}
+          onDayPress={onDayPress}
+            style=
+              {{
+                maxWidth: 400,
+                width:400,
+                height: 400
+              }}
+            markedDates=
+              {{
+                        [selected]: {
+                          selected: true,
+                          disableTouchEvent: false,
+                          selectedColor: selectCol ,
+                          selectedTextColor: 'black'
+                        }
+                }}
           />
+
+          {/* functions on 211-230============= */}
+        <TaskBtnCont>
+          <TaskBtn 
+              taskNum={category.taskCategory.Course.taskNum} 
+              taskCate={category.taskCategory.Course.taskCate}
+              onBtnPress={coursePress}  
+          />
+          
+          <TaskBtn 
+               taskNum={category.taskCategory.Group.taskNum} 
+               taskCate={category.taskCategory.Group.taskCate}
+               onBtnPress={groupPress}   
+          />
+
+          <TaskBtn 
+              taskNum={category.taskCategory.Event.taskNum} 
+              taskCate={category.taskCategory.Event.taskCate}
+              onBtnPress={eventPress}  
+          />
+        </TaskBtnCont>
+
+          
+      { courses ?
+        <FlatList 
+          data = {coursesData}
+          renderItem={({item})=> 
+                <IndividualEventCard 
+                  EventTitle={item.EventTitle}
+                  EventDescrip = {item.EventDescrip}
+                  EventStartTime={item.EventStartTime}
+                  EventDueTime = {item.EventDueTime} /> }
+        /> : null
+      }
+      { groups ?
+        <FlatList 
+          data = {groupsData}
+          renderItem={({item})=> 
+                <IndividualEventCard 
+                  EventTitle={item.EventTitle}
+                  EventDescrip = {item.EventDescrip}
+                  EventStartTime={item.EventStartTime}
+                  EventDueTime = {item.EventDueTime} /> }
+        /> : null
+      }
+      { events ?
+        <FlatList 
+          data = {eventsData}
+          renderItem={({item})=> 
+                <IndividualEventCard 
+                  EventTitle={item.EventTitle}
+                  EventDescrip = {item.EventDescrip}
+                  EventStartTime={item.EventStartTime}
+                  EventDueTime = {item.EventDueTime} /> }
+        /> : null
+      }
+        {/* <IndividualEventCard EventBackgroundColor={colors.accColOne}/> */}
+          
     </Wrapper>
 
     <AgendaWrapper agendaDisplay = {agendaDisplay} > 
       <View style ={{flex:1, width:'100%',}}>
+        
              <Agenda 
-
-       
                 items={items}
                 loadItemsForMonth={loadItems}
                 renderItem={renderItem}
                 selected={daySelect}
-theme={{ 
-      calendarBackground: 'green',
-      agendaKnobColor: 'red',
-      backgroundColor: 'yellow',
-      // agendaDayTextColor: 
-      // agendaDayNumColor: 
-      // agendaTodayColor: 
-      // monthTextColor: 
-      // textDefaultColor: 
-      // todayBackgroundColor: 
-      // textSectionTitleColor: 
-      selectedDayBackgroundColor: 'pink'
-      // dayTextColor: 
-      // dotColor: 
-      // textDisabledColor: 
-    }}
+                
+                theme=
+                {{ 
+                  calendarBackground: colors.primCol,
+                  agendaKnobColor: colors.lightBg,
+                  backgroundColor: colors.secCol,
+              // agendaDayTextColor: 
+              // agendaDayNumColor: 
+              // agendaTodayColor: 
+              // monthTextColor: 
+              // textDefaultColor: 
+              // todayBackgroundColor: 
+              // textSectionTitleColor: 
+              selectedDayBackgroundColor: 'pink'
+              // dayTextColor: 
+              // dotColor: 
+              // textDisabledColor: 
+                }}
                 
  />
 
@@ -235,12 +401,35 @@ theme={{
               setItems( {...items, ...trialPush})
             }} />
 
+          <Pressable 
+          style=
+          {{
+            justifyContent:'center',
+            alignItems:'center',
+            borderTopWidth:1.5,
+            borderRightWidth:1.5,
+            borderBottomWidth:1.5,
+            borderLeftWidth:1.5,
+            height:'5%',
+            width:'30%',
+            margin:5
+          }}
+          onPress={()=>{
+              setAgendaDisplay('none')
+              setCalDisplay('flex')
+              }}>
+
+              <Text> Calendar View </Text>
+          </Pressable>
         </View>
       </AgendaWrapper>   
-{/*     
+    
        <NavBarCon>
-          <NavBar/>
-        </NavBarCon> */}
+          <NavBar 
+            // addEventPress={onEventPress}
+            // onCalendarPress={onCalendarPress}
+            />
+        </NavBarCon>
 
     </View>
    

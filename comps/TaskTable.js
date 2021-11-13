@@ -1,13 +1,11 @@
 // import styled from "@emotion/styled-base";
 import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Button, TextInput } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import AppTimePicker from "./AppTimePicker";
-import NavBar from "./NavBar";
 import RecBtn from "./RecBtn";
-// import {Picker} from '@react-native-picker/picker';
-import  {Configurations} from'../PropConfig/Props'
+import { Configurations } from '../PropConfig/Props'
 import ModalSelector from 'react-native-modal-selector'
 
 const CardCon = Styled.View`
@@ -60,9 +58,7 @@ const TaskTable = ({
   text = 'Create ',
   height = 800,
   width = "100%",
-  onJoinPress = () => { },
-  onCreatePress = () => { },
-  onRecBtnPress=()=>{},
+  onRecBtnPress = () => { },
   TaskName,
   LoCation,
 
@@ -70,77 +66,73 @@ const TaskTable = ({
   const [selectedValue, setSelectedValue] = useState("Courses")
   let index = 0;
   const data = [
-      { key: index++, section: true, label: 'Type' },
-      { key: index++, label: 'Courses' },
-      { key: index++, label: 'Groups' },
-      { key: index++, label: 'Events' },
-      // etc...
-      // Can also add additional custom keys which are passed to the onChange callback
-      // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
+    { key: index++, section: true, label: 'Type' },
+    { key: index++, label: 'Courses' },
+    { key: index++, label: 'Groups' },
+    { key: index++, label: 'Events' },
+    // etc...
+    // Can also add additional custom keys which are passed to the onChange callback
+    // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
 
   return (
-    <CardCon bgc={Configurations.colors.primCol}  height={height} width={width}>
+    <CardCon bgc={Configurations.colors.primCol} height={height} width={width}>
 
       <TextCon>
-          <TextInput1  tColor={Configurations.colors.secCol}   ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol}/>
-          </TextInput1>
-        <TextInput2  style={{color:Configurations.colors.secCol}} >
-          Task Name 
+        <TextInput1 tColor={Configurations.colors.secCol}   ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
+        </TextInput1>
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+          Task Name
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', }}
+        <TextInput3
+          style=
+          {{
+            height: 40,
+            borderBottomWidth: 1,
+            borderBottomColor: 'white',
+          }}
+          onChangeText={() => { setTextValue() }}
+          // value={textValue}
           placeholder="Type the task name"
-        onChangeText={ TaskName}
-        defaultValue={text}
+          // onChangeText={TaskName}
+          // defaultValue={text}
         >
         </TextInput3>
-        <TextInput2 style={{color:Configurations.colors.secCol}} >
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Task Category
         </TextInput2>
         <PickerCon>
-        <ModalSelector
-                    data={data}
-                    initValue="Coures"
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                    borderBottomWidth="none" />
-</PickerCon>
-        {/* <PickerCon style={{ height: "18%", width: "100%", overflow: 'hidden', backgroundColor: 'red',}}>
-        <Picker
-          selectedValue={selectedValue}
-          
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
-          <Picker.Item label="Courses" value="Courses" />
-          <Picker.Item label="Groups" value="Groups" />
-          <Picker.Item label="Events" value="Events" />
-        </Picker>
-        </PickerCon> */}
-       
-        <TextInput2 style={{color:Configurations.colors.secCol}} >
+          <ModalSelector
+            data={data}
+            initValue="Coures"
+            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            borderBottomWidth="none" />
+        </PickerCon>
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Location
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color:Configurations.colors.secCol }}
+        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
           placeholder="Type the Location"
-        onChangeText={LoCation}
-        defaultValue={text}
+          // onChangeText={LoCation}
+          // defaultValue={text}
         ></TextInput3>
-      <TextInput2 style={{color:Configurations.colors.secCol}} >
-         Start Time
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+          Start Time
+        </TextInput2> 
+        <TimeCon>
+          <AppTimePicker />
+        </TimeCon>
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+          End Time
         </TextInput2>
         <TimeCon>
-        <AppTimePicker />
-      </TimeCon>
-        <TextInput2 style={{color:Configurations.colors.secCol}} >
-         End Time
-        </TextInput2>
-        <TimeCon>
-        <AppTimePicker />
-      </TimeCon>
+          <AppTimePicker />
+        </TimeCon>
       </TextCon>
       <ButtonCon>
-      <RecBtn onRecBtnPress={onRecBtnPress} text={text}/>
+        <RecBtn onRecBtnPress={onRecBtnPress} text={text} />
       </ButtonCon>
-    
+
     </CardCon>
   );
 };

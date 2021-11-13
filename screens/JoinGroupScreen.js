@@ -16,9 +16,11 @@ const JoinGroupScreen = ({
     return (
         // <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'position' : 'height'} style={styles.container}>
         <View style={styles.container}>
-            <AppHeader text='Groups'/>
+            
             <View style={styles.midDiv}>
-                <JoinAGroupCard onRecBtnPress={onRecBtnPress}/>
+                <JoinAGroupCard 
+                    text = "Join Group"
+                    onRecBtnPress={onRecBtnPress}/>
             </View>
             <NavBar/>
         </View>
