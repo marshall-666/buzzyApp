@@ -11,8 +11,14 @@ import {ListAvatar} from '../comps/ListAvatar'
 import { Members } from '../data/Members'
 import { GroupsData } from '../data/GroupsData'
 import { EventsMembTwo } from '../data/Events'
-
-
+import { Available } from '../comps/Available'
+import { Configurations } from '../PropConfig/Props'
+import {Days} from '../data/AvailableTime'
+import {DaysTwo} from '../data/AvailableTime'
+import {DaysThree} from '../data/AvailableTime'
+import { set } from 'react-native-reanimated'
+const lightBg = Configurations.colors.lightBg
+const primCol =  Configurations.colors.primCol
 const MembersScheduleScreen = ({
     navigation,
     route,
@@ -52,9 +58,8 @@ const MembersScheduleScreen = ({
 
 
 
-    const [items, setItems] = useState(
-       EventsMembTwo
-      )
+    const [memberOne, setMemberOne] = useState(false)
+    const [memberTwo, setMemberTwo] = useState(false)
 
       const timeToString =(time)=> {
         const date = new Date(time);
@@ -92,13 +97,30 @@ const MembersScheduleScreen = ({
     return (
         <ScrollView style={styles.container}>
             <AppHeader text="Schedules"/>
-
+          <View style={{
+            backgroundColor:lightBg, height:'25%'}} >
             <FlatList
                 horizontal
                 data={Members}
                 renderItem={({item})=> 
                     <ListAvatar 
-                        Members={item}
+                        memberName={item.name}
+                        memberUri={item.imageUri}
+                       onPress={()=>
+                        {
+                          if(item.id== 1 )
+                          { 
+                            setMemberOne(true) 
+                            console.warn("Heyy",item.id, memberOne)
+                      
+                          }
+                          if (item.id == 2)
+                          {
+                            setMemberOne(false)
+                            setMemberTwo(true)
+                          }
+                    
+                        }}
                         
                         // onPress={console.warn('hey you pressed on')}
                         // onPress={onPress}
@@ -108,7 +130,21 @@ const MembersScheduleScreen = ({
                 }
                 />
 
+          </View>
+
+        <View>
+            <FlatList
+              horizontal
+              alwaysBounceHorizontal={true}
+              data={memberOne? DaysTwo : memberTwo? DaysThree : Days }
+              renderItem={({item})=> <Available  
+                                        monthName={item.month}
+                                        day={item.day}
+                                        date={item.date}
+                                    />}
+            />
            
+        </View>
         </ScrollView>
     )
 }
@@ -118,6 +154,7 @@ export default MembersScheduleScreen
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        backgroundColor:primCol
     },
     midDiv: {
         width: '100%',

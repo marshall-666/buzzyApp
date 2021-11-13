@@ -4,15 +4,15 @@ import { useNavigation, useRoute } from '@react-navigation/core';
 
 
 
- export const ListAvatar = ({Members})=>
+ export const ListAvatar = ({
+    memberName= "Member One",
+    memberUri = "http://placekitten.com/150/150",
+    onPress=()=>{}
+    })=>
  {
 
     const navigation = useNavigation();
-    const onPress = ()=>
-    {
-        console.warn('pressed', Members.name, Members.id)
-        navigation.navigate('MembersSchedule', {id: Members.id})
-    }
+    
      
 
     //  console.warn(GroupsData.groups.name)
@@ -23,14 +23,14 @@ import { useNavigation, useRoute } from '@react-navigation/core';
                 
                 <Image
                     style={{height:100, width:100, borderRadius: 100}} 
-                    source={{uri:Members.imageUri}}/>
+                    source={{uri:memberUri}}/>
                     <View style=
                     {{
                         alignItems:'center', 
                         marginTop:5
                     
                     }}>
-                        <Text> {Members.name} </Text>
+                        <Text> {memberName} </Text>
                     </View>
                     
                 
@@ -41,3 +41,33 @@ import { useNavigation, useRoute } from '@react-navigation/core';
 
     )
  }
+
+
+
+// export const ListAvatar = ({groupsData})=>
+//  {
+
+//     const navigation = useNavigation();
+//     const onPress = ()=>
+//     {
+//         console.warn('pressed', Members.name, Members.id)
+//         navigation.navigate('MembersSchedule', {id: Members.id})
+//     }
+     
+
+//     //  console.warn(GroupsData.groups.name)
+//     return(
+//             <Pressable 
+//                 onPress={onPress}
+//                 style={{margin:10,}}>
+                
+//                 <Text> {groupsData.members.name} </Text>
+                    
+                
+
+
+
+//             </Pressable>
+
+//     )
+//  }
