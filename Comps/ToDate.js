@@ -26,7 +26,7 @@ export const ToDate = () => {
                     alignItems:'center', 
                     justifyContent:'center',
                     width:'100%',
-                    height:'7%',
+                    height:100,
                     backgroundColor: lightBg,
                     borderBottomLeftRadius:20,
                     borderBottomRightRadius:10

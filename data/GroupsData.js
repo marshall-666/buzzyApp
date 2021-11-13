@@ -42,11 +42,11 @@ export const GroupsData=
     },
 
     {
-        id: '2',
+        id: '3',
         groups: 
             {
             id: 'g2',
-            name: 'WebDev',
+            name: 'Project 2',
             imageUri: 'https://placekitten.com/200/200',
             }
     },

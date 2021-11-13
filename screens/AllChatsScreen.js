@@ -27,7 +27,6 @@ const AllChats = ({ navigation }) => {
             justifyContent: 'flex-start' 
             
         }}>
-      <AppHeader text="Task" />
       <Text> Hello this is Screen one </Text>
     
     
@@ -61,7 +60,7 @@ const AllChats = ({ navigation }) => {
      </View>
        
     
-     
+     <NavBar/>
     </View>
   );
 }

@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/core';
     const onPress = ()=>
     {
         console.warn('pressed', user.name)
-        navigation.navigate('ChatTabOne', {id: chatRoom.id})
+        navigation.navigate('SingleChatThread', {id: chatRoom.id})
     }
      const user = chatRoom.users[1];
     return(

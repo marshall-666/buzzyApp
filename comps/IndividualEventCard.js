@@ -69,7 +69,7 @@ const IndividualEventCard = ({
       <TouchableOpacity onPress={()=>{navigation.navigate('GroupHome')}}>
         <MaterialIcons name="group" size={35} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onChatPress}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('AllChats')}}>
         <Entypo name="chat" size={35} color="black" />
       </TouchableOpacity>
     </IconCont>

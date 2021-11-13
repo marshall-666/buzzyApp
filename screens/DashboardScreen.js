@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text,ScrollView, FlatList } from 'react-native';
+import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppHeader from '../comps/AppHeader';
@@ -21,10 +21,12 @@ import {eventsData} from '../data/tasks'
 import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
 
+
+
 // import {taskCategory} from '../data/category'
 
 const colors = Configurations.colors;
-const secCol = Configurations.colors.secCol;
+const secCol = colors.secCol;
 
 
 
@@ -375,9 +377,9 @@ const DashboardScreen = ({navigation }) => {
                 
                 theme=
                 {{ 
-                  calendarBackground: 'green',
-                  agendaKnobColor: 'red',
-                  backgroundColor: '#fad',
+                  calendarBackground: colors.primCol,
+                  agendaKnobColor: colors.lightBg,
+                  backgroundColor: colors.secCol,
               // agendaDayTextColor: 
               // agendaDayNumColor: 
               // agendaTodayColor: 
@@ -399,6 +401,26 @@ const DashboardScreen = ({navigation }) => {
               setItems( {...items, ...trialPush})
             }} />
 
+          <Pressable 
+          style=
+          {{
+            justifyContent:'center',
+            alignItems:'center',
+            borderTopWidth:1.5,
+            borderRightWidth:1.5,
+            borderBottomWidth:1.5,
+            borderLeftWidth:1.5,
+            height:'5%',
+            width:'30%',
+            margin:5
+          }}
+          onPress={()=>{
+              setAgendaDisplay('none')
+              setCalDisplay('flex')
+              }}>
+
+              <Text> Calendar View </Text>
+          </Pressable>
         </View>
       </AgendaWrapper>   
     

@@ -96,7 +96,6 @@ const MembersScheduleScreen = ({
     // }
     return (
         <ScrollView style={styles.container}>
-            <AppHeader text="Schedules"/>
           <View style={{
             backgroundColor:lightBg, height:'25%'}} >
             <FlatList

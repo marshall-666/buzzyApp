@@ -14,6 +14,10 @@ import AllGroupsScreen from '../screens/AllGroupsScreen';
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import LogoutScreen from '../screens/Logout';
+import JoinGroupScreen from '../screens/JoinGroupScreen';
+import CreateGroupScreen from '../screens/CreateGroupScreen';
+
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,6 +53,8 @@ function AllGroups() {
     <Drawer.Navigator screenOptions={{
       headerShown: false,
     }}>
+      
+      
       <Drawer.Screen name='AllGroups' component={AllGroupsScreen} />
       <Drawer.Screen name="Account" component={TaskCreatingScreen} />
       <Drawer.Screen name="Setting" component={TaskCreatingScreen} />
@@ -103,6 +109,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="AllGroups" component={AllGroups} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
+      <Stack.Screen name="AllChats" component={AllChats} />
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
 
       {/* dashboard flow ends */}
@@ -115,9 +122,13 @@ export default function TaskboardStack() {
 
 
       {/* Other group flows */}
+        {/* join or create a group */}
+        <Stack.Screen name="JoinGroup" component={JoinGroupScreen} />
+        <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
+
 
       {/* Members schedules */}
-
+      <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
       {/* Other group flows */}
 
     </Stack.Navigator>
