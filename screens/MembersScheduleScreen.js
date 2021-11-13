@@ -11,14 +11,16 @@ import {ListAvatar} from '../comps/ListAvatar'
 import { Members } from '../data/Members'
 import { GroupsData } from '../data/GroupsData'
 import { EventsMembTwo } from '../data/Events'
-
+import { color } from '@storybook/addon-knobs'
+import {Available} from '../comps/Available'
 
 const MembersScheduleScreen = ({
     navigation,
     route,
     GroupsData
 }) => {
-    
+
+  
     // route is a parameter provided by react navigation.
     // I logged route and discovered the architecture of the data being passed over from the list avatar component.
     // id was stored under an object called params.
@@ -33,25 +35,9 @@ const MembersScheduleScreen = ({
     console.warn(members);
     
     
-    // useEffect (()=>{
-    //     var member = route.params
-    //     console.warn(member)
-        
-        
-    //     // console.warn(member)
-    //     if (member == 1)
-    //     (
-    //         setItems(items)
-    //     )
-    //     if (member== 2)
-    //     {
-    //         setItems(EventsMembTwo)
-    //     }
-
-    // },[])
 
 
-
+    const [color, setColor] = useState('red')
     const [items, setItems] = useState(
        EventsMembTwo
       )
@@ -90,15 +76,53 @@ const MembersScheduleScreen = ({
     //     // navigation.navigate('GroupHome', {id: Members.id})
     // }
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} 
+        contentContainerStyle={{alignItems:'center', }}>
             <AppHeader text="Schedules"/>
 
+          
             <FlatList
                 horizontal
                 data={Members}
                 renderItem={({item})=> 
                     <ListAvatar 
-                        Members={item}
+                        memberName={item.name}
+                        onPress={()=>
+                        {
+                          if(item.id == 1)
+                          {
+                              console.warn("hey", item.name)
+                              setColor('red ')
+                          }
+
+                          if(item.id == 2)
+                          {
+                            {console.warn("hey", item.name)}
+                            setColor('green')
+                          }
+                          
+                          
+                          }}
+                        // onPress={console.warn('hey you pressed on')}
+                        // onPress={onPress}
+                    />
+          
+                
+                
+                }
+            />
+
+          
+            <View style={{backgroundColor:color}}>
+              <Text>Hi There</Text>
+            </View>
+            {/* <Available/> */}
+                 {/* <FlatList
+                horizontal
+                data={GroupsData.members}
+                renderItem={({item})=> 
+                    <ListAvatar 
+                        groupsData={item}
                         
                         // onPress={console.warn('hey you pressed on')}
                         // onPress={onPress}
@@ -106,7 +130,7 @@ const MembersScheduleScreen = ({
                 />
                 
                 }
-                />
+                /> */}
 
            
         </ScrollView>
@@ -118,6 +142,7 @@ export default MembersScheduleScreen
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        
     },
     midDiv: {
         width: '100%',
