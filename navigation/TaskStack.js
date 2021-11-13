@@ -13,12 +13,10 @@ import SingleChatThread from '../screens/SingleChatThreadScreen';
 import AllGroupsScreen from '../screens/AllGroupsScreen';
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import LogoutScreen from '../screens/Logout';
-import JoinGroupScreen from '../screens/JoinGroupScreen';
+import LogoutScreen from '../screens/LogoutScreen';
+import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
-
-
-
+import JoinGroupScreen from '../screens/JoinGroupScreen';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -28,8 +26,7 @@ function Taskboard() {
       headerShown: false,
     }}>
       <Drawer.Screen name='Taskboard' component={TaskboardScreen} />
-      <Drawer.Screen name="Account" component={TaskCreatingScreen} />
-      <Drawer.Screen name="Setting" component={TaskCreatingScreen} />
+      <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
   );
@@ -41,8 +38,7 @@ function Dashboard() {
       headerShown: false,
     }}>
       <Drawer.Screen name='Dashboard' component={DashboardScreen} />
-      <Drawer.Screen name="Account" component={TaskCreatingScreen} />
-      <Drawer.Screen name="Setting" component={TaskCreatingScreen} />
+      <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
   );
