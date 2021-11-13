@@ -61,7 +61,7 @@ console.warn("Displaying person number", route.params?.id)
             justifyContent: 'flex-start' 
             
         }}>
-      <AppHeader text="Task" />
+     
     
         <Text> Hello Screen 2 </Text>
     <Button 

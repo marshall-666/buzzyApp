@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, View, Text, ScrollView ,KeyboardAvoidingView,StyleSheet } from 'react-native';
-import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import TaskTable from '../comps/TaskTable';
@@ -36,7 +35,7 @@ width:100%
 const TaskButtonWrapper = styled.View`
 justify-content:center
 margin:3.5%;
-margin-top:17.5%;
+margin-top:7.5%;
 margin-bottom:4.5%;
 display:flex;
 flex-wrap:nowrap;
@@ -64,22 +63,8 @@ const TaskCreatingScreen = ({ navigation }) => {
     }
   };
 
-  // const [taskName  , SetTaskName] = useState("");
-  // const [taskType , settaskType] = useState("");
-  // const [location , SetLocatione] = useState("");
-  // const [startTime , SetStartTime] = useState("");
-  // const [endTime , SetEndTime] = useState("");
   const onHandleCreate = () => {
      
-  //   await setDoc(doc(fireStore, "event", "LA"), {
-  //     TaskName: taskName,
-  //     TaskType: taskType,
-  //     Location: location,
-  //     StartTime: startTime,
-  //     EndTime: endTime,
-  //   });
-  //   const eventsRef = doc(fireStore, 'events', 'BJ');
-  //  setDoc(eventsRef, { capital: true }, { merge: true });
        navigation.navigate('Taskboard')
   }
 
@@ -89,7 +74,7 @@ const TaskCreatingScreen = ({ navigation }) => {
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <View style={styles.header}>
-        <AppHeader text="Task" displayBack="none" onLogoutPress={handleSignOut} />
+       
       </View>
       <Wrapper>
         <TaskButtonWrapper>
