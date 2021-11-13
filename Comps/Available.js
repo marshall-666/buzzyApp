@@ -1,34 +1,51 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import {Configurations} from '../PropConfig/Props'
+import { TimeSlot } from './TimeSlot'
+import { Times } from '../data/AvailableTime'
 
 const dividerCol = Configurations.colors.lightBg
 const bgCol = Configurations.colors.primCol
 
 export const Available = (
     {
-
+        monthName =" November",
+        day="today",
+        date = "20th",
+        bgColor={bgCol}
     }
 ) => {
     return (
-        <View style={styles.card} >
-            <View>
-                <Text>hello</Text>
-                <Text>hello</Text>
+        <View style={styles.card}  >
+                
+            <View style={{width:'100%'}}>
+                <Text style={{
+                    fontSize:30, 
+                    color:'white',
+                    fontWeight:'bold'}}>{date}
+                
+                </Text>
+                
+                <Text style={{
+                    fontSize:25, 
+                    color:'white',
+                    fontWeight:'bold'}}>
+                        {monthName}
+                </Text>
             </View>
             
-            <View style={styles.slot}>
-                <Text> Time Slot </Text>
-                <View style={styles.divider}></View>
-                <View>
-                    <Text>From</Text>
-                    <Text>To</Text>
-                </View>
-
-            </View>
+            <FlatList 
+                data={Times}
+                renderItem={({item})=> <TimeSlot from={item.from}
+                to={item.to}/>}/>
 
 
 
+            <Text style={{
+                    fontSize:25, 
+                    color:'white',
+                    fontWeight:'bold'}}> {day} 
+            </Text>
         </View>
     )
 }
@@ -38,22 +55,30 @@ export const Available = (
 const styles = StyleSheet.create({
     
     card:{
-        backgroundColor:bgCol,
-        width:"90%",
-        height:'50%',
+        padding:15,
+        
+        width:"60%",
+        height:'80%',
         marginTop:10,
-        justifyContent:'center',
+        justifyContent:'space-evenly',
         alignItems:'center',
-        borderRadius:10
+        borderRadius:10,
+        borderTopWidth:1,
+        borderRightWidth:1,
+        borderBottomWidth:1,
+        borderLeftWidth:1,
+
     },
     slot:{
-        width:'70%',
+        width:'90%',
         flexDirection:'row',
+        justifyContent:'space-evenly',
         alignItems:'center',
         borderTopWidth:1,
         borderRightWidth:1,
         borderBottomWidth:1,
         borderLeftWidth:1,
+        borderRadius:10,
     },
 
     divider:{
