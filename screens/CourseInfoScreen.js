@@ -44,10 +44,23 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-    <AppHeader onMenuPress={()=>navigation.navigate('AccountScreen')} text="Courses" />
-  
+
         <CourseCardWrapper> 
-            <ScrollView  style={{width:'100%', height:'100%'}} contentContainerStyle={{width:'100%', height:'150%', display:'flex', justifyContent:'space-evenly', alignItems:'center', background:'green',}}>
+            <ScrollView  
+              style=
+              {{
+                width:'100%', height:'100%'
+              }} 
+              contentContainerStyle=
+                {{
+                  width:'100%', 
+                  height:'150%', 
+                  display:'flex', 
+                  justifyContent:'space-evenly', 
+                  alignItems:'center', 
+                  background:'green',
+                
+                }}>
             <Task/>
             <Task/>
             <Task/>

@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, ActivityIndicator,StyleSheet } from 'react-native';
+import { View, ActivityIndicator,StyleSheet,Text } from 'react-native';
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 import AuthStack from './AuthStack';
 import TaskStack from './TaskStack';
-import TaskCreatingScreen from '../screens/TaskCreatingScreen';
-
-
+import { db } from '../firebase/fireStore';
+import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const { users, setUsers } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
+  const usersCollectionRef = collection(db, "users");
+ 
 
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
@@ -19,16 +21,19 @@ export default function RootNavigator() {
       try {
         await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
         setIsLoading(false);
+        const data =await getDoc(usersCollectionRef);
+      setUsers(data.doc.data());
       } catch (error) {
         console.log(error);
       }
     });
+    
     // unsubscribe auth listener on unmount
     return unsubscribeAuth;
   }, []);
   
 
-   if (isLoading) {
+   if (isLoading ) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size='large' />
@@ -36,9 +41,13 @@ export default function RootNavigator() {
     );
   }
 
+
+  
+
   return (
     <NavigationContainer>
-      <TaskCreatingScreen/>
+      {user ?  <TaskStack /> : <AuthStack />}
+     
     </NavigationContainer>
   );
 }

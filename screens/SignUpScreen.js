@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, Image, StyleSheet } from 'react-native';
+import { Button, View, Text, Image, StyleSheet,KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
+import { db } from '../firebase/fireStore';
+import { collection, getDocs, addDoc,doc} from "firebase/firestore"; 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import  ErrorInfo  from '../comps/ErrorInfo'
+import ErrorInfo from '../comps/ErrorInfo'
+
 
 
 const LogoWrapper = styled.View`
@@ -19,7 +22,7 @@ flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
 width:75%;
-height:150px
+height:17%
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
@@ -44,10 +47,11 @@ top:300px
 height:52.5%;
 width:100%;
 `
+
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
-  const [users, setUsers] = useState('');
+  const [newName, setnewName] = useState('');
   const [program, setProgram] = useState('');
   const [set, setSet] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -56,6 +60,15 @@ const SignUpScreen = ({ navigation }) => {
   const [page1, setPage1] = useState(true)
   const [page2, setPage2] = useState(false)
   const [signupError, setSignupError] = useState('');
+  
+  
+  
+ 
+  const usersCollectionRef = collection(db, "users");
+  const createUsers = async () =>{
+   
+    await addDoc(usersCollectionRef, { name: newName, school:school,program:program,set:set });
+  }
 
 
   const continuePress = () => {
@@ -68,21 +81,22 @@ const SignUpScreen = ({ navigation }) => {
   }
   const submitPress = async () => {
     const auth = getAuth();
-      if (email !== '' && password !== '') {
-        await createUserWithEmailAndPassword(auth, email, password)
+    if (email !== '' && password !== '') {
+      await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
+          createUsers()
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
-      setSignupError(errorCode,errorMessage);
+          setSignupError(errorCode, errorMessage);
 
         });
-      }
+    }
   };
 
   const handlePasswordVisibility = () => {
@@ -94,10 +108,12 @@ const SignUpScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-
+  
+  
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
-      <AppHeader text="Welcome" display="none" />
+    <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+     <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none'/>
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
@@ -138,8 +154,8 @@ const SignUpScreen = ({ navigation }) => {
           placeholder='Bill Lin'
           autoCapitalize='none'
           autoCorrect={false}
-          value={users}
-          onChangeText={text => setUsers(text)}
+          value={newName}
+          onChangeText={text => setnewName(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.title2}>Password</Text>
@@ -220,7 +236,7 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setSet(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-          {signupError ? <ErrorInfo error={signupError} visible={true} /> : null}
+        {signupError ?<Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
 
         <Text style={styles.button}>
           <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
@@ -231,7 +247,7 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.title4}>I have an account.</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('Login')}>Login</Text>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -272,10 +288,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   button: {
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 20,
-  },
+    height:'30%',
+     marginTop: '1%',
+   alignSelf:'center'
+   },
   logo: {
     position: 'absolute',
     width: 150,

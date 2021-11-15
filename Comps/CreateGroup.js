@@ -66,7 +66,9 @@ align-items:flex-start;
 `
 
 
-export const  CreateGroup = ()=> {
+export const  CreateGroup = ({
+    handlePress=()=>{}
+})=> {
     return (
         <CardCont>
             
@@ -94,7 +96,7 @@ export const  CreateGroup = ()=> {
                     <InputBox placeholder="Enter Group Member's Emails" placeholderTextColor="lightgrey"/>
                 </InputContainer>
             
-            <ButPress>
+            <ButPress onPress={handlePress}>
                 <Text>Create Group</Text>
             </ButPress>
             </OptCont>

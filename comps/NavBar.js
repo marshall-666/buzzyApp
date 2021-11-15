@@ -6,8 +6,10 @@ import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { NavigationContainer,useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  {Configurations} from'../PropConfig/Props'
-
+import { Octicons } from '@expo/vector-icons'; 
 
 const BarCont = Styled.View`
 width:90%;
@@ -34,20 +36,25 @@ border:6px solid #94BDD4
 
 const NavBar = ({
    
-    
+  
     onCalendarPress = () => {},
     onHomePress = () => {},
-    addEventPress = () => {},
+    
     onCoursesPress = () => {},
-    onGroupsPress = () => {},
+    // onGroupsPress = () => {},
+    // GroupHome,
 }) => {
+  const navigation = useNavigation()
+
+  // const onEventPress = () => {navigation.navigate('TaskCreating')}
   return (
   <BarCont backgroundColor={Configurations.colors.secCol}>
-      <TouchableOpacity onPress={onCalendarPress}>
-        <Foundation name="calendar" size={35} color="white"/>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
+      <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onHomePress}>
-        <Foundation name="home" size={35} color="white"/>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Taskboard')}}>
+        
+        <FontAwesome5 name="tasks" size={30} color="white" />
       </TouchableOpacity>
       
       <YellowCircle 
@@ -55,15 +62,15 @@ const NavBar = ({
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
-        <TouchableOpacity onPress={addEventPress}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('TaskCreating')}}>
             <AntDesign name="plus" size={35} color="black" />
         </TouchableOpacity>
-      </YellowCircle>
+      </YellowCircle>    
       
-      <TouchableOpacity onPress={onCoursesPress}>
-        <FontAwesome5 name="book" size={28} color="white" />
+      <TouchableOpacity onPress={()=>{navigation.navigate('CourseInfo')}}>
+      <Octicons name="comment-discussion" size={35} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={onGroupsPress}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>
         <MaterialIcons name="group" size={35} color="white" />
       </TouchableOpacity>
   </BarCont>

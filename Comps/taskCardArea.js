@@ -3,10 +3,6 @@ import styled from "@emotion/styled-base";
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import Styled from "styled-components/native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import AppTimePicker from "./AppTimePicker";
-import NavBar from "./NavBar";
-import RecBtn from "./RecBtn";
 import  {Configurations} from'../PropConfig/Props'
 
 const CardCon = Styled.View`
@@ -19,7 +15,7 @@ border-radius:${(props) => props.bradius}px;
 display:flex;
 flex-wrap:wrap;
 flex-direction:row;
-box-shadow: 5px -100px  black;
+box-shadow: 0 3px 10px rgba(0, 0, 0 , 0.9);
 `
 const TextCon = Styled.View`
 display:flex;
@@ -70,10 +66,6 @@ const TaskCardArea = ({
   const [selectedValue, setSelectedValue] = useState("Courses")
   return (
     <CardCon  bgc={Configurations.colors.primCol} bradius={bradius} height={height} width={width}>
-
-
-
-
     </CardCon>
   );
 };

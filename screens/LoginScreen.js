@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, Image, StyleSheet } from 'react-native';
+import { Button, View, Text, Image, StyleSheet, KeyboardAvoidingView} from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
@@ -10,7 +10,6 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebas
 import  ErrorInfo  from '../comps/ErrorInfo'
 
 const LogoWrapper = styled.View`
-margin-left:10px;
 margin-top:8%;
 margin-bottom:8%;
 display:flex;
@@ -18,14 +17,13 @@ flex-wrap:nowrap;
 flex-direction:row;
 justify-content:space-between;
 width:75%;
-height:150px
+height:17%
 `
 const TaskButtonWrapper = styled.View`
 margin:3%
 `
 const CourseEventCardWrapper = styled.View`
 height:100%;
-
 `
 const NavBarCon = styled.View`
 position:absolute;
@@ -35,7 +33,6 @@ height:100%
 width:100%
 left:5%
 `
-
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
@@ -43,7 +40,6 @@ top:300px
 height:52.5%;
 width:100%;
 `
-
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -82,27 +78,26 @@ const LoginScreen = ({ navigation }) => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        navigation.navigate('Taskboard')
+        // navigation.navigate('Taskboard')
         // ...
       } else {
         // User is signed out
         // ...
       }
     });
-
   }
-
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
-      <AppHeader text="Welcome" display="none" />
+    <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }} >
+      <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none'/>
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
         <Text style={styles.Logoin}>Login</Text>
-        <Text style={styles.Logoin}>Login</Text>
       </LogoWrapper>
-      <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
+  
+      <TaskCardArea style={{ position: 'absolute', zIndex: 3 }} />
+      
       <View style={styles.inpuTable}>
         <Text style={styles.title2}>Email</Text>
         <InputField
@@ -130,7 +125,7 @@ const LoginScreen = ({ navigation }) => {
           }}
           containerStyle={{
             backgroundColor: Configurations.colors.primCol,
-            marginBottom: '8%',
+            marginBottom: '6%',
             borderBottomWidth: 1,
           }}
           leftIcon='lock'
@@ -144,20 +139,24 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.title3}>Forgot Password?</Text>
-        <Text style={styles.button}>
-          {loginError ? <ErrorInfo error={loginError} visible={true} /> : null}
-
-          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+        <Text style={styles.title3}>Forgot Password?
+        
         </Text>
+        {loginError ? <Text><ErrorInfo error={loginError} visible={true} /></Text> : null}
+        <View style={styles.button}>
+          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+        </View>
         <Text style={styles.title3}>OR</Text>
-      </View>
-      <Image source={require("../assets/D2L.png")} style={styles.D2L} />
+        <Image source={require("../assets/D2L.png")} style={styles.D2L} />
       <View style={styles.container3}>
+      
         <Text style={styles.title4}>Don’t have an account yet?</Text>
         <Text style={styles.title5} onPress={() => navigation.navigate('SignUp')}>Signup</Text>
       </View>
-    </View>
+      </View>
+      
+
+    </KeyboardAvoidingView>
   );
 }
 
@@ -181,13 +180,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
     marginLeft: -30,
-    marginTop: 90
+    marginTop: '30%'
   },
   title2: {
     fontSize: 18,
     fontWeight: '600',
     color: Configurations.colors.secCol,
-    // marginLeft:20,
     alignSelf: 'flex-start',
     paddingBottom: 5,
   },
@@ -195,14 +193,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: Configurations.colors.secCol,
-    // marginLeft:20,
     alignSelf: 'center',
-    paddingBottom: 5,
+    marginTop: '-2.5%',
   },
   button: {
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 20
+   height:'30%',
+    marginTop: '1%',
+  alignSelf:'center'
 
   },
   logo: {
@@ -211,7 +208,6 @@ const styles = StyleSheet.create({
     height: 150,
     zIndex: 3,
     marginLeft: 200,
-    // marginTop:0,
   },
   honeycomb: {
     marginLeft: -60,
@@ -221,28 +217,23 @@ const styles = StyleSheet.create({
   D2L: {
     width: 50,
     height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 740,
-    position: 'absolute',
-    zIndex: 4,
+    alignSelf: 'center',
+    marginTop:'2.5%'
   },
   container3: {
-    position: 'absolute',
-    zIndex: 4,
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 810,
+   
   },
   title4: {
     fontSize: 18,
     fontWeight: '400',
     color: Configurations.colors.secCol,
     alignSelf: 'center',
-    paddingBottom: '-17.5%',
+    marginTop: '7.5%',
 
   },
   title5: {
@@ -251,7 +242,7 @@ const styles = StyleSheet.create({
     color: 'orange',
     marginLeft: 10,
     alignSelf: 'center',
-    paddingBottom: '-17.5%',
+    marginTop: '7.5%',
 
   },
 

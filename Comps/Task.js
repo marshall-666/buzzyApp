@@ -1,17 +1,16 @@
 import React from 'react'
 import { useState } from 'react';
 import { View, Text,Pressable } from 'react-native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee, faCalendarAlt, faLocationArrow, faChalkboardTeacher, faUsers } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/native'
 
 // main container for the component within with everything resides.
 const TaskCont = styled.View`
 width:90%;
 height:${props => props.height};
-background-color:red;
 border-radius:10px;
 align-items:center;
+margin-top:10px;
+margin-bottom:10px;
 `
 
 // divider
@@ -55,7 +54,14 @@ justify-content:space-around;
 
 
 
-export const Task = ({})=> {
+export const Task = ({
+    title='Title',
+    days= "Monday",
+    time = "Sometime",
+    location="sw14",
+    instructor="Henry Leung",
+    group= "see groups"
+})=> {
     // states to change the height of the task card.
     const [height, setHeight] = useState('5%')
     const [card, setCard] = useState(true)
@@ -86,33 +92,34 @@ export const Task = ({})=> {
                setCard(!card) 
                taskHeight()
             }}>
-                <FontAwesomeIcon icon={ faCoffee } />
                 <Text>
-                something goes here
+                {title}
                 </Text>
             </TaskHeader>
             <Divider></Divider>
           
        
             <Content display={display}>
+                
+                
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faCalendarAlt } size= {45} />
-                    <Text>Whatevr text you add</Text>
+                    <View>
+                        <Text>{days}</Text>
+                        <Text>{time}</Text>
+                    </View>
+                    
+                    
                 </ContentCell>
                 
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faLocationArrow } size= {45} />
-                    <Text>Whatevr text you add</Text>
+                    <Text>{location}</Text>
                 </ContentCell>
                 
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faChalkboardTeacher} size= {45} />
-                    <Text>Whatevr text you add</Text>
+                    <Text>{instructor}</Text>
                 </ContentCell>
-                
                 <ContentCell> 
-                    <FontAwesomeIcon icon={ faUsers} size= {45} />
-                    <Text>Whatevr text you add</Text>
+                    <Text>{group}</Text>
                 </ContentCell>
 
 

@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {View, Button, Platform, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import  {Configurations} from'../PropConfig/Props'
-
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { Fontisto } from '@expo/vector-icons'; 
 
 
 
@@ -45,40 +46,48 @@ import  {Configurations} from'../PropConfig/Props'
 
   const showDatepicker = () => {
     showMode('date');
+    
+
   };
 
   const showTimepicker = () => {
     showMode('time');
+   
   };
+ 
 
   return (
     <View style={styles.container}>
-      <Text  style={{color:"#ffffff", fontSize:20, color:Configurations.colors.secCol }}> {text}  </Text>
+      
       <View style={styles.buttonCon}>
       <View style={{marginRight:20}}> 
         <TouchableOpacity style={styles.button} onPress={showDatepicker} >
-        <Text>Set Date</Text>
+        <Text><Fontisto name="date" size={30} color={Configurations.colors.secCol} /></Text>
         </TouchableOpacity>
       </View>
+
       <View>
         <TouchableOpacity style={styles.button} onPress={showTimepicker}  >
-        <Text>Set Time</Text>
+        <Text><Fontisto name="clock" size={30} color={Configurations.colors.secCol} /></Text>
         </TouchableOpacity>
       </View>
       </View>
-     
-      {show && (
+      <View  style={{width: '50%',height:40, backgroundcolor: "grey", marginTop:10, 
+      alignContent:'center',justifyContent:'center',
+      overflow:'hidden'}}>
+      {show ? (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
           is24Hour={true}
-          display="spinner"
-          onChange={onChange}
-          style={{width: 320, backgroundColor: "white"}}
+          display="default"
+          onChange={onChange} 
+          style={{height:40, width:100,alignSelf:'center'}}
         />
-      )}
-  
+      ):null}
+       </View>
+  <Text  style={{color:"#ffffff", fontSize:20, color:Configurations.colors.secCol }}> {text}  </Text>
     </View>
   );
 };
@@ -96,9 +105,9 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 7.5,
-    borderRadius:10,
+    // backgroundColor: "#DDDDDD",
+    // padding: 7.5,
+    // borderRadius:10,
     width: 95
   },
 });
