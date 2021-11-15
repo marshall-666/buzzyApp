@@ -6,6 +6,7 @@ import LottieView from 'lottie-react-native';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import { Configurations } from '../PropConfig/Props'
 import DashboardScreen from '../screens/DashboardScreen';
+import AgendaScreen from '../screens/AgendaScreen';
 import CourseInfoScreen from '../screens/CourseInfoScreen';
 import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
@@ -104,6 +105,7 @@ export default function TaskboardStack() {
     >
       {/* dashboard flow */}
       <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Agenda" component={AgendaScreen} />
       <Stack.Screen name="AllGroups" component={AllGroups} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
