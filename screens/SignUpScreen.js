@@ -6,9 +6,11 @@ import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
+import { db } from '../firebase/fireStore';
+import { collection, getDocs, addDoc,doc} from "firebase/firestore"; 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import ErrorInfo from '../comps/ErrorInfo'
-import LottieView from 'lottie-react-native';
+
 
 
 const LogoWrapper = styled.View`
@@ -45,10 +47,11 @@ top:300px
 height:52.5%;
 width:100%;
 `
+
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
-  const [users, setUsers] = useState('');
+  const [newName, setnewName] = useState('');
   const [program, setProgram] = useState('');
   const [set, setSet] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -57,7 +60,15 @@ const SignUpScreen = ({ navigation }) => {
   const [page1, setPage1] = useState(true)
   const [page2, setPage2] = useState(false)
   const [signupError, setSignupError] = useState('');
-
+  
+  
+  
+ 
+  const usersCollectionRef = collection(db, "users");
+  const createUsers = async () =>{
+   
+    await addDoc(usersCollectionRef, { name: newName, school:school,program:program,set:set });
+  }
 
 
   const continuePress = () => {
@@ -75,7 +86,7 @@ const SignUpScreen = ({ navigation }) => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-         
+          createUsers()
           // ...
         })
         .catch((error) => {
@@ -97,7 +108,8 @@ const SignUpScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-
+  
+  
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
@@ -142,8 +154,8 @@ const SignUpScreen = ({ navigation }) => {
           placeholder='Bill Lin'
           autoCapitalize='none'
           autoCorrect={false}
-          value={users}
-          onChangeText={text => setUsers(text)}
+          value={newName}
+          onChangeText={text => setnewName(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.title2}>Password</Text>

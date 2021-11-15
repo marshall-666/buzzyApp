@@ -13,10 +13,9 @@ import { coursesData } from '../data/tasks'
 import { groupsData } from '../data/tasks'
 import { eventsData } from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-import fireAuth from '../firebase/fireAuth';
 import { Configurations } from '../PropConfig/Props'
-import fireStore from '../firebase/fireStore';
-
+import { db } from '../firebase/fireStore';
+import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
 margin-top:14%;
@@ -70,6 +69,19 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorE, setTextColorE] = useState(false)
   const [welcome, setWelcome] = useState(true)
 
+    
+  // const [users, setUsers] = useState([]);
+  // const usersCollectionRef = collection(db, "users");
+  
+  // useEffect(() => {
+  //   const getUser =async()=>{
+  //     const data =await getDoc(usersCollectionRef);
+  //     setUsers(data.doc);
+  //     console.log(data)
+  //   }
+  //   getUser();
+  //   }, [])
+
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
   //     .toString(16)
@@ -122,7 +134,7 @@ const TaskboardScreen = ({ navigation }) => {
     setWelcome(false)
 
   }
-  const { user } = useContext(AuthenticatedUserContext);
+  const { user,users } = useContext(AuthenticatedUserContext);
   // const handleSignOut = async () => {
   //   try {
   //     await fireAuth.signOut();
@@ -169,14 +181,15 @@ const TaskboardScreen = ({ navigation }) => {
   <TaskCardArea/> 
      
     
-  {welcome ? <Text style={styles.title}>Welcome {user.email}!</Text>: null  }
+  {welcome ? <Text style={styles.title}>Welcome {user.email} 
+  {users.name}!</Text>: null  }
      
   { course ? (<TaskCardsWrapper>
     {
       courses.map((o, i) => 
       (
      
-        <CourseEventCard  
+        <IndividualEventCard  
           key={i} id={o.id} 
           EventTitle={o.EventTitle} 
           EventDescrip={o.EventDescrip} 
@@ -195,7 +208,7 @@ const TaskboardScreen = ({ navigation }) => {
       groups.map((o, i) => 
       ( 
      
-        <GroupEventCard  
+        <IndividualEventCard  
           key={i} id={o.id} 
           EventTitle={o.EventTitle} 
           EventDescrip={o.EventDescrip} 
