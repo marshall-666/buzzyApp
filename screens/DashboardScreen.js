@@ -313,6 +313,7 @@ const DashboardScreen = ({navigation }) => {
           data = {coursesData}
           renderItem={({item})=> 
                 <IndividualEventCard 
+                  EventBackgroundColor="#EC8B1A"
                   EventTitle={item.EventTitle}
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
