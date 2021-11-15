@@ -9,12 +9,8 @@ import styled from 'styled-components/native';
 
 
 // Component imports===============
-import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
-import {Task} from '../comps/Task'
-import TaskTable from '../comps/TaskTable';
 import NavBar from '../comps/NavBar'
-import { HomeCalendar } from '../comps/Calendar';
 import IndividualEventCard from '../comps/IndividualEventCard';
 import { ToDate } from '../comps/ToDate';
 
@@ -29,12 +25,21 @@ import {category} from '../data/category'
 import { Events } from '../data/Events';
 
 
+
+
 // import {taskCategory} from '../data/category'
 
 const colors = Configurations.colors;
 const secCol = colors.secCol;
 const accent = colors.butCol;
 
+// const objectTest= {
+
+//   '2021-11-17': {marked: true,dotColor: 'red'},
+//   '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+
+// }
+const something = '2021-11-05';
 
 const Wrapper =styled.ScrollView`
 
@@ -83,7 +88,36 @@ const HeadTxt = styled.Text``
 
 
 const DashboardScreen = ({navigation }) => {
-
+  const nextDays = [
+    '2021-11-01',
+    '2021-11-05',
+    '2021-11-08',
+    '2021-11-07',
+    '2021-11-18',
+    '2021-11-17',
+    '2021-11-28',
+    '2021-11-29'
+  ];
+  
+  // console.log(nextDays[1])
+  // for(let i=0;i<nextDays.length;i++)
+  // {
+  //   console.log(nextDays[i])
+    
+  // }
+  
+  let newDaysObject = {};
+  
+  nextDays.forEach((day) => {
+    newDaysObject[day] = {
+       marked: true, 
+       dotColor: colors.lightBg, 
+       selectedDotColor: 'red',
+       
+      //  selectedColor: selected,
+        
+    };
+  });
 
   const [calDisplay, setCalDisplay] = useState('flex');
   // state for switching between courses groups and events
@@ -94,6 +128,7 @@ const DashboardScreen = ({navigation }) => {
   // relatable code on line 286-294, 211-230
   
   const [selected, setSelected] = useState({});
+  const [markedDates, setMarkedDates] = useState({});
   const [selectCol, setSelectCol] = useState('#F5F5E1')
   
   
@@ -118,7 +153,8 @@ const DashboardScreen = ({navigation }) => {
     {
       setSelectCol('#F5F5E1')
     }
-      
+    
+
   };
 
 
@@ -199,7 +235,7 @@ const DashboardScreen = ({navigation }) => {
 
 
 
-
+          enableSwipeMonths={true}
         // onDayLongPress={()=>{setSelectCol('green')}}
           onDayPress={onDayPress}
             style=
@@ -208,15 +244,38 @@ const DashboardScreen = ({navigation }) => {
                 width:400,
                 height: 400,
               }}
-            markedDates=
-              {{
-                        [selected]: {
-                          selected: true,
-                          disableTouchEvent: false,
-                          selectedColor: selectCol ,
-                          selectedTextColor: 'black'
-                        }
-                }}
+              // markedDates={{
+              //   '2012-05-08': {
+              //     selected: true,
+              //     dots: [
+              //       {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+              //       {key: 'massage', color: 'red', selectedDotColor: 'white'}
+              //     ]
+              //   },
+              //   '2012-05-09': {
+              //     disabled: true,
+              //     dots: [
+              //       {key: 'vacation', color: 'green', selectedDotColor: 'red'},
+              //       {key: 'massage', color: 'red', selectedDotColor: 'green'}
+              //     ]
+              //   }
+              // }}
+              markedDates= {{
+                
+            ...newDaysObject,
+                
+            [selected]: 
+              {
+                  selected: true,
+                  disableTouchEvent: false,
+                  selectedColor: selectCol ,
+                  selectedTextColor: 'black',
+                  
+              }
+
+            
+            
+            }}
           />
 
           {/* functions on 211-230============= */}
@@ -243,8 +302,8 @@ const DashboardScreen = ({navigation }) => {
               taskCate={category.taskCategory.Event.taskCate}
               taskBtnColor={ events ? colors.secCol : 'white' }
               textColor= {events ? 'white' : colors.secCol }
-
               onBtnPress={eventPress}  
+
           />
         </TaskBtnCont>
 
@@ -300,3 +359,16 @@ const DashboardScreen = ({navigation }) => {
 export default DashboardScreen
 
 
+// {
+
+                
+                  
+//   newDaysObject,
+//   // '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+//           [selected]: {
+//             selected: true,
+//             disableTouchEvent: false,
+//             selectedColor: selectCol ,
+//             selectedTextColor: 'black'
+//           }
+//   }

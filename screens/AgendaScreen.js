@@ -19,7 +19,7 @@ import {coursesData} from '../data/tasks';
 import {eventsData} from '../data/tasks'
 import {category} from '../data/category'
 import { Events } from '../data/Events';
-
+import { EventsMembThree } from '../data/Events';
 
 // import {taskCategory} from '../data/category'
 
@@ -67,12 +67,6 @@ justify-content:space-evenly;
 const selectedDay = SelectedDay
 const primCol = Configurations.colors.primCol
 
-
-const CalCont = styled.View`
-background-color:${primCol};
-height:400px;
-width:100%;
-`
 const HeadTxt = styled.Text``
 
 
@@ -117,10 +111,7 @@ const AgendaScreen = ({navigation, route }) => {
   
 
 
-  // state for switching between courses groups and events
-  const [courses, setCourses] = useState(true);
-  const [groups, setGroups] = useState(false);
-  const [events, setEvents] = useState(false);
+  
 
   // relatable code on line 286-294, 211-230
 
