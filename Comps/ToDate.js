@@ -22,7 +22,7 @@ let day = weekday[d.getDay()];
 export const ToDate = () => {
     return (
         <View style={styles.dateHeader}>
-            <Text style={{fontSize:60, fontWeight:'550'}}> { d.getDate()}</Text>
+            <Text style={{fontSize:60, fontWeight:'500'}}> { d.getDate()}</Text>
             <Text style={{fontSize:24}}> {day}</Text>
         </View>
     )
