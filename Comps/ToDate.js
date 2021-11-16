@@ -21,16 +21,7 @@ let day = weekday[d.getDay()];
 
 export const ToDate = () => {
     return (
-        <View style=
-                {{
-                    alignItems:'center', 
-                    justifyContent:'center',
-                    width:'100%',
-                    height:100,
-                    backgroundColor: lightBg,
-                    borderBottomLeftRadius:20,
-                    borderBottomRightRadius:10
-                }}>
+        <View style={styles.dateHeader}>
             <Text style={{fontSize:60, fontWeight:'550'}}> { d.getDate()}</Text>
             <Text style={{fontSize:24}}> {day}</Text>
         </View>
@@ -39,4 +30,17 @@ export const ToDate = () => {
 
 
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    dateHeader:
+    {
+        flex:1,
+        alignItems:'center', 
+        justifyContent:'center',
+        width:'100%',
+        height:100,
+        backgroundColor: lightBg,
+        borderBottomLeftRadius:20,
+        borderBottomRightRadius:20,
+        marginBottom:15
+    }
+})
