@@ -22,9 +22,15 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function Taskboard() {
+
   return (
-    <Drawer.Navigator screenOptions={{
-      headerShown: false,
+    <Drawer.Navigator 
+    drawerContentOptions={{
+      drawerType:"back",
+      drawerPosition: "right",
+    }}
+    screenOptions={{
+      headerShown: false, 
     }}>
       <Drawer.Screen name='Taskboard' component={TaskboardScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
@@ -35,9 +41,16 @@ function Taskboard() {
 
 function Dashboard() {
   return (
-    <Drawer.Navigator screenOptions={{
-      headerShown: false,
-    }}>
+    <Drawer.Navigator 
+    drawerContentOptions={{
+      drawerType:"back",
+      drawerPosition: "right",
+    }}
+    screenOptions={{
+      headerShown: false, 
+    
+    }}
+    >
       <Drawer.Screen name='Dashboard' component={DashboardScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
@@ -47,8 +60,13 @@ function Dashboard() {
 
 function AllGroups() {
   return (
-    <Drawer.Navigator screenOptions={{
-      headerShown: false,
+    <Drawer.Navigator 
+    drawerContentOptions={{
+      drawerType:"back",
+      drawerPosition: "right",
+    }}
+    screenOptions={{
+      headerShown: false, 
     }}>
       
       

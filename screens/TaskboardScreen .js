@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
-import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
@@ -70,17 +69,15 @@ const TaskboardScreen = ({ navigation }) => {
   const [welcome, setWelcome] = useState(true)
 
     
-  // const [users, setUsers] = useState([]);
-  // const usersCollectionRef = collection(db, "users");
-  
-  // useEffect(() => {
-  //   const getUser =async()=>{
-  //     const data =await getDoc(usersCollectionRef);
-  //     setUsers(data.doc);
-  //     console.log(data)
-  //   }
-  //   getUser();
-  //   }, [])
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users" );  
+  useEffect(() => {
+    const getUser =async()=>{
+      const data =await getDoc(usersCollectionRef);
+      setUsers(data.data()); 
+    }
+    getUser();
+    }, [])
 
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
@@ -134,7 +131,7 @@ const TaskboardScreen = ({ navigation }) => {
     setWelcome(false)
 
   }
-  const { user,users } = useContext(AuthenticatedUserContext);
+  const { user } = useContext(AuthenticatedUserContext);
   // const handleSignOut = async () => {
   //   try {
   //     await fireAuth.signOut();
@@ -176,7 +173,6 @@ const TaskboardScreen = ({ navigation }) => {
     taskCate={category.taskCategory.Event.taskCate}  
     onBtnPress={eventPress}
   />
-      
   </TaskButtonsWrapper>
   <TaskCardArea/> 
      
@@ -188,7 +184,6 @@ const TaskboardScreen = ({ navigation }) => {
     {
       courses.map((o, i) => 
       (
-     
         <IndividualEventCard  
           key={i} id={o.id} 
           EventTitle={o.EventTitle} 
