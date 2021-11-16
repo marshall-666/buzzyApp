@@ -33,7 +33,7 @@ height:100%;
 `
 
 const IconCont = Styled.View`
-display:flex;
+display:${(props) => props.IconDisplay};
 align-items:center;
 justify-content:center;
 flex-direction:column;
@@ -51,6 +51,7 @@ const IndividualEventCard = ({
     EventDueTime="September 24th 7:00pm",
     onGroupPress=()=>{},
     onChatPress=()=>{},
+    IconDisplay="flex"
 
 
 }) => {
@@ -65,7 +66,7 @@ const IndividualEventCard = ({
       <Text style={{fontSize:14}}>{EventDueTime}</Text>  
     </TextCont>
     
-    <IconCont>
+    <IconCont IconDisplay={IconDisplay}>
       <TouchableOpacity onPress={()=>{navigation.navigate('GroupHome')}}>
         <MaterialIcons name="group" size={35} color="black" />
       </TouchableOpacity>

@@ -20,7 +20,7 @@ import {coursesData} from '../data/tasks';
 import {eventsData} from '../data/tasks'
 import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
-
+import {GroupEventCard} from '../comps/GroupEventCard';
 
 
 // import {taskCategory} from '../data/category'
@@ -337,7 +337,8 @@ const DashboardScreen = ({navigation }) => {
                   EventTitle={item.EventTitle}
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime} /> }
+                  EventDueTime = {item.EventDueTime}
+                  IconDisplay="none" /> }
         /> : null
       }
       { groups ?
@@ -359,7 +360,8 @@ const DashboardScreen = ({navigation }) => {
                   EventTitle={item.EventTitle}
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime} /> }
+                  EventDueTime = {item.EventDueTime}
+                  IconDisplay="none" /> }
         /> : null
       }
         {/* <IndividualEventCard EventBackgroundColor={colors.accColOne}/> */}
