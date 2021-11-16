@@ -13,8 +13,8 @@ export const AuthenticatedUserProvider = ({ children }) => {
   useEffect(() => {
     const getUser =async()=>{
       const data =await getDoc(usersCollectionRef);
-      setUsers(data.doc.data());
-      // console.log(data)
+      setUsers(data.data());
+      // console.log(data.data)
     }
     getUser();
     }, [])
