@@ -57,21 +57,12 @@ const GroupHomeScreen = ({
                         
 
                         <View style={{flexDirection: 'row'}}>
+                            
+                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
-                            
-                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'SCHEDULE MEETING'}/>
                         </View>
                             
-                        <View style={{flexDirection: 'row'}}>
-                            <InGroupButton 
-                                handleBtnOnPress = {()=>{navigation.navigate('MembersSchedule', {info : memberInfo})}} 
-                                btnText={'MEMBERS SCHEDULES'}/>
-                                {/* memberinfo being passed over to the Members schedule page. */}
-
-                                
-                            <InGroupButton handleBtnOnPress = {handleBtnOnPress} btnText={'TIMES'}/>
-                        </View>
                     
                     </View>
                         
