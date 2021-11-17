@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, Image, StyleSheet,KeyboardAvoidingView } from 'react-native';
+import { Button, View, Text, Image, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
@@ -7,7 +7,7 @@ import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
 import { db } from '../firebase/fireStore';
-import { collection, getDocs, addDoc,doc} from "firebase/firestore"; 
+import { collection, getDocs, addDoc, doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import ErrorInfo from '../comps/ErrorInfo'
 
@@ -49,6 +49,7 @@ width:100%;
 `
 
 const SignUpScreen = ({ navigation }) => {
+  const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
   const [newName, setnewName] = useState('');
@@ -60,16 +61,25 @@ const SignUpScreen = ({ navigation }) => {
   const [page1, setPage1] = useState(true)
   const [page2, setPage2] = useState(false)
   const [signupError, setSignupError] = useState('');
-  
-  
-  
- 
-  const usersCollectionRef = collection(db, "users");
-  const createUsers = async () =>{
-   
-    await addDoc(usersCollectionRef, { name: newName, school:school,program:program,set:set });
-  }
 
+
+
+
+ 
+  const createUsers = async () => {
+    const usersCollectionRef = collection(db, "users");
+    await addDoc(usersCollectionRef, 
+      { name: newName, 
+      school: school, 
+      program: program, 
+      set: set });
+    // await setDoc(doc(db, "users", user.uid) ,
+    //   { name: newName, 
+    //   school: school, 
+    //   program: program, 
+    //   set: set });
+  }
+   
 
   const continuePress = () => {
     setPage1(false)
@@ -79,9 +89,12 @@ const SignUpScreen = ({ navigation }) => {
     setPage1(true)
     setPage2(false)
   }
+
   const submitPress = async () => {
+
     const auth = getAuth();
     if (email !== '' && password !== '') {
+
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in 
@@ -108,12 +121,12 @@ const SignUpScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-  
-  
+
+
   return (
-    <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
-    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
-     <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none'/>
+    <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={-250}
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+      <AppHeader text="Welcome" displayBack="none" textAlign='center' displayR='none' />
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
@@ -236,7 +249,7 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={text => setSet(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        {signupError ?<Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
+        {signupError ? <Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
 
         <Text style={styles.button}>
           <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
@@ -288,10 +301,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   button: {
-    height:'30%',
-     marginTop: '1%',
-   alignSelf:'center'
-   },
+    height: '30%',
+    marginTop: '1%',
+    alignSelf: 'center'
+  },
   logo: {
     position: 'absolute',
     width: 150,

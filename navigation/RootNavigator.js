@@ -10,9 +10,9 @@ import { collection, getDoc, addDoc,doc} from "firebase/firestore";
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const { users, setUsers } = useContext(AuthenticatedUserContext);
+  // const { users, setUsers } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
-  const usersCollectionRef = collection(db, "users");
+  // const usersCollectionRef = collection(db, "users");
  
 
   useEffect(() => {
@@ -21,8 +21,7 @@ export default function RootNavigator() {
       try {
         await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
         setIsLoading(false);
-        const data =await getDoc(usersCollectionRef);
-      setUsers(data.doc.data());
+      
       } catch (error) {
         console.log(error);
       }

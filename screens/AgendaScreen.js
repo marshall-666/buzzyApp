@@ -39,7 +39,7 @@ display:flex;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
