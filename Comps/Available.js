@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import {Configurations} from '../PropConfig/Props'
 import { TimeSlot } from './TimeSlot'
 import { Times } from '../data/AvailableTime'
+import { Days } from '../data/AvailableTime'
 
 const dividerCol = Configurations.colors.lightBg
 const bgCol = Configurations.colors.primCol
@@ -35,9 +36,9 @@ export const Available = (
             </View>
             
             <FlatList 
-                data={Times}
-                renderItem={({item})=> <TimeSlot from={item.from}
-                to={item.to}/>}/>
+                data={Days}
+                renderItem={({item})=> <TimeSlot from={item.times.from}
+                to={item.times.to}/>}/>
 
 
 

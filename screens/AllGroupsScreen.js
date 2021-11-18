@@ -12,31 +12,19 @@ const lightBg = Configurations.colors.lightBg
 
 const AllGroupsScreen = ({navigation}) => {
     return (
-        <View style={{flex:1, justifyContent:'space-between', alignItems:'center',
-        backgroundColor:lightBg}}>
+        <View style={{flex:1, justifyContent:'flex-end',
+        backgroundColor:lightBg,}}>
 
-         
+            <View style={styles.lowerDiv}>
 
-
-         <View style={styles.thread}>
-            <FlatList  
-                data={GroupsData}
-                renderItem={({item})=><GroupThread GroupsData={item}/>}
-            />
-         </View>
-            
-            <Text style=
-            {{
-                color:'darkgrey', 
-                width:'65%', 
-                textAlign:'center'
-                
-            }}> 
-                Dont see a group you're in or you'd like to start your own? 
-            
-            </Text>
-        
-        <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+                <View style={styles.thread}>   
+                    <FlatList  
+                    data={GroupsData}
+                    renderItem={({item})=><GroupThread GroupsData={item}/>}
+                    />
+                </View>
+                   
+                <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <Pressable
                     onPress={()=>{navigation.navigate('JoinGroup')}} 
                     style={styles.joinCreate} >
@@ -56,7 +44,7 @@ const AllGroupsScreen = ({navigation}) => {
         </View>
 
          <NavBar/>
-        
+        </View>
      </View>
     )
 }
@@ -69,21 +57,27 @@ const styles = StyleSheet.create({
         
         width:'100%',
         borderBottomWidth:1,
-        alignItems:'flex-start',
+        alignItems:'center',
         justifyContent:'space-between',
-    }
-    ,
+    },
+    lowerDiv: {
+        width: '100%',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'space-between',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        backgroundColor: Configurations.colors.primCol,
+    },
     joinCreate:
     {
         justifyContent:'center',
         alignItems:'center',
-        borderTopWidth:1.5,
-        borderRightWidth:1.5,
-        borderBottomWidth:1.5,
-        borderLeftWidth:1.5,
-        height:'30%',
-        width:'30%',
-        margin:5
+        borderRadius:10,
+        height:'40%',
+        width:'40%',
+        margin:5,
+        backgroundColor:Configurations.colors.butCol
     }
 
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Image, View, Pressable, ActivityIndicator, TouchableOpacity } from "react-native";
+import { Text, Image, View, Pressable, ActivityIndicator, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/core';
 import {GroupsData} from '../data/GroupsData';
 import { Members } from '../data/Members';
@@ -11,7 +11,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const CardCont = Styled.View`
 width:90%;
-height:120px;
+height:40%;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -20,11 +20,7 @@ border-radius:15px;
 margin:10px;
 overflow:hidden;
 `
-const EventColour = Styled.View`
-width:4%;
-height:100%;
-background-color:${(props) => props.EventBackgroundColor};
-`
+
 
 
 const MidCont = Styled.Pressable`
@@ -37,10 +33,9 @@ justify-content:space-evenly;
 
 const TextCont = Styled.View`
 display:flex;
-height:60%;
+height:80%;
 flex-direction:column;
-align-items:flex-start;
-justify-content:space-evenly;
+justify-content:flex-end;
 `;
 
 
@@ -53,39 +48,35 @@ width:32%;
 height:100%;
 `
 
- export const GroupThread = ({GroupsData})=>
+ export const GroupMemberCard = ({
+     
+ })=>
  {
-
     const navigation = useNavigation();
-    const onPress = ()=>{
-        navigation.navigate('GroupHome', {id: GroupsData.id, name: GroupsData.members})
+    const onPress=()=>{
+        Alert.alert("navigate to individual members page when created")
     },
     backgroundColor="#FFFFFF",
     EventBackgroundColor="#D63030",
-    groupName="Web Dev Group",
-    groupMembersNum="4 members"
-  
-     const group = GroupsData.groups;
-    //  console.warn(GroupsData.groups.name)
+    memberName="Jody Prinsloo"
+   
     return(
         <CardCont backgroundColor={backgroundColor}>
-            <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
 
                 <MidCont onPress={onPress}>  
                     <Image
-                    style={{height:80, width:80, borderRadius: 100}} 
-                    source={{uri:group.imageUri}}/>    
+                    style={{height:80, width:80, borderRadius: 10}} 
+                    source={{uri:'https://i.pravatar.cc/300'}}/>    
                     <TextCont>    
-                        <Text style={{fontSize:18}}>{groupName}</Text>
-                        <Text>{groupMembersNum}</Text>
+                        <Text style={{fontSize:20}}>{memberName}</Text>
                     </TextCont>       
                 </MidCont>
         
                 <IconCont style={{borderLeftColor:"black", borderLeftWidth:"0.5px"}} onPress={onPress}>
                 <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
                 </IconCont>
-
-      </CardCont>
+                
+        </CardCont>
 
     )
  }

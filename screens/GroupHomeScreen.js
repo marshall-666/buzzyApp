@@ -1,15 +1,19 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,FlatList, Pressable } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
+import { GroupMemberCard } from '../comps/GroupMemberCard'
 import InGroupButton from '../comps/InGroupButton'
 import GroupEventCard from '../comps/CourseEventCard'
+import { MembersData } from '../data/MembersData'
+
 
 const GroupHomeScreen = ({
+    onSchedulePress=()=>{},
     navigation,
     groupName='Default Group',
     memberNum=5,
-    route
+    route,
 }) => {
 
     // information coming in from the GroupThread Component.
@@ -19,6 +23,7 @@ const GroupHomeScreen = ({
     const handleBtnOnPress =()=> {
         alert('Navigate to the function')
     }
+   
 
     return (
         <View style={styles.container}>
@@ -26,21 +31,25 @@ const GroupHomeScreen = ({
 
                 <View style={styles.midDiv}>
                     <Text style={{fontSize: 30}}>{groupName}</Text>
+                    <Text>{memberNum} Members</Text>
+                    
+                    <Pressable onPress={onSchedulePress}>
+                        <View>
+                            <Text>Schedule Meeting</Text>
+                        </View>
+                    </Pressable>
                 </View>
 
                 <View style={styles.lowerDiv}>
                     
                     <View style={styles.membersView}>
-                        <Text style={{fontSize: 24, padding: 28, color: '#ffffff'}}>
-                                Members - {memberNum}
-                        </Text>
                         
-                        <MembersInGroupCard topRightCorner={15}/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard bottomRightCorner={15}/>
+                        <FlatList  
+                    data={MembersData}
+                    renderItem={({item})=><GroupMemberCard MembersData={item}/>}
+                    />
+                        
+                        
                     </View>
                     
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
@@ -109,6 +118,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#94BDD4',
     },
     membersView: {
+        justifyContent:'center',
+        alignItems:'center',
         width: '100%',
         marginBottom: 40,
     }
