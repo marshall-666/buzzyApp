@@ -12,7 +12,6 @@ export const AuthenticatedUserProvider = ({ children }) => {
 
 
   useEffect(() => {
-  //   // let interval
     const getUser = async () => {
       const auth = getAuth();
       const user = auth.currentUser;

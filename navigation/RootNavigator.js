@@ -10,11 +10,8 @@ import { collection, getDoc, addDoc,doc} from "firebase/firestore";
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  // const { users, setUsers } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
-  // const usersCollectionRef = collection(db, "users");
- 
-
+  
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = fireAuth.onAuthStateChanged(async authenticatedUser => {

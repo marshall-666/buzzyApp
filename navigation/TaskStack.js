@@ -29,10 +29,6 @@ function Taskboard() {
 
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
@@ -47,16 +43,13 @@ function Taskboard() {
 function Dashboard() {
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
       }}
-     
+
+
     >
       <Drawer.Screen name='Back' component={DashboardScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
@@ -68,10 +61,6 @@ function Dashboard() {
 function AllGroups() {
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
@@ -85,10 +74,8 @@ function AllGroups() {
 }
 
 
-
-
-export default function TaskboardStack({navigation}) {
-  // const navigation = useNavigation();
+export default function TaskboardStack() {
+  const navigation = useNavigation();
   const [load, setLoad] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -116,6 +103,7 @@ export default function TaskboardStack({navigation}) {
       </View>
     )
   }
+  
   return (
     <Stack.Navigator initialRouteName="Dashboard"
       screenOptions={{
@@ -125,8 +113,10 @@ export default function TaskboardStack({navigation}) {
         headerTintColor: '#fff', headerTitleStyle: {
           fontSize: 30
         },
+        
         headerRight: () => (
-          <TouchableOpacity onPress={() => alert("swip right to open drawer")}>
+         
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Entypo name="menu" size={30} color="lightgrey" />
           </TouchableOpacity>
         ),
