@@ -36,9 +36,12 @@ export const Available = (
             </View>
             
             <FlatList 
-                data={Days}
-                renderItem={({item})=> <TimeSlot from={item.times.from}
-                to={item.times.to}/>}/>
+                data={Times}
+                renderItem={({item})=> <TimeSlot 
+                                from={item.from}
+                                to={item.to}/>}
+            
+            />
 
 
 
