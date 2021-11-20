@@ -166,27 +166,81 @@ const trialPush = {
 // ========================agenda comments============================
 
 
+// make a function that recieves the data from the databse and returns the formatted data that is recieved by the front-end.
+
+const tasks = {
+  '2021-11-01':[
+    {
+    start: '2021-11-01 01:30:00',
+    end: '2021-11-01 02:30:00',
+    title: 'Dr. Mariana Joseph',
+    summary: '3412 Piedmont Rd NE, GA 3032',
+    color: '#e6add8'
+    },
+    {
+    start: '2021-11-01 03:30:00',
+    end: '2021-11-01 04:30:00',
+    title: 'Dr. Mariana Joseph',
+    summary: '3412 Piedmont Rd NE, GA 3032',
+    color: '#e6add8'
+    },
+    {
+    start: '2021-11-01 06:30:00',
+    end: '2021-11-01 06:30:00',
+    title: 'Dr. Mariana Joseph',
+    summary: '3412 Piedmont Rd NE, GA 3032',
+    color: '#e6add8'
+    },
+
+
+],
+  '2021-11-02':[{
+    start: '2021-11-02 01:30:00',
+    end: '2021-11-02 02:30:00',
+    title: 'Dr. Mariana Joseph',
+    summary: '3412 Piedmont Rd NE, GA 3032',
+    color: '#e6add8'
+  }],
+  // '2021-11-05':[]
+  // '2021-11-08',
+  // '2021-11-07',
+  // '2021-11-18',
+  // '2021-11-17',
+  // '2021-11-28',
+  // '2021-11-29'
+};
 const AgendaScreen = ({navigation, route }) => {
 
   const [selectCol, setSelectCol] = useState('red')
-  const[EVENTS, setEVENTS] = useState([])
+  const[EVENTS, setEVENTS] = useState(tasks[ChosenDay])
   const ChosenDay = route.params.day
   
-  console.log ("hey you selected", ChosenDay)
+  console.log ("hey you selected", tasks[ChosenDay])
 
-if(ChosenDay == '2021-11-02')
+// if(ChosenDay == '2021-11-02')
+// {
+//   useEffect (()=>{
+
+
+//     setEVENTS([
+//       {
+//         start: '2021-12-06 01:30:00',
+//         end: '2021-12-06 02:30:00',
+//         title: 'Dr. Mariana Joseph',
+//         summary: '3412 Piedmont Rd NE, GA 3032',
+//         color: '#e6add8'
+//       }])
+
+//   },[])
+// }
+
+
+if(ChosenDay)
 {
   useEffect (()=>{
 
 
-    setEVENTS([
-      {
-        start: '2021-12-06 01:30:00',
-        end: '2021-12-06 02:30:00',
-        title: 'Dr. Mariana Joseph',
-        summary: '3412 Piedmont Rd NE, GA 3032',
-        color: '#e6add8'
-      }])
+    setEVENTS(tasks[ChosenDay])
 
   },[])
 }
@@ -289,6 +343,7 @@ if(ChosenDay == '2021-11-02')
 
 
 export default AgendaScreen
+
 
 
 
