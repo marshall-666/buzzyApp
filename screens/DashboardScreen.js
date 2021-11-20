@@ -87,16 +87,16 @@ const HeadTxt = styled.Text``
 
 
 const DashboardScreen = ({navigation }) => {
-  const nextDays = [
-    '2021-11-01',
-    '2021-11-05',
-    '2021-11-08',
-    '2021-11-07',
-    '2021-11-18',
-    '2021-11-17',
-    '2021-11-28',
-    '2021-11-29'
-  ];
+  const nextDays = {
+    '2021-11-01':[],
+    '2021-11-05':[]
+    // '2021-11-08',
+    // '2021-11-07',
+    // '2021-11-18',
+    // '2021-11-17',
+    // '2021-11-28',
+    // '2021-11-29'
+  };
   
   // console.log(nextDays[1])
   // for(let i=0;i<nextDays.length;i++)
@@ -107,7 +107,7 @@ const DashboardScreen = ({navigation }) => {
   
   let newDaysObject = {};
   
-  nextDays.forEach((day) => {
+  Object.keys(nextDays).forEach((day) => {
     newDaysObject[day] = {
        marked: true, 
        dotColor: colors.lightBg, 
