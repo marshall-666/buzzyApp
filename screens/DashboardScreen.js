@@ -12,7 +12,7 @@ import styled from 'styled-components/native';
 import TaskBtn from '../comps/taskBtn';
 import NavBar from '../comps/NavBar'
 import IndividualEventCard from '../comps/IndividualEventCard';
-import { ToDate } from '../comps/ToDate';
+
 
 
 // Data imports===============

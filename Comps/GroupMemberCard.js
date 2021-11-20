@@ -21,14 +21,13 @@ margin:10px;
 overflow:hidden;
 `
 
-
-
 const MidCont = Styled.Pressable`
 display:flex;
 flex-direction:row;
 width:75%;
 align-items:center;
 justify-content:space-evenly;
+
 `;
 
 const TextCont = Styled.View`
@@ -61,8 +60,14 @@ height:100%;
     memberName="Jody Prinsloo"
    
     return(
-        <CardCont backgroundColor={backgroundColor}>
-
+        <CardCont backgroundColor={backgroundColor} style={{ shadowColor: '#000000',
+        shadowOpacity: 25,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowRadius: 4,}}>
+            
                 <MidCont onPress={onPress}>  
                     <Image
                     style={{height:80, width:80, borderRadius: 10}} 
