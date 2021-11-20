@@ -23,6 +23,7 @@ import {coursesData} from '../data/tasks';
 import {eventsData} from '../data/tasks'
 import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
+import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
 
 
@@ -58,7 +59,7 @@ flex-direction:row;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
