@@ -1,12 +1,9 @@
 // imports from dependancies ==========
 import React, { useState, useEffect } from 'react';
 import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Calendar } from 'react-native-calendars';
-import { Agenda } from 'react-native-calendars'
 import styled from 'styled-components/native';
-
+import axios from 'axios';
 
 // Component imports===============
 import TaskBtn from '../comps/taskBtn';
@@ -27,19 +24,10 @@ import { Events } from '../data/Events';
 
 
 
-// import {taskCategory} from '../data/category'
-
 const colors = Configurations.colors;
 const secCol = colors.secCol;
 const accent = colors.butCol;
 
-// const objectTest= {
-
-//   '2021-11-17': {marked: true,dotColor: 'red'},
-//   '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-
-// }
-const something = '2021-11-05';
 
 const Wrapper =styled.ScrollView`
 
@@ -75,51 +63,59 @@ const selectedDay = SelectedDay
 const primCol = Configurations.colors.primCol
 
 
-const CalCont = styled.View`
-background-color:${primCol};
-height:400px;
-width:100%;
-`
-const HeadTxt = styled.Text``
-
-
 
 // ========================agenda comments============================
 
 
 const DashboardScreen = ({navigation }) => {
-  const nextDays = {
-    '2021-11-01':[],
-    '2021-11-05':[]
-    // '2021-11-08',
-    // '2021-11-07',
-    // '2021-11-18',
-    // '2021-11-17',
-    // '2021-11-28',
-    // '2021-11-29'
-  };
-  
-  // console.log(nextDays[1])
-  // for(let i=0;i<nextDays.length;i++)
-  // {
-  //   console.log(nextDays[i])
-    
-  // }
-  
-  let newDaysObject = {};
-  
-  Object.keys(nextDays).forEach((day) => {
-    newDaysObject[day] = {
-       marked: true, 
-       dotColor: colors.lightBg, 
-       selectedDotColor: 'red',
-       
-      //  selectedColor: selected,
-        
-    };
-  });
+  const [newDaysObject, setNewDaysObject]= useState({})
 
-  const [calDisplay, setCalDisplay] = useState('flex');
+  useEffect (()=>{
+  
+  
+    const GetDays = async ()=>{
+        const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
+    
+        const daysObject = result.data
+        const newArray=[]
+
+        for(let i=0; i<daysObject.length; i++)
+        {
+          newArray.push(daysObject[i].day)
+        }      
+        
+        let newObject = newArray.map(function(obj)
+        {
+            return{
+              [obj]:[]
+            }
+        })
+      
+        const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
+  
+        let dailyEvents = {}
+  
+        Object.keys(eventDays).forEach((day) => 
+          {
+            dailyEvents[day] =  
+                {
+                  marked: true, 
+                  dotColor: colors.lightBg, 
+                  selectedDotColor: 'red',             
+                };
+          }
+        );
+              
+        
+        console.log(dailyEvents)
+        setNewDaysObject(dailyEvents)
+      }
+      GetDays()
+  },[])
+
+
+
+  
   // state for switching between courses groups and events
   const [courses, setCourses] = useState(true);
   const [groups, setGroups] = useState(false);
@@ -128,7 +124,6 @@ const DashboardScreen = ({navigation }) => {
   // relatable code on line 286-294, 211-230
   
   const [selected, setSelected] = useState({});
-  const [markedDates, setMarkedDates] = useState({});
   const [selectCol, setSelectCol] = useState('#F5F5E1')
   
   
@@ -191,12 +186,6 @@ const DashboardScreen = ({navigation }) => {
       backgroundColor: primCol
     }}>
 
-
-      {/* <AppHeader 
-        text="Task"
-        onBackPress={()=>{
-          setCalDisplay('flex') 
-          setAgendaDisplay('none')}} /> */}
       <Wrapper> 
     
       <ToDate/>
@@ -244,23 +233,8 @@ const DashboardScreen = ({navigation }) => {
                 width:400,
                 height: 400,
               }}
-              // markedDates={{
-              //   '2012-05-08': {
-              //     selected: true,
-              //     dots: [
-              //       {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
-              //       {key: 'massage', color: 'red', selectedDotColor: 'white'}
-              //     ]
-              //   },
-              //   '2012-05-09': {
-              //     disabled: true,
-              //     dots: [
-              //       {key: 'vacation', color: 'green', selectedDotColor: 'red'},
-              //       {key: 'massage', color: 'red', selectedDotColor: 'green'}
-              //     ]
-              //   }
-              // }}
-              markedDates= {{
+      
+            markedDates= {{
                 
             ...newDaysObject,
                 
@@ -289,12 +263,12 @@ const DashboardScreen = ({navigation }) => {
           />
           
           <TaskBtn 
-               taskNum={category.taskCategory.Group.taskNum} 
-               taskCate={category.taskCategory.Group.taskCate}
+              taskNum={category.taskCategory.Group.taskNum} 
+              taskCate={category.taskCategory.Group.taskCate}
               taskBtnColor={ groups ? colors.secCol : 'white' }
               textColor= {groups ? 'white' : colors.secCol }
 
-               onBtnPress={groupPress}   
+              onBtnPress={groupPress}   
           />
 
           <TaskBtn 
