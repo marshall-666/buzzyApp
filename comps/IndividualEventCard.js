@@ -1,5 +1,5 @@
 import React from "react";
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -44,13 +44,11 @@ height:100%;
 
 const IndividualEventCard = ({
     backgroundColor="#FFFFFF",
-    EventBackgroundColor="#D63030",
+    EventBackgroundColor="green",
     EventTitle="Basketball Practice",
     EventDescrip="Town Center Field #5",
     EventStartTime="September 24th 5:00pm",
     EventDueTime="September 24th 7:00pm",
-    onGroupPress=()=>{},
-    onChatPress=()=>{},
     IconDisplay="flex"
 
 
@@ -84,3 +82,4 @@ const IndividualEventCard = ({
 
 
 export default IndividualEventCard;
+

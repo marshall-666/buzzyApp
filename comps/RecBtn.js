@@ -49,7 +49,6 @@ const RecBtn = ({
 export default RecBtn;
 const styles = StyleSheet.create({
   container: {
-    flex: 1
   },
  
 });

@@ -1,27 +1,17 @@
 import React from 'react'
-import { View, Text, TextInput,Pressable } from 'react-native'
+import { View, Text, TextInput,Pressable, ScrollView, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
 import { Configurations } from '../PropConfig/Props'
 
 const primCol = Configurations.colors.primCol
 const butCol = Configurations.colors.butCol
-const CardCont = styled.View`
-background-color:${primCol};
-width:100%;
-height:90%;
 
-border-radius:5px;
-align-items:center;
-padding:20px;
-`
 
 const OptCont = styled.View`
-
-width:85%;
-height:70%;
+width:100%;
+height:90%;
 justify-content:space-around;
 `
 
@@ -51,57 +41,69 @@ font-size:32px;
 const SubTxt = styled.Text`
 font-size:18px;
 margin-left:-5px;
-color:white;
+color:${Configurations.colors.secCol}
 `
 const InputBox = styled.TextInput`
-width:80%;
+width:100%;
 height:45px;
 border-bottom-width:3px;
-border-bottom-color:white;
+border-bottom-color:${Configurations.colors.secCol};
 color:white;
 `
 const InputContainer = styled.View`
 align-items:flex-start;
 
 `
+const Notes = styled.TextInput`
+width:100%;
+height:30%;
+background:white;
+borderRadius:10;
+`
 
-
-export const  CreateGroup = ({
+export const  ScheduleMeetingForm = ({
     handlePress=()=>{},
-
+    inputTitle="Meeting Name",
+    inputTitle2="Event Colour",
+    buttLabel="Next"
 })=> {
     return (
-        <CardCont>
-            
-            <HeadCont>
-                <HeadTxt>
-                    Create A Group
-                </HeadTxt>
-            </HeadCont>
-                
-            
+        
+                    
             <OptCont>
-            
+                <ScrollView contentContainerStyle={{height:'100%', justifyContent:'space-evenly'}}>
                 <InputContainer>
-                    <SubTxt> Group Name </SubTxt>
-                    <InputBox placeholder="Name" placeholderTextColor="lightgrey"/>
+                    <SubTxt style={{color:Configurations.colors.secCol}}> {inputTitle} </SubTxt>
+                    <InputBox placeholder="Buzzy Bee" placeholderTextColor="lightgrey"/>
                 </InputContainer>
             
                 <InputContainer>
-                    <SubTxt> Description </SubTxt>
-                    <InputBox placeholder="What is This Group For" placeholderTextColor="lightgrey"/>
+                    <SubTxt style={{color:Configurations.colors.secCol}}> {inputTitle2} </SubTxt>
+                    <InputBox placeholder="Red" placeholderTextColor="lightgrey"/>
                 </InputContainer>
-            
-                <InputContainer>
-                    <SubTxt> Invite Members </SubTxt>
-                    <InputBox placeholder="Enter Group Member's Emails" placeholderTextColor="lightgrey"/>
-                </InputContainer>
+                
+                <Notes placeholder="meeting notes" placeholderTextColor="lightgrey"/>
+               
             
             <ButPress onPress={handlePress}>
-                <Text>Create Group</Text>
+                <Text>{buttLabel}</Text>
             </ButPress>
+                </ScrollView>
+            
             </OptCont>
 
-        </CardCont>
+
+        
+
     )
 }
+
+const styles = StyleSheet.create({
+    
+    slot:{
+
+        justifyContent:'center',
+        alignItems:'center'
+    }
+
+})

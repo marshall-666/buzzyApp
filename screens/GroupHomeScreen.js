@@ -67,7 +67,7 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeetingStepOne')}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>
@@ -94,6 +94,7 @@ const GroupHomeScreen = ({
 
                 </View>
             </ScrollView>
+            
             <NavBar/>
         </View>
     )
@@ -104,6 +105,8 @@ export default GroupHomeScreen
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        alignItems:'center',
+        justifyContent:'center'
     },
     midDiv: {
         width: '100%',

@@ -17,6 +17,12 @@ import LogoutScreen from '../screens/LogoutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
+import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
+import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
+import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
+import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
+import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -127,6 +133,15 @@ export default function TaskboardStack() {
 
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
+      
+      {/* Schedule meeting flow */}
+      <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} />
+      <Stack.Screen name="ScheduleMeetingStepTwo" component={ScheduleMeetingStepTwoScreen} />
+      <Stack.Screen name="ScheduleMeetingStepThree" component={ScheduleMeetingStepThreeScreen} />
+      <Stack.Screen name="ScheduleMeetingStepFour" component={ScheduleMeetingStepFourScreen} />
+      <Stack.Screen name="ScheduleMeetingStepFive" component={ScheduleMeetingStepFiveScreen} />
+      
+      
       {/* Other group flows */}
 
     </Stack.Navigator>
