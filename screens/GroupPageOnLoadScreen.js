@@ -22,7 +22,7 @@ const GroupPageOnLoadScreen = ({
             <View style={styles.midDiv}>
                 <JoinCreate onJoinPress={onJoinPress} onCreatePress={onCreatePress}/>
             </View>
-            <NavBar/>
+            <NavBar/> 
         </View>
     )
 }
@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         alignItems: 'center',
         marginBottom: 50,
-    }
+    },
+  
 })

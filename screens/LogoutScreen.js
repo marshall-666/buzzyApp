@@ -51,10 +51,11 @@ width:100%;
 const LogoutScreen = ({ navigation }) => {
 
 
-  const { user } = useContext(AuthenticatedUserContext);
+  const { user,users } = useContext(AuthenticatedUserContext);
   const handleSignOut = async () => {
     try {
       await fireAuth.signOut();
+      
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +66,7 @@ const LogoutScreen = ({ navigation }) => {
     <View style={styles.container}>
        <Image source={require("../assets/avatar.jpg")} style={styles.tinyLogo} />
       <TouchableOpacity onPress={handleSignOut}>
-      <Text style={styles.title1}>Hello {user.email}</Text>
+      <Text style={styles.title1}>Hello {users.name}</Text>
         <Text style={styles.title2} >Logout </Text>
       </TouchableOpacity>
 

@@ -65,21 +65,21 @@ const SignUpScreen = ({ navigation }) => {
 
 
 
-
-  // const createUsers = async () => {
-  //   const usersCollectionRef = collection(db, "users");
-  //   await addDoc(usersCollectionRef, 
-  //     { name: newName, 
-  //     school: school, 
-  //     program: program, 
-  //     set: set });
-  //   // await setDoc(doc(db, "users", user.uid) ,
-  //   //   { name: newName, 
-  //   //   school: school, 
-  //   //   program: program, 
-  //   //   set: set });
-  // }
-
+ 
+  const createUsers = async () => {
+    const usersCollectionRef = collection(db, "users");
+    await addDoc(usersCollectionRef, 
+      { name: newName, 
+      school: school, 
+      program: program, 
+      set: set });
+    // await setDoc(doc(db, "users", user.uid) ,
+    //   { name: newName, 
+    //   school: school, 
+    //   program: program, 
+    //   set: set });
+  }
+   
 
   const continuePress = () => {
     setPage1(false)
@@ -93,45 +93,24 @@ const SignUpScreen = ({ navigation }) => {
   const submitPress = async () => {
 
     const auth = getAuth();
-    if ( email !== '' && password !== '') {
+    if (email !== '' && password !== '') {
 
-      try {
-        const result = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        await setDoc(doc(db, "users", result.user.uid), {
-          uid: result.user.uid,
-          id: result.user.uid,
-          name: newName,
-          email: email,
-          school: school,
-          program: program,
-          set: set ,
-          isOnline: true,
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          createUsers()
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+          setSignupError(errorCode, errorMessage);
+
         });
-        // setData({
-        //   name: newName,
-        //   email: email,
-        //   password: password,
-        //   school:school,
-        //   program:program,
-        //   set:set,
-        //   error: null,
-        //   loading: false,
-        // });
-      }
-      catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-        setSignupError(errorCode, errorMessage);
-      };
-
-
-    };
-  }
+    }
+  };
 
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {

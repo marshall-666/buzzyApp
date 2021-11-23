@@ -9,7 +9,7 @@ import { Configurations } from '../PropConfig/Props'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import ErrorInfo from '../comps/ErrorInfo'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 const LogoWrapper = styled.View`
@@ -45,10 +45,10 @@ height:52.5%;
 width:100%;
 `
 const AccountScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [school, setSchool] = useState('');
-  const [users, setUsers] = useState('');
-  const [program, setProgram] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [school, setSchool] = useState('');
+  // const [users, setUsers] = useState('');
+  // const [program, setProgram] = useState('');
   const [set, setSet] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
@@ -96,13 +96,13 @@ const AccountScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-  const { user } = useContext(AuthenticatedUserContext);
+  const { user, users} = useContext(AuthenticatedUserContext);
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <LogoWrapper>
         
-        <Text style={styles.User}> Hi {user.email}</Text> 
+        <Text style={styles.User}> {users.name}</Text> 
         
         <Image source={require("../assets/avatar.jpg")} style={styles.tinyLogo}/>
         
@@ -124,8 +124,8 @@ const AccountScreen = ({ navigation }) => {
           placeholder='Bill Lin'
           autoCapitalize='none'
           autoCorrect={false}
-          value={users}
-          onChangeText={text => setUsers(text)}
+          value={users.name}
+          // onChangeText={text => setUsers(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.title2}>Email</Text>
@@ -144,8 +144,8 @@ const AccountScreen = ({ navigation }) => {
           keyboardType='email-address'
           textContentType='emailAddress'
           autoFocus={true}
-          value={email}
-          onChangeText={text => setEmail(text)}
+          value={user.email}
+          // onChangeText={text => setEmail(text)}
         />
         
         <Text style={styles.title2}>Password</Text>
@@ -169,7 +169,7 @@ const AccountScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.title2}>Birthday</Text>
+        <Text style={styles.title2}>School</Text>
         <InputField
           inputStyle={{
             fontSize: 14
@@ -179,15 +179,15 @@ const AccountScreen = ({ navigation }) => {
             marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
-          leftIcon='human-greeting'
+          leftIcon='school'
           placeholder='MM/DD/YYYY'
           autoCapitalize='none'
           autoCorrect={false}
-          value={users}
+          value={users.school}
           onChangeText={text => setUsers(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
-        <Text style={styles.title2}>Gender</Text>
+        <Text style={styles.title2}>Program</Text>
         <InputField
           inputStyle={{
             fontSize: 14
@@ -197,12 +197,12 @@ const AccountScreen = ({ navigation }) => {
             marginBottom: '2.5%',
             borderBottomWidth: 1,
           }}
-          leftIcon='human-greeting'
+          leftIcon='book'
           placeholder='Male/Female'
           autoCapitalize='none'
           autoCorrect={false}
-          value={users}
-          onChangeText={text => setUsers(text)}
+          value={users.program}
+          // onChangeText={text => setUsers(text)}
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.button}>
@@ -211,10 +211,7 @@ const AccountScreen = ({ navigation }) => {
         
       </View>
      
-      <View style={styles.container3}>
-        <Text style={styles.title4}>I have an account.</Text>
-        <Text style={styles.title5} onPress={() => navigation.navigate('Login')}>Login</Text>
-      </View>
+     
     </KeyboardAvoidingView>
   );
 }
@@ -236,7 +233,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginTop: 20
+    marginTop: 20,
+    width:200,
+    alignItems:'center',
+    justifyContent:'center',
+    textAlign:'center'
   },
   title2: {
     fontSize: 18,

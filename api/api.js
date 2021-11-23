@@ -1,0 +1,1 @@
+export default API_URL = 'https://digitpan.com/bbserver/server.php'

@@ -24,7 +24,8 @@ export const Days = [
     id: 1,
     day: 'Monday',
     date:'20th',
-    month: 'November'
+    month: 'November',
+    times: [{from:"9:30 AM", to:"11:30 AM"}, {from:"12:30 PM", to:"3:30 PM"}, {from:"9:30 AM", to:"11:30 AM"},]
   },
 
   {
