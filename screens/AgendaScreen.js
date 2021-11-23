@@ -50,7 +50,7 @@ const timeToString =(time)=> {
 
 
 // make a function that recieves the data from the databse and returns the formatted data that is recieved by the front-end.
-
+ 
 const tasks = {
   '2021-11-01':[]
 };
@@ -69,9 +69,12 @@ if(ChosenDay)
   useEffect (()=>{ 
     const GetEvents = async ()=>
     {
+
+         
           const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
       
           const eventsObject = result.data
+          // console.log(eventsObject)
           const newArray=[]
           for(let i=0; i<eventsObject.length; i++)
           {
@@ -111,12 +114,9 @@ if(ChosenDay)
         setEVENTS(dailyEvents[ChosenDay])
         console.log(dailyEvents[ChosenDay])
    
-    }
-      
+    }      
       GetEvents()
   
-
-
   },[])
 }
 
