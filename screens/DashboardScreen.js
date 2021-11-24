@@ -74,8 +74,28 @@ const DashboardScreen = ({navigation }) => {
   
   
     const GetDays = async ()=>{
-        const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
+const whatever = {
+  
+  day:'2021-11-10',
+  start:'2021-11-10 11:30',
+  end:'2021-11-10 12:30',
+  title:'something to test',
+  summary:'does it work?' 
+
+}
     
+
+const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
+        // .then(function (response) {
+        //   console.log(response.data);
+        // })
+        
+        console.log(pushPost.data)
+
+        // console.log(newResult)
+      // console.log(newResult.data)  
+        const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
+        
         const daysObject = result.data
         const newArray=[]
 
@@ -107,7 +127,7 @@ const DashboardScreen = ({navigation }) => {
         );
               
         
-        console.log(dailyEvents)
+        // console.log(dailyEvents)
         setNewDaysObject(dailyEvents)
       }
       GetDays()

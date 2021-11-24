@@ -12,6 +12,7 @@ import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
 import SingleChatThread from '../screens/SingleChatThreadScreen';
 import AllGroupsScreen from '../screens/AllGroupsScreen';
+import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen' 
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
 import { createDrawerNavigator,DrawerContentScrollView,
   DrawerItemList, DrawerItem,DrawerActions } from '@react-navigation/drawer';
@@ -22,6 +23,7 @@ import JoinGroupScreen from '../screens/JoinGroupScreen';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -29,16 +31,13 @@ function Taskboard() {
 
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
       }}>
       <Drawer.Screen name='Back' component={TaskboardScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -47,18 +46,14 @@ function Taskboard() {
 function Dashboard() {
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
       }}
-     
     >
       <Drawer.Screen name='Back' component={DashboardScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -68,16 +63,13 @@ function Dashboard() {
 function AllGroups() {
   return (
     <Drawer.Navigator
-      // drawerContentOptions={{
-      //   drawerType: "back",
-      //   drawerPosition: "right",
-      // }}
       screenOptions={{
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
       }}>
       <Drawer.Screen name='Back' component={AllGroupsScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -85,10 +77,8 @@ function AllGroups() {
 }
 
 
-
-
-export default function TaskboardStack({navigation}) {
-  // const navigation = useNavigation();
+export default function TaskboardStack() {
+  const navigation = useNavigation();
   const [load, setLoad] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -116,6 +106,7 @@ export default function TaskboardStack({navigation}) {
       </View>
     )
   }
+  
   return (
     <Stack.Navigator initialRouteName="Dashboard"
       screenOptions={{
@@ -125,8 +116,10 @@ export default function TaskboardStack({navigation}) {
         headerTintColor: '#fff', headerTitleStyle: {
           fontSize: 30
         },
+        
         headerRight: () => (
-          <TouchableOpacity onPress={() => alert("swip right to open drawer")}>
+         
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Entypo name="menu" size={30} color="lightgrey" />
           </TouchableOpacity>
         ),
@@ -151,6 +144,7 @@ export default function TaskboardStack({navigation}) {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
+      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
       {/* Other group flows */}
     </Stack.Navigator>
   );

@@ -59,11 +59,15 @@ const TaskTable = ({
   height = 800,
   width = "100%",
   onRecBtnPress = () => { },
-  TaskName,
-  LoCation,
-
+  taskName,
+  discription,
+  location,
+  startTime,
+  endTime,
+ 
 }) => {
   const [selectedValue, setSelectedValue] = useState("Courses")
+  
   let index = 0;
   const data = [
     { key: index++, section: true, label: 'Type' },
@@ -91,8 +95,8 @@ const TaskTable = ({
             borderBottomWidth: 1,
             borderBottomColor: 'white',
           }}
-          onChangeText={() => { setTextValue() }}
-          // value={textValue}
+          onChangeText={(text) => { setTaskName(text) }}
+          value={taskName}
           placeholder="Type the task name"
           // onChangeText={TaskName}
           // defaultValue={text}
@@ -113,20 +117,21 @@ const TaskTable = ({
         </TextInput2>
         <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
           placeholder="Type the Location"
-          // onChangeText={LoCation}
+          onChangeText={(text) => { setLocation(text) }}
+          value={location}
           // defaultValue={text}
         ></TextInput3>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Start Time
         </TextInput2> 
         <TimeCon>
-          <AppTimePicker />
+          <AppTimePicker text={startTime}/>
         </TimeCon>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           End Time
         </TextInput2>
         <TimeCon>
-          <AppTimePicker />
+          <AppTimePicker text={endTime} />
         </TimeCon>
       </TextCon>
       <ButtonCon>

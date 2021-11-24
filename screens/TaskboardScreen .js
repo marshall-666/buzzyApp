@@ -70,7 +70,7 @@ const TaskboardScreen = ({ navigation }) => {
   const [welcome, setWelcome] = useState(true)
 
     
-  // const [users, setUsers] = useState([]);
+ 
   const { user,users } = useContext(AuthenticatedUserContext);
 
   // const randomColors = () => {
@@ -126,13 +126,6 @@ const TaskboardScreen = ({ navigation }) => {
 
   }
  
-  // const handleSignOut = async () => {
-  //   try {
-  //     await fireAuth.signOut();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   return (
     <View  
       style={{ 

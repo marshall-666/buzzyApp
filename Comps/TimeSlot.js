@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     
     slot:{
         margin:15,
-        width:'90%',
+        // width:'90%',
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems:'center',

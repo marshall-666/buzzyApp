@@ -77,7 +77,7 @@ height:100%;
                     </TextCont>       
                 </MidCont>
         
-                <IconCont style={{borderLeftColor:"black", borderLeftWidth:"0.5px"}} onPress={onPress}>
+                <IconCont style={{borderLeftColor:"black", borderLeftWidth:0.5}} onPress={onPress}>
                 <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
                 </IconCont>
                 
