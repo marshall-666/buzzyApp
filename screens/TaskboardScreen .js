@@ -171,7 +171,7 @@ const TaskboardScreen = ({ navigation }) => {
   <TaskCardArea/> 
      
     
-  {welcome ? <Text style={styles.title}>Welcome  {users.name}!</Text>: null  }
+  {welcome ? <Text style={styles.title}>Welcome {users.name} !</Text>: null  }
    
 
      
