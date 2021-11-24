@@ -75,3 +75,16 @@ var updateTask = {
     group_id: '',
     user_id: '',
 }
+
+var addChat = {
+    op: 'add_msg',
+    sender_id: '',
+    group_id: '',
+    message: '',
+}
+
+var loadChats = {
+    op: 'load_msgls',
+    user_id: '',
+    group_id: '',
+}

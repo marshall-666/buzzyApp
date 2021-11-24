@@ -90,15 +90,25 @@ const talktoserver = (param) => {
                 update_tk.append('user_id', param.user_id)
                 letstalk(API_URL, update_tk)
                 break
-
-
-                
-                
+            case 'add_msg':
+                var add_msg = new FormData()
+                add_msg.append('op', param.op)
+                add_msg.append('sender_id', param.sender_id)
+                add_msg.append('group_id', param.group_id)
+                add_msg.append('message', param.message)
+                letstalk(API_URL, add_msg)
+                break
+            case 'load_msgls':
+                var load_chat = new FormData()
+                load_chat.append('op', param.op)
+                load_chat.append('user_id', param.user_id)
+                load_chat.append('group_id', param.group_id)
+                letstalk(API_URL, load_chat)
+                break
+            default:
+                console.log('No such operation!')                
 
         }
-
-
-        
     
 }
 
