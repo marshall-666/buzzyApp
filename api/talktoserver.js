@@ -1,3 +1,4 @@
+import { add } from 'react-native-reanimated'
 import API_URL from './api.js'
 
 const talktoserver = ({op, param}) => {
@@ -30,6 +31,55 @@ const talktoserver = ({op, param}) => {
                 create_g.append('is_admin', param.is_admin)
                 letstalk(API_URL, create_g)
                 break
+            case 'get_group_ls':
+                var get_gls = new FormData()
+                get_gls.append('op', op)
+                get_gls.append('user_id', param.user_id)
+                letstalk(API_URL, get_gls)
+                break
+            case 'get_mem_detail':
+                var mem_detail = new FormData()
+                mem_detail.append('op', op)
+                mem_detail.append('m_id', param.m_id)
+                letstalk(API_URL, mem_detail)
+                break
+            case 'add_member':
+                var addmember = new FormData()
+                addmember.append('op', op)
+                addmember.append('m_id', param.m_id)
+                addmember.append('group_id', param.group_id)
+                addmember.append('is_admin', param.is_admin)
+                letstalk(API_URL, addmember)
+                break
+            case 'create_task':
+                var createtk = new FormData()
+                createtk.append('op', op)
+                createtk.append('tkname', param.tkname)
+                createtk.append('descrip', param.descrip)
+                createtk.append('category_id', param.category_id)
+                createtk.append('start_t', param.start_t)
+                createtk.append('end_t', param.end_it)
+                createtk.append('loca', param.loca)
+                createtk.append('group_id', param.group_id)
+                createtk.append('user_id', param.user_id)
+                letstalk(API_URL, createtk)
+                break
+            case 'get_tasks_ls':
+                var get_tkls = new FormData()
+                get_tkls.append('op', op)
+                get_tkls.append('user_id', param.user_id)
+                letstalk(API_URL, get_tkls)
+                break
+            case 'get_task_detail':
+                var get_tkdetail = new FormData()
+                get_tkdetail.append('op', op)
+                get_tkdetail.append('tk_id', param.tk_id)
+                letstalk(API_URL, get_tkdetail)
+                break
+            
+
+
+                
                 
 
         }
