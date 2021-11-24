@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import {Configurations} from '../PropConfig/Props'
 import { TimeSlot } from './TimeSlot'
 import { Times } from '../data/AvailableTime'
@@ -16,7 +16,7 @@ export const Available = (
     }
 ) => {
     return (
-        <View style={styles.card}  >
+        <View  style={styles.card} >
                 
             <View style={{width:'100%'}}>
                 <Text style={{
@@ -58,12 +58,13 @@ export const Available = (
 const styles = StyleSheet.create({
     
     card:{
-        padding:15,
+        padding:10,
+        // backgroundColor:'red',
         
-        width:"60%",
-        height:'80%',
-        marginTop:10,
-        justifyContent:'space-evenly',
+        // height:'80%',
+        
+        marginHorizontal:5,
+        
         alignItems:'center',
         borderRadius:10,
         borderTopWidth:1,
