@@ -10,7 +10,7 @@ import {Configurations} from '../PropConfig/Props'
 
 const lightBg = Configurations.colors.lightBg
 
-const AllGroupsScreen = ({navigation}) => {
+const ScheduleMeetingOneScreen = ({navigation}) => {
     return (
         <View style={{flex:1, justifyContent:'flex-end',
         backgroundColor:lightBg,}}>

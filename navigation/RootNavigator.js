@@ -5,12 +5,15 @@ import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 import AuthStack from './AuthStack';
 import TaskStack from './TaskStack';
-import DashboardScreen from './CalendarStack'
-
+import { db } from '../firebase/fireStore';
+import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  // const { users, setUsers } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
+  // const usersCollectionRef = collection(db, "users");
+ 
 
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
@@ -18,6 +21,7 @@ export default function RootNavigator() {
       try {
         await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
         setIsLoading(false);
+      
       } catch (error) {
         console.log(error);
       }

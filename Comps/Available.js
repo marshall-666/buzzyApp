@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 import {Configurations} from '../PropConfig/Props'
 import { TimeSlot } from './TimeSlot'
 import { Times } from '../data/AvailableTime'
+import { Days } from '../data/AvailableTime'
 
 const dividerCol = Configurations.colors.lightBg
 const bgCol = Configurations.colors.primCol

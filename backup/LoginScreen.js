@@ -46,7 +46,6 @@ const LoginScreen = ({ navigation }) => {
   const [rightIcon, setRightIcon] = useState('eye');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  
 
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
@@ -57,43 +56,35 @@ const LoginScreen = ({ navigation }) => {
       setPasswordVisibility(!passwordVisibility);
     }
   };
-  const onLoginPress = async () => {
+  const onLoginPress = () => {
     const auth = getAuth();
-    
+  
     if (email !== '' && password !== '') {
-      try {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-
-
- 
-        const usersDocRef = doc(db, "users",result.user.uid );
-      const data = await getDoc(usersDocRef);
-      setUsers(data.data())
-     
-        
-      }
-        catch(error)  {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("Singed in user: ", user);
+        })
+        .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setLoginError(errorMessage);
 
-        };
+        });
       }
-    
-    // onAuthStateChanged(auth, (user) => {
-    //   const user = auth.currentUser;
-    //   if (user !== null) {
-        
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/firebase.User
-    //     const uid = user.uid;
-    //     // navigation.navigate('Taskboard')
-    //     // ...
-    //   } else {
-    //     // User is signed out
-    //     // ...
-    //   }
-    // });
+    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        // navigation.navigate('Taskboard')
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
   }
   return (
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-250}

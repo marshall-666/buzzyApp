@@ -17,6 +17,7 @@ import {Days} from '../data/AvailableTime'
 import {DaysTwo} from '../data/AvailableTime'
 import {DaysThree} from '../data/AvailableTime'
 import { set } from 'react-native-reanimated'
+
 const lightBg = Configurations.colors.lightBg
 const primCol =  Configurations.colors.primCol
 const MembersScheduleScreen = ({

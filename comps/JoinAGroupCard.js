@@ -36,7 +36,7 @@ const JoinAGroupCard = ({
             />
             <View style={styles.devider}/>
             <View style={styles.btnContainer}>
-                <RecBtn text={text} height={50} width={'80%'} onRecBtnPress={onRecBtnPress}/>
+                <RecBtn text={text} height={50} width={'80'} onRecBtnPress={onRecBtnPress}/>
             </View>
         </View>
     )

@@ -51,10 +51,11 @@ width:100%;
 const LogoutScreen = ({ navigation }) => {
 
 
-  const { user } = useContext(AuthenticatedUserContext);
+  const { user,users } = useContext(AuthenticatedUserContext);
   const handleSignOut = async () => {
     try {
       await fireAuth.signOut();
+      
     } catch (error) {
       console.log(error);
     }
@@ -63,9 +64,9 @@ const LogoutScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image  style={styles.tinyLogo} source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}/>
+       <Image source={require("../assets/avatar.jpg")} style={styles.tinyLogo} />
       <TouchableOpacity onPress={handleSignOut}>
-      <Text style={styles.title1}>Hello {user.email}</Text>
+      <Text style={styles.title1}>Hello {users.name}</Text>
         <Text style={styles.title2} >Logout </Text>
       </TouchableOpacity>
 
@@ -95,17 +96,26 @@ const styles = StyleSheet.create({
     color: Configurations.colors.secCol,
     textAlign: 'center',
     fontSize: 24,
-    fontWeight: '400'
+    fontWeight: '400',
+    margin:20
   },
   title2: {
     width: '100%',
-    color: Configurations.colors.primCol,
+    backgroundColor: Configurations.colors.primCol,
+    color:'white',
     textAlign: 'center',
     fontSize: 24,
-    fontWeight: '400'
+    fontWeight: '400',
+    paddingRight:30,
+    paddingLeft:30,
+    padding:10,
+    borderRadius:10,
+    alignSelf:'center'
   },
   tinyLogo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
+    borderRadius:100,
+    marginBottom:30
   },
 });

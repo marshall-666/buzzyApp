@@ -9,7 +9,7 @@ import axios from 'axios';
 import TaskBtn from '../comps/taskBtn';
 import NavBar from '../comps/NavBar'
 import IndividualEventCard from '../comps/IndividualEventCard';
-import { ToDate } from '../comps/ToDate';
+
 
 
 // Data imports===============
@@ -19,9 +19,9 @@ import { groupsData } from '../data/tasks';
 import {coursesData} from '../data/tasks';
 import {eventsData} from '../data/tasks'
 import {category} from '../data/category'
+import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
-
-
+import {GroupEventCard} from '../comps/GroupEventCard';
 
 
 const colors = Configurations.colors;
@@ -47,7 +47,7 @@ flex-direction:row;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
@@ -311,7 +311,8 @@ const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
                   EventTitle={item.EventTitle}
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime} /> }
+                  EventDueTime = {item.EventDueTime}
+                  IconDisplay="none" /> }
         /> : null
       }
       { groups ?
@@ -333,7 +334,8 @@ const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
                   EventTitle={item.EventTitle}
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime} /> }
+                  EventDueTime = {item.EventDueTime}
+                  IconDisplay="none" /> }
         /> : null
       }
         {/* <IndividualEventCard EventBackgroundColor={colors.accColOne}/> */}
