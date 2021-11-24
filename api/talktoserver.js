@@ -1,4 +1,9 @@
+//import API_URL in your file
 import API_URL from './api.js'
+
+//import talktoserver in your file
+//set the var value in the var copy from FetchDataFormats.js
+//call talktoserver and put the var as a parameter
 
 const talktoserver = (param) => {
     

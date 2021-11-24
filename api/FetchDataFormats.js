@@ -1,4 +1,4 @@
-
+//copy one of these var into your file, set the value at ''
 
 var registerUser = {
     op:'register_user',
