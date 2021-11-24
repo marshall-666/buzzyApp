@@ -1,15 +1,30 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
+import { GroupMemberCard } from '../comps/GroupMemberCard'
 import InGroupButton from '../comps/InGroupButton'
 import GroupEventCard from '../comps/CourseEventCard'
+import { MembersData } from '../data/MembersData'
+import styled from 'styled-components/native'
+
+
+
+const NavBarCon = styled.View`
+position:absolute;
+z-index:2;
+top:92.5%;
+height:100%
+width:100%
+left:5%
+`
 
 const GroupHomeScreen = ({
+    onSchedulePress=()=>{},
     navigation,
     groupName='Default Group',
     memberNum=5,
-    route
+    route,
 }) => {
 
     // information coming in from the GroupThread Component.
@@ -17,30 +32,42 @@ const GroupHomeScreen = ({
     console.warn(route.params)
     const memberInfo = route.params
     const handleBtnOnPress =()=> {
-        alert('Navigate to the function')
+        navigation.navigate('ScheduleMeetingStepOne')
     }
+   
 
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}}>
 
                 <View style={styles.midDiv}>
-                    <Text style={{fontSize: 30}}>{groupName}</Text>
+                    
+                    <View style={styles.topDiv}>   
+                        <View style={styles.textCont}>
+                            <Text style={{fontSize: 30}}>{groupName}</Text>
+                            <Text>{memberNum} Members</Text>
+                        </View>    
+                            <Image source={require("../assets/BuzzyBeeLogo.png")} />
+                    </View>     
+                    
+                    <Pressable onPress={onSchedulePress}>
+                        <View>
+                            <Text>Schedule Meeting</Text>
+                        </View>
+                    </Pressable>
                 </View>
 
                 <View style={styles.lowerDiv}>
                     
                     <View style={styles.membersView}>
-                        <Text style={{fontSize: 24, padding: 28, color: '#ffffff'}}>
-                                Members - {memberNum}
-                        </Text>
                         
-                        <MembersInGroupCard topRightCorner={15}/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard/>
-                        <MembersInGroupCard bottomRightCorner={15}/>
+                        <FlatList  
+                    style={{}}
+                    data={MembersData}
+                    renderItem={({item})=><GroupMemberCard MembersData={item}/>}
+                    />
+                        
+                        
                     </View>
                     
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
@@ -58,7 +85,7 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {handleBtnOnPress} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeetingStepOne')}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>
@@ -85,7 +112,9 @@ const GroupHomeScreen = ({
 
                 </View>
             </ScrollView>
-            <NavBar/>
+            <NavBarCon>
+                <NavBar/>
+            </NavBarCon>
         </View>
     )
 }
@@ -96,6 +125,16 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
     },
+
+    topDiv: {
+    flexDirection:'row'
+    },
+
+    textCont:{
+        flexDirection:'column'
+    },
+
+
     midDiv: {
         width: '100%',
         height: 100,
@@ -109,6 +148,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#94BDD4',
     },
     membersView: {
+        justifyContent:'center',
+        alignItems:'center',
         width: '100%',
         marginBottom: 40,
     }
