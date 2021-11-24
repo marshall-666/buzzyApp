@@ -338,7 +338,9 @@ const DashboardScreen = ({navigation }) => {
                   EventDescrip = {item.EventDescrip}
                   EventStartTime={item.EventStartTime}
                   EventDueTime = {item.EventDueTime}
-                  IconDisplay="none" /> }
+                  IconDisplay="none" 
+                  onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
+                  /> }
         /> : null
       }
       { groups ?

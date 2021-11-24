@@ -122,6 +122,11 @@ export default function TaskboardStack() {
       <Stack.Screen name='Taskboard' component={Taskboard} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
 
+
+      {/* Course Info */}
+      <Stack.Screen name="CourseInfo" component={CourseInfoScreen} />
+
+
       {/* Taskmamagement schedules */}
 
 

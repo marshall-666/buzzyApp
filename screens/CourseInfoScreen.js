@@ -21,7 +21,7 @@ width:100%;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background-color:#35579F;
+background-color:green;
 border-top-right-radius: 25px;
 border-top-left-radius: 25px;
 flex:0.9;
@@ -70,10 +70,10 @@ const CourseInfoScreen = () => {
             <Task/>
             <Task/>
             </ScrollView>
+        </CourseCardWrapper>  
             <NavBarCon>
                 <NavBar/>
             </NavBarCon>
-        </CourseCardWrapper>  
     </Wrapper>
    
 
