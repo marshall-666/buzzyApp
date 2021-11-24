@@ -63,24 +63,6 @@ const SignUpScreen = ({ navigation }) => {
   const [signupError, setSignupError] = useState('');
 
 
-
-
-
-  // const createUsers = async () => {
-  //   const usersCollectionRef = collection(db, "users");
-  //   await addDoc(usersCollectionRef, 
-  //     { name: newName, 
-  //     school: school, 
-  //     program: program, 
-  //     set: set });
-  //   // await setDoc(doc(db, "users", user.uid) ,
-  //   //   { name: newName, 
-  //   //   school: school, 
-  //   //   program: program, 
-  //   //   set: set });
-  // }
-
-
   const continuePress = () => {
     setPage1(false)
     setPage2(true)
@@ -111,16 +93,6 @@ const SignUpScreen = ({ navigation }) => {
           set: set ,
           isOnline: true,
         });
-        // setData({
-        //   name: newName,
-        //   email: email,
-        //   password: password,
-        //   school:school,
-        //   program:program,
-        //   set:set,
-        //   error: null,
-        //   loading: false,
-        // });
       }
       catch (error) {
         const errorCode = error.code;

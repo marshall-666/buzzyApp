@@ -12,7 +12,6 @@ export default function AuthStack() {
       headerShown: false
     }}>
       
-
       <Stack.Screen name='Login' component={LoginScreen} />
       <Stack.Screen name='SignUp' component={SignUpScreen} />
     </Stack.Navigator>
