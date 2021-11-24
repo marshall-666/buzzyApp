@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import {Configurations} from '../PropConfig/Props'
 import { TimeSlot } from './TimeSlot'
 import { Times } from '../data/AvailableTime'
@@ -19,7 +19,7 @@ export const Available = (
     }
 ) => {
     return (
-        <View style={styles.card}  >
+        <View  style={styles.card} >
                 
             <View style={{width:'100%',alignItems:'flex-start'}}>
                 <Text style={{
@@ -42,8 +42,16 @@ export const Available = (
             
             <FlatList 
                 data={Times}
+<<<<<<< HEAD
                 renderItem={({item})=> <TimeSlot  onSlotPress={onSlotPress}from={item.from}
                 to={item.to}/>}/>
+=======
+                renderItem={({item})=> <TimeSlot 
+                                from={item.from}
+                                to={item.to}/>}
+            
+            />
+>>>>>>> 110d9bc520734d15b336d968b09aaaa28fecbd10
 
 
 
@@ -61,12 +69,22 @@ export const Available = (
 const styles = StyleSheet.create({
     
     card:{
+<<<<<<< HEAD
         padding:15,
         backgroundColor:'white',
         width:"100%",
         height:'70%',
         marginTop:10,
         justifyContent:'space-evenly',
+=======
+        padding:10,
+        // backgroundColor:'red',
+        
+        // height:'80%',
+        
+        marginHorizontal:5,
+        
+>>>>>>> 110d9bc520734d15b336d968b09aaaa28fecbd10
         alignItems:'center',
         borderRadius:10,
         borderTopWidth:1,

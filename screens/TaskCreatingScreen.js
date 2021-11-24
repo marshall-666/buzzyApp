@@ -9,7 +9,9 @@ import { Configurations } from '../PropConfig/Props'
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
+
+
 const taskCategory = [
   {
     id: 1,
@@ -44,24 +46,21 @@ flex-direction:row;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
 `
-
-
 const TaskCreatingScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(taskCategory)
+  const [taskdata,setTaskdata]=useState({
+  taskName: "",
+  description: "",
+  startTime: "",
+  endTime: "",})
 
-  const { user } = useContext(AuthenticatedUserContext);
-  const handleSignOut = async () => {
-    try {
-      await fireAuth.signOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  const { user,users } = useContext(AuthenticatedUserContext);
 
   const onHandleCreate = () => {
      

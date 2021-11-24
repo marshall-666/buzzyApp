@@ -1,12 +1,23 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View,FlatList, Pressable } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import { GroupMemberCard } from '../comps/GroupMemberCard'
 import InGroupButton from '../comps/InGroupButton'
 import GroupEventCard from '../comps/CourseEventCard'
 import { MembersData } from '../data/MembersData'
+import styled from 'styled-components/native'
 
+
+
+const NavBarCon = styled.View`
+position:absolute;
+z-index:2;
+top:92.5%;
+height:100%
+width:100%
+left:5%
+`
 
 const GroupHomeScreen = ({
     onSchedulePress=()=>{},
@@ -21,7 +32,7 @@ const GroupHomeScreen = ({
     console.warn(route.params)
     const memberInfo = route.params
     const handleBtnOnPress =()=> {
-        alert('Navigate to the function')
+        navigation.navigate('ScheduleMeetingStepOne')
     }
    
 
@@ -30,8 +41,14 @@ const GroupHomeScreen = ({
             <ScrollView style={{flex: 1}}>
 
                 <View style={styles.midDiv}>
-                    <Text style={{fontSize: 30}}>{groupName}</Text>
-                    <Text>{memberNum} Members</Text>
+                    
+                    <View style={styles.topDiv}>   
+                        <View style={styles.textCont}>
+                            <Text style={{fontSize: 30}}>{groupName}</Text>
+                            <Text>{memberNum} Members</Text>
+                        </View>    
+                            <Image source={require("../assets/BuzzyBeeLogo.png")} />
+                    </View>     
                     
                     <Pressable onPress={onSchedulePress}>
                         <View>
@@ -45,6 +62,7 @@ const GroupHomeScreen = ({
                     <View style={styles.membersView}>
                         
                         <FlatList  
+                    style={{}}
                     data={MembersData}
                     renderItem={({item})=><GroupMemberCard MembersData={item}/>}
                     />
@@ -108,6 +126,16 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
+
+    topDiv: {
+    flexDirection:'row'
+    },
+
+    textCont:{
+        flexDirection:'column'
+    },
+
+
     midDiv: {
         width: '100%',
         height: 100,

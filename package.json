@@ -20,6 +20,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^13.0.1",
     "@react-native-picker/picker": "^2.1.0",
+    "@react-native/normalize-color": "^2.0.0",
     "@react-navigation/core": "^6.1.0",
     "@react-navigation/drawer": "^6.1.8",
     "@react-navigation/native": "^6.0.6",
@@ -28,6 +29,7 @@
     "axios": "^0.23.0",
     "dotenv": "^10.0.0",
     "expo": "~43.0.0",
+    "expo-image-picker": "~11.0.3",
     "expo-status-bar": "~1.1.0",
     "firebase": "^9.3.0",
     "lottie-react-native": "^4.0.3",
@@ -39,6 +41,13 @@
     "react-native-calendars": "^1.1268.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-modal-selector": "^2.1.0",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    "react-native-quick-base64": "^0.1.4",
+>>>>>>> master
+>>>>>>> 110d9bc520734d15b336d968b09aaaa28fecbd10
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "~3.8.0",

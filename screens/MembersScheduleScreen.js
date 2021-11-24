@@ -132,9 +132,10 @@ const MembersScheduleScreen = ({
 
           </View>
 
-        <View>
+        
             <FlatList
               horizontal
+              contentContainerStyle={{alignItems:'center', justifyContent:'flex-start'}}
               alwaysBounceHorizontal={true}
               data={memberOne? DaysTwo : memberTwo? DaysThree : Days }
               renderItem={({item})=> <Available  
@@ -144,7 +145,7 @@ const MembersScheduleScreen = ({
                                     />}
             />
            
-        </View>
+        
         </ScrollView>
     )
 }

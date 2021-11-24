@@ -11,19 +11,15 @@ import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const { users, setUsers } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
-  const usersCollectionRef = collection(db, "users");
- 
-
+  
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = fireAuth.onAuthStateChanged(async authenticatedUser => {
       try {
         await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
         setIsLoading(false);
-        const data =await getDoc(usersCollectionRef);
-      setUsers(data.doc.data());
+      
       } catch (error) {
         console.log(error);
       }

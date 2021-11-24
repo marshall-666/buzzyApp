@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
-import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
@@ -15,6 +14,7 @@ import { eventsData } from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import { Configurations } from '../PropConfig/Props'
 import { db } from '../firebase/fireStore';
+import { fireAuth } from '../firebase/fireAuth';
 import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
@@ -36,7 +36,7 @@ height:100%;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
@@ -45,7 +45,7 @@ left:5%
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
-top:300px
+top:30%
 height:52.5%;
 width:100%;
 `
@@ -70,17 +70,8 @@ const TaskboardScreen = ({ navigation }) => {
   const [welcome, setWelcome] = useState(true)
 
     
-  // const [users, setUsers] = useState([]);
-  // const usersCollectionRef = collection(db, "users");
-  
-  // useEffect(() => {
-  //   const getUser =async()=>{
-  //     const data =await getDoc(usersCollectionRef);
-  //     setUsers(data.doc);
-  //     console.log(data)
-  //   }
-  //   getUser();
-  //   }, [])
+ 
+  const { user,users } = useContext(AuthenticatedUserContext);
 
   // const randomColors = () => {
   //   const randomColor = Math.floor(Math.random() * 16777215)
@@ -134,14 +125,7 @@ const TaskboardScreen = ({ navigation }) => {
     setWelcome(false)
 
   }
-  const { user,users } = useContext(AuthenticatedUserContext);
-  // const handleSignOut = async () => {
-  //   try {
-  //     await fireAuth.signOut();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+ 
   return (
     <View  
       style={{ 
@@ -176,19 +160,18 @@ const TaskboardScreen = ({ navigation }) => {
     taskCate={category.taskCategory.Event.taskCate}  
     onBtnPress={eventPress}
   />
-      
   </TaskButtonsWrapper>
   <TaskCardArea/> 
      
     
-  {welcome ? <Text style={styles.title}>Welcome {user.email} 
-  {users.name}!</Text>: null  }
+  {welcome ? <Text style={styles.title}>Welcome  {users.name}!</Text>: null  }
+   
+
      
   { course ? (<TaskCardsWrapper>
     {
       courses.map((o, i) => 
       (
-     
         <IndividualEventCard  
           key={i} id={o.id} 
           EventTitle={o.EventTitle} 
