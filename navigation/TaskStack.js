@@ -12,6 +12,7 @@ import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
 import SingleChatThread from '../screens/SingleChatThreadScreen';
 import AllGroupsScreen from '../screens/AllGroupsScreen';
+import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen' 
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
 import { createDrawerNavigator,DrawerContentScrollView,
   DrawerItemList, DrawerItem,DrawerActions } from '@react-navigation/drawer';
@@ -21,6 +22,7 @@ import CreateGroupScreen from '../screens/CreateGroupScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,6 +37,7 @@ function Taskboard() {
         drawerPosition: "right",
       }}>
       <Drawer.Screen name='Back' component={TaskboardScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -48,10 +51,9 @@ function Dashboard() {
         drawerType: "back",
         drawerPosition: "right",
       }}
-
-
     >
       <Drawer.Screen name='Back' component={DashboardScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -67,6 +69,7 @@ function AllGroups() {
         drawerPosition: "right",
       }}>
       <Drawer.Screen name='Back' component={AllGroupsScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
     </Drawer.Navigator>
@@ -141,6 +144,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
+      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
       {/* Other group flows */}
     </Stack.Navigator>
   );

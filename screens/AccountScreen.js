@@ -72,6 +72,7 @@ const AccountScreen = ({ navigation }) => {
       }
     })();
   }, []);
+  // useEffect(()=>{ setImage(result.uri); },[user])
 
   const updateImg = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
