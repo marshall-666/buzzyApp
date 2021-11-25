@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image, SectionList } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import { GroupMemberCard } from '../comps/GroupMemberCard'
@@ -14,7 +14,7 @@ import styled from 'styled-components/native'
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
@@ -63,10 +63,11 @@ const GroupHomeScreen = ({
                     <View style={styles.membersView}>
                         
                         <FlatList  
-                            
-                            data={Members}
+                            contentContainerStyle={{maxWidth:'100%'}}
+                            scrollEnabled={true}
+                            data={MembersData}
                             renderItem={({item})=> <GroupMemberCard 
-                                                    person={item.name}/>}
+                                                    person={item.members.name}/>}
                         />
                         
                         
@@ -114,8 +115,10 @@ const GroupHomeScreen = ({
 
                 </View>
             </ScrollView>
+            <NavBarCon>
+                <NavBar/>
+            </NavBarCon>
             
-            <NavBar/>
         </View>
     )
 }
@@ -136,18 +139,19 @@ const styles = StyleSheet.create({
     textCont:{
         flexDirection:'column'
     },
-
-
+    
     midDiv: {
         width: '100%',
-        height: 100,
         padding: 30,
+        
     },
+    
     lowerDiv: {
         width: '100%',
+        height:'100%',
         paddingTop: 20,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         backgroundColor: '#94BDD4',
     },
     membersView: {

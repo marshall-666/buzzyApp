@@ -16,7 +16,14 @@ const AllGroupsScreen = ({navigation}) => {
     return (
         <View style={styles.header}>
         
-        <Text> hi </Text>
+            <View style={styles.head}>
+                <Text style={{fontSize:22}} >
+                    You are currently in
+                </Text>
+                <Text style={{fontSize:22}} >
+                    3 Groups
+                </Text>
+            </View>
             <View style={styles.lowerDiv}>
 
                 <View style={styles.thread}>   
@@ -62,6 +69,14 @@ const AllGroupsScreen = ({navigation}) => {
 export default AllGroupsScreen
 
 const styles = StyleSheet.create({
+    head:
+    {
+        
+        alignItems:'center',
+        justifyContent:'center',
+        height:150,
+        
+    },
     header:
     {
         backgroundColor:lightBg,
