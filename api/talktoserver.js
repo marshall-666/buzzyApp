@@ -114,23 +114,20 @@ const talktoserver = (param) => {
 
     }
 
-
-    const letstalk = async (url, d) => {
-        try{
-            const response = await fetch(url, {
-                method: 'POST',
-                body: d,
-            })
-            if(!response.ok) throw Error('Did not receive data.')
-            const resData = await response.json()
-            return resData
-        } catch(err) {
-            console.log(err.message)
-        } 
-    }
 }
 
 export default talktoserver
 
-
-
+export const letstalk = async (url, d) => {
+    try{
+        const response = await fetch(url, {
+            method: 'POST',
+            body: d,
+        })
+        if(!response.ok) throw Error('Did not receive data.')
+        const resData = await response.json()
+        console.log(resData)
+    } catch(err) {
+        console.log(err.message)
+    } 
+}
