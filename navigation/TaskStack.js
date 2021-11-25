@@ -124,7 +124,7 @@ export default function TaskboardStack() {
         headerRight: () => (
          
           <TouchableOpacity onPress={() => alert('Swide left')}>
-            <Entypo name="menu" size={30} color="lightgrey" />
+            <Entypo name="menu" size={30} color="lightgrey"/>
           </TouchableOpacity>
         ),
       }}
