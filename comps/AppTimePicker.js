@@ -7,7 +7,10 @@ import { Fontisto } from '@expo/vector-icons';
 
 
 
- const AppTimePicker = () => {
+ const AppTimePicker = ({
+  
+ }
+ ) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);

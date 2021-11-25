@@ -10,6 +10,7 @@ import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
 import { doc, setDoc } from "firebase/firestore";
+import { db } from '../firebase/fireStore';
 
 
 const taskCategory = [
@@ -53,25 +54,43 @@ left:5%
 `
 const TaskCreatingScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(taskCategory)
-  const [taskdata,setTaskdata]=useState({
-  taskName: "",
-  description: "",
-  startTime: "",
-  endTime: "",})
-
+  // const [taskdata,setTaskdata]=useState({
+  // taskName: "",
+  // description: "",
+  // startTime: "",
+  // endTime: "",})
+const [taskName, setTaskName] = useState('');
+  const [location, setLocation] = useState('');
+  const [ startTime, setStartTime] = useState('');
+  const [ endTime, setEndTime] = useState('');
+  const [ selectedValue, setSelectedValue] = useState('Courses');
+  
 
   const { user,users } = useContext(AuthenticatedUserContext);
 
   const onHandleCreate = () => {
      
-       navigation.navigate('Taskboard')
-  }
+   
+        setDoc(doc(db, "tasks", user.uid), {
+        uid: user.uid,
+        id: user.uid,
+        taskName: taskName,
+        location: location, 
+        startTime: startTime,
+        endTime: endTime,
+        selectedValue:selectedValue
+      
+      });
+      // console.log(data())
+      navigation.navigate('Taskboard')
+    }
+  
 
 
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
-    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol  }}>
       <View style={styles.header}>
        
       </View>
@@ -87,7 +106,10 @@ const TaskCreatingScreen = ({ navigation }) => {
           }
 
         </TaskButtonWrapper>
-        <TaskTable onRecBtnPress={onHandleCreate}  />
+        <TaskTable onRecBtnPress={onHandleCreate} setTaskName={setTaskName}  
+        setLocation={setLocation} taskName={taskName} location={location} startTime={startTime}
+         setStartTime={setStartTime} endTime={endTime} setEndTime={setEndTime}
+         selectedValue={selectedValue} setSelectedValue={setSelectedValue}/>
 
       </Wrapper>
       <NavBarCon>

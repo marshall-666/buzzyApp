@@ -8,6 +8,7 @@ import RecBtn from "./RecBtn";
 import { Configurations } from '../PropConfig/Props'
 import ModalSelector from 'react-native-modal-selector'
 
+
 const CardCon = Styled.View`
 width:${(props) => props.width};
 height:${(props) => props.height}px;
@@ -22,7 +23,7 @@ flex-direction:row;
 `
 const TextCon = Styled.View`
 display:flex;
-height:90%;
+height:82.5%;
 width:300px;
 justify-content:flex-start;
 flex-direction:column;
@@ -48,10 +49,10 @@ width:100%;
 margin-top:10px
 `
 const TimeCon = Styled.View`
-height:15%;
+height:14%;
 `
 const ButtonCon = Styled.View`
-margin-top:-200px
+margin-top:-120px
 `
 const TaskTable = ({
 
@@ -64,10 +65,14 @@ const TaskTable = ({
   location,
   startTime,
   endTime,
- 
+  setTaskName,
+  setLocation,
+  selectedValue,
+  setSelectedValue,
+  itemValue
 }) => {
-  const [selectedValue, setSelectedValue] = useState("Courses")
-  
+  // const [selectedValue, setSelectedValue] = useState("Courses")
+
   let index = 0;
   const data = [
     { key: index++, section: true, label: 'Type' },

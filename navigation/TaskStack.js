@@ -122,7 +122,7 @@ export default function TaskboardStack() {
         
         headerRight: () => (
          
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          <TouchableOpacity onPress={() => alert("swip to right")}>
             <Entypo name="menu" size={30} color="lightgrey" />
           </TouchableOpacity>
         ),
@@ -153,6 +153,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
+      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
       
       {/* Schedule meeting flow */}
       <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} />
