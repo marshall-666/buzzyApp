@@ -140,22 +140,30 @@ const slotMon =[]
     {
       title: "businessCom",
       startTime: new Date("2021/11/22 9:30 AM"),
-      endTime: new Date("2021/11/22 12:20 PM")
+      endTime: new Date("2021/11/22 12:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Design2",
       startTime: new Date("2021/11/22 01:30 PM"),
-      endTime: new Date("2021/11/22 04:20 PM")
+      endTime: new Date("2021/11/22 04:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Communting",
       startTime: new Date("2021/11/22 04:30 PM"),
-      endTime: new Date("2021/11/22 05:20 PM")
+      endTime: new Date("2021/11/22 05:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: " do assignment",
       startTime: new Date("2021/11/22 06:50 PM"),
-      endTime: new Date("2021/11/22 09:30 PM")
+      endTime: new Date("2021/11/22 09:30 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
   ];
   var ScheduleTue = [
@@ -526,11 +534,12 @@ const slotMon =[]
     horizontal
     contentContainerStyle={{alignItems:'center', justifyContent:'flex-start'}}
     alwaysBounceHorizontal={true}
-    data={Days}
+    data={ScheduleMon}
     renderItem={({item})=> <Available
-                              monthName={item.month}
+                              monthName={item.date}
+                              // day={item.day}
+                              date={item.day}
                               day={item.day}
-                              date={item.date}
                               data={<FlatList
                                 contentContainerStyle={{ width:300}}
                                 data={slotMon}
