@@ -6,6 +6,7 @@ import { GroupMemberCard } from '../comps/GroupMemberCard'
 import InGroupButton from '../comps/InGroupButton'
 import GroupEventCard from '../comps/CourseEventCard'
 import { MembersData } from '../data/MembersData'
+import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 
 
@@ -62,10 +63,11 @@ const GroupHomeScreen = ({
                     <View style={styles.membersView}>
                         
                         <FlatList  
-                    style={{}}
-                    data={MembersData}
-                    renderItem={({item})=><GroupMemberCard MembersData={item}/>}
-                    />
+                            
+                            data={Members}
+                            renderItem={({item})=> <GroupMemberCard 
+                                                    person={item.name}/>}
+                        />
                         
                         
                     </View>
@@ -85,7 +87,7 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeetingStepOne')}} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('MembersSchedule', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>

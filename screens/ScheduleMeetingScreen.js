@@ -105,7 +105,9 @@ const ListItem = ({ item }) => {
   );
 };
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+  <TouchableOpacity 
+      onPress={onPress} 
+      style={[styles.item, backgroundColor]}>
     <Text style={[styles.title2, textColor]}>{item.title}</Text>
   </TouchableOpacity>
 );

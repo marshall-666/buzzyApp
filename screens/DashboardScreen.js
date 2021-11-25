@@ -85,12 +85,12 @@ const whatever = {
 }
     
 
-const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
+
         // .then(function (response) {
         //   console.log(response.data);
         // })
         
-        console.log(pushPost.data)
+        // console.log(pushPost.data)
 
         // console.log(newResult)
       // console.log(newResult.data)  
@@ -304,6 +304,7 @@ const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
           
       { courses ?
         <FlatList 
+          contentContainerStyle={{ maxWidth:'100%'}}
           data = {coursesData}
           renderItem={({item})=> 
                 <IndividualEventCard 
@@ -317,6 +318,7 @@ const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
       }
       { groups ?
         <FlatList 
+          contentContainerStyle={{ maxWidth:'100%'}}
           data = {groupsData}
           renderItem={({item})=> 
                 <IndividualEventCard 
@@ -328,6 +330,7 @@ const pushPost = await axios.post('http://localhost:8888/newApi.php', whatever)
       }
       { events ?
         <FlatList 
+          contentContainerStyle={{ maxWidth:'100%'}}
           data = {eventsData}
           renderItem={({item})=> 
                 <IndividualEventCard 
