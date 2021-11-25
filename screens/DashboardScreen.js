@@ -1,6 +1,6 @@
 // imports from dependancies ==========
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
+import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
 import axios from 'axios';
@@ -280,6 +280,7 @@ console.log(dbResult)
 
           {/* functions on 211-230============= */}
         <TaskBtnCont>
+        <View style={styles.shadows}> 
           <TaskBtn 
               taskNum={category.taskCategory.Course.taskNum} 
               taskCate={category.taskCategory.Course.taskCate}
@@ -287,7 +288,10 @@ console.log(dbResult)
               textColor= {courses ? 'white' : colors.secCol }
               onBtnPress={coursePress}  
           />
-          
+        </View>  
+
+
+        <View style={styles.shadows}>
           <TaskBtn 
               taskNum={category.taskCategory.Group.taskNum} 
               taskCate={category.taskCategory.Group.taskCate}
@@ -296,7 +300,9 @@ console.log(dbResult)
 
               onBtnPress={groupPress}   
           />
+        </View>
 
+        < View style={styles.shadows}>
           <TaskBtn 
               taskNum={category.taskCategory.Event.taskNum} 
               taskCate={category.taskCategory.Event.taskCate}
@@ -305,6 +311,7 @@ console.log(dbResult)
               onBtnPress={eventPress}  
 
           />
+        </View>
         </TaskBtnCont>
 
           
@@ -363,6 +370,17 @@ console.log(dbResult)
   );
 }
 
+const styles = StyleSheet.create({
+
+  shadows: 
+    {
+      shadowColor: '#5B7797',
+      shadowOffset: {width: 10, height: 8},
+      shadowOpacity: 1,
+      shadowRadius: 7,
+    }
+ 
+});
 
 export default DashboardScreen
 

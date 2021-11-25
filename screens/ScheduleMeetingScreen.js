@@ -428,7 +428,7 @@ const slotAvailable =[...slotMon, ...slotTue]
         item={item}
         onPress={() =>  {
                           setSelectedId(item.id)
-                          navigation.navigate("ScheduleMeetingS1", {info:item.title})
+                          navigation.navigate("ScheduleMeetingS2", {info:item.title})
                         }                                                  
                       }
         backgroundColor={{ backgroundColor }}
