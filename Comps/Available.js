@@ -8,13 +8,14 @@ import { itemList } from '../data/tasks'
 
 const dividerCol = Configurations.colors.lightBg
 const bgCol = Configurations.colors.primCol
-
+const darkCol= Configurations.colors.secCol
 export const Available = (
     {
         monthName =" November",
         day="today",
         date = "20th",
         bgColor={bgCol},
+        data,
         onSlotPress=()=>{}
     }
 ) => {
@@ -24,7 +25,7 @@ export const Available = (
             <View style={{width:'100%',alignItems:'flex-start'}}>
                 <Text style={{
                     fontSize:30, 
-                    color:'black',
+                    color:darkCol,
                     fontWeight:'bold',
                     }}>
                     {date}
@@ -32,7 +33,7 @@ export const Available = (
                 
                 <Text style={{
                     fontSize:25, 
-                    color:'black',
+                    color:darkCol,
                     fontWeight:'bold',
                     marginLeft:-4}}>
                         {monthName}
@@ -40,16 +41,19 @@ export const Available = (
 
             </View>
             
-            <FlatList 
+                {data}
+            
+            {/* <FlatList 
                 data={Times}
                 renderItem={({item})=> <TimeSlot  onSlotPress={onSlotPress}from={item.from}
-                to={item.to}/>}/>
+                to={item.to}/>}/> */}
 
 
 
             <Text style={{
                     fontSize:25, 
-                    color:'black',
+                    marginTop:20,
+                    color:darkCol,
                     fontWeight:'bold'}}> {day} 
             </Text>
         </View>
@@ -61,19 +65,15 @@ export const Available = (
 const styles = StyleSheet.create({
     
     card:{
-        padding:15,
-        backgroundColor:'white',
-        width:"100%",
-        height:'70%',
-        marginTop:10,
+        // backgroundColor:'red',
+        paddingHorizontal:20,
+        paddingVertical:25,
+        height:410,
+        backgroundColor:'#ffffff80',
+        margin:10,
         justifyContent:'space-evenly',
         alignItems:'center',
         borderRadius:10,
-        borderTopWidth:1,
-        borderRightWidth:1,
-        borderBottomWidth:1,
-        borderLeftWidth:1,
-
     },
     slot:{
         width:'90%',

@@ -1,11 +1,12 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image, SectionList } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import { GroupMemberCard } from '../comps/GroupMemberCard'
 import InGroupButton from '../comps/InGroupButton'
 import GroupEventCard from '../comps/CourseEventCard'
 import { MembersData } from '../data/MembersData'
+import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 
 
@@ -13,7 +14,7 @@ import styled from 'styled-components/native'
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:92%;
 height:100%
 width:100%
 left:5%
@@ -62,10 +63,12 @@ const GroupHomeScreen = ({
                     <View style={styles.membersView}>
                         
                         <FlatList  
-                    style={{}}
-                    data={MembersData}
-                    renderItem={({item})=><GroupMemberCard MembersData={item}/>}
-                    />
+                            contentContainerStyle={{maxWidth:'100%'}}
+                            scrollEnabled={true}
+                            data={MembersData}
+                            renderItem={({item})=> <GroupMemberCard 
+                                                    person={item.members.name}/>}
+                        />
                         
                         
                     </View>
@@ -85,7 +88,7 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeetingStepOne')}} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('MembersSchedule', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>
@@ -112,8 +115,10 @@ const GroupHomeScreen = ({
 
                 </View>
             </ScrollView>
+            <NavBarCon>
+                <NavBar/>
+            </NavBarCon>
             
-            <NavBar/>
         </View>
     )
 }
@@ -134,18 +139,19 @@ const styles = StyleSheet.create({
     textCont:{
         flexDirection:'column'
     },
-
-
+    
     midDiv: {
         width: '100%',
-        height: 100,
         padding: 30,
+        
     },
+    
     lowerDiv: {
         width: '100%',
+        height:'100%',
         paddingTop: 20,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         backgroundColor: '#94BDD4',
     },
     membersView: {

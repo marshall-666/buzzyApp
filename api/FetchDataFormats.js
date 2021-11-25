@@ -1,4 +1,16 @@
-//copy one of these var into your file, set the value at ''
+
+//copy one of these block into your file, set the value at '', 
+// use useEffect to track the dbResult and operate it accordlingly.
+
+
+
+//========================================
+//  Register New User
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
 
 var registerUser = {
     op:'register_user',
@@ -11,10 +23,38 @@ var registerUser = {
     img_url: '',
 }
 
+talktoserver(registerUser).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+//================================================
+//  Upload Firebase uid to DB and get the pair ID
+//================================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
+
 var auth = {
     op: 'auth',
     fb_uid: '',
 }
+
+talktoserver(auth).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+//========================================
+//  Create Group
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
 
 var createGroup = {
     op: 'create_group',
@@ -24,15 +64,60 @@ var createGroup = {
     is_admin: '',
 }
 
+talktoserver(createGroup).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+//========================================
+//  Load Group List
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
+
 var loadGroupList = {
     op: 'get_group_ls',
     user_id: '',
 }
 
+talktoserver(loadGroupList).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+//========================================
+//  Load Group Member Detail
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
+
 var loadMemberDetail = {
     op: 'get_mem_detail',
     m_id: '',
 }
+
+talktoserver(loadMemberDetail).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+
+//========================================
+//  Add Member to A Group
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
 
 var addMember = {
     op: 'add_member',
@@ -40,6 +125,22 @@ var addMember = {
     group_id: '',
     is_admin: '',
 }
+
+talktoserver(addMember).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+
+//========================================
+//  Create Task
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
 
 var createTask = {
     op: 'create_task',
@@ -53,15 +154,61 @@ var createTask = {
     user_id: '',
 }
 
+talktoserver(createTask).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+
+//========================================
+//  Load Task List (to calender)
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
+
 var loadTaskList = {
     op: 'get_tasks_ls',
     user_id: '',
 }
 
+talktoserver(loadTaskList).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+//========================================
+//  Load Task Detail
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
+
 var loadTaskDetail = {
     op: 'get_task_detail',
     tk_id: '',
 }
+
+talktoserver(loadTaskDetail).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+//=======================================
+//  Update Task
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+const [dbResult, setDbResult] = useState()
 
 var updateTask = {
     op: 'update_task',
@@ -76,6 +223,22 @@ var updateTask = {
     user_id: '',
 }
 
+talktoserver(updateTask).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+//========================================
+//  Add Chat
+//========================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
 var addChat = {
     op: 'add_msg',
     sender_id: '',
@@ -83,8 +246,30 @@ var addChat = {
     message: '',
 }
 
+talktoserver(addChat).then((rd) => {
+    setDbResult(rd)
+})
+
+
+
+
+//=======================================
+//  Load Chats
+//=======================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
 var loadChats = {
     op: 'load_msgls',
     user_id: '',
     group_id: '',
 }
+
+talktoserver(loadChats).then((rd) => {
+    setDbResult(rd)
+})
+
+//======================================
