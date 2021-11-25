@@ -26,7 +26,8 @@ import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree'
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
 import { useNavigation } from '@react-navigation/native';
-import { Entypo } from '@expo/vector-icons';
+import {Entypo} from '@expo/vector-icons'
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -122,8 +123,8 @@ export default function TaskboardStack() {
         
         headerRight: () => (
          
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <Entypo name="menu" size={30} color="lightgrey" />
+          <TouchableOpacity onPress={() => alert('Swide left')}>
+            <Entypo name="menu" size={30} color="lightgrey"/>
           </TouchableOpacity>
         ),
       }}
