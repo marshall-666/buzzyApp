@@ -1,6 +1,6 @@
-import talktoserver from "../api/talktoserver"
-import React, {useState} from "react"
-//copy one of these var into your file, set the value at ''
+
+//copy one of these block into your file, set the value at '', 
+// use useEffect to track the dbResult and operate it accordlingly.
 
 
 
