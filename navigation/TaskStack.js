@@ -25,7 +25,8 @@ import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
 import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
-
+import { useNavigation } from '@react-navigation/native';
+import { Entypo } from '@expo/vector-icons';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
