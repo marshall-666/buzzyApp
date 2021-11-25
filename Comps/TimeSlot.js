@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         margin:15,
         backgroundColor: Configurations.colors.primCol,
         padding:5,
-        width:'90%',
+        // width:'90%',
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems:'center',

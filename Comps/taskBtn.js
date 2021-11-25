@@ -12,7 +12,7 @@ justify-content:center;
 align-items:flex-start;
 border-radius:${(props)=>props.bradius}px;
 padding:10px
-box-shadow: 0 3px 5px rgba(0, 0, 0 , 0.3);
+box-shadow: 0 10px 10px rgba(155, 155, 155 , 1)
 margin-right:${(props)=>props.margin}px
 display:${(props)=>props.displayBtn}
 `
@@ -64,7 +64,18 @@ const TaskBtn = ({
     ><ImgCon bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayImg={displayImg} >
        <Image style={styles.tinyLogo} source={{uri:img}}/>
        </ImgCon>
-    <BtnCon bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayBtn={displayBtn} >
+    <BtnCon style={{
+    shadowColor: '#3D5A80',
+    shadowOffset: {width: -5, height: -3},
+    shadowOpacity: .5,
+    shadowRadius: 10,
+  }}
+        bgc={taskBtnColor} 
+        bradius={bradius} 
+        height={height} 
+        width={width} 
+        margin={margin} 
+        displayBtn={displayBtn} >
    
         <TextInput textColor={textColor}>{taskNum}</TextInput>
         <TaskInput textColor={textColor}>{taskCate}</TaskInput>

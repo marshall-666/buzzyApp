@@ -8,10 +8,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 
-
 const CardCont = Styled.View`
 width:90%;
-height:120px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -22,7 +20,6 @@ overflow:hidden;
 `
 const EventColour = Styled.View`
 width:4%;
-height:100%;
 background-color:${(props) => props.EventBackgroundColor};
 `
 
@@ -37,7 +34,6 @@ justify-content:space-evenly;
 
 const TextCont = Styled.View`
 display:flex;
-height:60%;
 flex-direction:column;
 align-items:flex-start;
 justify-content:space-evenly;
@@ -50,22 +46,27 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 width:32%;
-height:100%;
 `
 
- export const GroupThread = ({GroupsData})=>
- {
-
-    const navigation = useNavigation();
-    const onPress = ()=>{
-        navigation.navigate('GroupHome', {id: GroupsData.id, name: GroupsData.members})
-    },
+ export const GroupThread = ({
+    navigation,
     backgroundColor="#FFFFFF",
     EventBackgroundColor="#D63030",
     groupName="Web Dev Group",
-    groupMembersNum="4 members"
+    groupMembersNum="4 members",
+    groupImg ="",
+    onPress = ()=>{
+       
+    }
+
+
+ })=>
+ {
+
   
-     const group = GroupsData.groups;
+    
+  
+     
     //  console.warn(GroupsData.groups.name)
     return(
         <CardCont backgroundColor={backgroundColor}>
@@ -74,7 +75,7 @@ height:100%;
                 <MidCont onPress={onPress}>  
                     <Image
                     style={{height:80, width:80, borderRadius: 100}} 
-                    source={{uri:group.imageUri}}/>    
+                    source={{uri:groupImg}}/>    
                     <TextCont>    
                         <Text style={{fontSize:18}}>{groupName}</Text>
                         <Text>{groupMembersNum}</Text>

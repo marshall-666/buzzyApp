@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, View, Text, StyleSheet,FlatList ,TouchableOpacity,SectionList,ScrollView} from 'react-native';
+import { Button, View, Text, StyleSheet,FlatList ,TouchableOpacity,SectionList,ScrollView, Pressable} from 'react-native';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
@@ -13,6 +13,10 @@ import { groupsData } from '../data/tasks'
 import { eventsData } from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import { Configurations } from '../PropConfig/Props'
+import { Available } from '../comps/Available'
+import {Days} from '../data/AvailableTime'
+import {DaysTwo} from '../data/AvailableTime'
+import {DaysThree} from '../data/AvailableTime'
 import { db } from '../firebase/fireStore';
 import { fireAuth } from '../firebase/fireAuth';
 import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
@@ -105,9 +109,11 @@ const ListItem = ({ item }) => {
   );
 };
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+  <Pressable 
+      onPress={onPress} 
+      style={[styles.item, backgroundColor]}>
     <Text style={[styles.title2, textColor]}>{item.title}</Text>
-  </TouchableOpacity>
+  </Pressable>
 );
 const TaskboardScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(category)
@@ -439,7 +445,7 @@ const slotMon =[]
   const [selectedId, setSelectedId] = useState(null);
 
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? Configurations.colors.secCol: Configurations.colors.backCol;
+    const backgroundColor = item.id === selectedId ? Configurations.colors.secCol: Configurations.colors.primCol;
     const color = item.id === selectedId ? 'white' : 'black';
 
     return (
@@ -510,14 +516,31 @@ const slotMon =[]
   {/* {welcome ?  <Text style={styles.title}> {newarray}</Text>: null  } */}
   { Levi ? (<TaskCardsWrapper>
     {
-      <FlatList
-      data={slotMon}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
-    
+    //   <FlatList
+    //   data={slotMon}
+    //   renderItem={renderItem}
+    //   keyExtractor={item => item.id}
+    // />
+    <FlatList
+    contentContainerStyle={{maxHeight:100}}
+    horizontal
+    contentContainerStyle={{alignItems:'center', justifyContent:'flex-start'}}
+    alwaysBounceHorizontal={true}
+    data={Days}
+    renderItem={({item})=> <Available
+                              monthName={item.month}
+                              day={item.day}
+                              date={item.date}
+                              data={<FlatList
+                                contentContainerStyle={{ width:300}}
+                                data={slotMon}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.id}
+                              />}
+                          />}
+  />
     }
-     
+
       </TaskCardsWrapper>) : null}
    
   
@@ -549,14 +572,35 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   }, item: {
-    backgroundColor:Configurations.colors.backCol,
-    padding: 10,
-    marginVertical: 6,
-    marginHorizontal: 40,
-   borderRadius:10
+  //   backgroundColor:Configurations.colors.backCol,
+  //   padding: 10,
+  //   marginVertical: 6,
+  //   marginHorizontal: 40,
+  //  borderRadius:10
+  margin:15,
+        backgroundColor: Configurations.colors.primCol,
+        padding:5,
+        // width:'90%',
+        height:55,
+        flexDirection:'row',
+        justifyContent:'space-evenly',
+        alignItems:'center',
+        borderTopWidth:1.5,
+        borderRightWidth:.5,
+        borderBottomWidth:1.5,
+        borderLeftWidth:1.5,
+        borderRadius:15,
+        borderTopColor:'#ffffff70',
+        borderRightColor:'#ffffff70',
+        borderBottomColor:'#ffffff70',
+        borderLeftColor:'#ffffff70',
+        shadowColor: Configurations.colors.secCol,
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,  
   },
   title2: {
-    fontSize: 24,
+    fontSize: 18,
     textAlign:'center'
   },
 });
