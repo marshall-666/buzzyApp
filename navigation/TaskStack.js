@@ -20,10 +20,13 @@ import LogoutScreen from '../screens/LogoutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
-import { Entypo } from '@expo/vector-icons';
+import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
+import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
+import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
+import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
+import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
 import { useNavigation } from '@react-navigation/native';
-
-
+import { Entypo } from '@expo/vector-icons';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -137,6 +140,12 @@ export default function TaskboardStack() {
       {/* Taskmamagement schedules */}
       <Stack.Screen name='Taskboard' component={Taskboard} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
+
+
+      {/* Course Info */}
+      <Stack.Screen name="CourseInfo" component={CourseInfoScreen} />
+
+
       {/* Taskmamagement schedules */}
       {/* Other group flows */}
       {/* join or create a group */}
@@ -144,7 +153,15 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
-      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
+      
+      {/* Schedule meeting flow */}
+      <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} />
+      <Stack.Screen name="ScheduleMeetingStepTwo" component={ScheduleMeetingStepTwoScreen} />
+      <Stack.Screen name="ScheduleMeetingStepThree" component={ScheduleMeetingStepThreeScreen} />
+      <Stack.Screen name="ScheduleMeetingStepFour" component={ScheduleMeetingStepFourScreen} />
+      <Stack.Screen name="ScheduleMeetingStepFive" component={ScheduleMeetingStepFiveScreen} />
+      
+      
       {/* Other group flows */}
     </Stack.Navigator>
   );

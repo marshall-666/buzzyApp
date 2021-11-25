@@ -1,12 +1,15 @@
 import React from 'react'
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import NavBar from '../comps/NavBar';
-import styled from 'styled-components/native';
 import {Configurations} from '../PropConfig/Props'
 import IndividualEventCard from '../comps/IndividualEventCard';
+import styled from 'styled-components/native';
 import {DateCard} from '../comps/DateCard';
+import {CreateGroup} from '../comps/CreateGroup'
+import { ScheduleMeetingForm } from '../comps/ScheduleMeetingForm';
 
 const lightBg = Configurations.colors.lightBg
+
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -18,36 +21,29 @@ left:5%
 `
 
 
-const ScheduleMeetingStepOneScreen = ({navigation}) => {
+const ScheduleMeetingStepThreeScreen = ({navigation,
+meetingTimeAppear="November 20th",
+}) => {
     return (
         <View style={{flex:1, justifyContent:'flex-end', alignItems:'center',
         backgroundColor:lightBg,}}>
 
             <View style={styles.meetingCardCont}>
-                <IndividualEventCard IconDisplay="none" EventTitle="Meeting name" EventDescrip="meeting description" EventStartTime="" EventDueTime=""/>
+                <IndividualEventCard IconDisplay="none" EventTitle="Meeting name" EventDescrip="meeting description" EventStartTime="" EventDueTime={meetingTimeAppear}/>
             </View>
 
             <View style={styles.mainCont}>
-                <Text style={{fontSize:30, color:Configurations.colors.secCol}}>Step 1/5</Text>
-                
-                    <Text style={{fontSize:18, color:Configurations.colors.backCol}}>
+                <Text style={{fontSize:30, color:Configurations.colors.secCol}}>Step 3/5</Text>
+                <Text style={{fontSize:18, color:Configurations.colors.backCol}}>
                     What Day would you like to meet?
-                    </Text>
+                </Text>
 
-                    <View style={styles.dateCardR1}>
-                        <DateCard onCardPress=  {()=>{navigation.navigate('ScheduleMeetingStepTwo')}}/>
-                        <DateCard  onCardPress=  {()=>{navigation.navigate('ScheduleMeetingStepTwo')}}/>
-                    </View>
-                   
-                    <View style={styles.dateCardR1}>
-                        <DateCard  onCardPress=  {()=>{navigation.navigate('ScheduleMeetingStepTwo')}}/>
-                        <DateCard  onCardPress=  {()=>{navigation.navigate('ScheduleMeetingStepTwo')}}/>
-                    </View>
+                <ScheduleMeetingForm handlePress={()=>{navigation.navigate('ScheduleMeetingStepFour')}}/> 
+                    
                 <View>
            
                 </View>
 
-        
             </View>
             
             <NavBarCon>
@@ -58,11 +54,10 @@ const ScheduleMeetingStepOneScreen = ({navigation}) => {
     )
 }
 
-export default ScheduleMeetingStepOneScreen
+export default ScheduleMeetingStepThreeScreen
 
 const styles = StyleSheet.create({
     mainCont: {
-        width: '100%',
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'space-evenly',
@@ -70,10 +65,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 25,
         backgroundColor: Configurations.colors.primCol,
         height:'80%',
-        padding:'5%'
-    },
-    dateCardR1:{
-        flexDirection:'row'
+        width:'100%',
+        padding:'5%',
     },
     meetingCardCont:{
         width:'100%',

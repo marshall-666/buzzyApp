@@ -114,9 +114,8 @@ const GroupHomeScreen = ({
 
                 </View>
             </ScrollView>
-            <NavBarCon>
-                <NavBar/>
-            </NavBarCon>
+            
+            <NavBar/>
         </View>
     )
 }
@@ -126,6 +125,8 @@ export default GroupHomeScreen
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        alignItems:'center',
+        justifyContent:'center'
     },
 
     topDiv: {

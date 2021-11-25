@@ -4,6 +4,7 @@ import {Configurations} from '../PropConfig/Props'
 import { TimeSlot } from './TimeSlot'
 import { Times } from '../data/AvailableTime'
 import { Days } from '../data/AvailableTime'
+import { itemList } from '../data/tasks'
 
 const dividerCol = Configurations.colors.lightBg
 const bgCol = Configurations.colors.primCol
@@ -13,41 +14,42 @@ export const Available = (
         monthName =" November",
         day="today",
         date = "20th",
-        bgColor={bgCol}
+        bgColor={bgCol},
+        onSlotPress=()=>{}
     }
 ) => {
     return (
         <View  style={styles.card} >
                 
-            <View style={{width:'100%'}}>
+            <View style={{width:'100%',alignItems:'flex-start'}}>
                 <Text style={{
                     fontSize:30, 
-                    color:'white',
-                    fontWeight:'bold'}}>{date}
-                
+                    color:'black',
+                    fontWeight:'bold',
+                    }}>
+                    {date}
                 </Text>
                 
                 <Text style={{
                     fontSize:25, 
-                    color:'white',
-                    fontWeight:'bold'}}>
+                    color:'black',
+                    fontWeight:'bold',
+                    marginLeft:-4}}>
                         {monthName}
                 </Text>
+
             </View>
             
             <FlatList 
                 data={Times}
-                renderItem={({item})=> <TimeSlot 
-                                from={item.from}
-                                to={item.to}/>}
-            
-            />
+                renderItem={({item})=> <TimeSlot  onSlotPress={onSlotPress}from={item.from}
+                to={item.to}/>}/>
 
 
 
             <Text style={{
                     fontSize:25, 
-                    color:'white',
+                    color:'black',
                     fontWeight:'bold'}}> {day} 
             </Text>
         </View>
@@ -59,13 +61,12 @@ export const Available = (
 const styles = StyleSheet.create({
     
     card:{
-        padding:10,
-        // backgroundColor:'red',
-        
-        // height:'80%',
-        
-        marginHorizontal:5,
-        
+        padding:15,
+        backgroundColor:'white',
+        width:"100%",
+        height:'70%',
+        marginTop:10,
+        justifyContent:'space-evenly',
         alignItems:'center',
         borderRadius:10,
         borderTopWidth:1,

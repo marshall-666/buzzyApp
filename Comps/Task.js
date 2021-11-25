@@ -15,25 +15,27 @@ margin-bottom:10px;
 
 // divider
 const Divider = styled.View`
-width:100%;
-height:10px;
-background-color:green;
+width:5%;
+height:100%;
+background-color:#21aab5;
 `
 
 
 // clickable header container for the card
 const TaskHeader = styled.Pressable`
+flex-direction:row;
 width:100%;
 height:80px;
 align-items:center;  
-background-color:yellow;
+background-color:white;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
+overflow:hidden;
 `
 
 // container carrying the content inside the card when its expanded
 const Content = styled.View`
-width:90%;
+width:100%;
 background-color:#e5e5e5;
 height:80%;
 justify-content:space-around;
@@ -92,11 +94,11 @@ export const Task = ({
                setCard(!card) 
                taskHeight()
             }}>
+                <Divider/>
                 <Text>
                 {title}
                 </Text>
             </TaskHeader>
-            <Divider></Divider>
           
        
             <Content display={display}>

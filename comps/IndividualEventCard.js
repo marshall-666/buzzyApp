@@ -1,12 +1,12 @@
 import React from "react";
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet, Pressable} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 
-const CardCont = Styled.View`
+const CardCont = Styled.Pressable`
 width:90%;
 height:120px;
 display:flex;
@@ -44,20 +44,20 @@ height:100%;
 
 const IndividualEventCard = ({
     backgroundColor="#FFFFFF",
-    EventBackgroundColor="#D63030",
+    EventBackgroundColor="green",
     EventTitle="Basketball Practice",
     EventDescrip="Town Center Field #5",
     EventStartTime="September 24th 5:00pm",
     EventDueTime="September 24th 7:00pm",
-    onGroupPress=()=>{},
-    onChatPress=()=>{},
-    IconDisplay="flex"
+    IconDisplay="flex",
+    onCardPress=()=>{}
 
 
 }) => {
   const navigation = useNavigation();
   return (
-  <CardCont backgroundColor={backgroundColor}>
+  <CardCont backgroundColor={backgroundColor} onPress={onCardPress}>
+
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
       <Text style={{fontSize:24}}>{EventTitle.substr(0,15)}</Text>
@@ -76,7 +76,7 @@ const IndividualEventCard = ({
     </IconCont>
   
   
-  
+ 
   </CardCont>
   );
 };
@@ -84,3 +84,4 @@ const IndividualEventCard = ({
 
 
 export default IndividualEventCard;
+
