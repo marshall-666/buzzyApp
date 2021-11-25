@@ -13,6 +13,7 @@ import IndividualEventCard from '../comps/IndividualEventCard';
 
 
 // Data imports===============
+import talktoserver from "../api/talktoserver"
 import { SelectedDay } from '../data/test';
 import { Configurations } from '../PropConfig/Props'
 import { groupsData } from '../data/tasks';
@@ -69,7 +70,21 @@ const primCol = Configurations.colors.primCol
 
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
+  const [dbResult, setDbResult] = useState()
 
+  useEffect (()=>{
+
+      var loadTaskList = {
+        op: 'get_tasks_ls',
+        user_id: '1',
+    }
+    
+      talktoserver(loadTaskList).then((rd) => {
+        setDbResult(rd)
+      })
+
+  },[dbResult])
+  
   useEffect (()=>{
   
   
@@ -84,19 +99,10 @@ const whatever = {
 
 }
     
+console.log(dbResult)
 
-
-        // .then(function (response) {
-        //   console.log(response.data);
-        // })
         
-        // console.log(pushPost.data)
-
-        // console.log(newResult)
-      // console.log(newResult.data)  
-        const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
-        
-        const daysObject = result.data
+        const daysObject = dbResult
         const newArray=[]
 
         for(let i=0; i<daysObject.length; i++)
