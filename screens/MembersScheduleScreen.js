@@ -36,8 +36,8 @@ const MembersScheduleScreen = ({
     
     console.warn(route);
 
-    const members = route.params.info;
-    console.warn(members);
+    // const members = route.params.info;
+    // console.warn(members);
     
     
     // useEffect (()=>{

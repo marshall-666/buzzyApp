@@ -12,7 +12,8 @@ import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
-  
+
+
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = fireAuth.onAuthStateChanged(async authenticatedUser => {
@@ -28,7 +29,7 @@ export default function RootNavigator() {
     // unsubscribe auth listener on unmount
     return unsubscribeAuth;
   }, []);
-  
+
 
    if (isLoading ) {
     return (

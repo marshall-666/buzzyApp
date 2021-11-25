@@ -10,8 +10,8 @@ import { Entypo } from '@expo/vector-icons';
 
 
 const CardCont = Styled.View`
-width:90%;
-height:40%;
+width:90%
+padding: 10px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
@@ -32,7 +32,6 @@ justify-content:space-evenly;
 
 const TextCont = Styled.View`
 display:flex;
-height:80%;
 flex-direction:column;
 justify-content:flex-end;
 `;
@@ -44,23 +43,20 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 width:32%;
-height:100%;
+
 `
 
  export const GroupMemberCard = ({
-     
+     person= "whatevr"
  })=>
  {
     const navigation = useNavigation();
     const onPress=()=>{
-        Alert.alert("navigate to individual members page when created")
-    },
-    backgroundColor="#FFFFFF",
-    EventBackgroundColor="#D63030",
-    memberName="Jody Prinsloo"
+        alert("navigate to individual members page when created")
+    }
    
     return(
-        <CardCont backgroundColor={backgroundColor} style={{ shadowColor: '#000000',
+        <CardCont backgroundColor='#ffffff' style={{ shadowColor: '#000000',
         shadowOpacity: 25,
         shadowOffset: {
             width: 0,
@@ -73,7 +69,7 @@ height:100%;
                     style={{height:80, width:80, borderRadius: 10}} 
                     source={{uri:'https://i.pravatar.cc/300'}}/>    
                     <TextCont>    
-                        <Text style={{fontSize:20}}>{memberName}</Text>
+                        <Text style={{fontSize:20}}>{person}</Text>
                     </TextCont>       
                 </MidCont>
         
