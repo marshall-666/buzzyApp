@@ -1,4 +1,3 @@
-//import API_URL in your file
 import API_URL from './api.js'
 
 //import talktoserver in your file
@@ -109,17 +108,3 @@ const talktoserver = async (param) => {
 }
 
 export default talktoserver
-
-// export const letstalk = async (url, d) => {
-//     try{
-//         const response = await fetch(url, {
-//             method: 'POST',
-//             body: d,
-//         })
-//         if(!response.ok) throw Error('Did not receive data.')
-//         const resData = await response.json()
-//         console.log(resData)
-//     } catch(err) {
-//         console.log(err.message)
-//     } 
-// }
