@@ -16,7 +16,7 @@ export const AuthenticatedUserProvider = ({ children }) => {
       const usersDocRef = doc(db, "users", user.uid );
       const data = await getDoc(usersDocRef);
       setUsers(data.data())
-      console.log( data.data())
+      // console.log( data.data())
       // console.log( data.id)
       // console.log( users.name)
       // console.log( user.name)

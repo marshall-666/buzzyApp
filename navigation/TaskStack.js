@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TaskboardScreen from '../screens/TaskboardScreen '
 import TaskCreatingScreen from "../screens/TaskCreatingScreen"
@@ -12,10 +12,12 @@ import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
 import SingleChatThread from '../screens/SingleChatThreadScreen';
 import AllGroupsScreen from '../screens/AllGroupsScreen';
-import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen' 
+import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen'
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
-import { createDrawerNavigator,DrawerContentScrollView,
-  DrawerItemList, DrawerItem,DrawerActions } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator, DrawerContentScrollView,
+  DrawerItemList, DrawerItem, DrawerActions
+} from '@react-navigation/drawer';
 import LogoutScreen from '../screens/LogoutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
@@ -26,8 +28,9 @@ import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree'
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
 import { useNavigation } from '@react-navigation/native';
-import {Entypo} from '@expo/vector-icons'
-
+import { Entypo } from '@expo/vector-icons'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo} from "firebase/auth";
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -79,9 +82,8 @@ function AllGroups() {
     </Drawer.Navigator>
   );
 }
-
-
 export default function TaskboardStack() {
+  const { user, users } = useContext(AuthenticatedUserContext);
   const navigation = useNavigation();
   const [load, setLoad] = useState(true)
   useEffect(() => {
@@ -90,7 +92,9 @@ export default function TaskboardStack() {
     }, 2000);
 
   })
-  if (load === true) {
+  // console.log(user.metadata)
+  if (user.metadata.createdAt == user.metadata.lastLoginAt) {
+    if (load === true) {
     return (
       <View style={styles.container}>
         <LottieView
@@ -105,12 +109,17 @@ export default function TaskboardStack() {
           source={require('../assets/welcome.json')}
           autoPlay={true}
         />
-        <Text style={styles.title}><Text style={styles.title1}>Welcom to BuzzyBee</Text>
+        <Text style={styles.title}><Text style={styles.title1}>Register successfully.</Text>
         </Text>
       </View>
     )
+    }
   }
-  
+  else {
+    // console.log("Old User")
+  }
+
+
   return (
     <Stack.Navigator initialRouteName="Dashboard"
       screenOptions={{
@@ -120,9 +129,9 @@ export default function TaskboardStack() {
         headerTintColor: '#fff', headerTitleStyle: {
           fontSize: 30
         },
-        
+
         headerRight: () => (
-         
+
           <TouchableOpacity onPress={() => alert("swip right")}>
             <Entypo name="menu" size={30} color="lightgrey" />
           </TouchableOpacity>
@@ -130,9 +139,9 @@ export default function TaskboardStack() {
       }}
     >
       {/* dashboard flow */}
-      <Stack.Screen name="Dashboard"  options={{
-            headerShown: false,
-          }} component={Dashboard} />
+      <Stack.Screen name="Dashboard" options={{
+        headerShown: false,
+      }} component={Dashboard} />
       <Stack.Screen name="Agenda" component={AgendaScreen} />
       <Stack.Screen name="AllGroups" component={AllGroups} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
@@ -157,15 +166,15 @@ export default function TaskboardStack() {
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
       <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
-      
+
       {/* Schedule meeting flow */}
       <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} />
       <Stack.Screen name="ScheduleMeetingStepTwo" component={ScheduleMeetingStepTwoScreen} />
       <Stack.Screen name="ScheduleMeetingStepThree" component={ScheduleMeetingStepThreeScreen} />
       <Stack.Screen name="ScheduleMeetingStepFour" component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="ScheduleMeetingStepFive" component={ScheduleMeetingStepFiveScreen} />
-      
-      
+
+
       {/* Other group flows */}
     </Stack.Navigator>
   );

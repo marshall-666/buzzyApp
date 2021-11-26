@@ -9,7 +9,7 @@ import { Configurations } from '../PropConfig/Props'
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 
@@ -68,12 +68,13 @@ const [endTime,setEndTime] =useState('Pick end Time')
         setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
+       meeting:{
         taskName: taskName,
         location: location, 
         startTime: startTime,
         endTime:endTime,
         category:Value
-      
+        }
       });
       
       
