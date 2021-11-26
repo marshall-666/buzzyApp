@@ -9,8 +9,6 @@ export const AuthenticatedUserContext = createContext({});
 export const AuthenticatedUserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
-
-
   useEffect(() => {
     const getUser = async () => {
       const auth = getAuth();

@@ -63,8 +63,6 @@ const LoginScreen = ({ navigation }) => {
     if (email !== '' && password !== '') {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
-
-
  
         const usersDocRef = doc(db, "users",result.user.uid );
       const data = await getDoc(usersDocRef);

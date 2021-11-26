@@ -55,59 +55,7 @@ height:52.5%;
 width:100%;
 `
 
-const SECTIONS = [
-  {
-    title: 'BuzzyBee',
-    horizontal: true,
-    data: [
-      {
-        key: '1',
-        text: 'Group',
-        uri: 'https://picsum.photos/id/1/200',
-      },
-      {
-        key: '2',
-        text: 'Abbey',
-        uri: 'https://picsum.photos/id/10/200',
-      },
 
-      {
-        key: '3',
-        text: 'Nick',
-        uri: 'https://picsum.photos/id/1002/200',
-      },
-      {
-        key: '4',
-        text: 'Warren',
-        uri: 'https://picsum.photos/id/1006/200',
-      },
-      {
-        key: '5',
-        text: 'Levi',
-        uri: 'https://picsum.photos/id/1008/200',
-      },{
-        key: '6',
-        text: 'Jody',
-        uri: 'https://picsum.photos/id/1008/200',
-      },
-    ],
-  },
- 
-];
-const ListItem = ({ item }) => {
-  return (
-    <View style={styles.item}>
-      <Image
-        source={{
-          uri: item.uri,
-        }}
-        style={styles.itemPhoto}
-        resizeMode="cover"
-      />
-      <Text style={styles.itemText}>{item.text}</Text>
-    </View>
-  );
-};
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <Pressable 
       onPress={onPress} 
@@ -369,7 +317,7 @@ const slotMon =[]
         slotTue.push(meeting)
       }
     });
-
+    console.log(slotTue)
   const { user,users } = useContext(AuthenticatedUserContext);
   var randomColor = require('randomcolor'); // import the script
   var color = randomColor(); // a hex code for an attractive color
@@ -499,6 +447,7 @@ const slotMon =[]
      displayBtn='none'
      displayImg='flex'
     name='Levi'
+    img={users.uri}
     onBtnPress={LeviPress}
   />
    <TaskBtn 

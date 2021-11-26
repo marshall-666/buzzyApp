@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button, TextInput } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
-import AppTimePicker from "./AppTimePicker";
+import {AppTimePicker1, AppTimePicker2} from "./AppTimePicker";
 import RecBtn from "./RecBtn";
 import { Configurations } from '../PropConfig/Props'
 import ModalSelector from 'react-native-modal-selector'
@@ -23,7 +23,7 @@ flex-direction:row;
 `
 const TextCon = Styled.View`
 display:flex;
-height:82.5%;
+height:80%;
 width:300px;
 justify-content:flex-start;
 flex-direction:column;
@@ -65,14 +65,22 @@ const TaskTable = ({
   location,
   startTime,
   endTime,
+  setStartTime,
+  setEndTime,
   setTaskName,
   setLocation,
-  selectedValue,
-  setSelectedValue,
-  itemValue
+  Value,
+  setValue,
+ 
 }) => {
-  // const [selectedValue, setSelectedValue] = useState("Courses")
+  // const [selectedValue, setSelectedValue] = useState('Courses')
+  // const [Value, setValue] = useState('')
+// const [endTime,setEndTime] =useState('Pick end Time')
+  // const [startTime,setStartTime] =useState('Pick start Time')
+   
 
+ 
+  
   let index = 0;
   const data = [
     { key: index++, section: true, label: 'Type' },
@@ -83,6 +91,9 @@ const TaskTable = ({
     // Can also add additional custom keys which are passed to the onChange callback
     // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
+  // console.log(Value)
+  // console.log(startTime)
+  // console.log(endTime)
 
   return (
     <CardCon bgc={Configurations.colors.primCol} height={height} width={width}>
@@ -114,9 +125,26 @@ const TaskTable = ({
           <ModalSelector
             data={data}
             initValue="Coures"
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-            borderBottomWidth="none" />
+            // onValueChange={(label) => setSelectedValue(label)}
+            onChange={(item)=>{ setValue(item.label)}}
+            borderBottomWidth="none" 
+            >
+             <TextInput
+                        style={{borderWidth:1, borderColor:'#ccc', padding:2, height:35, fontSize:18, textAlign:'center' 
+                        ,color:Configurations.colors.secCol}}
+                        editable={false}
+                        placeholder=""
+                        value={Value} />
+          </ModalSelector>
+            
         </PickerCon>
+        {/* <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
+         
+         value={selectedValue}
+         
+        >
+
+        </TextInput3> */}
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Location
         </TextInput2>
@@ -130,13 +158,18 @@ const TaskTable = ({
           Start Time
         </TextInput2> 
         <TimeCon>
-          <AppTimePicker text={startTime}/>
+          <AppTimePicker1
+            startTime={startTime} setStartTime={setStartTime} 
+            />
+          
         </TimeCon>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           End Time
         </TextInput2>
         <TimeCon>
-          <AppTimePicker text={endTime} />
+          <AppTimePicker2
+           endTime={endTime}  setEndTime={setEndTime}  
+           />
         </TimeCon>
       </TextCon>
       <ButtonCon>
@@ -145,6 +178,7 @@ const TaskTable = ({
 
     </CardCon>
   );
+  
 };
 
 

@@ -130,7 +130,9 @@ export default function TaskboardStack() {
       }}
     >
       {/* dashboard flow */}
-      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Dashboard"  options={{
+            headerShown: false,
+          }} component={Dashboard} />
       <Stack.Screen name="Agenda" component={AgendaScreen} />
       <Stack.Screen name="AllGroups" component={AllGroups} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
