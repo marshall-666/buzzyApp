@@ -4,9 +4,6 @@ import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
-import CourseEventCard from '../comps/CourseEventCard';
-import GroupEventCard from '../comps/GroupEventCard';
-import IndividualEventCard from '../comps/IndividualEventCard';
 import { category } from '../data/category'
 import { coursesData } from '../data/tasks'
 import { groupsData } from '../data/tasks'
@@ -15,13 +12,7 @@ import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvide
 import { Configurations } from '../PropConfig/Props'
 import { Available } from '../comps/Available'
 import {Days} from '../data/AvailableTime'
-import {DaysTwo} from '../data/AvailableTime'
-import {DaysThree} from '../data/AvailableTime'
-import { db } from '../firebase/fireStore';
-import { fireAuth } from '../firebase/fireAuth';
-import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
-import { compare } from 'semver';
-import Comparsion from '../comps/Comparsion';
+
 const TaskButtonsWrapper = styled.View`
 margin-top:10%;
 margin-bottom:5%;
@@ -29,14 +20,6 @@ display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
 width:90%;
-`
-
-const TaskButtonWrapper = styled.View`
-margin:3%
-`
-const CourseEventCardWrapper = styled.View`
-height:100%;
-
 `
 const NavBarCon = styled.View`
 position:absolute;
@@ -56,7 +39,7 @@ width:100%;
 `
 
 
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
+const Item = ({ item, onPress, backgroundColor, textColor, navigation }) => (
   <Pressable 
       onPress={onPress} 
       style={[styles.item, backgroundColor]}>
@@ -79,44 +62,54 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
   const [welcome, setWelcome] = useState(true)
- 
-const slotAvailable =[]
+  const [monday, setMonday]= useState(false)
+  const [tuesday, setTuesday]= useState(false)
+
+
+
 const slotTue =[]
 const slotMon =[]
-
   var ScheduleMon = [
     {
       title: "businessCom",
       startTime: new Date("2021/11/22 9:30 AM"),
-      endTime: new Date("2021/11/22 12:20 PM")
+      endTime: new Date("2021/11/22 12:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Design2",
       startTime: new Date("2021/11/22 01:30 PM"),
-      endTime: new Date("2021/11/22 04:20 PM")
+      endTime: new Date("2021/11/22 04:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Communting",
       startTime: new Date("2021/11/22 04:30 PM"),
-      endTime: new Date("2021/11/22 05:20 PM")
+      endTime: new Date("2021/11/22 05:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: " do assignment",
       startTime: new Date("2021/11/22 06:50 PM"),
-      endTime: new Date("2021/11/22 09:30 PM")
+      endTime: new Date("2021/11/22 09:30 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
   ];
   var ScheduleTue = [
-    {
-      title: "Asset Design and intergration",
-      startTime: new Date("2021/11/23 9:30 AM"),
-      endTime: new Date("2021/11/23 12:20 PM")
-    },
-    {
-      title: "Advance Photoshop",
-      startTime: new Date("2021/11/23 01:30 PM"),
-      endTime: new Date("2021/11/23 04:20 PM")
-    },
+    // {
+    //   title: "Asset Design and intergration",
+    //   startTime: new Date("2021/11/23 11:30 AM"),
+    //   endTime: new Date("2021/11/23 12:20 PM")
+    // },
+    // {
+    //   title: "Advance Photoshop",
+    //   startTime: new Date("2021/11/23 01:30 PM"),
+    //   endTime: new Date("2021/11/23 04:20 PM")
+    // },
     {
       title: "Communting",
       startTime: new Date("2021/11/23 04:30 PM"),
@@ -153,80 +146,95 @@ const slotMon =[]
   [{  id:1,
       title: "Monday 08:30-09:20",
       startTime: new Date("2021/11/22 8:30 AM"),
-      endTime: new Date("2021/11/22 9:20 AM")
+      endTime: new Date("2021/11/22 9:20 AM"),
+      day:'Monday'
     },
     { id:2,
       title: "Monday 09:30-10:20",
       startTime: new Date("2021/11/22 9:30 AM"),
-      endTime: new Date("2021/11/22 10:20 AM")
+      endTime: new Date("2021/11/22 10:20 AM"),
+      day:'Monday'
     },
     { id:3,
       title: "Monday 10:30-11:20",
       startTime: new Date("2021/11/22 10:30 AM"),
-      endTime: new Date("2021/11/22 11:20 PM")
+      endTime: new Date("2021/11/22 11:20 PM"),
+      day:'Monday'
     },
     { id:4,
       title: "Monday 11:30-12:20",
       startTime: new Date("2021/11/22 11:30 AM"),
-      endTime: new Date("2021/11/22 12:20 PM")
+      endTime: new Date("2021/11/22 12:20 PM"),
+      day:'Monday'
     },
     { id:5,
       title: "Monday 12:30-13:20",
       startTime: new Date("2021/11/22 12:30 PM"),
-      endTime: new Date("2021/11/22 01:20 PM")
+      endTime: new Date("2021/11/22 01:20 PM"),
+      day:'Monday'
     }, {id:6,
       title: "Monday 13:30-14:20",
       startTime: new Date("2021/11/22 01:30 PM"),
-      endTime: new Date("2021/11/22 02:20 PM")
+      endTime: new Date("2021/11/22 02:20 PM"),
+      day:'Monday'
     },
     { id:7,
       title: "Monday 14:30-15:20",
       startTime: new Date("2021/11/22 02:30 PM"),
-      endTime: new Date("2021/11/22 03:20 PM")
+      endTime: new Date("2021/11/22 03:20 PM"),
+      day:'Monday'
     },
     { id:8,
       title: "Monday 15:30-16:20",
       startTime: new Date("2021/11/22 03:30 PM"),
-      endTime: new Date("2021/11/22 04:20 PM")
+      endTime: new Date("2021/11/22 04:20 PM"),
+      day:'Monday'
     },
     { id:9,
       title: "Monday 16:30-17:20",
       startTime: new Date("2021/11/22 04:30 PM"),
-      endTime: new Date("2021/11/22 05:20 PM")
+      endTime: new Date("2021/11/22 05:20 PM"),
+      day:'Monday'
     },
     { id:10,
       title: "Monday 17:30-18:20",
       startTime: new Date("2021/11/22 05:30 PM"),
-      endTime: new Date("2021/11/22 06:20 PM")
+      endTime: new Date("2021/11/22 06:20 PM"),
+      day:'Monday'
     },
     { id:11,
       title: "Monday 18:30-19:20",
       startTime: new Date("2021/11/22 06:30 PM"),
-      endTime: new Date("2021/11/22 07:20 PM")
+      endTime: new Date("2021/11/22 07:20 PM"),
+      day:'Monday'
     },
     { id:12,
       title: "Monday 19:30-20:20",
       startTime: new Date("2021/11/22 07:30 PM"),
-      endTime: new Date("2021/11/22 08:20 PM")
+      endTime: new Date("2021/11/22 08:20 PM"),
+      day:'Monday'
     },
     { id:13,
       title: "Monday 20:30-21:20",
       startTime: new Date("2021/11/22 08:30 PM"),
-      endTime: new Date("2021/11/22 09:20 PM")
+      endTime: new Date("2021/11/22 09:20 PM"),
+      day:'Monday'
     },
     { id:14,
       title: "Monday 21:30-22:20",
       startTime: new Date("2021/11/22 09:30 PM"),
-      endTime: new Date("2021/11/22 10:20 PM")
+      endTime: new Date("2021/11/22 10:20 PM"),
+      day:'Monday'
     },
     { id:15,
       title: "Monday 22:30-23:20",
       startTime: new Date("2021/11/22 10:30 PM"),
-      endTime: new Date("2021/11/22 11:20 PM")
+      endTime: new Date("2021/11/22 11:20 PM"),
+      day:'Monday'
     },
   
     ]
-    const comparsionMon = meetingMon.forEach(function (meeting, i) {
+     meetingMon.forEach(function (meeting, i) {
       if (slotFitsMon(meeting) == true) {
         // return   meeting.title
         // console.log(meeting.title)
@@ -237,87 +245,106 @@ const slotMon =[]
   [{  id:1,
       title: "Tuesday 08:30-09:20",
       startTime: new Date("2021/11/23 8:30 AM"),
-      endTime: new Date("2021/11/23 9:20 AM")
+      endTime: new Date("2021/11/23 9:20 AM"),
+      day: 'Tuesday'
     },
     { id:2,
       title: "Tuesday 09:30-10:20",
       startTime: new Date("2021/11/23 9:30 AM"),
-      endTime: new Date("2021/11/23 10:20 AM")
+      endTime: new Date("2021/11/23 10:20 AM"),
+      day: 'Tuesday'
     },
     { id:3,
       title: "Tuesday 10:30-11:20",
       startTime: new Date("2021/11/23 10:30 AM"),
-      endTime: new Date("2021/11/23 11:20 PM")
+      endTime: new Date("2021/11/23 11:20 PM"),
+      day: 'Tuesday'
     },
     { id:4,
       title: "Tuesday 11:30-12:20",
       startTime: new Date("2021/11/23 11:30 AM"),
-      endTime: new Date("2021/11/23 12:20 PM")
+      endTime: new Date("2021/11/23 12:20 PM"),
+      day: 'Tuesday'
     },
     { id:5,
       title: "Tuesday 12:30-13:20",
       startTime: new Date("2021/11/23 12:30 PM"),
-      endTime: new Date("2021/11/23 01:20 PM")
+      endTime: new Date("2021/11/23 01:20 PM"),
+      day: 'Tuesday'
     }, {id:6,
       title: "Tuesday 13:30-14:20",
       startTime: new Date("2021/11/23 01:30 PM"),
-      endTime: new Date("2021/11/23 02:20 PM")
+      endTime: new Date("2021/11/23 02:20 PM"),
+      day: 'Tuesday'
     },
     { id:7,
       title: "Tuesday 14:30-15:20",
       startTime: new Date("2021/11/23 02:30 PM"),
-      endTime: new Date("2021/11/23 03:20 PM")
+      endTime: new Date("2021/11/23 03:20 PM"),
+      day: 'Tuesday'
     },
     { id:8,
       title: "Tuesday 15:30-16:20",
       startTime: new Date("2021/11/23 03:30 PM"),
-      endTime: new Date("2021/11/23 04:20 PM")
+      endTime: new Date("2021/11/23 04:20 PM"),
+      day: 'Tuesday'
     },
     { id:9,
       title: "Tuesday 16:30-17:20",
       startTime: new Date("2021/11/23 04:30 PM"),
-      endTime: new Date("2021/11/23 05:20 PM")
+      endTime: new Date("2021/11/23 05:20 PM"),
+      day: 'Tuesday'
     },
     { id:10,
       title: "Tuesday 17:30-18:20",
       startTime: new Date("2021/11/23 05:30 PM"),
-      endTime: new Date("2021/11/23 06:20 PM")
+      endTime: new Date("2021/11/23 06:20 PM"),
+      day: 'Tuesday'
     },
     { id:11,
       title: "Tuesday 18:30-19:20",
       startTime: new Date("2021/11/23 06:30 PM"),
-      endTime: new Date("2021/11/23 07:20 PM")
+      endTime: new Date("2021/11/23 07:20 PM"),
+      day: 'Tuesday'
     },
     { id:12,
       title: "Tuesday 19:30-20:20",
       startTime: new Date("2021/11/23 07:30 PM"),
-      endTime: new Date("2021/11/23 08:20 PM")
+      endTime: new Date("2021/11/23 08:20 PM"),
+      day: 'Tuesday'
     },
     { id:13,
       title: "Tuesday 20:30-21:20",
       startTime: new Date("2021/11/23 08:30 PM"),
-      endTime: new Date("2021/11/23 09:20 PM")
+      endTime: new Date("2021/11/23 09:20 PM"),
+      day: 'Tuesday'
     },
     { id:14,
       title: "Tuesday 21:30-22:20",
       startTime: new Date("2021/11/23 09:30 PM"),
-      endTime: new Date("2021/11/23 10:20 PM")
+      endTime: new Date("2021/11/23 10:20 PM"),
+      day: 'Tuesday'
     },
     { id:15,
       title: "Tuesday 22:30-23:20",
       startTime: new Date("2021/11/23 10:30 PM"),
-      endTime: new Date("2021/11/23 11:20 PM")
+      endTime: new Date("2021/11/23 11:20 PM"),
+      day: 'Tuesday'
     },
   
     ]
-    const comparsionTue = meetingTue.forEach(function (meeting, i) {
+     meetingTue.forEach(function (meeting, i) {
       if (slotFitsTue(meeting) == true) {
-        // return   meeting.title
-        // console.log(meeting.title)
+        
         slotTue.push(meeting)
+        // console.log(slotTue)
       }
     });
-    console.log(slotTue)
+    
+const slotAvailable =[...slotMon, ...slotTue]
+// console.log(slotAvailable) 
+
+
   const { user,users } = useContext(AuthenticatedUserContext);
   var randomColor = require('randomcolor'); // import the script
   var color = randomColor(); // a hex code for an attractive color
@@ -387,7 +414,7 @@ const slotMon =[]
     setWelcome(false)
   }
 
-  // const renderItem = ({ item }) => (
+  // const renderItem = ({ item }) => ( 
   //   <Item title={item.title} />
   // );
   const [selectedId, setSelectedId] = useState(null);
@@ -399,7 +426,11 @@ const slotMon =[]
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() =>  {
+                          setSelectedId(item.id)
+                          navigation.navigate("ScheduleMeetingS1", {info:item.title})
+                        }                                                  
+                      }
         backgroundColor={{ backgroundColor }}
         textColor={{ color }}
       />
@@ -470,23 +501,79 @@ const slotMon =[]
     //   renderItem={renderItem}
     //   keyExtractor={item => item.id}
     // />
+    
     <FlatList
     contentContainerStyle={{maxHeight:100}}
     horizontal
     contentContainerStyle={{alignItems:'center', justifyContent:'flex-start'}}
     alwaysBounceHorizontal={true}
     data={Days}
-    renderItem={({item})=> <Available
-                              monthName={item.month}
-                              day={item.day}
-                              date={item.date}
-                              data={<FlatList
-                                contentContainerStyle={{ width:300}}
-                                data={slotMon}
-                                renderItem={renderItem}
-                                keyExtractor={item => item.id}
-                              />}
-                          />}
+    renderItem={({item})=> 
+                      { 
+                        if(item.day === "Monday")
+                        {
+                              return (
+                                    <Available
+                                    monthName={item.month}
+                                    // day={item.day}
+                                    date={item.date}
+                                    day={item.day}
+                                    data=
+                                      { 
+                                          <FlatList
+                                                contentContainerStyle={{ width:300}}
+                                                data={slotMon}
+                                                renderItem={renderItem}
+                                                keyExtractor={item => item.id}
+                                          />
+                                      }
+                                />
+                              )                       
+                        }
+
+                        else if (item.day === "Tuesday")
+                        {
+                          return (
+                                <Available
+                                monthName={item.month}
+                                // day={item.day}
+                                date={item.date}
+                                day={item.day}
+                                data=
+                                  {
+                                      <FlatList
+                                            contentContainerStyle={{ width:300}}
+                                            data={slotTue}
+                                            renderItem={renderItem}
+                                            keyExtractor={item => item.id}
+                                      />
+                                  }
+                            />
+                          )                       
+                    }
+                        else if (item.day === "Wednesday")
+                        {
+                          return (
+                                <Available
+                                monthName={item.month}
+                                // day={item.day}
+                                date={item.date}
+                                day={item.day}
+                                data=
+                                  {
+                                      <FlatList
+                                            contentContainerStyle={{ width:300}}
+                                            data={slotTue}
+                                            renderItem={renderItem}
+                                            keyExtractor={item => item.id}
+                                      />
+                                  }
+                            />
+                          )                       
+                    }
+                      }
+                    
+                    }
   />
     }
 

@@ -20,8 +20,15 @@ const lightBg = Configurations.colors.lightBg
 
 const ScheduleMeetingStepTwoScreen = ({navigation,
 meetingTimeAppear="November 20th",
-date="November 20th"
+date="November 20th",
+route
 }) => {
+    
+    
+    const MeetingTime =  route.params
+    console.log(MeetingTime)
+
+
     return (
         <View style={{flex:1, justifyContent:'flex-end',
         backgroundColor:lightBg,}}>
