@@ -178,7 +178,6 @@ const DashboardScreen = ({navigation }) => {
             // console.log(grpTasks)
           }
             
-
           else if (taskList[i].cname == 'courses')
           {
             setCourseTasks(taskList)
