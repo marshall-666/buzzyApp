@@ -65,10 +65,10 @@ const TaskBtn = ({
        <Image style={styles.tinyLogo} source={{uri:img}}/>
        </ImgCon>
     <BtnCon style={{
-    shadowColor: '#3D5A80',
-    shadowOffset: {width: -5, height: -3},
-    shadowOpacity: .5,
-    shadowRadius: 10,
+    shadowColor: '#CFEEFF',
+    shadowOffset: {width: -6, height: -3},
+    shadowOpacity: 1,
+    shadowRadius: 7,
   }}
         bgc={taskBtnColor} 
         bradius={bradius} 

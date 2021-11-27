@@ -38,7 +38,7 @@ meetingTimeAppear="November 20th",
                     What Day would you like to meet?
                 </Text>
 
-                <ScheduleMeetingForm handlePress={()=>{navigation.navigate('ScheduleMeetingStepFour')}}/> 
+                <ScheduleMeetingForm handlePress={()=>{navigation.navigate('ScheduleMeetingS3')}}/> 
                     
                 <View>
            
