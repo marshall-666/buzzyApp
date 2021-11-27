@@ -67,7 +67,8 @@ const GroupHomeScreen = ({
                             scrollEnabled={true}
                             data={MembersData}
                             renderItem={({item})=> <GroupMemberCard 
-                                                    person={item.members.name}/>}
+                                                    person={item.members.name}
+                                                    />}
                         />
                         
                         

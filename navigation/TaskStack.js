@@ -27,6 +27,8 @@ import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
 import { useNavigation } from '@react-navigation/native';
 import {Entypo} from '@expo/vector-icons'
+import IndividualMemberScreen from '../screens/IndividualMemberScreen'
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -163,6 +165,9 @@ export default function TaskboardStack() {
       <Stack.Screen name="ScheduleMeetingStepFour" component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="ScheduleMeetingStepFive" component={ScheduleMeetingStepFiveScreen} />
       
+      {/* Individual Member Screen */}
+      
+      <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
       
       {/* Other group flows */}
     </Stack.Navigator>

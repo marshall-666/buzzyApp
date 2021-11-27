@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
@@ -8,11 +8,47 @@ import { GroupThread } from '../comps/GroupThread';
 import {GroupsData} from '../data/GroupsData';
 import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
+import talktoserver from "../api/talktoserver"
 
 
 const lightBg = Configurations.colors.lightBg
 const AllGroupsScreen = ({navigation}) => {
+
+
+const [dbResult, setDbResult] = useState()
+const [numOfGroups, setNumOfGroups] = useState()
+const [gname, setGname] = useState()
+const [memCount, setMemCount] = useState()
+useEffect(()=>{
+var loadGroupList = {
+    op: 'get_group_ls',
+    user_id: '',
+}
+
+talktoserver(loadGroupList).then((rd) => {
+    setDbResult(rd)
+    console.log(dbResult[1].mem_count)
+    console.log("/////////////////////////////////")
+})
+},[]) 
+
+useEffect(()=>{
+        
+    const updateGroupList = async () =>
+    {
+        setGname(dbResult[1].group.gname)
+        setNumOfGroups(dbResult[0].group_count)
+        setMemCount(dbResult[1].mem_count)
+    }
     
+updateGroupList()
+
+},[dbResult])
+
+
+
+
+
     return (
         <View style={styles.header}>
         
@@ -21,7 +57,7 @@ const AllGroupsScreen = ({navigation}) => {
                     You are currently in
                 </Text>
                 <Text style={{fontSize:22}} >
-                    3 Groups
+                    {numOfGroups} Group(s)
                 </Text>
             </View>
             <View style={styles.lowerDiv}>
@@ -32,9 +68,10 @@ const AllGroupsScreen = ({navigation}) => {
                         scrollEnabled={true}
                         data={GroupsData}
                         renderItem={({item})=> <GroupThread 
-                                                        groupName={item.groups.name}
-                                                        groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {info: item.groups.name})}}/>}
+                                                groupName={gname}
+                                                groupMembersNum={numOfGroups + " " + "members"}    
+                                                groupImg={item.groups.imageUri}
+                                                onPress={()=>{ navigation.navigate('GroupHome', {info: item.groups.name})}}/>}
                         />
                     
                 </View>
