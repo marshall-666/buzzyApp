@@ -100,16 +100,7 @@ const slotMon =[]
     },
   ];
   var ScheduleTue = [
-    // {
-    //   title: "Asset Design and intergration",
-    //   startTime: new Date("2021/11/23 11:30 AM"),
-    //   endTime: new Date("2021/11/23 12:20 PM")
-    // },
-    // {
-    //   title: "Advance Photoshop",
-    //   startTime: new Date("2021/11/23 01:30 PM"),
-    //   endTime: new Date("2021/11/23 04:20 PM")
-    // },
+
     {
       title: "Communting",
       startTime: new Date("2021/11/23 04:30 PM"),
