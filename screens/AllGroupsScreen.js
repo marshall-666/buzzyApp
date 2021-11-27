@@ -108,7 +108,6 @@ export default AllGroupsScreen
 const styles = StyleSheet.create({
     head:
     {
-        
         alignItems:'center',
         justifyContent:'center',
         height:150,

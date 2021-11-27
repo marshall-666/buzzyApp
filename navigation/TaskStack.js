@@ -159,11 +159,11 @@ export default function TaskboardStack() {
       <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
       
       {/* Schedule meeting flow */}
-      <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} />
-      <Stack.Screen name="ScheduleMeetingStepTwo" component={ScheduleMeetingStepTwoScreen} />
-      <Stack.Screen name="ScheduleMeetingStepThree" component={ScheduleMeetingStepThreeScreen} />
-      <Stack.Screen name="ScheduleMeetingStepFour" component={ScheduleMeetingStepFourScreen} />
-      <Stack.Screen name="ScheduleMeetingStepFive" component={ScheduleMeetingStepFiveScreen} />
+      {/* <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} /> */}
+      <Stack.Screen name="ScheduleMeetingS1" component={ScheduleMeetingStepTwoScreen} />
+      <Stack.Screen name="ScheduleMeetingS2" component={ScheduleMeetingStepThreeScreen} />
+      <Stack.Screen name="ScheduleMeetingS3" component={ScheduleMeetingStepFourScreen} />
+      <Stack.Screen name="ScheduleMeetingS4" component={ScheduleMeetingStepFiveScreen} />
       
       {/* Individual Member Screen */}
       
