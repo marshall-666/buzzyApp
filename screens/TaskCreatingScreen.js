@@ -9,7 +9,9 @@ import { Configurations } from '../PropConfig/Props'
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
+import { db } from '../firebase/fireStore';
+import talktoserver from "../api/talktoserver"
 
 
 const taskCategory = [
@@ -53,25 +55,55 @@ left:5%
 `
 const TaskCreatingScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(taskCategory)
-  const [taskdata,setTaskdata]=useState({
-  taskName: "",
-  description: "",
-  startTime: "",
-  endTime: "",})
-
-
+const [taskName, setTaskName] = useState('');
+  const [location, setLocation] = useState('');
+  const [dbResult, setDbResult] = useState()
+const [Value, setValue] = useState('Course')
   const { user,users } = useContext(AuthenticatedUserContext);
-
+const [endTime,setEndTime] =useState('Pick end Time')
+  const [startTime,setStartTime] =useState('Pick start Time')
+ 
   const onHandleCreate = () => {
-     
-       navigation.navigate('Taskboard')
-  }
+    
+        setDoc(doc(db, "tasks", user.uid), {
+        uid: user.uid,
+        id: user.uid,
+       meeting:{
+        taskName: taskName,
+        location: location, 
+        startTime: startTime,
+        endTime:endTime,
+        category:Value
+        }
+      });
+      
+      
+var createTask = {
+    op: 'create_task',
+    tkname: taskName,
+    descrip: Value,
+    category_id: '1',
+    start_t: startTime,
+    end_t: endTime,
+    loca: location,
+    group_id: '1',
+    user_id: user.uid,
+}
 
+talktoserver(createTask).then((rd) => {
+    setDbResult(rd) 
+    console.log(dbResult)
+})
+
+      navigation.navigate('Taskboard')
+    }
+  
+    console.log(Value)
 
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
-    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol  }}>
       <View style={styles.header}>
        
       </View>
@@ -80,17 +112,27 @@ const TaskCreatingScreen = ({ navigation }) => {
           {
             tasks.map((o, i) => (
               <TaskButtonWrapper key={i}>
-                <TaskBtn id={o.id} taskNum={o.taskNum} taskCate={o.taskCate} />
+                <TaskBtn id={o.id} taskNum={o.taskNum} taskCate={o.taskCate} margin={0} />
               </TaskButtonWrapper>
             )
             )
           }
 
         </TaskButtonWrapper>
-        <TaskTable onRecBtnPress={onHandleCreate}  />
+        <TaskTable onRecBtnPress={onHandleCreate} setTaskName={setTaskName}  
+        setLocation={setLocation} taskName={taskName} location={location} 
+ Value={Value} setValue={setValue} 
+ startTime={startTime} setStartTime={setStartTime}
+ endTime={endTime} setEndTime={setEndTime}
+
+ />
 
       </Wrapper>
       <NavBarCon>
+
+
+
+
         <NavBar />
       </NavBarCon>
     </KeyboardAvoidingView>

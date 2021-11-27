@@ -478,6 +478,7 @@ const slotAvailable =[...slotMon, ...slotTue]
      displayBtn='none'
      displayImg='flex'
     name='Levi'
+    img={users.uri}
     onBtnPress={LeviPress}
   />
    <TaskBtn 
