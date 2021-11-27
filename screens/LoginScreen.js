@@ -6,8 +6,9 @@ import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'
 import RecBtn from '../comps/RecBtn';
 import { Configurations } from '../PropConfig/Props'
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import  ErrorInfo  from '../comps/ErrorInfo'
+import LottieView from 'lottie-react-native';
 
 const LogoWrapper = styled.View`
 margin-top:8%;
@@ -46,7 +47,13 @@ const LoginScreen = ({ navigation }) => {
   const [rightIcon, setRightIcon] = useState('eye');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  
+  const [load, setLoad] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(false);
+    }, 2000);
+
+  })
 
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
@@ -59,13 +66,9 @@ const LoginScreen = ({ navigation }) => {
   };
   const onLoginPress = async () => {
     const auth = getAuth();
-    
     if (email !== '' && password !== '') {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
-
-
- 
         const usersDocRef = doc(db, "users",result.user.uid );
       const data = await getDoc(usersDocRef);
       setUsers(data.data())
@@ -254,5 +257,24 @@ const styles = StyleSheet.create({
     marginTop: '7.5%',
 
   },
-
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    width: '70%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  title1: {
+    width: '100%',
+    color: Configurations.colors.secCol,
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: '400'
+  },
+ 
 });

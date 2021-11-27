@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TaskboardScreen from '../screens/TaskboardScreen '
 import TaskCreatingScreen from "../screens/TaskCreatingScreen"
@@ -12,10 +12,9 @@ import GroupHomeScreen from '../screens/GroupHomeScreen';
 import AllChats from '../screens/AllChatsScreen';
 import SingleChatThread from '../screens/SingleChatThreadScreen';
 import AllGroupsScreen from '../screens/AllGroupsScreen';
-import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen' 
+import ScheduleMeetingScreen from '../screens/ScheduleMeetingScreen'
 import MembersScheduleScreen from '../screens/MembersScheduleScreen';
-import { createDrawerNavigator,DrawerContentScrollView,
-  DrawerItemList, DrawerItem,DrawerActions } from '@react-navigation/drawer';
+import {  createDrawerNavigator, DrawerActions } from '@react-navigation/drawer';
 import LogoutScreen from '../screens/LogoutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
@@ -26,11 +25,14 @@ import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree'
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
 import { useNavigation } from '@react-navigation/native';
-import {Entypo} from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
+//drawer//
 function Taskboard() {
 
   return (
@@ -63,7 +65,6 @@ function Dashboard() {
     </Drawer.Navigator>
   );
 }
-
 function AllGroups() {
   return (
     <Drawer.Navigator
@@ -79,9 +80,42 @@ function AllGroups() {
     </Drawer.Navigator>
   );
 }
+function ScheduleMeeting() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+        drawerType: "back",
+        drawerPosition: "right",
+      }}>
+      <Drawer.Screen name='Back' component={ScheduleMeetingScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
+      <Drawer.Screen name="Account" component={AccountScreen} />
+      <Drawer.Screen name="Logout" component={LogoutScreen} />
+    </Drawer.Navigator>
+  );
+}
+//drawer//
 
+const NavigationDrawerStructure = (props)=> {
+  //Structure for the navigatin Drawer
+  const toggleDrawer = () => {
+    //Props to open/close the drawer
+    props.navigationProps.toggleDrawer();
+  };
+
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={()=> toggleDrawer()}>
+        {/*Donute Button Image */}
+        <Entypo name="menu" size={30} color="lightgrey" />
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 export default function TaskboardStack() {
+  const { user, users } = useContext(AuthenticatedUserContext);
   const navigation = useNavigation();
   const [load, setLoad] = useState(true)
   useEffect(() => {
@@ -90,27 +124,34 @@ export default function TaskboardStack() {
     }, 2000);
 
   })
-  if (load === true) {
-    return (
-      <View style={styles.container}>
-        <LottieView
-          ref={(ref) => {
-            anim = ref
-          }}
-          style={{
-            width: 350,
-            height: 350,
-            backgroundColor: '#fff',
-          }}
-          source={require('../assets/welcome.json')}
-          autoPlay={true}
-        />
-        <Text style={styles.title}><Text style={styles.title1}>Welcom to BuzzyBee</Text>
-        </Text>
-      </View>
-    )
+  // console.log(user.metadata)
+  if (user.metadata.createdAt == user.metadata.lastLoginAt) {
+    if (load === true) {
+      return (
+        <View style={styles.container}>
+          <LottieView
+            ref={(ref) => {
+              anim = ref
+            }}
+            style={{
+              width: 350,
+              height: 350,
+              backgroundColor: '#fff',
+            }}
+            source={require('../assets/welcome.json')}
+            autoPlay={true}
+          />
+          <Text style={styles.title}><Text style={styles.title1}>Register successfully.</Text>
+          </Text>
+        </View>
+      )
+    }
   }
-  
+  else {
+    // console.log("Old User")
+  }
+
+
   return (
     <Stack.Navigator initialRouteName="Dashboard"
       screenOptions={{
@@ -120,17 +161,21 @@ export default function TaskboardStack() {
         headerTintColor: '#fff', headerTitleStyle: {
           fontSize: 30
         },
-        
-        headerRight: () => (
-         
-          <TouchableOpacity onPress={() => alert('Swide left')}>
-            <Entypo name="menu" size={30} color="lightgrey"/>
-          </TouchableOpacity>
-        ),
-      }}
+        headerRight: 
+         () => <NavigationDrawerStructure
+         navigationProps={navigation}
+       />,
+        // (
+        //   <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+        //     <Entypo name="menu" size={30} color="lightgrey" />
+        //   </TouchableOpacity>
+        // ),
+      }
+    
+    }
     >
       {/* dashboard flow */}
-      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Dashboard" options={{  headerShown: false }} component={Dashboard} />
       <Stack.Screen name="Agenda" component={AgendaScreen} />
       <Stack.Screen name="AllGroups" component={AllGroups} />
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
@@ -154,8 +199,8 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
-      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeetingScreen} />
-      
+      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeeting} />
+
       {/* Schedule meeting flow */}
       {/* <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} /> */}
       <Stack.Screen name="ScheduleMeetingS1" component={ScheduleMeetingStepTwoScreen} />
