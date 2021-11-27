@@ -19,7 +19,7 @@ import { collection, getDoc, addDoc,doc} from "firebase/firestore";
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
 margin-top:14%;
-margin-bottom:10%;
+margin-bottom:2.5%;
 display:flex;
 flex-wrap:nowrap;
 flex-direction:row;

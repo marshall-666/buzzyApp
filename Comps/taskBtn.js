@@ -23,10 +23,10 @@ background-color:${(props)=>props.bgc};
 justify-content:center;
 align-items:flex-start;
 border-radius:${(props)=>props.bradius}px;
-padding:10px
 box-shadow: 0 3px 5px rgba(0, 0, 0 , 0.3);
 margin-right:${(props)=>props.margin}px
 display:${(props)=>props.displayImg}
+
 `
 const TextInput =Styled.Text`
 font-size:32px;
@@ -61,7 +61,7 @@ const TaskBtn = ({
     <View>
     <TouchableOpacity
     onPress={onBtnPress}
-    ><ImgCon bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayImg={displayImg} >
+    ><ImgCon  bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayImg={displayImg} >
        <Image style={styles.tinyLogo} source={{uri:img}}/>
        </ImgCon>
     <BtnCon style={{
@@ -90,8 +90,10 @@ const TaskBtn = ({
 const styles = StyleSheet.create({
 
   tinyLogo: {
-    width: 80,
-    height: 80,
+    width: 95,
+    height: 95,
+    resizeMode: 'contain',
+    borderRadius:30
   },
 
 });

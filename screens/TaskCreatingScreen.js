@@ -9,7 +9,7 @@ import { Configurations } from '../PropConfig/Props'
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
-import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
+import { doc, setDoc,serverTimestamp ,collection,addDoc } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 
@@ -65,7 +65,7 @@ const [endTime,setEndTime] =useState('Pick end Time')
  
   const onHandleCreate = () => {
     
-        setDoc(doc(db, "tasks", user.uid), {
+      setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
        meeting:{
@@ -73,10 +73,11 @@ const [endTime,setEndTime] =useState('Pick end Time')
         location: location, 
         startTime: startTime,
         endTime:endTime,
-        category:Value
+        descrip:Value
         }
       });
-      
+     
+     
       
 var createTask = {
     op: 'create_task',
@@ -89,16 +90,17 @@ var createTask = {
     group_id: '1',
     user_id: user.uid,
 }
-
-talktoserver(createTask).then((rd) => {
+console.log(createTask)
+ talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
     console.log(dbResult)
+  
 })
 
       navigation.navigate('Taskboard')
     }
   
-    console.log(Value)
+    
 
   return (
 
