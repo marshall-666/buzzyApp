@@ -4,15 +4,15 @@ import styled from 'styled-components/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { Configurations } from '../PropConfig/Props'
-
+import RecBtn from './RecBtn'
 const primCol = Configurations.colors.primCol
 const butCol = Configurations.colors.butCol
 
 
 const OptCont = styled.View`
 width:100%;
-height:90%;
-justify-content:space-around;
+height:85%;
+justify-content:center;
 `
 
 const ButPress = styled.Pressable`
@@ -23,6 +23,7 @@ justify-content:center;
 align-items:center;
 padding:5px;
 border-radius:5px;
+
 `
 
 
@@ -44,50 +45,68 @@ margin-left:-5px;
 color:${Configurations.colors.secCol}
 `
 const InputBox = styled.TextInput`
-width:100%;
-height:45px;
-border-bottom-width:3px;
+width:95%;
+height:40px;
+border-bottom-width:1px;
 border-bottom-color:${Configurations.colors.secCol};
 color:white;
 `
 const InputContainer = styled.View`
 align-items:flex-start;
-
+margin-bottom:7.5%
 `
 const Notes = styled.TextInput`
 width:100%;
-height:30%;
+height:25%;
 background:white;
-borderRadius:10;
+borderRadius:10px;
+margin-bottom:5%
+`
+const BtnCon = styled.View `
+width:100%;
+height:20%;
+display:flex;
+flex-direction:row
+justify-content:space-between;
+align-items:center
 `
 
 export const  ScheduleMeetingForm = ({
     handlePress=()=>{},
-    inputTitle="Meeting Name",
-    inputTitle2="Event Colour",
-    buttLabel="Next"
+    inputTitle,
+    setInputTitle,
+    inputTitle2,
+    setInputTitle2,
+    description,
+    setDescription,
+    Next=()=>{},
+    Back=()=>{}
 })=> {
     return (
         
                     
             <OptCont>
-                <ScrollView contentContainerStyle={{height:'100%', justifyContent:'space-evenly'}}>
+                <ScrollView contentContainerStyle={{height:'100%', }}>
                 <InputContainer>
-                    <SubTxt style={{color:Configurations.colors.secCol}}> {inputTitle} </SubTxt>
-                    <InputBox placeholder="Buzzy Bee" placeholderTextColor="lightgrey"/>
+                    <SubTxt style={{color:Configurations.colors.secCol}}>  Meeting name</SubTxt>
+                    <InputBox placeholder="Buzzy Bee" placeholderTextColor="lightgrey" value={inputTitle}/>
                 </InputContainer>
             
                 <InputContainer>
-                    <SubTxt style={{color:Configurations.colors.secCol}}> {inputTitle2} </SubTxt>
-                    <InputBox placeholder="Red" placeholderTextColor="lightgrey"/>
+                    <SubTxt style={{color:Configurations.colors.secCol}}> Task color </SubTxt>
+                    <InputBox placeholder="Red" placeholderTextColor="lightgrey" value={inputTitle2}/>
                 </InputContainer>
                 
-                <Notes placeholder="meeting notes" placeholderTextColor="lightgrey"/>
+                <Notes placeholder="meeting notes" placeholderTextColor="lightgrey" value={description}/>
                
             
-            <ButPress onPress={handlePress}>
-                <Text>{buttLabel}</Text>
-            </ButPress>
+            {/* <ButPress onPress={handlePress}>
+                <Text style={{fontSize:20}}>{buttLabel}</Text>
+            </ButPress> */}
+            <BtnCon>
+            <RecBtn text="Back" width={150} height={60} onRecBtnPress={Back}/>
+            <RecBtn text="Next" width={150} height={60} onRecBtnPress={Next}/>
+            </BtnCon>
                 </ScrollView>
             
             </OptCont>
