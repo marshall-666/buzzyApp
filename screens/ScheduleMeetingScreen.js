@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, View, Text, StyleSheet,FlatList ,TouchableOpacity,SectionList,ScrollView} from 'react-native';
+import { Button, View, Text, StyleSheet,FlatList ,TouchableOpacity,SectionList,ScrollView, Pressable} from 'react-native';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
 import TaskCardArea from '../comps/taskCardArea';
-import CourseEventCard from '../comps/CourseEventCard';
-import GroupEventCard from '../comps/GroupEventCard';
-import IndividualEventCard from '../comps/IndividualEventCard';
 import { category } from '../data/category'
 import { coursesData } from '../data/tasks'
 import { groupsData } from '../data/tasks'
 import { eventsData } from '../data/tasks'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import { Configurations } from '../PropConfig/Props'
-import { db } from '../firebase/fireStore';
-import { fireAuth } from '../firebase/fireAuth';
-import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
-import { compare } from 'semver';
-import Comparsion from '../comps/Comparsion';
+import { Available } from '../comps/Available'
+import {Days} from '../data/AvailableTime'
+
 const TaskButtonsWrapper = styled.View`
 margin-top:10%;
 margin-bottom:5%;
@@ -25,14 +20,6 @@ display:flex;
 flex-wrap:nowrap;
 flex-direction:row;
 width:90%;
-`
-
-const TaskButtonWrapper = styled.View`
-margin:3%
-`
-const CourseEventCardWrapper = styled.View`
-height:100%;
-
 `
 const NavBarCon = styled.View`
 position:absolute;
@@ -46,68 +33,19 @@ left:5%
 const TaskCardsWrapper = styled.ScrollView`
 position:absolute;
 z-index:2;
-top:30%
-height:52.5%;
+top:27.5%
+height:65%;
 width:100%;
+padding:5%
 `
 
-const SECTIONS = [
-  {
-    title: 'BuzzyBee',
-    horizontal: true,
-    data: [
-      {
-        key: '1',
-        text: 'Group',
-        uri: 'https://picsum.photos/id/1/200',
-      },
-      {
-        key: '2',
-        text: 'Abbey',
-        uri: 'https://picsum.photos/id/10/200',
-      },
 
-      {
-        key: '3',
-        text: 'Nick',
-        uri: 'https://picsum.photos/id/1002/200',
-      },
-      {
-        key: '4',
-        text: 'Warren',
-        uri: 'https://picsum.photos/id/1006/200',
-      },
-      {
-        key: '5',
-        text: 'Levi',
-        uri: 'https://picsum.photos/id/1008/200',
-      },{
-        key: '6',
-        text: 'Jody',
-        uri: 'https://picsum.photos/id/1008/200',
-      },
-    ],
-  },
- 
-];
-const ListItem = ({ item }) => {
-  return (
-    <View style={styles.item}>
-      <Image
-        source={{
-          uri: item.uri,
-        }}
-        style={styles.itemPhoto}
-        resizeMode="cover"
-      />
-      <Text style={styles.itemText}>{item.text}</Text>
-    </View>
-  );
-};
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+const Item = ({ item, onPress, backgroundColor, textColor, navigation }) => (
+  <Pressable 
+      onPress={onPress} 
+      style={[styles.item, backgroundColor]}>
     <Text style={[styles.title2, textColor]}>{item.title}</Text>
-  </TouchableOpacity>
+  </Pressable>
 );
 const TaskboardScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(category)
@@ -125,58 +63,95 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
   const [welcome, setWelcome] = useState(true)
- 
-const slotAvailable =[]
+  const [monday, setMonday]= useState(false)
+  const [tuesday, setTuesday]= useState(false)
+
+
 const slotTue =[]
 const slotMon =[]
-
+const slotWed =[]
   var ScheduleMon = [
     {
       title: "businessCom",
-      startTime: new Date("2021/11/22 9:30 AM"),
-      endTime: new Date("2021/11/22 12:20 PM")
+      startTime: new Date("2021/12/06 9:30 AM"),
+      endTime: new Date("2021/12/06 12:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Design2",
-      startTime: new Date("2021/11/22 01:30 PM"),
-      endTime: new Date("2021/11/22 04:20 PM")
+      startTime: new Date("2021/12/06 01:30 PM"),
+      endTime: new Date("2021/12/06 04:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: "Communting",
-      startTime: new Date("2021/11/22 04:30 PM"),
-      endTime: new Date("2021/11/22 05:20 PM")
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
     {
       title: " do assignment",
-      startTime: new Date("2021/11/22 06:50 PM"),
-      endTime: new Date("2021/11/22 09:30 PM")
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+      day: 'Monday',
+      date: '22nd November'
     },
   ];
   var ScheduleTue = [
     {
       title: "Asset Design and intergration",
-      startTime: new Date("2021/11/23 9:30 AM"),
-      endTime: new Date("2021/11/23 12:20 PM")
+      startTime: new Date("2021/12/07 11:30 AM"),
+      endTime: new Date("2021/12/07 12:20 PM")
     },
     {
       title: "Advance Photoshop",
-      startTime: new Date("2021/11/23 01:30 PM"),
-      endTime: new Date("2021/11/23 04:20 PM")
+      startTime: new Date("2021/12/07 01:30 PM"),
+      endTime: new Date("2021/12/07 04:20 PM")
     },
     {
       title: "Communting",
-      startTime: new Date("2021/11/23 04:30 PM"),
-      endTime: new Date("2021/11/23 05:20 PM")
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
     },
     {
       title: " do assignment",
-      startTime: new Date("2021/11/23 06:50 PM"),
-      endTime: new Date("2021/11/23 09:30 PM")
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
     },
     {
       title: " do assignment2",
-      startTime: new Date("2021/11/23 10:00 PM"),
-      endTime: new Date("2021/11/23 11:20 PM")
+      startTime: new Date("2021/12/07 10:00 PM"),
+      endTime: new Date("2021/12/07 11:20 PM")
+    },
+  ];
+  var ScheduleWed = [
+    {
+      title: "Accounting",
+      startTime: new Date("2021/12/08 08:30 AM"),
+      endTime: new Date("2021/12/08 10:20 PM")
+    },
+    {
+      title: "Web dev3",
+      startTime: new Date("2021/12/08 12:30 PM"),
+      endTime: new Date("2021/12/08 02:20 PM")
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/08 10:00 PM"),
+      endTime: new Date("2021/12/08 11:20 PM")
     },
   ];
   function slotFitsMon(meeting) {
@@ -195,174 +170,410 @@ const slotMon =[]
         (s.endTime <= meeting.startTime && ScheduleTue[i + 1].startTime >= meeting.endTime) // Slot between others
     });
   };
+  function slotFitsWed(meeting) {
+    if (ScheduleWed.length == 0) return true;
+    return ScheduleWed.some(function (s, i) {
+      return (i == 0 && meeting.endTime <= s.startTime) || // slot is before all others
+        (s.endTime <= meeting.startTime && !ScheduleWed[i + 1]) || // slot is after all others
+        (s.endTime <= meeting.startTime && ScheduleWed[i + 1].startTime >= meeting.endTime) // Slot between others
+    });
+  };
+  
+
   const meetingMon = 
-  [{  id:1,
+  [{  id:Date.parse("2021/12/06 8:30 AM"),
       title: "Monday 08:30-09:20",
-      startTime: new Date("2021/11/22 8:30 AM"),
-      endTime: new Date("2021/11/22 9:20 AM")
+      startTime: new Date("2021/12/06 8:30 AM"),
+      endTime: new Date("2021/12/06 9:20 AM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:2,
+    { id:Date.parse("2021/12/06 9:30 AM"),
       title: "Monday 09:30-10:20",
-      startTime: new Date("2021/11/22 9:30 AM"),
-      endTime: new Date("2021/11/22 10:20 AM")
+      startTime: new Date("2021/12/06 9:30 AM"),
+      endTime: new Date("2021/12/06 10:20 AM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:3,
+    { id:Date.parse("2021/12/06 10:30 AM"),
       title: "Monday 10:30-11:20",
-      startTime: new Date("2021/11/22 10:30 AM"),
-      endTime: new Date("2021/11/22 11:20 PM")
+      startTime: new Date("2021/12/06 10:30 AM"),
+      endTime: new Date("2021/12/06 11:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:4,
+    { id:Date.parse("2021/12/06 11:30 AM"),
       title: "Monday 11:30-12:20",
-      startTime: new Date("2021/11/22 11:30 AM"),
-      endTime: new Date("2021/11/22 12:20 PM")
+      startTime: new Date("2021/12/06 11:30 AM"),
+      endTime: new Date("2021/12/06 12:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:5,
+    { id:Date.parse("2021/12/06 12:30 PM"),
       title: "Monday 12:30-13:20",
-      startTime: new Date("2021/11/22 12:30 PM"),
-      endTime: new Date("2021/11/22 01:20 PM")
-    }, {id:6,
+      startTime: new Date("2021/12/06 12:30 PM"),
+      endTime: new Date("2021/12/06 01:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
+    }, 
+    {id:Date.parse("2021/12/06 01:30 PM"),
       title: "Monday 13:30-14:20",
-      startTime: new Date("2021/11/22 01:30 PM"),
-      endTime: new Date("2021/11/22 02:20 PM")
+      startTime: new Date("2021/12/06 01:30 PM"),
+      endTime: new Date("2021/12/06 02:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:7,
+    { id:Date.parse("2021/12/06 02:30 PM"),
       title: "Monday 14:30-15:20",
-      startTime: new Date("2021/11/22 02:30 PM"),
-      endTime: new Date("2021/11/22 03:20 PM")
+      startTime: new Date("2021/12/06 02:30 PM"),
+      endTime: new Date("2021/12/06 03:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:8,
+    { id:Date.parse("2021/12/06 03:30 PM"),
       title: "Monday 15:30-16:20",
-      startTime: new Date("2021/11/22 03:30 PM"),
-      endTime: new Date("2021/11/22 04:20 PM")
+      startTime: new Date("2021/12/06 03:30 PM"),
+      endTime: new Date("2021/12/06 04:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:9,
+    { id:Date.parse("2021/12/06 04:30 PM"),
       title: "Monday 16:30-17:20",
-      startTime: new Date("2021/11/22 04:30 PM"),
-      endTime: new Date("2021/11/22 05:20 PM")
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:10,
+    { id:Date.parse("2021/12/06 05:30 PM"),
       title: "Monday 17:30-18:20",
-      startTime: new Date("2021/11/22 05:30 PM"),
-      endTime: new Date("2021/11/22 06:20 PM")
+      startTime: new Date("2021/12/06 05:30 PM"),
+      endTime: new Date("2021/12/06 06:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:11,
+    { id:Date.parse("2021/12/06 06:30 PM"),
       title: "Monday 18:30-19:20",
-      startTime: new Date("2021/11/22 06:30 PM"),
-      endTime: new Date("2021/11/22 07:20 PM")
+      startTime: new Date("2021/12/06 06:30 PM"),
+      endTime: new Date("2021/12/06 07:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:12,
+    { id:Date.parse("2021/12/06 07:30 PM"),
       title: "Monday 19:30-20:20",
-      startTime: new Date("2021/11/22 07:30 PM"),
-      endTime: new Date("2021/11/22 08:20 PM")
+      startTime: new Date("2021/12/06 07:30 PM"),
+      endTime: new Date("2021/12/06 08:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:13,
+    { id:Date.parse("2021/12/06 08:30 PM"),
       title: "Monday 20:30-21:20",
-      startTime: new Date("2021/11/22 08:30 PM"),
-      endTime: new Date("2021/11/22 09:20 PM")
+      startTime: new Date("2021/12/06 08:30 PM"),
+      endTime: new Date("2021/12/06 09:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:14,
+    { id:Date.parse("2021/12/06 09:30 PM"),
       title: "Monday 21:30-22:20",
-      startTime: new Date("2021/11/22 09:30 PM"),
-      endTime: new Date("2021/11/22 10:20 PM")
+      startTime: new Date("2021/12/06 09:30 PM"),
+      endTime: new Date("2021/12/06 10:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
-    { id:15,
+    { id:Date.parse("2021/12/06 10:30 PM"),
       title: "Monday 22:30-23:20",
-      startTime: new Date("2021/11/22 10:30 PM"),
-      endTime: new Date("2021/11/22 11:20 PM")
+      startTime: new Date("2021/12/06 10:30 PM"),
+      endTime: new Date("2021/12/06 11:20 PM"),
+      Wday:'Monday',
+      mm:'December',
+      dd:'06'
     },
   
     ]
-    const comparsionMon = meetingMon.forEach(function (meeting, i) {
+     meetingMon.forEach(function (meeting, i) {
       if (slotFitsMon(meeting) == true) {
         // return   meeting.title
         // console.log(meeting.title)
         slotMon.push(meeting)
       }
     });
+ 
     const meetingTue = 
-  [{  id:1,
+  [{  id:Date.parse("2021/12/07 8:30 AM"),
       title: "Tuesday 08:30-09:20",
-      startTime: new Date("2021/11/23 8:30 AM"),
-      endTime: new Date("2021/11/23 9:20 AM")
+      startTime: new Date("2021/12/07 8:30 AM"),
+      endTime: new Date("2021/12/07 9:20 AM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:2,
+    { id:Date.parse("2021/12/07 9:30 AM"),
       title: "Tuesday 09:30-10:20",
-      startTime: new Date("2021/11/23 9:30 AM"),
-      endTime: new Date("2021/11/23 10:20 AM")
+      startTime: new Date("2021/12/07 9:30 AM"),
+      endTime: new Date("2021/12/07 10:20 AM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:3,
+    { id:Date.parse("2021/12/07 10:30 AM"),
       title: "Tuesday 10:30-11:20",
-      startTime: new Date("2021/11/23 10:30 AM"),
-      endTime: new Date("2021/11/23 11:20 PM")
+      startTime: new Date("2021/12/07 10:30 AM"),
+      endTime: new Date("2021/12/07 11:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:4,
+    { id:Date.parse("2021/12/07 11:30 AM"),
       title: "Tuesday 11:30-12:20",
-      startTime: new Date("2021/11/23 11:30 AM"),
-      endTime: new Date("2021/11/23 12:20 PM")
+      startTime: new Date("2021/12/07 11:30 AM"),
+      endTime: new Date("2021/12/07 12:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:5,
+    { id:Date.parse("2021/12/07 12:30 PM"),
       title: "Tuesday 12:30-13:20",
-      startTime: new Date("2021/11/23 12:30 PM"),
-      endTime: new Date("2021/11/23 01:20 PM")
-    }, {id:6,
+      startTime: new Date("2021/12/07 12:30 PM"),
+      endTime: new Date("2021/12/07 01:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
+    }, {
+      id:Date.parse("2021/12/07 01:30 PM"),
       title: "Tuesday 13:30-14:20",
-      startTime: new Date("2021/11/23 01:30 PM"),
-      endTime: new Date("2021/11/23 02:20 PM")
+      startTime: new Date("2021/12/07 01:30 PM"),
+      endTime: new Date("2021/12/07 02:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:7,
+    { id:Date.parse("2021/12/07 02:30 PM"),
       title: "Tuesday 14:30-15:20",
-      startTime: new Date("2021/11/23 02:30 PM"),
-      endTime: new Date("2021/11/23 03:20 PM")
+      startTime: new Date("2021/12/07 02:30 PM"),
+      endTime: new Date("2021/12/07 03:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:8,
+    { id:Date.parse("2021/12/07 03:30 PM"),
       title: "Tuesday 15:30-16:20",
-      startTime: new Date("2021/11/23 03:30 PM"),
-      endTime: new Date("2021/11/23 04:20 PM")
+      startTime: new Date("2021/12/07 03:30 PM"),
+      endTime: new Date("2021/12/07 04:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:9,
+    { id:Date.parse("2021/12/07 04:30 PM"),
       title: "Tuesday 16:30-17:20",
-      startTime: new Date("2021/11/23 04:30 PM"),
-      endTime: new Date("2021/11/23 05:20 PM")
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:10,
+    { id:Date.parse("2021/12/07 05:30 PM"),
       title: "Tuesday 17:30-18:20",
-      startTime: new Date("2021/11/23 05:30 PM"),
-      endTime: new Date("2021/11/23 06:20 PM")
+      startTime: new Date("2021/12/07 05:30 PM"),
+      endTime: new Date("2021/12/07 06:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:11,
+    { id:Date.parse("2021/12/07 06:30 PM"),
       title: "Tuesday 18:30-19:20",
-      startTime: new Date("2021/11/23 06:30 PM"),
-      endTime: new Date("2021/11/23 07:20 PM")
+      startTime: new Date("2021/12/07 06:30 PM"),
+      endTime: new Date("2021/12/07 07:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:12,
+    { id:Date.parse("2021/12/07 07:30 PM"),
       title: "Tuesday 19:30-20:20",
-      startTime: new Date("2021/11/23 07:30 PM"),
-      endTime: new Date("2021/11/23 08:20 PM")
+      startTime: new Date("2021/12/07 07:30 PM"),
+      endTime: new Date("2021/12/07 08:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:13,
+    { id:Date.parse("2021/12/07 08:30 PM"),
       title: "Tuesday 20:30-21:20",
-      startTime: new Date("2021/11/23 08:30 PM"),
-      endTime: new Date("2021/11/23 09:20 PM")
+      startTime: new Date("2021/12/07 08:30 PM"),
+      endTime: new Date("2021/12/07 09:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:14,
+    { id:Date.parse("2021/12/07 09:30 PM"),
       title: "Tuesday 21:30-22:20",
-      startTime: new Date("2021/11/23 09:30 PM"),
-      endTime: new Date("2021/11/23 10:20 PM")
+      startTime: new Date("2021/12/07 09:30 PM"),
+      endTime: new Date("2021/12/07 10:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
-    { id:15,
+    { id:Date.parse("2021/12/07 10:30 PM"),
       title: "Tuesday 22:30-23:20",
-      startTime: new Date("2021/11/23 10:30 PM"),
-      endTime: new Date("2021/11/23 11:20 PM")
+      startTime: new Date("2021/12/07 10:30 PM"),
+      endTime: new Date("2021/12/07 11:20 PM"),
+      Wday:'Tuesday',
+      mm:'December',
+      dd:'07'
     },
   
     ]
-    const comparsionTue = meetingTue.forEach(function (meeting, i) {
+     meetingTue.forEach(function (meeting, i) {
       if (slotFitsTue(meeting) == true) {
-        // return   meeting.title
-        // console.log(meeting.title)
+        
         slotTue.push(meeting)
+        // console.log(slotTue)
       }
     });
+    const meetingWed = 
+    [{  id:Date.parse("2021/12/08 8:30 AM"),
+        title: "Wed 08:30-09:20",
+        startTime: new Date("2021/12/08 8:30 AM"),
+        endTime: new Date("2021/12/08 9:20 AM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 9:30 AM"),
+        title: "Wed 09:30-10:20",
+        startTime: new Date("2021/12/08 9:30 AM"),
+        endTime: new Date("2021/12/08 10:20 AM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 10:30 AM"),
+        title: "Wed 10:30-11:20",
+        startTime: new Date("2021/12/08 10:30 AM"),
+        endTime: new Date("2021/12/08 11:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      {id:Date.parse("2021/12/08 11:30 AM"),
+        title: "Wed 11:30-12:20",
+        startTime: new Date("2021/12/08 11:30 AM"),
+        endTime: new Date("2021/12/08 12:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 12:30 PM"),
+        title: "Wed 12:30-13:20",
+        startTime: new Date("2021/12/08 12:30 PM"),
+        endTime: new Date("2021/12/08 01:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      }, {id:Date.parse("2021/12/08 01:30 PM"),
+        title: "Wed 13:30-14:20",
+        startTime: new Date("2021/12/08 01:30 PM"),
+        endTime: new Date("2021/12/08 02:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 02:30 PM"),
+        title: "Wed 14:30-15:20",
+        startTime: new Date("2021/12/08 02:30 PM"),
+        endTime: new Date("2021/12/08 03:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 03:30 PM"),
+        title: "Wed 15:30-16:20",
+        startTime: new Date("2021/12/08 03:30 PM"),
+        endTime: new Date("2021/12/08 04:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 04:30 PM"),
+        title: "Wed 16:30-17:20",
+        startTime: new Date("2021/12/08 04:30 PM"),
+        endTime: new Date("2021/12/08 05:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 05:30 PM"),
+        title: "Wed 17:30-18:20",
+        startTime: new Date("2021/12/08 05:30 PM"),
+        endTime: new Date("2021/12/08 06:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 06:30 PM"),
+        title: "Wed 18:30-19:20",
+        startTime: new Date("2021/12/08 06:30 PM"),
+        endTime: new Date("2021/12/08 07:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 07:30 PM"),
+        title: "Wed 19:30-20:20",
+        startTime: new Date("2021/12/08 07:30 PM"),
+        endTime: new Date("2021/12/08 08:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 08:30 PM"),
+        title: "Wed 20:30-21:20",
+        startTime: new Date("2021/12/08 08:30 PM"),
+        endTime: new Date("2021/12/08 09:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 09:30 PM"),
+        title: "Wed 21:30-22:20",
+        startTime: new Date("2021/12/08 09:30 PM"),
+        endTime: new Date("2021/12/08 10:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+      { id:Date.parse("2021/12/08 10:30 PM"),
+        title: "Wed 22:30-23:20",
+        startTime: new Date("2021/12/08 10:30 PM"),
+        endTime: new Date("2021/12/08 11:20 PM"),
+        Wday:'Wednesday',
+        mm:'December',
+        dd:'08'
+      },
+    
+      ]
+       meetingWed.forEach(function (meeting, i) {
+        if (slotFitsWed(meeting) == true) {
+          
+          slotWed.push(meeting)
+          // console.log(slotTue)
+        }
+      });
+    
+const slotAvailable =[...slotMon, ...slotTue]
+// console.log(slotAvailable) 
+
 
   const { user,users } = useContext(AuthenticatedUserContext);
   var randomColor = require('randomcolor'); // import the script
@@ -433,25 +644,37 @@ const slotMon =[]
     setWelcome(false)
   }
 
-  // const renderItem = ({ item }) => (
+  // const renderItem = ({ item }) => ( 
   //   <Item title={item.title} />
   // );
   const [selectedId, setSelectedId] = useState(null);
 
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? Configurations.colors.secCol: Configurations.colors.backCol;
+    const backgroundColor = item.id === selectedId ? Configurations.colors.secCol: Configurations.colors.primCol;
     const color = item.id === selectedId ? 'white' : 'black';
 
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() =>  {
+                          setSelectedId(item.id)
+                          navigation.navigate("MeetingStep2", {
+                            id:item.id,                                              
+                            meetingSlot:item.title,
+                             startTime:item.startTime,
+                            endTime:item.endTime,
+                            mm:item.mm,
+                           dd:item.dd,
+                            Wday:item.Wday
+                             })
+                        }                                                  
+                      }
         backgroundColor={{ backgroundColor }}
         textColor={{ color }}
       />
     );
   };
-
+// console.log(info.title)
   return (
     <View  
       style={{ 
@@ -493,12 +716,14 @@ const slotMon =[]
      displayBtn='none'
      displayImg='flex'
     name='Levi'
+    img={users.img}
     onBtnPress={LeviPress}
   />
    <TaskBtn 
     displayBtn='none'
     displayImg='flex'
     name='Jody'
+    img={users.img}
     onBtnPress={JodyPress}
   />
     </ScrollView >
@@ -510,14 +735,82 @@ const slotMon =[]
   {/* {welcome ?  <Text style={styles.title}> {newarray}</Text>: null  } */}
   { Levi ? (<TaskCardsWrapper>
     {
-      <FlatList
-      data={slotMon}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
     
+    <FlatList
+    contentContainerStyle={{maxHeight:100}}
+    horizontal
+    contentContainerStyle={{alignItems:'center', justifyContent:'flex-start'}}
+    // alwaysBounceHorizontal={true}
+    data={Days}
+    renderItem={({item})=> 
+                      { 
+                        if(item.day === "Monday")
+                        {
+                              return (
+                                    <Available
+                                    monthName={item.month}
+                                    // day={item.day}
+                                    date={item.date}
+                                    weekday={item.day}
+                                    data=
+                                      { 
+                                          <FlatList
+                                                contentContainerStyle={{ width:300}}
+                                                data={slotMon}
+                                                renderItem={renderItem}
+                                                keyExtractor={item => item.id}
+                                          />
+                                      }
+                                />
+                              )                       
+                        }
+
+                        else if (item.day === "Tuesday")
+                        {
+                          return (
+                                <Available
+                                monthName={item.month}
+                                // day={item.day}
+                                date={item.date}
+                                weekday={item.day}
+                                data=
+                                  {
+                                      <FlatList
+                                            contentContainerStyle={{ width:300}}
+                                            data={slotTue}
+                                            renderItem={renderItem}
+                                            keyExtractor={item => item.id}
+                                      />
+                                  }
+                            />
+                          )                       
+                    }
+                        else if (item.day === "Wednesday")
+                        {
+                          return (
+                                <Available
+                                monthName={item.month}
+                                // day={item.day}
+                                date={item.date}
+                                weekday={item.day}
+                                data=
+                                  {
+                                      <FlatList
+                                            contentContainerStyle={{ width:300}}
+                                            data={slotWed}
+                                            renderItem={renderItem}
+                                            keyExtractor={item => item.id}
+                                      />
+                                  }
+                            />
+                          )                       
+                    }
+                      }
+                    
+                    }
+  />
     }
-     
+
       </TaskCardsWrapper>) : null}
    
   
@@ -549,14 +842,35 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   }, item: {
-    backgroundColor:Configurations.colors.backCol,
-    padding: 10,
-    marginVertical: 6,
-    marginHorizontal: 40,
-   borderRadius:10
+  //   backgroundColor:Configurations.colors.backCol,
+  //   padding: 10,
+  //   marginVertical: 6,
+  //   marginHorizontal: 40,
+  //  borderRadius:10
+  margin:15,
+        backgroundColor: Configurations.colors.primCol,
+        padding:5,
+        // width:'90%',
+        height:55,
+        flexDirection:'row',
+        justifyContent:'space-evenly',
+        alignItems:'center',
+        borderTopWidth:1.5,
+        borderRightWidth:.5,
+        borderBottomWidth:1.5,
+        borderLeftWidth:1.5,
+        borderRadius:15,
+        borderTopColor:'#ffffff70',
+        borderRightColor:'#ffffff70',
+        borderBottomColor:'#ffffff70',
+        borderLeftColor:'#ffffff70',
+        shadowColor: Configurations.colors.secCol,
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.4,
+        shadowRadius: 4,  
   },
   title2: {
-    fontSize: 24,
+    fontSize: 18,
     textAlign:'center'
   },
 });

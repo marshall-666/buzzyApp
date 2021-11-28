@@ -11,6 +11,7 @@ import IndividualEventCard from '../comps/IndividualEventCard';
 
 
 // Data imports===============
+import talktoserver from "../api/talktoserver"
 import { SelectedDay } from '../data/test';
 import { Configurations } from '../PropConfig/Props'
 import { Events } from '../data/Events';
@@ -62,18 +63,37 @@ const AgendaScreen = ({navigation, route }) => {
   const [movie, setMovie] = useState('')
   const ChosenDay = route.params.day
 
+  const [dbResult, setDbResult] = useState()
+
+ 
 
 
 if(ChosenDay)
 {
+  useEffect (()=>{
+
+    var loadTaskList = {
+      op: 'get_tasks_ls',
+      user_id: '1', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
+  }
+  
+    talktoserver(loadTaskList).then((rd) => {
+      setDbResult(rd)
+    })
+
+},[])
+
+
+
   useEffect (()=>{ 
     const GetEvents = async ()=>
     {
 
+        console.log(dbResult)
          
-          const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
+          // const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
       
-          const eventsObject = result.data
+          const eventsObject = dbResult
           // console.log(eventsObject)
           const newArray=[]
           for(let i=0; i<eventsObject.length; i++)
@@ -117,7 +137,7 @@ if(ChosenDay)
     }      
       GetEvents()
   
-  },[])
+  },[dbResult])
 }
 
   const markedDates = {

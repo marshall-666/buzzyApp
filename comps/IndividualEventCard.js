@@ -16,6 +16,7 @@ border:1px solid #C4C4C4;
 border-radius:15px;
 margin:10px;
 overflow:hidden;
+
 `
 const EventColour = Styled.View`
 width:4%;
@@ -56,6 +57,15 @@ const IndividualEventCard = ({
 }) => {
   const navigation = useNavigation();
   return (
+    <View style=
+    {{
+        shadowColor: '#5B7797',
+        shadowOffset: {width: 10, height: 8},
+        shadowOpacity: .6,
+        shadowRadius: 7,
+    }}>
+    
+      
   <CardCont backgroundColor={backgroundColor} onPress={onCardPress}>
 
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
@@ -78,6 +88,7 @@ const IndividualEventCard = ({
   
  
   </CardCont>
+  </View>
   );
 };
 

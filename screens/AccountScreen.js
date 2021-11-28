@@ -12,9 +12,8 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { getStorage, ref, getDownloadURL, uploadBytes,uploadBytesResumable } from "firebase/storage";
 // import fstorage from '../firebase/fireStorage';
-import { btoa, atob, byteArray } from 'react-native-quick-base64';
 import { db } from '../firebase/fireStore';
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 
 const LogoWrapper = styled.View`
