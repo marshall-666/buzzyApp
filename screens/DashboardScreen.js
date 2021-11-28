@@ -131,7 +131,9 @@ const DashboardScreen = ({navigation }) => {
         })
       
         const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
-  
+        const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
+        const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+        const workout = {key: 'workout', color: 'green'};
         let dailyEvents = {}
   
         Object.keys(eventDays).forEach((day) => 
@@ -139,8 +141,7 @@ const DashboardScreen = ({navigation }) => {
             dailyEvents[day] =  
                 {
                   marked: true, 
-                  dotColor: colors.lightBg, 
-                  selectedDotColor: 'red',             
+                  dotColor: colors.butCol, 
                 };
           }
         );
@@ -164,7 +165,7 @@ const DashboardScreen = ({navigation }) => {
           
           const eventTaskArray = daysObject.filter(function(el)
           {
-            return el.task_category == 'individual'
+            return el.task_category == 'personal'
           })
           setEventTasks(eventTaskArray)
 
@@ -307,7 +308,7 @@ const DashboardScreen = ({navigation }) => {
                 width:400,
                 height: 400,
               }}
-      
+            // markingType={'multi-dot'}
             markedDates= {{
                 
             ...newDaysObject,
@@ -402,10 +403,11 @@ const DashboardScreen = ({navigation }) => {
           data = {eventTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
-                  EventTitle={item.tname}
-                  EventDescrip = {item.tdes}
-                  EventStartTime={item.start_t}
-                  EventDueTime = {item.end_t}
+                EventTitle=    {item.title}
+                EventDescrip = {item.summary}
+                EventStartTime={item.start}
+                EventDueTime = {item.end}
+                IconDisplay =   'none' 
                    /> }
         /> : null
       }
