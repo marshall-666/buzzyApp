@@ -665,7 +665,9 @@ const slotAvailable =[...slotMon, ...slotTue]
                             endTime:item.endTime,
                             mm:item.mm,
                            dd:item.dd,
-                            Wday:item.Wday
+                            Wday:item.Wday,
+                            desc:item.desc,
+                            
                              })
                         }                                                  
                       }
@@ -731,10 +733,13 @@ const slotAvailable =[...slotMon, ...slotTue]
   </TaskButtonsWrapper>
   <TaskCardArea/> 
      
+ 
     
   {/* {welcome ?  <Text style={styles.title}> {newarray}</Text>: null  } */}
   { Levi ? (<TaskCardsWrapper>
+    <Text style={{textAlign:'center',fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
     {
+      
     
     <FlatList
     contentContainerStyle={{maxHeight:100}}

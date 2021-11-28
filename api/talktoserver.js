@@ -14,7 +14,7 @@ const talktoserver = async (param) => {
         dataRqInbox.append('fb_uid', param.fb_uid)
         dataRqInbox.append('uname', param.uname)
         dataRqInbox.append('psword', param.psword)
-        dataRqInbox.appent('email', param.email)
+        dataRqInbox.append('email', param.email)
         dataRqInbox.append('org', param.org)
         dataRqInbox.append('pro', param.pro)
         dataRqInbox.append('img_url', param.img_url)

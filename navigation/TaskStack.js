@@ -202,11 +202,11 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
-      <Stack.Screen name="Meeting" component={ScheduleMeeting} />
+      <Stack.Screen name="ScheduleMeeting" options={{ title:'Meeting'}} component={ScheduleMeeting} />
 
       {/* Schedule meeting flow */}
       {/* <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} /> */}
-      <Stack.Screen name="MeetingStep1" component={ScheduleMeetingStepTwoScreen} />
+      {/* <Stack.Screen name="MeetingStep1" component={ScheduleMeetingStepTwoScreen} /> */}
       <Stack.Screen name="MeetingStep2" options={{ title:'Meeting'}} component={ScheduleMeetingStepThreeScreen} />
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />

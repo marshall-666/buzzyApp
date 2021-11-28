@@ -46,10 +46,10 @@ height:100%;
 const IndividualEventCard = ({
     backgroundColor="#FFFFFF",
     EventBackgroundColor="green",
-    EventTitle="Basketball Practice",
+    EventTitle="",
     EventDescrip="Town Center Field #5",
-    EventStartTime="September 24th 5:00pm",
-    EventDueTime="September 24th 7:00pm",
+    EventStartTime="",
+    EventDueTime="",
     IconDisplay="flex",
     onCardPress=()=>{}
 

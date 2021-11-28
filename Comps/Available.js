@@ -68,12 +68,13 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
         paddingHorizontal:20,
         paddingVertical:15,
-        maxHeight:425,
+        maxHeight:400,
         backgroundColor:'#ffffff80',
         margin:20,
         justifyContent:'space-evenly',
         alignItems:'center',
         borderRadius:10,
+        
     },
     slot:{
         width:'90%',

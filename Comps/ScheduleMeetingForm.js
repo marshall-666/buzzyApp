@@ -11,8 +11,9 @@ const butCol = Configurations.colors.butCol
 
 const OptCont = styled.View`
 width:100%;
-height:85%;
+height:90%;
 justify-content:center;
+
 `
 
 const ButPress = styled.Pressable`
@@ -25,8 +26,6 @@ padding:5px;
 border-radius:5px;
 
 `
-
-
 const HeadCont = styled.View`
 
 width:85%;
@@ -53,14 +52,18 @@ color:white;
 `
 const InputContainer = styled.View`
 align-items:flex-start;
-margin-bottom:7.5%
+margin-bottom:5%
+
 `
 const Notes = styled.TextInput`
 width:100%;
-height:25%;
+height:30%;
 background:white;
 borderRadius:10px;
-margin-bottom:5%
+margin-bottom:2.5%
+padding-left:5%
+justify-content:flex-start;
+align-items:flex-start
 `
 const BtnCon = styled.View `
 width:100%;
@@ -70,7 +73,14 @@ flex-direction:row
 justify-content:space-between;
 align-items:center
 `
+const TextInput2 = styled.Text`
+font-size:18px;
+padding-top:1.5%
+`
+const TextInput3 = styled.TextInput`
+width:100%;
 
+`
 export const  ScheduleMeetingForm = ({
     handlePress=()=>{},
     inputTitle,
@@ -80,29 +90,43 @@ export const  ScheduleMeetingForm = ({
     description,
     setDescription,
     Next=()=>{},
-    Back=()=>{}
+    Back=()=>{},
+    location,
+    setLocation
 })=> {
+    
     return (
-        
-                    
             <OptCont>
                 <ScrollView contentContainerStyle={{height:'100%', }}>
                 <InputContainer>
-                    <SubTxt style={{color:Configurations.colors.secCol}}>  Meeting name</SubTxt>
-                    <InputBox placeholder="Buzzy Bee" placeholderTextColor="lightgrey" value={inputTitle}/>
+                    <TextInput2 style={{color:Configurations.colors.secCol}}>Meeting Name</TextInput2>
+                    <TextInput3 style={{ height: 36, borderBottomWidth: 1, borderBottomColor: Configurations.colors.secCol, color: Configurations.colors.secCol }}
+                    placeholder="Buzzy Bee"  onChangeText={(text) => { setInputTitle(text) }} value={inputTitle}/>
                 </InputContainer>
             
-                <InputContainer>
-                    <SubTxt style={{color:Configurations.colors.secCol}}> Task color </SubTxt>
-                    <InputBox placeholder="Red" placeholderTextColor="lightgrey" value={inputTitle2}/>
-                </InputContainer>
+                {/* <InputContainer>
+                    <TextInput2 style={{color:Configurations.colors.secCol}}> Task color </TextInput2>
+                    <TextInput3 style={{ height: 36, borderBottomWidth: 1, borderBottomColor: Configurations.colors.secCol, color: Configurations.colors.secCol }}
+                    placeholder="Red" placeholderTextColor="lightgrey" onChangeText={(text) => { setInputTitle2(text) }} value={inputTitle2}/>
+                </InputContainer> */}
                 
-                <Notes placeholder="meeting notes" placeholderTextColor="lightgrey" value={description}/>
+                <Notes placeholder="meeting notes" placeholderTextColor={Configurations.colors.secCol} onChangeText={(text) => { setDescription(text) }} value={description}/>
                
             
             {/* <ButPress onPress={handlePress}>
                 <Text style={{fontSize:20}}>{buttLabel}</Text>
             </ButPress> */}
+            <InputContainer>
+             <TextInput2 style={{ color: Configurations.colors.secCol }} >
+          Meeting Platform
+        </TextInput2>
+        <TextInput3 style={{ height: 36, borderBottomWidth: 1, borderBottomColor: Configurations.colors.secCol, color: Configurations.colors.secCol }}
+          placeholder="Type the Location or a Meeting method"
+          onChangeText={(text) => { setLocation(text) }}
+          value={location}
+          // defaultValue={text}
+        ></TextInput3>
+      </InputContainer>
             <BtnCon>
             <RecBtn text="Back" width={150} height={60} onRecBtnPress={Back}/>
             <RecBtn text="Next" width={150} height={60} onRecBtnPress={Next}/>
