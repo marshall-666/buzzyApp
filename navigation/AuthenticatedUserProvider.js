@@ -9,8 +9,6 @@ export const AuthenticatedUserContext = createContext({});
 export const AuthenticatedUserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
-
-
   useEffect(() => {
     const getUser = async () => {
       const auth = getAuth();
@@ -18,7 +16,7 @@ export const AuthenticatedUserProvider = ({ children }) => {
       const usersDocRef = doc(db, "users", user.uid );
       const data = await getDoc(usersDocRef);
       setUsers(data.data())
-      console.log( data.data())
+      // console.log( data.data())
       // console.log( data.id)
       // console.log( users.name)
       // console.log( user.name)

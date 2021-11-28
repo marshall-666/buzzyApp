@@ -20,22 +20,34 @@ const lightBg = Configurations.colors.lightBg
 
 const ScheduleMeetingStepTwoScreen = ({navigation,
 meetingTimeAppear="November 20th",
-date="November 20th"
+// dateNum="November 20th",
+route
 }) => {
+    
+    
+    const { id, meetingSlot,startTime,endTime, mm, dd, Wday} = route.params;
+
+     const meetingslot=route.params
+console.log(meetingslot)
     return (
         <View style={{flex:1, justifyContent:'flex-end',
         backgroundColor:lightBg,}}>
 
             <View style={styles.meetingCardCont}>
-                <IndividualEventCard IconDisplay="none" EventTitle="Meeting name" EventDescrip="meeting description" EventStartTime="" EventDueTime={meetingTimeAppear}/>
+                <IndividualEventCard IconDisplay="none" EventTitle="Meeting name" EventDescrip="meeting description" EventStartTime="" EventDueTime= {JSON.stringify(meetingSlot)}/>
             </View>
 
             <View style={styles.mainCont}>
                 <Text style={{fontSize:30, color:Configurations.colors.secCol}}>Step 2/5</Text>
                 <Text style={{fontSize:18, color:Configurations.colors.backCol}}>
-                    Available Times for {date}
+               
                 </Text>
-                <Available onSlotPress=  {()=>{navigation.navigate('ScheduleMeetingStepThree')}}/>    
+                <Available 
+                 date={dd}
+                monthName={mm}
+                weekday={Wday}
+                
+                onSlotPress=  {navigation.navigate('MeetingStep1')}/>    
                     
                 <View>
            
@@ -62,7 +74,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: Configurations.colors.primCol,
-        height:'80%',
+        height:'77.5%',
         padding:'5%'
     },
     dateCardR1:{
@@ -70,8 +82,9 @@ const styles = StyleSheet.create({
     },
     meetingCardCont:{
         width:'100%',
-        height:'30%',
-        justifyContent:'flex-end',
-        alignItems:'center'
+        height:'22.5%',
+        justifyContent:'center',
+        alignItems:'center',
+        
     }
 })

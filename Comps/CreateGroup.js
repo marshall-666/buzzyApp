@@ -68,8 +68,15 @@ align-items:flex-start;
 
 export const  CreateGroup = ({
     handlePress=()=>{},
+    nameVal="",
+    discpVal="",
+    memVal="sometin",
+    onGrpVal = ()=>{},
+    onDiscpVal=()=>{}
 
 })=> {
+
+
     return (
         <CardCont>
             
@@ -84,17 +91,32 @@ export const  CreateGroup = ({
             
                 <InputContainer>
                     <SubTxt> Group Name </SubTxt>
-                    <InputBox placeholder="Name" placeholderTextColor="lightgrey"/>
+                    <InputBox 
+                        placeholder="Name" 
+                        placeholderTextColor="lightgrey" 
+                        value={nameVal} 
+                        onChangeText={onGrpVal}/>
                 </InputContainer>
             
                 <InputContainer>
                     <SubTxt> Description </SubTxt>
-                    <InputBox placeholder="What is This Group For" placeholderTextColor="lightgrey"/>
+                    <InputBox 
+                        placeholder="What is This Group For" 
+                        placeholderTextColor="lightgrey" 
+                        value={discpVal} 
+                        onChangeText={onDiscpVal} 
+                    
+                    />
                 </InputContainer>
             
                 <InputContainer>
                     <SubTxt> Invite Members </SubTxt>
-                    <InputBox placeholder="Enter Group Member's Emails" placeholderTextColor="lightgrey"/>
+                    <InputBox 
+                        placeholder="Enter Group Member's Emails" 
+                        placeholderTextColor="lightgrey"
+                        // value={memVal}
+                        // onChange={onChangeVal} 
+                        />
                 </InputContainer>
             
             <ButPress onPress={handlePress}>

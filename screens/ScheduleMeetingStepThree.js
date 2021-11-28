@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import NavBar from '../comps/NavBar';
 import {Configurations} from '../PropConfig/Props'
@@ -21,24 +21,45 @@ left:5%
 `
 
 
-const ScheduleMeetingStepThreeScreen = ({navigation,
+const ScheduleMeetingStepThreeScreen = ({navigation,route,
 meetingTimeAppear="November 20th",
 }) => {
+    const { id, meetingSlot,startTime,endTime, mm, dd, Wday} = route.params;
+    const [inputTitle,setInputTitle]=useState('')
+    const [inputTitle2,setInputTitle2]=useState('')
+    const [description,setDescription]=useState('')
+    
     return (
         <View style={{flex:1, justifyContent:'flex-end', alignItems:'center',
         backgroundColor:lightBg,}}>
 
             <View style={styles.meetingCardCont}>
-                <IndividualEventCard IconDisplay="none" EventTitle="Meeting name" EventDescrip="meeting description" EventStartTime="" EventDueTime={meetingTimeAppear}/>
+                <IndividualEventCard IconDisplay="none" EventTitle={inputTitle} EventDescrip={description} EventStartTime="" EventDueTime={JSON.stringify(meetingSlot)}/>
             </View>
 
             <View style={styles.mainCont}>
-                <Text style={{fontSize:30, color:Configurations.colors.secCol}}>Step 3/5</Text>
+                <Text style={{fontSize:30, color:Configurations.colors.secCol}}>Step 2/4</Text>
                 <Text style={{fontSize:18, color:Configurations.colors.backCol}}>
-                    What Day would you like to meet?
+                    {/* What Day would you like to meet? */}
                 </Text>
 
-                <ScheduleMeetingForm handlePress={()=>{navigation.navigate('ScheduleMeetingStepFour')}}/> 
+                <ScheduleMeetingForm 
+                inputTitle={inputTitle}
+                setInputTitle={setInputTitle}
+                inputTitle2={inputTitle2}
+                setInputTitle2={setInputTitle2}
+                description={description}
+                setDescription={setDescription}
+                
+                // handlePress={()=>{navigation.navigate('ScheduleMeetingStepFour')}}
+                Next={
+                    ()=>{setDescription(), setInputTitle()}
+
+
+                }
+                
+                
+                /> 
                     
                 <View>
            
@@ -60,18 +81,18 @@ const styles = StyleSheet.create({
     mainCont: {
         flexDirection:'column',
         alignItems:'center',
-        justifyContent:'space-evenly',
+        justifyContent:'space-between',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: Configurations.colors.primCol,
-        height:'80%',
+        height:'77.5%',
         width:'100%',
         padding:'5%',
     },
     meetingCardCont:{
         width:'100%',
-        height:'30%',
-        justifyContent:'flex-end',
+        height:'22.5%',
+        justifyContent:'center',
         alignItems:'center'
     }
 })
