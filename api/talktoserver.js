@@ -3,6 +3,7 @@ import API_URL from './api.js'
 //import talktoserver in your file
 //set the var value in the var copy from FetchDataFormats.js
 //call talktoserver and put the var as a parameter
+//use useEffect to track the dbResult and operate accordingly
 
 const talktoserver = async (param) => {
 
