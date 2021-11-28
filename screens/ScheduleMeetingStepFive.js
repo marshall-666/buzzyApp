@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     meetingCardCont:{
-        width:'150%',
+        maxWidth:'100%',
         height:'22.5%',
         justifyContent: 'center',
         alignItems: 'center'
