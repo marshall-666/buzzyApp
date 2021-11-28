@@ -132,8 +132,14 @@ const TaskTable = ({
             borderBottomWidth="none" 
             >
              <TextInput
-                        style={{borderWidth:1, borderColor:'#ccc', padding:2, height:35, fontSize:18, textAlign:'center' 
-                        ,color:Configurations.colors.secCol}}
+                        style={{
+                        borderWidth:1, 
+                        borderColor:'#ccc', 
+                        padding:2, 
+                        height:35, 
+                        fontSize:18, 
+                        textAlign:'center',
+                        color:Configurations.colors.secCol}}
                         editable={false}
                         placeholder=""
                         value={Value} />
@@ -184,7 +190,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn style={{}} onRecBtnPress={onRecBtnPress} text={text} />
       </ButtonCon>
 
     </CardCon>

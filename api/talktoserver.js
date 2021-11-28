@@ -3,6 +3,7 @@ import API_URL from './api.js'
 //import talktoserver in your file
 //set the var value in the var copy from FetchDataFormats.js
 //call talktoserver and put the var as a parameter
+//use useEffect to track the dbResult and operate accordingly
 
 const talktoserver = async (param) => {
 
@@ -95,6 +96,10 @@ const talktoserver = async (param) => {
 
         dataRqInbox.append('op', param.op)
         dataRqInbox.append('user_id', param.user_id)
+        dataRqInbox.append('group_id', param.group_id)
+
+    } else if(param.op == 'load_slot'){
+        dataRqInbox.append('op', param.op)
         dataRqInbox.append('group_id', param.group_id)
     }
 

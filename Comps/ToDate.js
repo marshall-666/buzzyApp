@@ -37,10 +37,11 @@ const styles = StyleSheet.create({
         alignItems:'center', 
         justifyContent:'center',
         width:'100%',
-        height:100,
+        height:200,
         backgroundColor: lightBg,
         borderBottomLeftRadius:20,
         borderBottomRightRadius:20,
-        marginBottom:15
+        marginBottom:15,
+        
     }
 })

@@ -758,7 +758,7 @@ const TaskboardScreen = ({ navigation }) => {
                     {
                       <FlatList
                         contentContainerStyle={{ width: 300 }}
-                        data={Schedule}
+                        data={slotMon}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                       />
@@ -778,7 +778,7 @@ const TaskboardScreen = ({ navigation }) => {
                     {
                       <FlatList
                         contentContainerStyle={{ width: 300 }}
-                        data={Schedule}
+                        data={slotTue}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                       />
@@ -797,7 +797,7 @@ const TaskboardScreen = ({ navigation }) => {
                     {
                       <FlatList
                         contentContainerStyle={{ width: 300 }}
-                        data={Schedule}
+                        data={slotWed}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                       />

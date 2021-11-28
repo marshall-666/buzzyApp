@@ -24,6 +24,7 @@ import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
 import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
+import EditTaskScreen from '../screens/EditTaskScreen'
 import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
@@ -189,6 +190,7 @@ export default function TaskboardStack() {
       {/* Taskmamagement schedules */}
       <Stack.Screen name='Taskboard' component={Taskboard} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
+      <Stack.Screen name="EditTask" component={EditTaskScreen} />
 
 
       {/* Course Info */}

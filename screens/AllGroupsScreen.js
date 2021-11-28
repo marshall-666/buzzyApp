@@ -19,8 +19,8 @@ const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
 
-useEffect(()=>{
-
+useEffect(async()=>{
+ 
     var loadGroupList = {
         op: 'get_group_ls',
         user_id: '1',
@@ -30,29 +30,34 @@ useEffect(()=>{
         setDbResult(rd)
     })
 },[])
+console.log('=======================')
+// console.log(dbResult)
+// console.log('------------------------')
+// console.log(dbResult.groups[0].group)
+console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 
     const loadGroups = async()=>
         {
 
             // console.log(dbResult)
-            // console.log(dbResult[1].group.gname)
-            for(let i = 1; i<dbResult.length; i++)
+            // console.log(dbResult[].group.gname)
+            for(let i = 0; i<=dbResult.groups.length; i++)
             {
-                // console.log(dbResult[i].group)
-                if(grpArray.length <= dbResult.length-2)
+                if(grpArray.length <= dbResult.groups.length)
                 {
+                    // console.log(dbResult.groups[i])
 
-                    grpArray.push(dbResult[i].group)
+                    grpArray.push(dbResult.groups[i])
                 }
                 // setGName(dbResult[i].group.gname)
             }
+            console.log(grpArray)
             
         }
-        
         loadGroups()
     
-    console.log(grpArray[0])
+    // console.log(grpArray[0])
 // useEffect(()=>
 // {
 //     const groupInfo = async () =>
@@ -78,11 +83,8 @@ useEffect(()=>{
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={grpArray}
-                        renderItem={({item})=> <GroupThread 
-                                                        groupName={item.gname}
-                                                        // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {info: item.gname})}}/>}
+                        data={gName}
+                        renderItem={({item})=> <GroupThread />}
                         />
                     
                 </View>
