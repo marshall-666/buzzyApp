@@ -57,7 +57,7 @@ margin-top:-120px
 const TaskTable = ({
 
   text = 'Create ',
-  height = 800,
+  height = 900,
   width = "100%",
   onRecBtnPress = () => { },
   taskName,
@@ -188,7 +188,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn style={{}} onRecBtnPress={onRecBtnPress} text={text} />
       </ButtonCon>
 
     </CardCon>

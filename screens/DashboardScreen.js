@@ -144,9 +144,39 @@ const DashboardScreen = ({navigation }) => {
                 };
           }
         );
+           
+        // ================================================================
+          const courseTaskArray = daysObject.filter(function(el)
+              {
+                return el.task_category == 'course'
+              })
+              setCourseTasks(courseTaskArray)
               
-        
-        // console.log(dailyEvents)
+              
+
+
+          const groupTaskArray = daysObject.filter(function(el)
+          {
+            return el.task_category == 'group'
+          })
+          setGrpTasks(groupTaskArray)
+          
+          
+          const eventTaskArray = daysObject.filter(function(el)
+          {
+            return el.task_category == 'individual'
+          })
+          setEventTasks(eventTaskArray)
+
+
+
+
+        // ================================================================
+
+
+
+
+
         setNewDaysObject(dailyEvents)
       }
       GetDays()
@@ -154,36 +184,7 @@ const DashboardScreen = ({navigation }) => {
 
       const taskList = dbResult
       // console.log(dbResultTask[0].cname)
-      const getTasks = async()=>
-      {
-        for (let i=0 ; i<= taskList.length; i++)
-        {
-          if (taskList[i].task_category == 'group')
-          {
-            // console.log(taskList)
-            // grpTasks.push(taskList)
-              setGrpTasks(taskList)
-            // console.log(grpTasks)
-          }
-            
-          // else if (taskList[i].cname == 'courses')
-          // {
-          //   setCourseTasks(taskList)
-          // }
-          // else if (taskList[i].cname == 'events')
-          // {
-          //   setEventTasks(taskList)
-          // }
-          // console.log(taskList[i].cname)
-        }
-      }
-      // console.log("==================================")
-      // console.log(taskList)
-      // console.log("==================================")
-      // console.log("==================================")
-      // console.log(grpTasks[1])
-      // console.log("==================================")
-      getTasks()
+     
   },[dbResult])
 
   // console.log(dbResult)
@@ -369,10 +370,10 @@ const DashboardScreen = ({navigation }) => {
           renderItem={({item})=> 
                 <IndividualEventCard 
                   EventBackgroundColor="#EC8B1A"
-                  EventTitle={item.tname}
-                  EventDescrip = {item.tdes}
-                  EventStartTime={item.start_t}
-                  EventDueTime = {item.end_t}
+                  EventTitle=    {item.title}
+                  EventDescrip = {item.summary}
+                  EventStartTime={item.start}
+                  EventDueTime = {item.end} 
                   IconDisplay="none" 
                   onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
                   /> }

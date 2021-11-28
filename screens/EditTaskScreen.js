@@ -63,9 +63,9 @@ const TaskCreatingScreen = ({ navigation, route }) =>
         const [location, setLocation] = useState('');
         const [Value, setValue] = useState('')
         const { user,users } = useContext(AuthenticatedUserContext);
-        const [endTime,setEndTime] =useState('')
+        const [endTime,setEndTime] = useState('')
         const [startTime,setStartTime] =useState('')
-        
+        const [desc,setDesc] =useState('')
         const [dbResult, setDbResult] = useState()
         const [dbResultTask, setDbResultTask] = useState()
 
@@ -79,15 +79,15 @@ const TaskCreatingScreen = ({ navigation, route }) =>
     {
         var updateTask = {
             op: 'update_task',
-            tk_id: '',
+            tk_id: selectedTask,
             tkname: taskName,
-            descrip: '',
-            category_id: '',
-            start_t: '',
-            end_t: '',
-            loca: '',
-            group_id: '',
-            user_id: '',
+            descrip: desc,
+            category_id: '2',
+            start_t: startTime,
+            end_t: endTime,
+            loca: location,
+            group_id: '1',
+            user_id: '1',
         }
         
         talktoserver(updateTask).then((rd) => 
@@ -95,6 +95,7 @@ const TaskCreatingScreen = ({ navigation, route }) =>
                 setDbResult(rd)
             }
         )
+        console.log(dbResult)
     }
         
        
@@ -120,6 +121,13 @@ const TaskCreatingScreen = ({ navigation, route }) =>
     useEffect(async ()=>{
         console.log(dbResultTask)
         setTaskName(dbResultTask[0].tname)
+        setDesc(dbResultTask[0].tdes)
+        setLocation(dbResultTask[0].locat)
+        setStartTime(dbResultTask[0].start_t)
+        setEndTime(dbResultTask[0].end_t)
+        setValue(dbResultTask[0].cname)
+        setDesc(dbResultTask[0].tdes)
+        // console.log(dbResultTask[0].end_t)
     },[dbResultTask])
 
 // console.log(selectedTask)
@@ -160,7 +168,10 @@ const TaskCreatingScreen = ({ navigation, route }) =>
             setStartTime=   {setStartTime}
             endTime=        {endTime} 
             setEndTime=     {setEndTime}
+            desc=           {desc} 
+            setDesc=        {setDesc}
             text=           "Update Task"
+            onRecBtnPress=  {UpdateTask}
 
  />
 

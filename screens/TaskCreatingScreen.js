@@ -70,7 +70,7 @@ const [endTime,setEndTime] =useState('Pick end Time')
       setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
-       meeting:{
+        meeting:{
         taskName: taskName,
         location: location, 
         startTime: startTime,
@@ -122,12 +122,19 @@ console.log(createTask)
           }
 
         </TaskButtonWrapper>
-        <TaskTable onRecBtnPress={onHandleCreate} setTaskName={setTaskName}  
-        setLocation={setLocation} taskName={taskName} location={location} 
- Value={Value} setValue={setValue} 
- startTime={startTime} setStartTime={setStartTime}
- endTime={endTime} setEndTime={setEndTime}
-desc={desc} setDesc={setDesc}
+        <TaskTable 
+            onRecBtnPress={onHandleCreate} 
+            setTaskName={setTaskName}  
+            setLocation={setLocation} 
+            taskName={taskName} 
+            location={location} 
+            Value={Value} 
+            setValue={setValue} 
+            startTime={startTime} 
+            setStartTime={setStartTime}
+            endTime={endTime} 
+            setEndTime={setEndTime}
+            desc={desc} setDesc={setDesc}
  />
 
       </Wrapper>
