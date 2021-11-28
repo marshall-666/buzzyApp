@@ -71,7 +71,7 @@ const TaskTable = ({
   setLocation,
   Value,
   setValue,
- 
+ desc,setDesc
 }) => {
   // const [selectedValue, setSelectedValue] = useState('Courses')
   // const [Value, setValue] = useState('')
@@ -152,6 +152,15 @@ const TaskTable = ({
           placeholder="Type the Location"
           onChangeText={(text) => { setLocation(text) }}
           value={location}
+          // defaultValue={text}
+        ></TextInput3>
+         <TextInput2 style={{ color: Configurations.colors.secCol }} >
+         Description
+        </TextInput2>
+        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
+          placeholder="Describ your propose"
+          onChangeText={(text) => { setDesc(text) }}
+          value={desc}
           // defaultValue={text}
         ></TextInput3>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >

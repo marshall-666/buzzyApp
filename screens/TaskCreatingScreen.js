@@ -62,6 +62,8 @@ const [Value, setValue] = useState('Course')
   const { user,users } = useContext(AuthenticatedUserContext);
 const [endTime,setEndTime] =useState('Pick end Time')
   const [startTime,setStartTime] =useState('Pick start Time')
+  const [desc,setDesc] =useState('')
+
  
   const onHandleCreate = () => {
     
@@ -73,16 +75,15 @@ const [endTime,setEndTime] =useState('Pick end Time')
         location: location, 
         startTime: startTime,
         endTime:endTime,
-        descrip:Value
+        category:Value,
+        descrip:desc
         }
       });
-     
-     
-      
+
 var createTask = {
     op: 'create_task',
     tkname: taskName,
-    descrip: Value,
+    descrip: desc,
     category_id: '1',
     start_t: startTime,
     end_t: endTime,
@@ -93,8 +94,8 @@ var createTask = {
 console.log(createTask)
  talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
+   
     console.log(dbResult)
-  
 })
 
       navigation.navigate('Taskboard')
@@ -126,7 +127,7 @@ console.log(createTask)
  Value={Value} setValue={setValue} 
  startTime={startTime} setStartTime={setStartTime}
  endTime={endTime} setEndTime={setEndTime}
-
+desc={desc} setDesc={setDesc}
  />
 
       </Wrapper>

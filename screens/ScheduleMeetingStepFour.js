@@ -39,7 +39,7 @@ date="November 20th"
                <Text>Map API</Text>   
                <Text style={{fontSize:18, color:Configurations.colors.backCol}}>Meeting Online?</Text> 
                <Text>Zoom link generator here</Text> 
-            <RecBtn text="create" width="140" height="50" onRecBtnPress={()=>{navigation.navigate('ScheduleMeetingStepFive')}}/>
+            <RecBtn text="create" width="140" height="50" onRecBtnPress={()=>{navigation.navigate('ScheduleMeetingS4')}}/>
             </View>
             <NavBarCon>    
                 <NavBar/>

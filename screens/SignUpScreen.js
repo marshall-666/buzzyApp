@@ -98,11 +98,11 @@ const SignUpScreen = ({ navigation }) => {
           op: 'register_user',
           fb_uid: result.user.uid,
           uname: newName,
-          psword: '',
+          psword: 123456,
           email: email,
           org: school,
           pro: program,
-          img_url: '',
+          img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
         }
         console.log(registerUser)
         talktoserver(registerUser).then((rd) => {

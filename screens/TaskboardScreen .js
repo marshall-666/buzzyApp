@@ -16,6 +16,8 @@ import { Configurations } from '../PropConfig/Props'
 import { db } from '../firebase/fireStore';
 import { fireAuth } from '../firebase/fireAuth';
 import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
+import talktoserver from "../api/talktoserver"
+
 const TaskButtonsWrapper = styled.View`
 margin-left:10px;
 margin-top:14%;
@@ -68,9 +70,26 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorG, setTextColorG] = useState(false)
   const [textColorE, setTextColorE] = useState(false)
   const [welcome, setWelcome] = useState(true)
+  const [dbResult, setDbResult] = useState()
 
     
- 
+useEffect(()=>{
+
+      
+      var loadTaskDetail = {
+          op: 'get_task_detail',
+          tk_id: '1',
+      }
+      
+      talktoserver(loadTaskDetail).then((rd) => {
+          setDbResult(rd)
+          console.log(dbResult)
+      })
+
+
+},[])
+
+
   const { user,users } = useContext(AuthenticatedUserContext);
 
   // const randomColors = () => {
@@ -188,15 +207,15 @@ const TaskboardScreen = ({ navigation }) => {
 
   { group ? (<TaskCardsWrapper>
     {
-      groups.map((o, i) => 
+      dbResult.map((o, i) => 
       ( 
      
         <IndividualEventCard  
           key={i} id={o.id} 
-          EventTitle={o.EventTitle} 
-          EventDescrip={o.EventDescrip} 
-          EventStartTime={o.EventStartTime} 
-          EventDueTime={o.EventDueTime} 
+          EventTitle={o.tname} 
+          EventDescrip={o.tdes} 
+          EventStartTime={o.start_t} 
+          EventDueTime={o.end_t} 
           EventBackgroundColor= {randomColor()}
         />
 

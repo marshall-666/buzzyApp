@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
@@ -8,11 +8,59 @@ import { GroupThread } from '../comps/GroupThread';
 import {GroupsData} from '../data/GroupsData';
 import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
+import talktoserver from "../api/talktoserver"
 
 
 const lightBg = Configurations.colors.lightBg
 const AllGroupsScreen = ({navigation}) => {
     
+const [dbResult, setDbResult] = useState()
+const [ gName, setGName] = useState()
+// const [ grp, setGrpName] = useState()
+const [grpArray, setGrpArray]=useState([])
+
+useEffect(()=>{
+
+    var loadGroupList = {
+        op: 'get_group_ls',
+        user_id: '1',
+    }
+    
+    talktoserver(loadGroupList).then((rd) => {
+        setDbResult(rd)
+    })
+},[])
+
+
+    const loadGroups = async()=>
+        {
+
+            // console.log(dbResult)
+            // console.log(dbResult[1].group.gname)
+            for(let i = 1; i<dbResult.length; i++)
+            {
+                // console.log(dbResult[i].group)
+                if(grpArray.length <= dbResult.length-2)
+                {
+
+                    grpArray.push(dbResult[i].group)
+                }
+                // setGName(dbResult[i].group.gname)
+            }
+            
+        }
+        
+        loadGroups()
+    
+    console.log(grpArray[0])
+// useEffect(()=>
+// {
+//     const groupInfo = async () =>
+//     {
+//         setGrpName(dbResult[0].gname)
+//     }
+// groupInfo()
+// },[dbResult])
     return (
         <View style={styles.header}>
         
@@ -30,11 +78,11 @@ const AllGroupsScreen = ({navigation}) => {
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={GroupsData}
+                        data={grpArray}
                         renderItem={({item})=> <GroupThread 
-                                                        groupName={item.groups.name}
-                                                        groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {info: item.groups.name})}}/>}
+                                                        groupName={item.gname}
+                                                        // groupImg={item.groups.imageUri}
+                                                        onPress={()=>{ navigation.navigate('GroupHome', {info: item.gname})}}/>}
                         />
                     
                 </View>
