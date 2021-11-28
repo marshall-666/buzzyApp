@@ -61,7 +61,7 @@ const AgendaScreen = ({navigation, route }) => {
   const [selectCol, setSelectCol] = useState('red')
   const[EVENTS, setEVENTS] = useState(tasks[ChosenDay])
   const [movie, setMovie] = useState('')
-  const [taskColor, setTaskColor] =useState("#fadeaf50")
+  const [taskColor, setTaskColor] =useState(colors.butCol)
   const ChosenDay = route.params.day
 
   const [dbResult, setDbResult] = useState()
@@ -93,8 +93,8 @@ useEffect (()=>{
             return el.day == [ChosenDay]
           })
           console.log('========-XXXXXX======')
-          console.log(dayTaskArray)
-        const eventsObject = dbResult
+          // console.log(dayTaskArray)
+          const eventsObject = dbResult
       
         
         // console.log(eventsObject)
@@ -103,17 +103,19 @@ useEffect (()=>{
         {
           newArray.push(dayTaskArray[i].day)
           console.log(dayTaskArray[i].task_category)
-          if(dayTaskArray[i].task_category == "course")
-          {
-            // console.log('hiii')
-            setTaskColor('#fadfad80')
-          }
-          else if(dayTaskArray[i].task_category == "group")
-          {
-            console.log('hiii')
-            setTaskColor('red')
+          
+          
+          // if(dayTaskArray[i].task_category == "course")
+          // {
+          //   // console.log('hiii')
+          //   setTaskColor('#fadfad80')
+          // }
+          // else if(dayTaskArray[i].task_category == "group")
+          // {
+          //   // console.log('hiii')
+          //   setTaskColor('red')
 
-          }
+          // }
           // else if(dayTaskArray[i].task_category == "course")
           // {
           //   // console.log('hiii')
@@ -143,6 +145,7 @@ useEffect (()=>{
           }
       });
     
+      console.log(transformed)
       let dailyEvents = {}
     
       Object.keys(eventDays).forEach((day) => {
@@ -220,11 +223,6 @@ useEffect (()=>{
       selectedColor: selectCol
     }
   }
-
-
-  
-
-
   
 
   // relatable code on line 286-294, 211-230
@@ -281,10 +279,16 @@ useEffect (()=>{
                  <Timeline events={EVENTS} 
                   pastScrollRange={10}
                   futureScrollRange={10}
-                  format24h={false}
+                  // format24h={false}
                   theme={{ 
-                    timeLabel:{color:secCol, fontSize:12},
-                    contentStyle:{backgroundColor:colors.primCol}
+                    timeLabel:{color:secCol, fontSize:13},
+                    contentStyle:{backgroundColor:colors.primCol},
+                    eventTimes:{fontSize:14},
+                    line:{backgroundColor:colors.lightBg},
+                    event:{borderColor:colors.secCol},
+                    eventTitle:{fontSize:16},
+                    eventSummary:{fontSize:14}
+
                     }}/>
 
        
