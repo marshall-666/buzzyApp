@@ -30,7 +30,7 @@ const secCol = colors.secCol;
 const accent = colors.butCol;
 
 
-const Wrapper =styled.ScrollView`
+const Wrapper = styled.ScrollView`
 
 `
 
@@ -71,7 +71,6 @@ const primCol = Configurations.colors.primCol
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
   const [dbResult, setDbResult] = useState()
-  const [dbResultTask, setDbResultTask] = useState()
   
   const [grpTasks, setGrpTasks] = useState([])
   const [courseTasks, setCourseTasks] = useState([])
@@ -96,20 +95,7 @@ const DashboardScreen = ({navigation }) => {
 
 
 // useEffect to load the tasks for cards and regular tasks
-  useEffect(()=>{
-
-
-    var loadTaskDetail = 
-    {
-        op: 'get_task_detail',
-        tk_id: '1',
-    }
-
-    talktoserver(loadTaskDetail).then((rd) => 
-    {
-        setDbResultTask(rd)
-    })
-  },[])
+ 
 
   useEffect (()=>{
   
@@ -128,6 +114,7 @@ const DashboardScreen = ({navigation }) => {
 
         
         const daysObject = dbResult
+        // console.log(daysObject)
         const newArray=[]
         const groupTask = []
         for(let i=0; i<daysObject.length; i++)
@@ -157,41 +144,48 @@ const DashboardScreen = ({navigation }) => {
                 };
           }
         );
+           
+        // ================================================================
+          const courseTaskArray = daysObject.filter(function(el)
+              {
+                return el.task_category == 'course'
+              })
+              setCourseTasks(courseTaskArray)
               
-        
-        // console.log(dailyEvents)
+              
+
+
+          const groupTaskArray = daysObject.filter(function(el)
+          {
+            return el.task_category == 'group'
+          })
+          setGrpTasks(groupTaskArray)
+          
+          
+          const eventTaskArray = daysObject.filter(function(el)
+          {
+            return el.task_category == 'individual'
+          })
+          setEventTasks(eventTaskArray)
+
+
+
+
+        // ================================================================
+
+
+
+
+
         setNewDaysObject(dailyEvents)
       }
       GetDays()
 
 
-      const taskList = dbResultTask
+      const taskList = dbResult
       // console.log(dbResultTask[0].cname)
-      const getTasks = async()=>
-      {
-        for (let i=0 ; i<= taskList.length; i++)
-        {
-          if (taskList[i].cname == 'group')
-          {
-            // grpTasks.push(taskList)
-            setGrpTasks(taskList)
-            // console.log(grpTasks)
-          }
-            
-          else if (taskList[i].cname == 'courses')
-          {
-            setCourseTasks(taskList)
-          }
-          else if (taskList[i].cname == 'events')
-          {
-            setEventTasks(taskList)
-          }
-          // console.log(taskList[i].cname)
-        }
-      }
-      
-      getTasks()
-  },[dbResult,dbResultTask])
+     
+  },[dbResult])
 
   // console.log(dbResult)
 
@@ -376,27 +370,32 @@ const DashboardScreen = ({navigation }) => {
           renderItem={({item})=> 
                 <IndividualEventCard 
                   EventBackgroundColor="#EC8B1A"
-                  EventTitle={item.tname}
-                  EventDescrip = {item.tdes}
-                  EventStartTime={item.start_t}
-                  EventDueTime = {item.end_t}
+                  EventTitle=    {item.title}
+                  EventDescrip = {item.summary}
+                  EventStartTime={item.start}
+                  EventDueTime = {item.end} 
                   IconDisplay="none" 
                   onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
                   /> }
         /> : null
       }
+      
       { groups ?
         <FlatList 
           contentContainerStyle={{ maxWidth:'100%'}}
           data = {grpTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
-                  EventTitle={item.tname}
-                  EventDescrip = {item.tdes}
-                  EventStartTime={item.start_t}
-                  EventDueTime = {item.end_t} /> }
+                  EventTitle=    {item.title}
+                  EventDescrip = {item.summary}
+                  EventStartTime={item.start}
+                  EventDueTime = {item.end} 
+                  onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+                  /> }
+                  
         /> : null
       }
+
       { events ?
         <FlatList 
           contentContainerStyle={{ maxWidth:'100%'}}
@@ -407,7 +406,7 @@ const DashboardScreen = ({navigation }) => {
                   EventDescrip = {item.tdes}
                   EventStartTime={item.start_t}
                   EventDueTime = {item.end_t}
-                  IconDisplay="none" /> }
+                   /> }
         /> : null
       }
         {/* <IndividualEventCard EventBackgroundColor={colors.accColOne}/> */}
