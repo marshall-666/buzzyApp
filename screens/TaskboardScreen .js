@@ -191,7 +191,7 @@ useEffect(()=>{
     {
       courses.map((o, i) => 
       (
-        <IndividualEventCard  
+        <CourseEventCard  
           key={i} id={o.id} 
           EventTitle={o.EventTitle} 
           EventDescrip={o.EventDescrip} 

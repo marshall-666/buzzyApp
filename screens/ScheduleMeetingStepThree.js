@@ -31,7 +31,8 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
     const [location, setLocation] = useState('')
 
     return (
-        <View behavior="height" keyboardVerticalOffset={-100}
+        <KeyboardAvoidingView  behavior="height"  keyboardVerticalOffset={-10} style={styles.container} >
+        <View
             style={{
                 flex: 1, justifyContent: 'flex-end', alignItems: 'center',
                 backgroundColor: lightBg, width: '100%'
@@ -91,12 +92,16 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
             </NavBarCon>
 
         </View>
+        </KeyboardAvoidingView>
     )
 }
 
 export default ScheduleMeetingStepThreeScreen
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+      },
     mainCont: {
         flexDirection: 'column',
         alignItems: 'center',
