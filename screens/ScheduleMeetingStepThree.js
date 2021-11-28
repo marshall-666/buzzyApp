@@ -31,7 +31,7 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
     const [location, setLocation] = useState('')
 
     return (
-        <KeyboardAvoidingView  behavior="height"  keyboardVerticalOffset={-10} style={styles.container} >
+        <KeyboardAvoidingView  behavior="height"  keyboardVerticalOffset={75} style={styles.container} >
         <View
             style={{
                 flex: 1, justifyContent: 'flex-end', alignItems: 'center',
