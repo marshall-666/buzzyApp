@@ -291,3 +291,22 @@ talktoserver(loadSlots).then((rd) => {
 })
 
 //======================================
+//  Load two members time slots
+//=======================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
+var indiSlots = {
+    op: 'indi_slot',
+    user_id: '',
+    subject_id: '',
+}
+
+talktoserver(indiSlots).then((rd) => {
+    setDbResult(rd)
+})
+
+//=======================================

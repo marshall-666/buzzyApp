@@ -99,8 +99,16 @@ const talktoserver = async (param) => {
         dataRqInbox.append('group_id', param.group_id)
 
     } else if(param.op == 'load_slot'){
+
         dataRqInbox.append('op', param.op)
         dataRqInbox.append('group_id', param.group_id)
+
+    } else if(param.op =='indi_slot'){
+
+        dataRqInbox.append('op', param.op)
+        dataRqInbox.append('user_id', param.user_id)
+        dataRqInbox.append('subject_id', param.subject_id)
+        
     }
 
     const response = await fetch(API_URL, {
