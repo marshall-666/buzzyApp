@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginTop: 50,
+    marginTop: '5%',
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',
