@@ -53,9 +53,13 @@ const GroupHomeScreen = ({
         
                 memsObj.name=groupInfo.members[i].name
                 memsIdObj.id=groupInfo.members[i].id
-                memsArray.push(memsObj.name)
+               
+                if(memsArray.length < groupInfo.members.length){
+
+                    memsArray.push(memsObj.name)
+                }
             }
-            console.log(memsIdObj)
+           
         }
             
         loadGroupMembers()
