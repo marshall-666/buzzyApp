@@ -81,9 +81,9 @@ const [endTime,setEndTime] =useState('Pick end Time')
         }
       });
       if ( Value=== 'Courses'){
-        setCategory_id('1')
+        setCategory_id('2')
      }else if (Value=== 'Groups')
-     {    setCategory_id('2')}
+     {    setCategory_id('1')}
      else {
       setCategory_id('3')
      }

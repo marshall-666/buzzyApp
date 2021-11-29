@@ -13,6 +13,7 @@ import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 
+const colors = Configurations.colors
 
 const taskCategory = [
   {
@@ -68,21 +69,49 @@ const TaskCreatingScreen = ({ navigation, route }) =>
         const [desc,setDesc] =useState('')
         const [dbResult, setDbResult] = useState()
         const [dbResultTask, setDbResultTask] = useState()
-
+        const [category_id,setCategory_id] =useState('')
+        const [rectCol, setRectCol] = useState(colors.butCol)
+        const [rectText, setRectText] = useState('Update Task')
+        const [txtCol, setTxtCol] = useState('black')
         // states to take in the exisisting values of the task
 
-        // const [dbResult, setDbResult] = useState()
-        const [taskNameCur, setTaskNameCur] = useState('');
+
+
 
 
     const UpdateTask = async()=>
     {
+      setRectCol(colors.secCol)
+      setRectText('Confirm?')
+      setTxtCol(colors.lightBg)
+      // navigation.navigate('Dashboard')
+      if(rectCol == colors.secCol)
+      {
+        navigation.navigate('Dashboard')
+      }
+        
+        
+      
+      if ( Value=== 'Courses')
+      {
+        setCategory_id('2')
+      }
+      
+      else if (Value=== 'Groups')
+      {
+        setCategory_id('1')
+      
+      }
+      else 
+      {
+        setCategory_id('3')
+      }
         var updateTask = {
             op: 'update_task',
             tk_id: selectedTask,
             tkname: taskName,
             descrip: desc,
-            category_id: '2',
+            category_id: category_id,
             start_t: startTime,
             end_t: endTime,
             loca: location,
@@ -130,7 +159,7 @@ const TaskCreatingScreen = ({ navigation, route }) =>
         // console.log(dbResultTask[0].end_t)
     },[dbResultTask])
 
-// console.log(selectedTask)
+
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
@@ -170,8 +199,10 @@ const TaskCreatingScreen = ({ navigation, route }) =>
             setEndTime=     {setEndTime}
             desc=           {desc} 
             setDesc=        {setDesc}
-            text=           "Update Task"
+            text=           {rectText}
             onRecBtnPress=  {UpdateTask}
+            bgC =           {rectCol}
+            txtC=           {txtCol}
 
  />
 

@@ -72,6 +72,8 @@ const TaskTable = ({
   Value,
   setValue,
  desc,setDesc,
+ bgC,
+ txtC
 
 }) => {
   // const [selectedValue, setSelectedValue] = useState('Courses')
@@ -190,7 +192,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn style={{}} onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} />
       </ButtonCon>
 
     </CardCon>
