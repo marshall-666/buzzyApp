@@ -88,7 +88,7 @@ const GroupChatScreen = ({
               style={{
                 width: 350,
                 height: 350,
-                backgroundColor: '#fff',
+                // backgroundColor: '#fff',
               }}
               source={require('../assets/WORK.json')}
               autoPlay={true}
