@@ -24,6 +24,7 @@ import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
 import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
 import ScheduleMeetingStepFourScreen from '../screens/ScheduleMeetingStepFour';
 import ScheduleMeetingStepFiveScreen from '../screens/ScheduleMeetingStepFive';
+import EditTaskScreen from '../screens/EditTaskScreen'
 import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
@@ -32,6 +33,8 @@ import IndividualMemberScreen from '../screens/IndividualMemberScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+
+
 
 //drawer//
 function Taskboard() {
@@ -42,7 +45,14 @@ function Taskboard() {
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
-      }}>
+        drawerStyle: {
+          backgroundColor: Configurations.colors.backCol,
+          width: 160,
+          justifyContent:'center'
+        },
+        
+      }} 
+      >
       <Drawer.Screen name='Back' component={TaskboardScreen} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
@@ -57,6 +67,10 @@ function Dashboard() {
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
+        drawerStyle: {
+          backgroundColor:  Configurations.colors.backCol,
+          width: 160,
+        },
       }}
     >
       <Drawer.Screen name='Back' component={DashboardScreen} />
@@ -73,6 +87,10 @@ function AllGroups() {
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
+        drawerStyle: {
+          backgroundColor:  Configurations.colors.backCol,
+          width: 160,
+        },
       }}>
       <Drawer.Screen name='Back' component={AllGroupsScreen} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
@@ -88,6 +106,10 @@ function ScheduleMeeting() {
         headerShown: false,
         drawerType: "back",
         drawerPosition: "right",
+        drawerStyle: {
+          backgroundColor:  Configurations.colors.backCol,
+          width: 160,
+        },
       }}>
       <Drawer.Screen name='Back' component={ScheduleMeetingScreen} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
@@ -98,22 +120,6 @@ function ScheduleMeeting() {
 }
 //drawer//
 
-const NavigationDrawerStructure = (props)=> {
-  //Structure for the navigatin Drawer
-  const toggleDrawer = () => {
-    //Props to open/close the drawer
-    props.navigationProps.toggleDrawer();
-  };
-
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity onPress={()=> toggleDrawer()}>
-        {/*Donute Button Image */}
-        <Entypo name="menu" size={30} color="lightgrey" />
-      </TouchableOpacity>
-    </View>
-  );
-}
 
 export default function TaskboardStack() {
   const { user, users } = useContext(AuthenticatedUserContext);
@@ -155,22 +161,20 @@ export default function TaskboardStack() {
 
   return (
     <Stack.Navigator initialRouteName="Dashboard"
-      screenOptions={{
+      screenOptions={ {
         headerShown: true,
-        headerStyle: { backgroundColor: Configurations.colors.secCol, },
+        headerStyle: { backgroundColor: Configurations.colors.secCol },
         headerTitleAlign: 'center',
         headerTintColor: '#fff', headerTitleStyle: {
           fontSize: 30
         },
         headerRight: 
-         () => <NavigationDrawerStructure
-         navigationProps={navigation}
-       />,
-        // (
-        //   <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        //     <Entypo name="menu" size={30} color="lightgrey" />
-        //   </TouchableOpacity>
-        // ),
+         ({navigation}) => 
+        (
+          <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+            <Entypo name="menu" size={30} color="lightgrey" />
+          </TouchableOpacity>
+        ),
       }
     
     }
@@ -187,6 +191,7 @@ export default function TaskboardStack() {
       {/* Taskmamagement schedules */}
       <Stack.Screen name='Taskboard' component={Taskboard} />
       <Stack.Screen name="TaskCreating" component={TaskCreatingScreen} />
+      <Stack.Screen name="EditTask" component={EditTaskScreen} />
 
 
       {/* Course Info */}
@@ -200,19 +205,14 @@ export default function TaskboardStack() {
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} />
       {/* Members schedules */}
       <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} />
-      <Stack.Screen name="ScheduleMeeting" component={ScheduleMeeting} />
+      <Stack.Screen name="ScheduleMeeting" options={{ title:'Meeting'}} component={ScheduleMeeting} />
 
       {/* Schedule meeting flow */}
       {/* <Stack.Screen name="ScheduleMeetingStepOne" component={ScheduleMeetingStepOneScreen} /> */}
-      <Stack.Screen name="ScheduleMeetingS1" component={ScheduleMeetingStepTwoScreen} />
-      <Stack.Screen name="ScheduleMeetingS2" component={ScheduleMeetingStepThreeScreen} />
-      <Stack.Screen name="ScheduleMeetingS3" component={ScheduleMeetingStepFourScreen} />
-      <Stack.Screen name="ScheduleMeetingS4" component={ScheduleMeetingStepFiveScreen} />
-      
-      {/* Individual Member Screen */}
-      
-      <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
-      
+      {/* <Stack.Screen name="MeetingStep1" component={ScheduleMeetingStepTwoScreen} /> */}
+      <Stack.Screen name="MeetingStep2" options={{ title:'Meeting'}} component={ScheduleMeetingStepThreeScreen} />
+      <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
+      <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
     </Stack.Navigator>
   );

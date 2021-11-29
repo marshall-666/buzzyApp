@@ -9,7 +9,7 @@ import { Configurations } from '../PropConfig/Props'
 import fireAuth from '../firebase/fireAuth';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import fireStore from '../firebase/fireStore';
-import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
+import { doc, setDoc,serverTimestamp ,collection,addDoc } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 
@@ -62,43 +62,55 @@ const [Value, setValue] = useState('Course')
   const { user,users } = useContext(AuthenticatedUserContext);
 const [endTime,setEndTime] =useState('Pick end Time')
   const [startTime,setStartTime] =useState('Pick start Time')
- 
+  const [desc,setDesc] =useState('')
+  const [category_id,setCategory_id] =useState('')
+
+
+
   const onHandleCreate = () => {
-    
-        setDoc(doc(db, "tasks", user.uid), {
+      setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
-       meeting:{
+        meeting:{
         taskName: taskName,
         location: location, 
         startTime: startTime,
         endTime:endTime,
-        category:Value
+        category:Value,
+        descrip:desc
         }
       });
-      
-      
+      if ( Value=== 'Courses'){
+        setCategory_id('1')
+     }else if (Value=== 'Groups')
+     {    setCategory_id('2')}
+     else {
+      setCategory_id('3')
+     }
 var createTask = {
     op: 'create_task',
     tkname: taskName,
-    descrip: Value,
-    category_id: '1',
+    descrip: desc,
+    category_id: category_id,
     start_t: startTime,
     end_t: endTime,
     loca: location,
     group_id: '1',
-    user_id: user.uid,
+    user_id: '1',
 }
+console.log(category_id)
+console.log(createTask)
 
-talktoserver(createTask).then((rd) => {
+ talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
+   
     console.log(dbResult)
 })
 
       navigation.navigate('Taskboard')
     }
   
-    console.log(Value)
+    
 
   return (
 
@@ -119,12 +131,19 @@ talktoserver(createTask).then((rd) => {
           }
 
         </TaskButtonWrapper>
-        <TaskTable onRecBtnPress={onHandleCreate} setTaskName={setTaskName}  
-        setLocation={setLocation} taskName={taskName} location={location} 
- Value={Value} setValue={setValue} 
- startTime={startTime} setStartTime={setStartTime}
- endTime={endTime} setEndTime={setEndTime}
-
+        <TaskTable 
+            onRecBtnPress={onHandleCreate} 
+            setTaskName={setTaskName}  
+            setLocation={setLocation} 
+            taskName={taskName} 
+            location={location} 
+            Value={Value} 
+            setValue={setValue} 
+            startTime={startTime} 
+            setStartTime={setStartTime}
+            endTime={endTime} 
+            setEndTime={setEndTime}
+            desc={desc} setDesc={setDesc}
  />
 
       </Wrapper>

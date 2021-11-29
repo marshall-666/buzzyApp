@@ -11,12 +11,12 @@ const bgCol = Configurations.colors.primCol
 const darkCol= Configurations.colors.secCol
 export const Available = (
     {
-        monthName =" November",
-        day="today",
-        date = "20th",
+        monthName =" ",
+        weekday="today",
+        date = "",
         bgColor={bgCol},
         data,
-        onSlotPress=()=>{}
+      
     }
 ) => {
     return (
@@ -35,7 +35,7 @@ export const Available = (
                     fontSize:25, 
                     color:darkCol,
                     fontWeight:'bold',
-                    marginLeft:-4}}>
+                    marginLeft:-4,marginBottom:10}}>
                         {monthName}
                 </Text>
 
@@ -54,7 +54,7 @@ export const Available = (
                     fontSize:25, 
                     marginTop:20,
                     color:darkCol,
-                    fontWeight:'bold'}}> {day} 
+                    fontWeight:'bold'}}> {weekday} 
             </Text>
         </View>
     )
@@ -67,13 +67,14 @@ const styles = StyleSheet.create({
     card:{
         // backgroundColor:'red',
         paddingHorizontal:20,
-        paddingVertical:25,
-        height:410,
+        paddingVertical:15,
+        maxHeight:400,
         backgroundColor:'#ffffff80',
-        margin:10,
+        margin:20,
         justifyContent:'space-evenly',
         alignItems:'center',
         borderRadius:10,
+        
     },
     slot:{
         width:'90%',
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
         borderBottomWidth:1,
         borderLeftWidth:1,
         borderRadius:10,
+        
     },
 
     divider:{

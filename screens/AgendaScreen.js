@@ -61,6 +61,7 @@ const AgendaScreen = ({navigation, route }) => {
   const [selectCol, setSelectCol] = useState('red')
   const[EVENTS, setEVENTS] = useState(tasks[ChosenDay])
   const [movie, setMovie] = useState('')
+  const [taskColor, setTaskColor] =useState(colors.butCol)
   const ChosenDay = route.params.day
 
   const [dbResult, setDbResult] = useState()
@@ -83,61 +84,137 @@ if(ChosenDay)
 
 },[])
 
+useEffect (()=>{ 
+  const GetEvents = async ()=>
+  {
 
-
-  useEffect (()=>{ 
-    const GetEvents = async ()=>
-    {
-
-        console.log(dbResult)
-         
-          // const result = await axios.get('http://localhost:8888/newApi.php?movies=all')
-      
-          const eventsObject = dbResult
-          // console.log(eventsObject)
-          const newArray=[]
-          for(let i=0; i<eventsObject.length; i++)
+    const dayTaskArray = dbResult.filter(function(el)
           {
-            newArray.push(eventsObject[i].day)
-          }
-          
-          // console.log(newObject)
-          
-          let newObject = newArray.map(function(obj)
-          {
-              return{
-                [obj]:[]
-              }
+            return el.day == [ChosenDay]
           })
-          
-          const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
-          let transformed = eventsObject.map(function(obj){
-            return {
-              
-              start: obj.start,
-              end: obj.end,
-              title: obj.title,
-              summary: obj.summary
-              
-            }
-        });
+          console.log('========-XXXXXX======')
+          // console.log(dayTaskArray)
+          const eventsObject = dbResult
       
-        let dailyEvents = {}
-      
-        Object.keys(eventDays).forEach((day) => {
-          dailyEvents[day] = 
-            transformed
         
-          ;
-        });
-        setMovie(dailyEvents);
-        setEVENTS(dailyEvents[ChosenDay])
-        console.log(dailyEvents[ChosenDay])
+        // console.log(eventsObject)
+        const newArray=[]
+        for(let i=0; i<dayTaskArray.length; i++)
+        {
+          newArray.push(dayTaskArray[i].day)
+          console.log(dayTaskArray[i].task_category)
+          
+          
+          // if(dayTaskArray[i].task_category == "course")
+          // {
+          //   // console.log('hiii')
+          //   setTaskColor('#fadfad80')
+          // }
+          // else if(dayTaskArray[i].task_category == "group")
+          // {
+          //   // console.log('hiii')
+          //   setTaskColor('red')
+
+          // }
+          // else if(dayTaskArray[i].task_category == "course")
+          // {
+          //   // console.log('hiii')
+          //   setTaskColor('#fadfad80')
+          // }
+        }
+        
+        // console.log(newObject)
+        
+        let newObject = newArray.map(function(obj)
+        {
+            return{
+              [obj]:[]
+            }
+        })
+        
+        const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
+        let transformed = dayTaskArray.map(function(obj){
+          return {
+            
+            start: obj.start,
+            end: obj.end,
+            title: obj.title,
+            summary: obj.summary,
+            color : taskColor
+            
+          }
+      });
+    
+      console.log(transformed)
+      let dailyEvents = {}
+    
+      Object.keys(eventDays).forEach((day) => {
+        dailyEvents[day] = 
+          transformed
+      
+        ;
+      });
+      
+
+      setEVENTS(dailyEvents[ChosenDay])
+      
+ 
+  }      
+    GetEvents()
+
+},[dbResult])
+
+  // useEffect (()=>{ 
+  //   const GetEvents = async ()=>
+  //   {
+
+      
+  //         const eventsObject = dbResult
+  //         // console.log(eventsObject)
+  //         const newArray=[]
+  //         for(let i=0; i<eventsObject.length; i++)
+  //         {
+  //           newArray.push(eventsObject[i].day)
+  //         }
+          
+  //         // console.log(newObject)
+          
+  //         let newObject = newArray.map(function(obj)
+  //         {
+  //             return{
+  //               [obj]:[]
+  //             }
+  //         })
+          
+  //         const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
+  //         let transformed = eventsObject.map(function(obj){
+  //           return {
+              
+  //             start: obj.start,
+  //             end: obj.end,
+  //             title: obj.title,
+  //             summary: obj.summary
+              
+  //           }
+  //       });
+      
+  //       let dailyEvents = {}
+      
+  //       Object.keys(eventDays).forEach((day) => {
+  //         dailyEvents[day] = 
+  //           transformed
+        
+  //         ;
+  //       });
+        
+
+  //       setEVENTS(dailyEvents[ChosenDay])
+        
    
-    }      
-      GetEvents()
+  //   }      
+  //     GetEvents()
   
-  },[dbResult])
+  // },[dbResult])
 }
 
   const markedDates = {
@@ -146,11 +223,6 @@ if(ChosenDay)
       selectedColor: selectCol
     }
   }
-
-
-  
-
-
   
 
   // relatable code on line 286-294, 211-230
@@ -207,10 +279,16 @@ if(ChosenDay)
                  <Timeline events={EVENTS} 
                   pastScrollRange={10}
                   futureScrollRange={10}
-                  format24h={false}
+                  // format24h={false}
                   theme={{ 
-                    timeLabel:{color:secCol},
-                    contentStyle:{backgroundColor:colors.primCol}
+                    timeLabel:{color:secCol, fontSize:13},
+                    contentStyle:{backgroundColor:colors.primCol},
+                    eventTimes:{fontSize:14},
+                    line:{backgroundColor:colors.lightBg},
+                    event:{borderColor:colors.secCol},
+                    eventTitle:{fontSize:16},
+                    eventSummary:{fontSize:14}
+
                     }}/>
 
        

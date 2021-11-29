@@ -1,20 +1,22 @@
 import React from "react";
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet, Pressable} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 
-const CardCont = Styled.View`
+const CardCont = Styled.Pressable`
 width:90%;
 height:120px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
 border:1px solid #C4C4C4;
-border-top-right-radius:${(props) => props.borderTopRightRadius};
-border-bottom-right-radius:${(props) => props.borderBottomRightRadius};
+border-radius:15px;
+margin:10px;
 overflow:hidden;
+
 `
 const EventColour = Styled.View`
 width:4%;
@@ -24,7 +26,7 @@ background-color:${(props) => props.EventBackgroundColor};
 
 const TextCont = Styled.View`
 display:flex;
-padding:1%;
+padding:2%;
 flex-direction:column;
 justify-content:space-evenly;
 width:60%;
@@ -32,7 +34,7 @@ height:100%;
 `
 
 const IconCont = Styled.View`
-display:flex;
+display:${(props) => props.IconDisplay};
 align-items:center;
 justify-content:center;
 flex-direction:column;
@@ -41,32 +43,49 @@ height:100%;
 `
 
 
-const GroupEventCard = ({
+const CourseEventCard = ({
     backgroundColor="#FFFFFF",
-    borderTopRightRadius="0",
-    borderBottomRightRadius="0",
-    EventBackgroundColor="#EFF32A",
-    EventTitle="MDIA 3109",
-    EventDescrip="Finish Beast Composition",
-    EventStartTime="September 24th 5:00pm",
-    EventDueTime="September 24th 7:00pm",
-    onGroupPress=()=>{},
+    EventBackgroundColor="green",
+    EventTitle="",
+    EventDescrip="Town Center Field #5",
+    EventStartTime="",
+    EventDueTime="",
+    IconDisplay="flex",
+    onCardPress=()=>{}
 
 
 }) => {
+  const navigation = useNavigation();
   return (
-  <CardCont backgroundColor={backgroundColor} borderTopRightRadius={borderTopRightRadius} borderBottomRightRadius={borderBottomRightRadius}>
+    <View style=
+    {{
+        shadowColor: '#5B7797',
+        shadowOffset: {width: 10, height: 8},
+        shadowOpacity: .6,
+        shadowRadius: 7,
+    }}>
+    
+      
+  <CardCont backgroundColor={backgroundColor} onPress={onCardPress}>
+
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
-      <Text><Text style={{fontSize:20}}>{EventTitle}</Text>  <FontAwesome5 name="edit" size={22} color="black" iconStyle={{marginLeft: 50}} /></Text> 
+      <Text style={{fontSize:24}}>{EventTitle.substr(0,15)}</Text>
       <Text style={{fontSize:14}}>{EventDescrip}</Text> 
       <Text style={{fontSize:14}}>{EventStartTime}</Text> 
       <Text style={{fontSize:14}}>{EventDueTime}</Text>  
     </TextCont>
+    
+   
+  
+  
+ 
   </CardCont>
+  </View>
   );
 };
 
 
 
-export default GroupEventCard;
+export default CourseEventCard;
+

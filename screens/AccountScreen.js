@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'yellow',
     marginLeft: -30,
-    marginTop: 240
+    marginTop: 275
   },
   User: {
     fontSize: 24,

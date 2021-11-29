@@ -31,6 +31,11 @@ useEffect(()=>{
         setDbResult(rd)
     })
 },[])
+console.log('=======================')
+// console.log(dbResult)
+// console.log('------------------------')
+// console.log(dbResult.groups[0].group)
+console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 
 useEffect(()=>{
@@ -58,6 +63,7 @@ useEffect(()=>{
                 }
                 
             }
+            console.log(grpArray)
             
             loadGroups()
        
