@@ -40,33 +40,8 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 useEffect(()=>{
 
-    const loadGroups = async()=>
-    {
-        
-        // console.log(dbResult.groups[0])
-        //         // console.log(dbResult)
-                // console.log(dbResult[1].group.gname)
-                for(let i = 0; i<Test.length; i++)
-                {
-                    // console.log(Test[i].groups.grpName)
-                   
-                
-                    if(grpArray.length <= Test.length)
-                    {
+    console.log(dbResult)
     
-                        // grpArray.push(Test.group)
-                   
-
-                        
-                    }
-                    // setGName(dbResult[i].group.gname)
-                }
-                
-            }
-            console.log(grpArray)
-            
-            loadGroups()
-       
 }, [dbResult])
 
     
@@ -95,7 +70,7 @@ useEffect(()=>{
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={Test}
+                        data={dbResult}
                         renderItem={({item})=> <GroupThread 
                                                         groupName={item.groups.grpName}
                                                         groupMembersNum={item.groups.mem_count}

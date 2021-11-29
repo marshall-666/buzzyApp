@@ -214,6 +214,9 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
+      <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
+    
+    
     </Stack.Navigator>
   );
 }

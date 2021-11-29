@@ -35,6 +35,7 @@ const GroupHomeScreen = ({
     const groupInfo = route.params
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
+    const [memsIdObj, setMemsIdObj]=useState({})
     const [memsObj, setMemsObj]=useState({})
     const [grpName, setGrpName]=useState()
     const [grpMemNum, setGrpMemNum]=useState()
@@ -51,14 +52,14 @@ const GroupHomeScreen = ({
             for(let i=0; i<groupInfo.members.length; i++ ){
         
                 memsObj.name=groupInfo.members[i].name
+                memsIdObj.id=groupInfo.members[i].id
                 memsArray.push(memsObj.name)
-                
             }
-            
+            console.log(memsIdObj)
         }
             
         loadGroupMembers()
-        
+       
       
     },[groupInfo])
 
@@ -74,7 +75,7 @@ const GroupHomeScreen = ({
     useEffect(()=>{
         var loadTaskDetail = {
             op: 'get_task_detail',
-            tk_id:groupid, //need a task id foreign key from group array to carry over to make so you get task you clicked on  
+            tk_id:groupid, 
             }
         
         talktoserver(loadTaskDetail).then((rd) => {

@@ -51,36 +51,36 @@ const IndividualMemberScreen = ({navigation,
     const [user, setUser] = useState('')
     const [imgSrc, setSrc] = useState()
 useEffect(()=>{
-    
     var loadMemberDetail = {
         op: 'get_mem_detail',
-        m_id: '1', //CONNECT THIS ID TO LOGGED IN USER
+        m_id: '1', 
     }
     
     
-
+    
     talktoserver(loadMemberDetail).then((rd) => {
         setDbResult(rd)
     })
-
-    // console.log(dbResult)
+    
 },[])
 
-    
-    useEffect(()=>{
-        
-        const updateUser = async () =>
-        {
 
-            setUser(dbResult[0].uname)
-            setSrc(dbResult[0].img_url)
-        }
+useEffect(()=>{
+    
+    const updateUser = async () =>
+    {
         
+        setUser(dbResult[0].uname)
+        setSrc(dbResult[0].img_url)
+    }
+    
     updateUser()
     
-    },[dbResult])
-    return (
-        
+   
+    
+},[dbResult])
+return (
+    
         
         <View style={{flex:1, justifyContent:'flex-end', alignItems:'center',
         backgroundColor:lightBg}}>
