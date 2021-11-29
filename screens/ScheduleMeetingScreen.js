@@ -12,6 +12,7 @@ import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvide
 import { Configurations } from '../PropConfig/Props'
 import { Available } from '../comps/Available'
 import { Days } from '../data/AvailableTime'
+import talktoserver from "../api/talktoserver"
 
 const TaskButtonsWrapper = styled.View`
 margin-top:10%;
@@ -55,14 +56,11 @@ const TaskboardScreen = ({ navigation }) => {
   const [showcourses, setShowCourses] = useState(showcourses)
   const [showSchedule, setShowSchedule] = useState(false)
   const [showAll, setShowAll] = useState(true)
+  const [dbResult, setDbResult] = useState()
 
-
-  const slotTue = []
-  const slotMon = []
-  const slotWed = []
 
  
-  var Schedule = [
+  const Schedule = [
     {
       title: "businessCom",
       startTime: new Date("2021/12/06 9:30 AM"),
@@ -95,52 +93,114 @@ const TaskboardScreen = ({ navigation }) => {
       endTime: new Date("2021/12/08 02:20 PM")
     },
   ];
-  // var ScheduleLevi = [
-  //   {
-  //     title: "Communting",
-  //     startTime: new Date("2021/12/06 04:30 PM"),
-  //     endTime: new Date("2021/12/06 05:20 PM"),
-  //   },
-  //   {
-  //     title: " do assignment",
-  //     startTime: new Date("2021/12/06 06:50 PM"),
-  //     endTime: new Date("2021/12/06 09:30 PM"),
-  //   },
-  //   {
-  //     title: "Communting",
-  //     startTime: new Date("2021/12/07 04:30 PM"),
-  //     endTime: new Date("2021/12/07 05:20 PM")
-  //   },
-  //   {
-  //     title: " do assignment",
-  //     startTime: new Date("2021/12/07 06:50 PM"),
-  //     endTime: new Date("2021/12/07 09:30 PM")
-  //   },
-  //   {
-  //     title: " do assignment2",
-  //     startTime: new Date("2021/12/07 10:00 PM"),
-  //     endTime: new Date("2021/12/07 11:20 PM")
-  //   },
-  //   {
-  //     title: "Communting",
-  //     startTime: new Date("2021/12/08 04:30 PM"),
-  //     endTime: new Date("2021/12/08 05:20 PM")
-  //   },
-  //   {
-  //     title: " do assignment",
-  //     startTime: new Date("2021/12/08 06:50 PM"),
-  //     endTime: new Date("2021/12/08 09:30 PM")
-  //   },
-  //   {
-  //     title: " do assignment2",
-  //     startTime: new Date("2021/12/08 10:00 PM"),
-  //     endTime: new Date("2021/12/08 11:20 PM")
-  //   },
 
-  // ];
-  // var Schedule = OldSchedule.concat(ScheduleLevi)
-  // let  Schedule = [...OldSchedule, ...ScheduleLevi];
+  const slotTue = []
+  const slotMon = []
+  const slotWed = []
+  var ScheduleLevi = [  
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/07 10:00 PM"),
+      endTime: new Date("2021/12/07 11:20 PM")
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/08 10:00 PM"),
+      endTime: new Date("2021/12/08 11:20 PM")
+    },
+
+  ];
+  if (setShowSchedule === true){
+    Schedule.push( {
+      title: "Communting",
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/07 10:00 PM"),
+      endTime: new Date("2021/12/07 11:20 PM")
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/08 10:00 PM"),
+      endTime: new Date("2021/12/08 11:20 PM")
+    },
+)
+  }
+   
+  console.log(Schedule)
   // console.log(Schedule)
+  // var indiSlots = {
+  //     op: 'indi_slot',
+  //     user_id: '',
+  //     subject_id: '',
+  // }
+  // talktoserver(indiSlots).then((rd) => {
+  //     setDbResult(rd)
+  // })
+  //   console.log(dbResult)
+  //   console.log(indiSlots)
+  // console.log(result)
+  // console.log(Schedule)
+  // }
+  // console.log(Schedule)
+
   function slotFitsMon(meeting) {
     if (Schedule.length == 0) return true;
     return Schedule.some(function (s, i) {
@@ -169,8 +229,8 @@ const TaskboardScreen = ({ navigation }) => {
     [{
       id: Date.parse("2021/12/06 8:30 AM"),
       title: "Monday 08:30-09:20",
-      startTime: new Date("2021/12/06 8:30 AM"),
-      endTime: new Date("2021/12/06 9:20 AM"),
+      startTime: new Date("2021/12/06 8:30:00 AM"),
+      endTime: new Date("2021/12/06 9:20:00 AM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -178,8 +238,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 9:30 AM"),
       title: "Monday 09:30-10:20",
-      startTime: new Date("2021/12/06 9:30 AM"),
-      endTime: new Date("2021/12/06 10:20 AM"),
+      startTime: new Date("2021/12/06 9:30:00 AM"),
+      endTime: new Date("2021/12/06 10:20:00 AM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -187,8 +247,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 10:30 AM"),
       title: "Monday 10:30-11:20",
-      startTime: new Date("2021/12/06 10:30 AM"),
-      endTime: new Date("2021/12/06 11:20 PM"),
+      startTime: new Date("2021/12/06 10:30:00 AM"),
+      endTime: new Date("2021/12/06 11:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -196,8 +256,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 11:30 AM"),
       title: "Monday 11:30-12:20",
-      startTime: new Date("2021/12/06 11:30 AM"),
-      endTime: new Date("2021/12/06 12:20 PM"),
+      startTime: new Date("2021/12/06 11:30:00 AM"),
+      endTime: new Date("2021/12/06 12:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -205,8 +265,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 12:30 PM"),
       title: "Monday 12:30-13:20",
-      startTime: new Date("2021/12/06 12:30 PM"),
-      endTime: new Date("2021/12/06 01:20 PM"),
+      startTime: new Date("2021/12/06 12:30:00 PM"),
+      endTime: new Date("2021/12/06 01:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -214,8 +274,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 01:30 PM"),
       title: "Monday 13:30-14:20",
-      startTime: new Date("2021/12/06 01:30 PM"),
-      endTime: new Date("2021/12/06 02:20 PM"),
+      startTime: new Date("2021/12/06 01:30:00 PM"),
+      endTime: new Date("2021/12/06 02:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -223,8 +283,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 02:30 PM"),
       title: "Monday 14:30-15:20",
-      startTime: new Date("2021/12/06 02:30 PM"),
-      endTime: new Date("2021/12/06 03:20 PM"),
+      startTime: new Date("2021/12/06 02:30:00 PM"),
+      endTime: new Date("2021/12/06 03:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -232,8 +292,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 03:30 PM"),
       title: "Monday 15:30-16:20",
-      startTime: new Date("2021/12/06 03:30 PM"),
-      endTime: new Date("2021/12/06 04:20 PM"),
+      startTime: new Date("2021/12/06 03:30:00 PM"),
+      endTime: new Date("2021/12/06 04:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -241,8 +301,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 04:30 PM"),
       title: "Monday 16:30-17:20",
-      startTime: new Date("2021/12/06 04:30 PM"),
-      endTime: new Date("2021/12/06 05:20 PM"),
+      startTime: new Date("2021/12/06 04:30:00 PM"),
+      endTime: new Date("2021/12/06 05:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -250,8 +310,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 05:30 PM"),
       title: "Monday 17:30-18:20",
-      startTime: new Date("2021/12/06 05:30 PM"),
-      endTime: new Date("2021/12/06 06:20 PM"),
+      startTime: new Date("2021/12/06 05:30:00 PM"),
+      endTime: new Date("2021/12/06 06:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -259,8 +319,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 06:30 PM"),
       title: "Monday 18:30-19:20",
-      startTime: new Date("2021/12/06 06:30 PM"),
-      endTime: new Date("2021/12/06 07:20 PM"),
+      startTime: new Date("2021/12/06 06:30:00 PM"),
+      endTime: new Date("2021/12/06 07:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -268,8 +328,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 07:30 PM"),
       title: "Monday 19:30-20:20",
-      startTime: new Date("2021/12/06 07:30 PM"),
-      endTime: new Date("2021/12/06 08:20 PM"),
+      startTime: new Date("2021/12/06 07:30:00 PM"),
+      endTime: new Date("2021/12/06 08:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -277,8 +337,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 08:30 PM"),
       title: "Monday 20:30-21:20",
-      startTime: new Date("2021/12/06 08:30 PM"),
-      endTime: new Date("2021/12/06 09:20 PM"),
+      startTime: new Date("2021/12/06 08:30:00 PM"),
+      endTime: new Date("2021/12/06 09:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -286,8 +346,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 09:30 PM"),
       title: "Monday 21:30-22:20",
-      startTime: new Date("2021/12/06 09:30 PM"),
-      endTime: new Date("2021/12/06 10:20 PM"),
+      startTime: new Date("2021/12/06 09:30:00 PM"),
+      endTime: new Date("2021/12/06 10:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -295,8 +355,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/06 10:30 PM"),
       title: "Monday 22:30-23:20",
-      startTime: new Date("2021/12/06 10:30 PM"),
-      endTime: new Date("2021/12/06 11:20 PM"),
+      startTime: new Date("2021/12/06 10:30:00 PM"),
+      endTime: new Date("2021/12/06 11:20:00 PM"),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -315,8 +375,8 @@ const TaskboardScreen = ({ navigation }) => {
     [{
       id: Date.parse("2021/12/07 8:30 AM"),
       title: "Tuesday 08:30-09:20",
-      startTime: new Date("2021/12/07 8:30 AM"),
-      endTime: new Date("2021/12/07 9:20 AM"),
+      startTime: new Date("2021/12/07 8:30:00 AM"),
+      endTime: new Date("2021/12/07 9:20:00 AM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -324,8 +384,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 9:30 AM"),
       title: "Tuesday 09:30-10:20",
-      startTime: new Date("2021/12/07 9:30 AM"),
-      endTime: new Date("2021/12/07 10:20 AM"),
+      startTime: new Date("2021/12/07 9:30:00 AM"),
+      endTime: new Date("2021/12/07 10:20:00 AM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -333,8 +393,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 10:30 AM"),
       title: "Tuesday 10:30-11:20",
-      startTime: new Date("2021/12/07 10:30 AM"),
-      endTime: new Date("2021/12/07 11:20 PM"),
+      startTime: new Date("2021/12/07 10:30:00 AM"),
+      endTime: new Date("2021/12/07 11:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -342,8 +402,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 11:30 AM"),
       title: "Tuesday 11:30-12:20",
-      startTime: new Date("2021/12/07 11:30 AM"),
-      endTime: new Date("2021/12/07 12:20 PM"),
+      startTime: new Date("2021/12/07 11:30:00 AM"),
+      endTime: new Date("2021/12/07 12:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -351,16 +411,16 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 12:30 PM"),
       title: "Tuesday 12:30-13:20",
-      startTime: new Date("2021/12/07 12:30 PM"),
-      endTime: new Date("2021/12/07 01:20 PM"),
+      startTime: new Date("2021/12/07 12:30:00 PM"),
+      endTime: new Date("2021/12/07 01:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
     }, {
       id: Date.parse("2021/12/07 01:30 PM"),
       title: "Tuesday 13:30-14:20",
-      startTime: new Date("2021/12/07 01:30 PM"),
-      endTime: new Date("2021/12/07 02:20 PM"),
+      startTime: new Date("2021/12/07 01:30:00 PM"),
+      endTime: new Date("2021/12/07 02:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -368,8 +428,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 02:30 PM"),
       title: "Tuesday 14:30-15:20",
-      startTime: new Date("2021/12/07 02:30 PM"),
-      endTime: new Date("2021/12/07 03:20 PM"),
+      startTime: new Date("2021/12/07 02:30:00 PM"),
+      endTime: new Date("2021/12/07 03:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -377,8 +437,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 03:30 PM"),
       title: "Tuesday 15:30-16:20",
-      startTime: new Date("2021/12/07 03:30 PM"),
-      endTime: new Date("2021/12/07 04:20 PM"),
+      startTime: new Date("2021/12/07 03:30:00 PM"),
+      endTime: new Date("2021/12/07 04:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -386,8 +446,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 04:30 PM"),
       title: "Tuesday 16:30-17:20",
-      startTime: new Date("2021/12/07 04:30 PM"),
-      endTime: new Date("2021/12/07 05:20 PM"),
+      startTime: new Date("2021/12/07 04:30:00 PM"),
+      endTime: new Date("2021/12/07 05:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -395,8 +455,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 05:30 PM"),
       title: "Tuesday 17:30-18:20",
-      startTime: new Date("2021/12/07 05:30 PM"),
-      endTime: new Date("2021/12/07 06:20 PM"),
+      startTime: new Date("2021/12/07 05:30:00 PM"),
+      endTime: new Date("2021/12/07 06:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -404,8 +464,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 06:30 PM"),
       title: "Tuesday 18:30-19:20",
-      startTime: new Date("2021/12/07 06:30 PM"),
-      endTime: new Date("2021/12/07 07:20 PM"),
+      startTime: new Date("2021/12/07 06:30:00 PM"),
+      endTime: new Date("2021/12/07 07:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -413,8 +473,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 07:30 PM"),
       title: "Tuesday 19:30-20:20",
-      startTime: new Date("2021/12/07 07:30 PM"),
-      endTime: new Date("2021/12/07 08:20 PM"),
+      startTime: new Date("2021/12/07 07:30:00 PM"),
+      endTime: new Date("2021/12/07 08:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -422,8 +482,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 08:30 PM"),
       title: "Tuesday 20:30-21:20",
-      startTime: new Date("2021/12/07 08:30 PM"),
-      endTime: new Date("2021/12/07 09:20 PM"),
+      startTime: new Date("2021/12/07 08:30:00 PM"),
+      endTime: new Date("2021/12/07 09:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -431,8 +491,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 09:30 PM"),
       title: "Tuesday 21:30-22:20",
-      startTime: new Date("2021/12/07 09:30 PM"),
-      endTime: new Date("2021/12/07 10:20 PM"),
+      startTime: new Date("2021/12/07 09:30:00 PM"),
+      endTime: new Date("2021/12/07 10:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -440,8 +500,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/07 10:30 PM"),
       title: "Tuesday 22:30-23:20",
-      startTime: new Date("2021/12/07 10:30 PM"),
-      endTime: new Date("2021/12/07 11:20 PM"),
+      startTime: new Date("2021/12/07 10:30:00 PM"),
+      endTime: new Date("2021/12/07 11:20:00 PM"),
       Wday: 'Tuesday',
       mm: 'December',
       dd: '07'
@@ -459,8 +519,8 @@ const TaskboardScreen = ({ navigation }) => {
     [{
       id: Date.parse("2021/12/08 8:30 AM"),
       title: "Wed 08:30-09:20",
-      startTime: new Date("2021/12/08 8:30 AM"),
-      endTime: new Date("2021/12/08 9:20 AM"),
+      startTime: new Date("2021/12/08 8:30:00 AM"),
+      endTime: new Date("2021/12/08 9:20:00 AM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -468,8 +528,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 9:30 AM"),
       title: "Wed 09:30-10:20",
-      startTime: new Date("2021/12/08 9:30 AM"),
-      endTime: new Date("2021/12/08 10:20 AM"),
+      startTime: new Date("2021/12/08 9:30:00 AM"),
+      endTime: new Date("2021/12/08 10:20:00 AM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -477,8 +537,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 10:30 AM"),
       title: "Wed 10:30-11:20",
-      startTime: new Date("2021/12/08 10:30 AM"),
-      endTime: new Date("2021/12/08 11:20 PM"),
+      startTime: new Date("2021/12/08 10:30:00 AM"),
+      endTime: new Date("2021/12/08 11:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -486,8 +546,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 11:30 AM"),
       title: "Wed 11:30-12:20",
-      startTime: new Date("2021/12/08 11:30 AM"),
-      endTime: new Date("2021/12/08 12:20 PM"),
+      startTime: new Date("2021/12/08 11:30:00 AM"),
+      endTime: new Date("2021/12/08 12:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -495,16 +555,16 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 12:30 PM"),
       title: "Wed 12:30-13:20",
-      startTime: new Date("2021/12/08 12:30 PM"),
-      endTime: new Date("2021/12/08 01:20 PM"),
+      startTime: new Date("2021/12/08 12:30:00 PM"),
+      endTime: new Date("2021/12/08 01:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
     }, {
       id: Date.parse("2021/12/08 01:30 PM"),
       title: "Wed 13:30-14:20",
-      startTime: new Date("2021/12/08 01:30 PM"),
-      endTime: new Date("2021/12/08 02:20 PM"),
+      startTime: new Date("2021/12/08 01:30:00 PM"),
+      endTime: new Date("2021/12/08 02:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -512,8 +572,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 02:30 PM"),
       title: "Wed 14:30-15:20",
-      startTime: new Date("2021/12/08 02:30 PM"),
-      endTime: new Date("2021/12/08 03:20 PM"),
+      startTime: new Date("2021/12/08 02:30:00 PM"),
+      endTime: new Date("2021/12/08 03:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -521,8 +581,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 03:30 PM"),
       title: "Wed 15:30-16:20",
-      startTime: new Date("2021/12/08 03:30 PM"),
-      endTime: new Date("2021/12/08 04:20 PM"),
+      startTime: new Date("2021/12/08 03:30:00 PM"),
+      endTime: new Date("2021/12/08 04:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -530,8 +590,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 04:30 PM"),
       title: "Wed 16:30-17:20",
-      startTime: new Date("2021/12/08 04:30 PM"),
-      endTime: new Date("2021/12/08 05:20 PM"),
+      startTime: new Date("2021/12/08 04:30:00 PM"),
+      endTime: new Date("2021/12/08 05:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -539,8 +599,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 05:30 PM"),
       title: "Wed 17:30-18:20",
-      startTime: new Date("2021/12/08 05:30 PM"),
-      endTime: new Date("2021/12/08 06:20 PM"),
+      startTime: new Date("2021/12/08 05:30:00 PM"),
+      endTime: new Date("2021/12/08 06:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -548,8 +608,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 06:30 PM"),
       title: "Wed 18:30-19:20",
-      startTime: new Date("2021/12/08 06:30 PM"),
-      endTime: new Date("2021/12/08 07:20 PM"),
+      startTime: new Date("2021/12/08 06:30:00 PM"),
+      endTime: new Date("2021/12/08 07:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -557,8 +617,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 07:30 PM"),
       title: "Wed 19:30-20:20",
-      startTime: new Date("2021/12/08 07:30 PM"),
-      endTime: new Date("2021/12/08 08:20 PM"),
+      startTime: new Date("2021/12/08 07:30:00 PM"),
+      endTime: new Date("2021/12/08 08:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -566,8 +626,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 08:30 PM"),
       title: "Wed 20:30-21:20",
-      startTime: new Date("2021/12/08 08:30 PM"),
-      endTime: new Date("2021/12/08 09:20 PM"),
+      startTime: new Date("2021/12/08 08:30:00 PM"),
+      endTime: new Date("2021/12/08 09:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -575,8 +635,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 09:30 PM"),
       title: "Wed 21:30-22:20",
-      startTime: new Date("2021/12/08 09:30 PM"),
-      endTime: new Date("2021/12/08 10:20 PM"),
+      startTime: new Date("2021/12/08 09:30:00 PM"),
+      endTime: new Date("2021/12/08 10:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -584,8 +644,8 @@ const TaskboardScreen = ({ navigation }) => {
     {
       id: Date.parse("2021/12/08 10:30 PM"),
       title: "Wed 22:30-23:20",
-      startTime: new Date("2021/12/08 10:30 PM"),
-      endTime: new Date("2021/12/08 11:20 PM"),
+      startTime: new Date("2021/12/08 10:30:00 PM"),
+      endTime: new Date("2021/12/08 11:20:00 PM"),
       Wday: 'Wednesday',
       mm: 'December',
       dd: '08'
@@ -599,14 +659,8 @@ const TaskboardScreen = ({ navigation }) => {
       // console.log(slotTue)
     }
   });
-// const showLevi=()=>{
-//   var Schedule = [...s, ...arr2];
-//   Array.prototype.push.apply(Schedule,ScheduleLevi); 
 
-// }
-// console.log(Schedule)
-  const slotAvailable = [...slotMon, ...slotTue]
-  // console.log(slotAvailable) 
+
 
 
   const { user, users } = useContext(AuthenticatedUserContext);
@@ -639,7 +693,9 @@ const TaskboardScreen = ({ navigation }) => {
   
   }
   const LeviPress = () => {
-    // showLevi()
+
+    // loadSchedule()
+  
     setShowSchedule(true)
     setShowAll(false)
     
@@ -757,6 +813,7 @@ const TaskboardScreen = ({ navigation }) => {
                     data=
                     {
                       <FlatList
+                        
                         contentContainerStyle={{ width: 300 }}
                         data={slotMon}
                         renderItem={renderItem}

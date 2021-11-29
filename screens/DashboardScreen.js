@@ -77,10 +77,10 @@ const DashboardScreen = ({navigation }) => {
   const [eventTasks, setEventTasks] = useState([])
   // const courseTasks = []
   const individualTasks =[]
-
+  // console.log('hi')
 // use effect function for loading the tasks to the calendar
   useEffect (()=>{
-
+    
       var loadTaskList = {
         op: 'get_tasks_ls',
         user_id: '1', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
@@ -90,12 +90,12 @@ const DashboardScreen = ({navigation }) => {
         setDbResult(rd)
       })
 
-  },[])
-// ================
+  },[dbResult])
+
 
 
 // useEffect to load the tasks for cards and regular tasks
- 
+
 
   useEffect (()=>{
   
@@ -110,9 +110,6 @@ const DashboardScreen = ({navigation }) => {
       summary:'does it work?' 
 
     }
-    
-
-        
         const daysObject = dbResult
         // console.log(daysObject)
         const newArray=[]
@@ -131,9 +128,7 @@ const DashboardScreen = ({navigation }) => {
         })
       
         const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
-        const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-        const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-        const workout = {key: 'workout', color: 'green'};
+        
         let dailyEvents = {}
   
         Object.keys(eventDays).forEach((day) => 
@@ -153,28 +148,28 @@ const DashboardScreen = ({navigation }) => {
               })
               setCourseTasks(courseTaskArray)
               
-              
-
-
           const groupTaskArray = daysObject.filter(function(el)
-          {
-            return el.task_category == 'group'
-          })
-          setGrpTasks(groupTaskArray)
-          
-          
+              {
+                return el.task_category == 'group'
+              })
+              setGrpTasks(groupTaskArray)
+            
           const eventTaskArray = daysObject.filter(function(el)
-          {
-            return el.task_category == 'personal'
-          })
-          setEventTasks(eventTaskArray)
-
-
-
-
+              {
+                return el.task_category == 'personal'
+              })
+              setEventTasks(eventTaskArray)
         // ================================================================
 
 
+
+
+
+        var today = new Date();
+
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        
+        
 
 
 
@@ -190,6 +185,7 @@ const DashboardScreen = ({navigation }) => {
 
   // console.log(dbResult)
 
+  
   
   // state for switching between courses groups and events
   const [courses, setCourses] = useState(true);
@@ -249,7 +245,9 @@ const DashboardScreen = ({navigation }) => {
     setEvents(true);
   }
 
+  var today = new Date();
 
+ 
 
   return (
   
@@ -258,7 +256,7 @@ const DashboardScreen = ({navigation }) => {
       flex: 1, 
       alignItems: 'center', 
       justifyContent: 'flex-start', 
-      backgroundColor: primCol
+      backgroundColor: primCol,
     }}>
 
       <Wrapper> 
@@ -331,7 +329,7 @@ const DashboardScreen = ({navigation }) => {
         <TaskBtnCont>
         <View style={styles.shadows}> 
           <TaskBtn 
-              taskNum={category.taskCategory.Course.taskNum} 
+              taskNum={courseTasks.length} 
               taskCate={category.taskCategory.Course.taskCate}
               taskBtnColor={ courses ? colors.secCol : 'white' }
               textColor= {courses ? 'white' : colors.secCol }
@@ -342,7 +340,7 @@ const DashboardScreen = ({navigation }) => {
 
         <View style={styles.shadows}>
           <TaskBtn 
-              taskNum={category.taskCategory.Group.taskNum} 
+              taskNum={grpTasks.length} 
               taskCate={category.taskCategory.Group.taskCate}
               taskBtnColor={ groups ? colors.secCol : 'white' }
               textColor= {groups ? 'white' : colors.secCol }
@@ -353,7 +351,7 @@ const DashboardScreen = ({navigation }) => {
 
         < View style={styles.shadows}>
           <TaskBtn 
-              taskNum={category.taskCategory.Event.taskNum} 
+              taskNum={eventTasks.length} 
               taskCate={category.taskCategory.Event.taskCate}
               taskBtnColor={ events ? colors.secCol : 'white' }
               textColor= {events ? 'white' : colors.secCol }
@@ -366,8 +364,10 @@ const DashboardScreen = ({navigation }) => {
           
       { courses ?
         <FlatList 
-          contentContainerStyle={{ maxWidth:'100%'}}
+          // initialNumToRender={3}
+          contentContainerStyle={{ maxWidth:'100%',}}
           data = {courseTasks}
+
           renderItem={({item})=> 
                 <IndividualEventCard 
                   EventBackgroundColor="#EC8B1A"
@@ -377,13 +377,15 @@ const DashboardScreen = ({navigation }) => {
                   EventDueTime = {item.end} 
                   IconDisplay="none" 
                   onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
+                  onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
                   /> }
+
         /> : null
       }
       
       { groups ?
         <FlatList 
-          contentContainerStyle={{ maxWidth:'100%'}}
+          contentContainerStyle={{ maxWidth:'100%',}}
           data = {grpTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
@@ -408,6 +410,8 @@ const DashboardScreen = ({navigation }) => {
                 EventStartTime={item.start}
                 EventDueTime = {item.end}
                 IconDisplay =   'none' 
+                onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+
                    /> }
         /> : null
       }
@@ -440,16 +444,20 @@ const styles = StyleSheet.create({
 export default DashboardScreen
 
 
-// {
 
-                
-                  
-//   newDaysObject,
-//   // '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-//           [selected]: {
-//             selected: true,
-//             disableTouchEvent: false,
-//             selectedColor: selectCol ,
-//             selectedTextColor: 'black'
-//           }
-//   }
+
+{/* <FlatList
+  data={data}
+  keyExtractor={(item, index) => `key-${index}`}
+  ListHeaderComponent={() => (
+    <SomeComponents>
+      ...Some components those need to be on top of the list
+    </SomeComponents>
+  )}
+  ListFooterComponent={() => (
+    <SomeComponents>
+      ...Some components those need to be below the list
+    </SomeComponents>
+  )}
+  renderItem={({ item, index}) => (somethings)}
+/> */}

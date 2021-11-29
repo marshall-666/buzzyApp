@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } from 'react-native'
-import AppHeader from '../comps/AppHeader'
-import JoinCreate from '../comps/JoinCreate'
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
 
@@ -15,7 +13,11 @@ const GroupChatScreen = ({
     const [chatMessage, setChatMessage] = useState()
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
-    
+
+    // const [dbResult, setDbResult] = useState()
+
+    let user_id = '1'
+
     useEffect(()=>{
         var loadChats = {
             op: 'load_msgls',
@@ -38,6 +40,7 @@ const GroupChatScreen = ({
         })
     }, [chatUpdated])
 
+    console.log(chatdata)
 
     const updateChat = (t) => {
         var addChat = {
@@ -78,7 +81,9 @@ const GroupChatScreen = ({
                 chatMessage={chatMessage} 
                 setChatMessage={setChatMessage}/>
             </View>
-            <NavBar/> 
+            <View style={styles.navbarWrap}>
+                <NavBar/>
+            </View> 
         </KeyboardAvoidingView>
     )
 }
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
     midDiv: {
         width: '100%',
         paddingHorizontal: 10,
-        height: '90%',
+        height: '85%',
         marginBottom: 5,
     },
     myChatContainer:{
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
         minHeight: 40,
         marginHorizontal: 10,
         marginVertical: 5,
-        backgroundColor: Themes.darkMode.tue,
+        backgroundColor: '#85A5E8',
         borderRadius: 10,
         alignItems: 'center',
         padding: 10,
@@ -124,6 +129,11 @@ const styles = StyleSheet.create({
         marginTop: 5,
         justifyContent:'flex-start',
     },
+    navbarWrap: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 })
 
 const ChatLine =({

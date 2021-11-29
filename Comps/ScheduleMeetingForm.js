@@ -128,8 +128,8 @@ export const  ScheduleMeetingForm = ({
         ></TextInput3>
       </InputContainer>
             <BtnCon>
-            <RecBtn text="Back" width={150} height={60} onRecBtnPress={Back}/>
-            <RecBtn text="Next" width={150} height={60} onRecBtnPress={Next}/>
+            <RecBtn bgC={butCol} text="Back" width={150} height={60} onRecBtnPress={Back}/>
+            <RecBtn bgC={butCol} text="Next" width={150} height={60} onRecBtnPress={Next}/>
             </BtnCon>
                 </ScrollView>
             

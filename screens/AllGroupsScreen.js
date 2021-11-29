@@ -9,6 +9,7 @@ import {GroupsData} from '../data/GroupsData';
 import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
+import {Test} from '../data/test'
 
 
 const lightBg = Configurations.colors.lightBg
@@ -19,8 +20,8 @@ const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
 
-useEffect(async()=>{
- 
+useEffect(()=>{
+    
     var loadGroupList = {
         op: 'get_group_ls',
         user_id: '1',
@@ -37,27 +38,13 @@ console.log('=======================')
 console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 
-    const loadGroups = async()=>
-        {
+useEffect(()=>{
 
-            // console.log(dbResult)
-            // console.log(dbResult[].group.gname)
-            for(let i = 0; i<=dbResult.groups.length; i++)
-            {
-                if(grpArray.length <= dbResult.groups.length)
-                {
-                    // console.log(dbResult.groups[i])
-
-                    grpArray.push(dbResult.groups[i])
-                }
-                // setGName(dbResult[i].group.gname)
-            }
-            console.log(grpArray)
-            
-        }
-        loadGroups()
+    console.log(dbResult)
     
-    // console.log(grpArray[0])
+}, [dbResult])
+
+    
 // useEffect(()=>
 // {
 //     const groupInfo = async () =>
@@ -83,8 +70,16 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={gName}
-                        renderItem={({item})=> <GroupThread />}
+                        data={dbResult}
+                        renderItem={({item})=> <GroupThread 
+                                                        groupName={item.groups.grpName}
+                                                        groupMembersNum={item.groups.mem_count}
+                                                        // groupImg={item.groups.imageUri}
+                                                        onPress={()=>{ navigation.navigate('GroupHome', {name: item.groups.grpName,
+                                                         numOfMem: item.groups.mem_count ,
+                                                         members: item.groups.members,
+                                                         id:item.groups.groupid
+                                                        })}}/>}
                         />
                     
                 </View>

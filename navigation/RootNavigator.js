@@ -7,7 +7,7 @@ import AuthStack from './AuthStack';
 import TaskStack from './TaskStack';
 import { db } from '../firebase/fireStore';
 import { collection, getDoc, addDoc,doc} from "firebase/firestore"; 
-import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
+
 
 export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
