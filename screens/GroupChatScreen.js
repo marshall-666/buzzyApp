@@ -2,7 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } from 'react-native'
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
+import styled from 'styled-components/native'
+import LottieView from 'lottie-react-native';
 
+const NavBarCon = styled.View`
+position:absolute;
+z-index:2;
+top:92%;
+height:100%
+width:100%
+left:5%
+`
+const Warning = styled.View`
+position:absolute;
+z-index:2;
+top:45%;
+height:100%
+width:100%
+left:5%
+`
 const GroupChatScreen = ({
     route,
     navigation
@@ -14,6 +32,8 @@ const GroupChatScreen = ({
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
     // const [dbResult, setDbResult] = useState()
+  const [load, setLoad] = useState(true)
+
     let user_id = '1'
     useEffect(()=>{
         var loadChats = {
@@ -58,6 +78,26 @@ const GroupChatScreen = ({
         :
         <ChatLine sender={item.sender} message={item.message}/>
     )
+    if (load === true) {
+        return (
+          <View style={styles.container}>
+            <LottieView
+              ref={(ref) => {
+                anim = ref
+              }}
+              style={{
+                width: 350,
+                height: 350,
+                backgroundColor: '#fff',
+              }}
+              source={require('../assets/WORK.json')}
+              autoPlay={true}
+            />
+             <Text style={{fontSize:50, textAlign:'center', color: 'red'}}>Coming soon </Text>
+         
+          </View>
+        )
+      }
 
     return (
         <KeyboardAvoidingView 
@@ -76,7 +116,15 @@ const GroupChatScreen = ({
                 chatMessage={chatMessage} 
                 setChatMessage={setChatMessage}/>
             </View>
+
+            <Warning>
+                
+                <Text style={{fontSize:50, textAlign:'center', color: 'red'}}>Coming soon </Text>
+            </Warning>
+            <NavBarCon>
             <NavBar/> 
+           </NavBarCon>
+           
         </KeyboardAvoidingView>
     )
 }
