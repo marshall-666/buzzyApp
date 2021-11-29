@@ -156,7 +156,7 @@ const LoginScreen = ({ navigation }) => {
         </Text>
         {loginError ? <Text><ErrorInfo error={loginError} visible={true} /></Text> : null}
         <View style={styles.button}>
-          <RecBtn text="Login" onRecBtnPress={onLoginPress} />
+          <RecBtn text="Login" onRecBtnPress={onLoginPress} bgC={Configurations.colors.butCol}/>
         </View>
         <Text style={styles.title3}>OR</Text>
         <Image source={require("../assets/D2L.png")} style={styles.D2L} />

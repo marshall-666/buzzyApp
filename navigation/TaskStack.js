@@ -172,7 +172,7 @@ export default function TaskboardStack() {
         headerRight: 
          ({navigation}) => 
         (
-          <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <TouchableOpacity onPress={() =>alart("swipe left to open the drawer")}>
             <Entypo name="menu" size={30} color="lightgrey" />
           </TouchableOpacity>
         ),
