@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "BuzzyBee",
-    "slug": "Save time to do what you love!",
+    "slug": "BuzzyBee",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/BuzzyBeeLogo.png",

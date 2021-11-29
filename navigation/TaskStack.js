@@ -215,14 +215,11 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
-<<<<<<< HEAD
       <Stack.Screen name="GroupChat" component={GroupChatScreen} />
 
-=======
       <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
     
     
->>>>>>> 73da603f35c38cad0646f2c3cf82b7c7cc7f0bca
     </Stack.Navigator>
   );
 }
