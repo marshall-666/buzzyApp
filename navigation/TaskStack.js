@@ -19,6 +19,7 @@ import LogoutScreen from '../screens/LogoutScreen';
 import AccountScreen from '../screens/AccountScreen';
 import CreateGroupScreen from '../screens/CreateGroupScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
+import GroupChatScreen from '../screens/GroupChatScreen';
 import ScheduleMeetingStepOneScreen from '../screens/ScheduleMeetingStepOne';
 import ScheduleMeetingStepTwoScreen from '../screens/ScheduleMeetingStepTwo';
 import ScheduleMeetingStepThreeScreen from '../screens/ScheduleMeetingStepThree';
@@ -213,6 +214,8 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
+      <Stack.Screen name="GroupChat" component={GroupChatScreen} />
+
     </Stack.Navigator>
   );
 }

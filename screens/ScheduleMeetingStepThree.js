@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         padding: '7.5%',
     },
     meetingCardCont: {
-        width: '150%',
+        width: '100%',
         height: '22.5%',
         justifyContent: 'center',
         alignItems: 'center'

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "levi",
-    "slug": "levi",
+    "name": "BuzzyBee",
+    "slug": "Save time to do what you love!",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/BuzzyBeeLogo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

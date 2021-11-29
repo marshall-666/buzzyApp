@@ -37,7 +37,7 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
             op: 'create_task',
             tkname: inputTitle,
             descrip: description,
-            category_id: '2',
+            category_id: '1',
             start_t: startTime,
             end_t: endTime,
             loca: location,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     meetingCardCont:{
-        width:'150%',
+        width:'100%',
         height:'22.5%',
         justifyContent: 'center',
         alignItems: 'center'
