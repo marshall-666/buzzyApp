@@ -51,9 +51,6 @@ width:32%;
  })=>
  {
     const navigation = useNavigation();
-    const onPress=()=>{
-        alert("navigate to individual members page when created")
-    }
    
     return(
         <CardCont backgroundColor='#ffffff' style={{ shadowColor: '#000000',
@@ -64,7 +61,7 @@ width:32%;
         },
         shadowRadius: 4,}}>
             
-                <MidCont onPress={onPress}>  
+                <MidCont onPress={()=>{navigation.navigate('IndividualMemberScreen')}}>  
                     <Image
                     style={{height:80, width:80, borderRadius: 10}} 
                     source={{uri:'https://i.pravatar.cc/300'}}/>    
@@ -73,7 +70,7 @@ width:32%;
                     </TextCont>       
                 </MidCont>
         
-                <IconCont style={{borderLeftColor:"black", borderLeftWidth:0.5}} onPress={onPress}>
+                <IconCont style={{borderLeftColor:"black", borderLeftWidth:0.5}} onPress={()=>{navigation.navigate('IndividualMemberScreen')}}>
                 <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
                 </IconCont>
                 
