@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } from 'react-native'
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
@@ -8,21 +8,26 @@ const GroupChatScreen = ({
     navigation
 }) => {
 
+    const routeData = route.params
+
     const [chatdata, setChatData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [chatMessage, setChatMessage] = useState()
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
+    const flatListChat = useRef(null)
 
-    // const [dbResult, setDbResult] = useState()
-
-    let user_id = '1'
+    
+    const load_msgls = 'load_msgls'
+    const add_msg = 'add_msg'
+    const user_id = '1'
+    const group_id = '1'
 
     useEffect(()=>{
         var loadChats = {
-            op: 'load_msgls',
-            user_id: '1',
-            group_id: '1',
+            op: load_msgls,
+            user_id: user_id,
+            group_id: group_id,
         }
         talktoserver(loadChats).then((rd) => {
             setChatData(rd)
@@ -31,9 +36,9 @@ const GroupChatScreen = ({
 
     useEffect(()=>{
         var loadChats = {
-            op: 'load_msgls',
-            user_id: '1',
-            group_id: '1',
+            op: load_msgls,
+            user_id: user_id,
+            group_id: group_id,
         }
         talktoserver(loadChats).then((rd) => {
             setChatData(rd)
@@ -44,9 +49,9 @@ const GroupChatScreen = ({
 
     const updateChat = (t) => {
         var addChat = {
-            op: 'add_msg',
-            sender_id: '1',
-            group_id: '1',
+            op: add_msg,
+            sender_id: user_id,
+            group_id: group_id,
             message: t,
         }
         
@@ -70,18 +75,23 @@ const GroupChatScreen = ({
             style={styles.container}>
             <View style={styles.midDiv}>
                 <FlatList
+                    ref={flatListChat}
+                    // onContentSizeChange={()=>{
+                    //     flatListChat.current.scrollToEnd()
+                    // }}
                     data={chatdata}
                     renderItem={renderItem}
                     keyExtractor={item=>item.id}
                 />
             </View>
-            <View>
-                <MessageInput 
-                updateChat={updateChat} 
-                chatMessage={chatMessage} 
-                setChatMessage={setChatMessage}/>
-            </View>
             <View style={styles.navbarWrap}>
+                <View style={{width: '100%', height: 90, paddingBottom: 25, paddingTop:10, alignItems:'center'}}>
+                    <MessageInput 
+                    updateChat={updateChat} 
+                    chatMessage={chatMessage} 
+                    setChatMessage={setChatMessage}
+                    />
+                </View>
                 <NavBar/>
             </View> 
         </KeyboardAvoidingView>
@@ -95,13 +105,13 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: '#F5F5E1',
+        backgroundColor: '#94BDD4',
     },
     midDiv: {
         width: '100%',
         paddingHorizontal: 10,
-        height: '85%',
         marginBottom: 5,
+        backgroundColor: '#F5F5E1'
     },
     myChatContainer:{
         flexDirection: 'row',
@@ -130,9 +140,13 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
     },
     navbarWrap: {
-        flex:1,
-        justifyContent: 'center',
+        width:'100%',
+        position: 'absolute',
+        bottom: 10,
+        justifyContent: 'space-between',
         alignItems: 'center',
+        backgroundColor: '#94BDD4',
+        // paddingBottom: 10
     }
 })
 
@@ -170,7 +184,7 @@ const MessageInput =({
     updateChat=()=>{},
 })=> {
     return(
-        <View>
+        <View style={{width: '90%', backgroundColor: '#FFF', borderRadius: 10}}>
             <TextInput
                 placeholder='Type here...'
                 onChangeText={(t) => setChatMessage(t)}
