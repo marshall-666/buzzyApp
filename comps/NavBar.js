@@ -67,7 +67,7 @@ const NavBar = ({
         </TouchableOpacity>
       </YellowCircle>    
       
-      <TouchableOpacity onPress={()=>{navigation.navigate('Meeting')}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('ScheduleMeeting')}}>
       <Octicons name="comment-discussion" size={35} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>

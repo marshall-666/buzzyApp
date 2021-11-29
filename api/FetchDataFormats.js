@@ -273,3 +273,40 @@ talktoserver(loadChats).then((rd) => {
 })
 
 //======================================
+//  Load all group members time slots
+//=======================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
+var loadSlots = {
+    op: 'load_slot',
+    group_id: '',
+}
+
+talktoserver(loadSlots).then((rd) => {
+    setDbResult(rd)
+})
+
+//======================================
+//  Load two members time slots
+//=======================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
+var indiSlots = {
+    op: 'indi_slot',
+    user_id: '',
+    subject_id: '',
+}
+
+talktoserver(indiSlots).then((rd) => {
+    setDbResult(rd)
+})
+
+//=======================================

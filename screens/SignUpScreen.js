@@ -70,13 +70,9 @@ const SignUpScreen = ({ navigation }) => {
     setPage1(true)
     setPage2(false)
   }
-
   const submitPress = async () => {
-  
-
     const auth = getAuth();
     if (email !== '' && password !== '') {
-
       try {
         const result = await createUserWithEmailAndPassword(
           auth,
@@ -93,27 +89,7 @@ const SignUpScreen = ({ navigation }) => {
           set: set,
           isOnline: true,
         });
-       
-        var registerUser = {
-          op: 'register_user',
-          fb_uid: result.user.uid,
-          uname: newName,
-          psword: 123456,
-          email: email,
-          org: school,
-          pro: program,
-          img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
-        }
-        console.log(registerUser)
-        talktoserver(registerUser).then((rd) => {
-          setDbResult(rd)
-          
-        })
-        console.log(dbResult)
-
-        console.log(registerUser)
-
-
+      
       }
       catch (error) {
         const errorCode = error.code;
@@ -121,9 +97,23 @@ const SignUpScreen = ({ navigation }) => {
         // ..
         setSignupError(errorCode, errorMessage);
       };
-
-
     };
+    var registerUser = {
+      op: 'register_user',
+      fb_uid: 'result.user.uid',
+      uname: 'newName',
+      psword: 'psword',
+      email: 'email',
+      org: 'school',
+      pro: 'program',
+      img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
+    }
+    console.log(registerUser)
+    talktoserver(registerUser).then((rd) => {
+      setDbResult(rd)
+    })
+    console.log(dbResult)
+    console.log(registerUser)
   }
 
   const handlePasswordVisibility = () => {

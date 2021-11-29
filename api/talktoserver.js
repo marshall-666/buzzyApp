@@ -15,7 +15,7 @@ const talktoserver = async (param) => {
         dataRqInbox.append('fb_uid', param.fb_uid)
         dataRqInbox.append('uname', param.uname)
         dataRqInbox.append('psword', param.psword)
-        dataRqInbox.appent('email', param.email)
+        dataRqInbox.append('email', param.email)
         dataRqInbox.append('org', param.org)
         dataRqInbox.append('pro', param.pro)
         dataRqInbox.append('img_url', param.img_url)
@@ -97,6 +97,18 @@ const talktoserver = async (param) => {
         dataRqInbox.append('op', param.op)
         dataRqInbox.append('user_id', param.user_id)
         dataRqInbox.append('group_id', param.group_id)
+
+    } else if(param.op == 'load_slot'){
+
+        dataRqInbox.append('op', param.op)
+        dataRqInbox.append('group_id', param.group_id)
+
+    } else if(param.op =='indi_slot'){
+
+        dataRqInbox.append('op', param.op)
+        dataRqInbox.append('user_id', param.user_id)
+        dataRqInbox.append('subject_id', param.subject_id)
+        
     }
 
     const response = await fetch(API_URL, {

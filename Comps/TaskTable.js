@@ -52,12 +52,12 @@ const TimeCon = Styled.View`
 height:14%;
 `
 const ButtonCon = Styled.View`
-margin-top:-120px
+margin-top:-75px
 `
 const TaskTable = ({
 
   text = 'Create ',
-  height = 800,
+  height = 900,
   width = "100%",
   onRecBtnPress = () => { },
   taskName,
@@ -71,15 +71,13 @@ const TaskTable = ({
   setLocation,
   Value,
   setValue,
- desc,setDesc
+ desc,setDesc,
+
 }) => {
   // const [selectedValue, setSelectedValue] = useState('Courses')
   // const [Value, setValue] = useState('')
 // const [endTime,setEndTime] =useState('Pick end Time')
   // const [startTime,setStartTime] =useState('Pick start Time')
-   
-
- 
   
   let index = 0;
   const data = [
@@ -91,13 +89,19 @@ const TaskTable = ({
     // Can also add additional custom keys which are passed to the onChange callback
     // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
-  // console.log(Value)
+ 
+ 
   // console.log(startTime)
   // console.log(endTime)
 
+  
+ 
+  // console.log(Value)
+  // console.log(category_id)
+
+
   return (
     <CardCon bgc={Configurations.colors.primCol} height={height} width={width}>
-
       <TextCon>
         <TextInput1 tColor={Configurations.colors.secCol}   ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
         </TextInput1>
@@ -114,8 +118,6 @@ const TaskTable = ({
           onChangeText={(text) => { setTaskName(text) }}
           value={taskName}
           placeholder="Type the task name"
-          // onChangeText={TaskName}
-          // defaultValue={text}
         >
         </TextInput3>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
@@ -130,8 +132,14 @@ const TaskTable = ({
             borderBottomWidth="none" 
             >
              <TextInput
-                        style={{borderWidth:1, borderColor:'#ccc', padding:2, height:35, fontSize:18, textAlign:'center' 
-                        ,color:Configurations.colors.secCol}}
+                        style={{
+                        borderWidth:1, 
+                        borderColor:'#ccc', 
+                        padding:2, 
+                        height:35, 
+                        fontSize:18, 
+                        textAlign:'center',
+                        color:Configurations.colors.secCol}}
                         editable={false}
                         placeholder=""
                         value={Value} />
@@ -182,7 +190,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn style={{}} onRecBtnPress={onRecBtnPress} text={text} />
       </ButtonCon>
 
     </CardCon>
