@@ -394,6 +394,7 @@ const DashboardScreen = ({navigation }) => {
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+                  IconDisplay='none'
                   /> }
                   
         /> : null
