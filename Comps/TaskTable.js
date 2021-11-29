@@ -192,7 +192,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={Configurations.colors.butCol}/>
       </ButtonCon>
 
     </CardCon>
