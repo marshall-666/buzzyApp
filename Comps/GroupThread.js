@@ -53,8 +53,8 @@ width:32%;
     backgroundColor="#FFFFFF",
     EventBackgroundColor="#D63030",
     groupName="Web Dev Group",
-    groupMembersNum="4 members",
-    groupImg ="",
+    groupMembersNum=4,
+    groupImg="https://placekitten.com/50/50",
     onPress = ()=>{
        
     }
@@ -78,7 +78,7 @@ width:32%;
                     source={{uri:groupImg}}/>    
                     <TextCont>    
                         <Text style={{fontSize:18}}>{groupName}</Text>
-                        <Text>{groupMembersNum}</Text>
+                        <Text>{groupMembersNum} Members</Text>
                     </TextCont>       
                 </MidCont>
         

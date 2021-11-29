@@ -13,7 +13,12 @@ const GroupChatScreen = ({
     const [chatMessage, setChatMessage] = useState()
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
+<<<<<<< HEAD
     
+=======
+    // const [dbResult, setDbResult] = useState()
+    let user_id = '1'
+>>>>>>> master
     useEffect(()=>{
         var loadChats = {
             op: 'load_msgls',
@@ -108,7 +113,11 @@ const styles = StyleSheet.create({
         minHeight: 40,
         marginHorizontal: 10,
         marginVertical: 5,
+<<<<<<< HEAD
         backgroundColor: Themes.darkMode.tue,
+=======
+        // backgroundColor: Themes.darkMode.tue,
+>>>>>>> master
         borderRadius: 10,
         alignItems: 'center',
         padding: 10,
