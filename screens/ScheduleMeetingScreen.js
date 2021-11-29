@@ -813,6 +813,7 @@ const TaskboardScreen = ({ navigation }) => {
                     data=
                     {
                       <FlatList
+                        
                         contentContainerStyle={{ width: 300 }}
                         data={slotMon}
                         renderItem={renderItem}

@@ -104,23 +104,6 @@ useEffect (()=>{
           newArray.push(dayTaskArray[i].day)
           console.log(dayTaskArray[i].task_category)
           
-          
-          // if(dayTaskArray[i].task_category == "course")
-          // {
-          //   // console.log('hiii')
-          //   setTaskColor('#fadfad80')
-          // }
-          // else if(dayTaskArray[i].task_category == "group")
-          // {
-          //   // console.log('hiii')
-          //   setTaskColor('red')
-
-          // }
-          // else if(dayTaskArray[i].task_category == "course")
-          // {
-          //   // console.log('hiii')
-          //   setTaskColor('#fadfad80')
-          // }
         }
         
         // console.log(newObject)
