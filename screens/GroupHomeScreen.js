@@ -1,5 +1,5 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Text, View,FlatList, Pressable, Image, SectionList } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { ScrollView, StyleSheet, Text, View, FlatList, Pressable, Image, SectionList } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import { GroupMemberCard } from '../comps/GroupMemberCard'
@@ -8,8 +8,9 @@ import GroupEventCard from '../comps/CourseEventCard'
 import { MembersData } from '../data/MembersData'
 import { Members } from '../data/Members'
 import styled from 'styled-components/native'
-
-
+import talktoserver from "../api/talktoserver"
+import IndividualEventCard from '../comps/IndividualEventCard';
+ 
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -23,19 +24,74 @@ left:5%
 const GroupHomeScreen = ({
     onSchedulePress=()=>{},
     navigation,
-    groupName='Default Group',
     memberNum=5,
     route,
 }) => {
 
-    // information coming in from the GroupThread Component.
-    // GroupsData.id and GroupsData.members
-    console.warn(route.params)
-    const memberInfo = route.params
-    const handleBtnOnPress =()=> {
-        navigation.navigate('ScheduleMeetingStepOne')
-    }
-   
+    
+    
+    //Group Information Retrieval Start
+
+    const groupInfo = route.params
+    const groupid =route.params.id
+    const [memsArray, setMemsArray]=useState([])
+    const [memsObj, setMemsObj]=useState({})
+    const [grpName, setGrpName]=useState()
+    const [grpMemNum, setGrpMemNum]=useState()
+    const [grpMems, setGrpMems]=useState()
+
+    useEffect(()=>{
+       
+            setGrpName(groupInfo.name)
+            setGrpMemNum(groupInfo.numOfMem)   
+            
+            const loadGroupMembers = async()=>
+            {
+            
+            for(let i=0; i<groupInfo.members.length; i++ ){
+        
+                memsObj.name=groupInfo.members[i].name
+                memsArray.push(memsObj.name)
+                
+            }
+            
+        }
+            
+        loadGroupMembers()
+        
+      
+    },[groupInfo])
+
+
+    // Task Information retrieval Start
+    
+    const [dbTaskResult, setDbTaskResult] = useState()
+    
+
+
+
+
+    useEffect(()=>{
+        var loadTaskDetail = {
+            op: 'get_task_detail',
+            tk_id:groupid, //need a task id foreign key from group array to carry over to make so you get task you clicked on  
+            }
+        
+        talktoserver(loadTaskDetail).then((rd) => {
+            setDbTaskResult(rd)
+          
+
+        })
+    },[])
+
+    useEffect(()=>{
+      
+
+        
+    },[dbTaskResult])
+
+
+
 
     return (
         <View style={styles.container}>
@@ -45,8 +101,8 @@ const GroupHomeScreen = ({
                     
                     <View style={styles.topDiv}>   
                         <View style={styles.textCont}>
-                            <Text style={{fontSize: 30}}>{groupName}</Text>
-                            <Text>{memberNum} Members</Text>
+                            <Text style={{fontSize: 30}}>{grpName}</Text>
+                            <Text>{grpMemNum} Members</Text>
                         </View>    
                             <Image source={require("../assets/BuzzyBeeLogo.png")} />
                     </View>     
@@ -65,10 +121,10 @@ const GroupHomeScreen = ({
                         <FlatList  
                             contentContainerStyle={{maxWidth:'100%'}}
                             scrollEnabled={true}
-                            data={MembersData}
+                            data={memsArray}
                             renderItem={({item})=> <GroupMemberCard 
-                                                    person={item.members.name}
-                                                    />}
+                            person={item}
+                            />}
                         />
                         
                         
@@ -83,7 +139,7 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}>
-                            {groupName}
+                            {grpName}
                         </Text>
                         
 
@@ -106,11 +162,20 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}> 
-                                Upcoming Events for {groupName}
+                                Upcoming Events for {grpName}
                         </Text>
-                        <GroupEventCard borderTopRightRadius={15}/>
-                        <GroupEventCard/>
-                        <GroupEventCard borderBottomRightRadius={15}/>
+                        <FlatList
+                        contentContainerStyle={{maxWidth:'100%'}}
+                        scrollEnabled={true}
+                        data={dbTaskResult}
+                        renderItem={({item})=> <IndividualEventCard 
+                                                EventTitle={item.tname}
+                                                EventDescrip={item.tdes}
+                                                EventStartTime={item.start_t}
+                                                EventEndTime={item.end_t}
+                                                IconDisplay="none"
+                                                />}
+                        />
                     </View>
                                 
 
@@ -134,7 +199,8 @@ const styles = StyleSheet.create({
     },
 
     topDiv: {
-    flexDirection:'row'
+    flexDirection:'row',
+    justifyContent:"space-between"
     },
 
     textCont:{

@@ -28,7 +28,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-
+import IndividualMemberScreen from '../screens/IndividualMemberScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();

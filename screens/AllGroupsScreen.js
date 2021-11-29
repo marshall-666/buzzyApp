@@ -9,37 +9,11 @@ import {GroupsData} from '../data/GroupsData';
 import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
+import {Test} from '../data/test'
 
 
 const lightBg = Configurations.colors.lightBg
 const AllGroupsScreen = ({navigation}) => {
-
-
-const [dbResult, setDbResult] = useState()
-const [numOfGroups, setNumOfGroups] = useState()
-const [gname, setGname] = useState()
-const [memCount, setMemCount] = useState()
-useEffect(()=>{
-var loadGroupList = {
-    op: 'get_group_ls',
-    user_id: '',
-}
-
-talktoserver(loadGroupList).then((rd) => {
-    setDbResult(rd)
-    console.log(dbResult[1].mem_count)
-    console.log("/////////////////////////////////")
-})
-},[]) 
-
-useEffect(()=>{
-        
-    const updateGroupList = async () =>
-    {
-        setGname(dbResult[1].group.gname)
-        setNumOfGroups(dbResult[0].group_count)
-        setMemCount(dbResult[1].mem_count)
-    }
     
 const [dbResult, setDbResult] = useState()
 const [ gName, setGName] = useState()
@@ -47,7 +21,7 @@ const [ gName, setGName] = useState()
 const [grpArray, setGrpArray]=useState([])
 
 useEffect(()=>{
-
+    
     var loadGroupList = {
         op: 'get_group_ls',
         user_id: '1',
@@ -59,27 +33,37 @@ useEffect(()=>{
 },[])
 
 
+useEffect(()=>{
+
     const loadGroups = async()=>
-        {
-
-            // console.log(dbResult)
-            // console.log(dbResult[1].group.gname)
-            for(let i = 1; i<dbResult.length; i++)
-            {
-                // console.log(dbResult[i].group)
-                if(grpArray.length <= dbResult.length-2)
+    {
+        
+        // console.log(dbResult.groups[0])
+        //         // console.log(dbResult)
+                // console.log(dbResult[1].group.gname)
+                for(let i = 0; i<Test.length; i++)
                 {
+                    // console.log(Test[i].groups.grpName)
+                   
+                
+                    if(grpArray.length <= Test.length)
+                    {
+    
+                        // grpArray.push(Test.group)
+                   
 
-                    grpArray.push(dbResult[i].group)
+                        
+                    }
+                    // setGName(dbResult[i].group.gname)
                 }
-                // setGName(dbResult[i].group.gname)
+                
             }
             
-        }
-        
-        loadGroups()
+            loadGroups()
+       
+}, [dbResult])
+
     
-    console.log(grpArray[0])
 // useEffect(()=>
 // {
 //     const groupInfo = async () =>
@@ -96,7 +80,7 @@ useEffect(()=>{
                     You are currently in
                 </Text>
                 <Text style={{fontSize:22}} >
-                    {numOfGroups} Group(s)
+                    3 Groups
                 </Text>
             </View>
             <View style={styles.lowerDiv}>
@@ -105,11 +89,16 @@ useEffect(()=>{
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={grpArray}
+                        data={Test}
                         renderItem={({item})=> <GroupThread 
-                                                        groupName={item.gname}
+                                                        groupName={item.groups.grpName}
+                                                        groupMembersNum={item.groups.mem_count}
                                                         // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {info: item.gname})}}/>}
+                                                        onPress={()=>{ navigation.navigate('GroupHome', {name: item.groups.grpName,
+                                                         numOfMem: item.groups.mem_count ,
+                                                         members: item.groups.members,
+                                                         id:item.groups.groupid
+                                                        })}}/>}
                         />
                     
                 </View>
