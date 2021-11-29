@@ -15,7 +15,7 @@ display:flex;
 height:100%;
 width:100%;
 flex-direction:column;
-justify-content:flex-end;
+justify-content:space-evenly;
 `;
 
 const CourseCardWrapper =styled.View`
@@ -46,7 +46,9 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-
+        <View style={{width:'100%', alignItems:'center'}}>
+          <Text style={{fontSize:25}}>Your buzzy course information!</Text>
+        </View>
         <CourseCardWrapper> 
           <View style={{width:'80%' }}>   
                 <FlatList
