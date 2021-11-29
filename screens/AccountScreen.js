@@ -22,6 +22,7 @@ display:flex;
 flex-wrap:wrap;
 flex-direction:row;
 justify-content:center;
+
 width:75%;
 height:20%
 `
@@ -244,7 +245,12 @@ const AccountScreen = ({ navigation }) => {
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.button}>
-          <RecBtn text="updates image" height="75" width="200" onRecBtnPress={updateImg} />
+          <RecBtn 
+              bgC={Configurations.colors.butCol}
+              text="updates image" 
+              height="75" 
+              width="200" 
+              onRecBtnPress={updateImg} />
         </Text>
       </View>
     </KeyboardAvoidingView>
@@ -268,7 +274,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginTop: 20,
+    marginTop: 50,
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',

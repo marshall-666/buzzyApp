@@ -197,7 +197,7 @@ const SignUpScreen = ({ navigation }) => {
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.button}>
-          <RecBtn text="Continue" height="75" width="200" onRecBtnPress={continuePress} />
+          <RecBtn text="Continue" height="75" width="200" onRecBtnPress={continuePress} bgC={Configurations.colors.butCol}/>
         </Text>
       </View>) : null}
       {page2 ? (<View style={styles.inpuTable}>
@@ -256,8 +256,8 @@ const SignUpScreen = ({ navigation }) => {
         {signupError ? <Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
 
         <Text style={styles.button}>
-          <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
-          <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} />
+          <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} bgC={Configurations.colors.butCol}/>
+          <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} bgC={Configurations.colors.butCol} />
         </Text>
       </View>) : null}
       <View style={styles.container3}>
