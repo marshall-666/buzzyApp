@@ -57,47 +57,49 @@ const TaskboardScreen = ({ navigation }) => {
   const [showSchedule, setShowSchedule] = useState(false)
   const [showAll, setShowAll] = useState(true)
   const [dbResult, setDbResult] = useState()
+  const [Schedule, setSchedule] = useState( 
+    [{
+    title: "businessCom",
+    startTime: new Date("2021/12/06 9:30 AM"),
+    endTime: new Date("2021/12/06 12:20 PM"),
+  },
+  {
+    title: "Design2",
+    startTime: new Date("2021/12/06 01:30 PM"),
+    endTime: new Date("2021/12/06 04:20 PM"),
+  },
+
+  {
+    title: "Asset Design and intergration",
+    startTime: new Date("2021/12/07 09:30 AM"),
+    endTime: new Date("2021/12/07 12:20 PM")
+  },
+  {
+    title: "Advance Photoshop",
+    startTime: new Date("2021/12/07 01:30 PM"),
+    endTime: new Date("2021/12/07 04:20 PM")
+  },
+  {
+    title: "Accounting",
+    startTime: new Date("2021/12/08 08:30 AM"),
+    endTime: new Date("2021/12/08 10:20 PM")
+  },
+  {
+    title: "Web dev3",
+    startTime: new Date("2021/12/08 12:30 PM"),
+    endTime: new Date("2021/12/08 02:20 PM")
+  }])
 
 
- 
-  const Schedule = [
-    {
-      title: "businessCom",
-      startTime: new Date("2021/12/06 9:30 AM"),
-      endTime: new Date("2021/12/06 12:20 PM"),
-    },
-    {
-      title: "Design2",
-      startTime: new Date("2021/12/06 01:30 PM"),
-      endTime: new Date("2021/12/06 04:20 PM"),
-    },
-   
-    {
-      title: "Asset Design and intergration",
-      startTime: new Date("2021/12/07 09:30 AM"),
-      endTime: new Date("2021/12/07 12:20 PM")
-    },
-    {
-      title: "Advance Photoshop",
-      startTime: new Date("2021/12/07 01:30 PM"),
-      endTime: new Date("2021/12/07 04:20 PM")
-    },
-    {
-      title: "Accounting",
-      startTime: new Date("2021/12/08 08:30 AM"),
-      endTime: new Date("2021/12/08 10:20 PM")
-    },
-    {
-      title: "Web dev3",
-      startTime: new Date("2021/12/08 12:30 PM"),
-      endTime: new Date("2021/12/08 02:20 PM")
-    },
-  ];
 
+  // const Schedule = [
+  // ];
+  
   const slotTue = []
   const slotMon = []
   const slotWed = []
-  var ScheduleLevi = [  
+
+  var ScheduleLevi = [
     {
       title: "Communting",
       startTime: new Date("2021/12/06 04:30 PM"),
@@ -140,51 +142,59 @@ const TaskboardScreen = ({ navigation }) => {
     },
 
   ];
-  if (setShowSchedule === true){
-    Schedule.push( {
+  if (setShowSchedule === true) {
+    Schedule.push({
       title: "Communting",
       startTime: new Date("2021/12/06 04:30 PM"),
       endTime: new Date("2021/12/06 05:20 PM"),
     },
-    {
-      title: " do assignment",
-      startTime: new Date("2021/12/06 06:50 PM"),
-      endTime: new Date("2021/12/06 09:30 PM"),
-    },
-    {
-      title: "Communting",
-      startTime: new Date("2021/12/07 04:30 PM"),
-      endTime: new Date("2021/12/07 05:20 PM")
-    },
-    {
-      title: " do assignment",
-      startTime: new Date("2021/12/07 06:50 PM"),
-      endTime: new Date("2021/12/07 09:30 PM")
-    },
-    {
-      title: " do assignment2",
-      startTime: new Date("2021/12/07 10:00 PM"),
-      endTime: new Date("2021/12/07 11:20 PM")
-    },
-    {
-      title: "Communting",
-      startTime: new Date("2021/12/08 04:30 PM"),
-      endTime: new Date("2021/12/08 05:20 PM")
-    },
-    {
-      title: " do assignment",
-      startTime: new Date("2021/12/08 06:50 PM"),
-      endTime: new Date("2021/12/08 09:30 PM")
-    },
-    {
-      title: " do assignment2",
-      startTime: new Date("2021/12/08 10:00 PM"),
-      endTime: new Date("2021/12/08 11:20 PM")
-    },
-)
+      {
+        title: " do assignment",
+        startTime: new Date("2021/12/06 06:50 PM"),
+        endTime: new Date("2021/12/06 09:30 PM"),
+      },
+      {
+        title: "Communting",
+        startTime: new Date("2021/12/07 04:30 PM"),
+        endTime: new Date("2021/12/07 05:20 PM")
+      },
+      {
+        title: " do assignment",
+        startTime: new Date("2021/12/07 06:50 PM"),
+        endTime: new Date("2021/12/07 09:30 PM")
+      },
+      {
+        title: " do assignment2",
+        startTime: new Date("2021/12/07 10:00 PM"),
+        endTime: new Date("2021/12/07 11:20 PM")
+      },
+      {
+        title: "Communting",
+        startTime: new Date("2021/12/08 04:30 PM"),
+        endTime: new Date("2021/12/08 05:20 PM")
+      },
+      {
+        title: " do assignment",
+        startTime: new Date("2021/12/08 06:50 PM"),
+        endTime: new Date("2021/12/08 09:30 PM")
+      },
+      {
+        title: " do assignment2",
+        startTime: new Date("2021/12/08 10:00 PM"),
+        endTime: new Date("2021/12/08 11:20 PM")
+      },
+    )
   }
-   
-  console.log(Schedule)
+  var loadSlots = {
+    op: 'load_slot',
+    group_id: '1',
+  }
+
+  talktoserver(loadSlots).then((rd) => {
+    setSchedule(rd)
+  })
+  // console.log(Schedule)
+  // console.log(dbResult)
   // console.log(Schedule)
   // var indiSlots = {
   //     op: 'indi_slot',
@@ -674,36 +684,36 @@ const TaskboardScreen = ({ navigation }) => {
   const AbbeyPress = () => {
     setShowSchedule(false)
     setShowAll(false)
-  
+
   }
   const NickPress = () => {
     setShowSchedule(false)
     setShowAll(false)
-  
+
   }
   const WarrenPress = () => {
     setShowAll(false)
-   
+
     setShowSchedule(false)
   }
   const GroupPress = () => {
-  
+
     setShowSchedule(false)
     setShowAll(false)
-  
+
   }
   const LeviPress = () => {
 
     // loadSchedule()
-  
+
     setShowSchedule(true)
     setShowAll(false)
-    
+
   }
   const JodyPress = () => {
     setShowSchedule(false)
     setShowAll(false)
- 
+
   }
 
 
@@ -813,7 +823,7 @@ const TaskboardScreen = ({ navigation }) => {
                     data=
                     {
                       <FlatList
-                        
+
                         contentContainerStyle={{ width: 300 }}
                         data={slotMon}
                         renderItem={renderItem}
