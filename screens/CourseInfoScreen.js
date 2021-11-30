@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, FlatList} from 'react-native';
+import { Button, View, Text, FlatList, Image, ImageBackground} from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar'
@@ -9,17 +9,18 @@ import { Configurations } from '../PropConfig/Props';
 
 
 
+const image = { uri: '' };
 
 const Wrapper = styled.View`
 display:flex;
 height:100%;
 width:100%;
 flex-direction:column;
-justify-content:space-evenly;
+justify-content:space-between;
 `;
 
 const CourseCardWrapper =styled.View`
-height:80%;
+height:85%;
 align-items:center;
 flex-direction:column;
 justify-content:center;
@@ -46,16 +47,18 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-        <View style={{width:'100%', alignItems:'center'}}>
+        <View style={{width:'100%', alignItems:'center', height:'30%',justifyContent:'space-evenly'}}>
+          <Image style={{width:'50%', height:"50%"}}source={require('../assets/coolBee.png')}/>
           <Text style={{fontSize:25}}>Your buzzy course information!</Text>
         </View>
-        <CourseCardWrapper> 
-          <View style={{width:'80%' }}>   
+       
+          <CourseCardWrapper>
+          <View style={{width:'100%'}}>   
+            <ImageBackground style={{width:'100%', top:"-5%"}}source={require('../assets/fileCabinet.jpg')}>   
                 <FlatList
-                contentContainerStyle={{
-                  justifyContent:"space-evenly",
-                  height:"150%"
-
+                contentContainerStyle={{ 
+                  height:"150%",
+                  display:"flex",
                 }}
                 data={CourseData}
                 renderItem={({item})=> <Task 
@@ -66,9 +69,11 @@ const CourseInfoScreen = () => {
                 courseTime={item.time}
                 />}
               />
+            </ImageBackground>    
+       
 
           </View>
-        </CourseCardWrapper>  
+          </CourseCardWrapper>
             <NavBarCon>
                 <NavBar/>
             </NavBarCon>

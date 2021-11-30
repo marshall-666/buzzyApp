@@ -6,15 +6,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { Foundation } from '@expo/vector-icons'; 
 import { Configurations } from '../PropConfig/Props';
+import * as Animatable from 'react-native-animatable';
+
 
 // main container for the component within with everything resides.
 const TaskCont = styled.View`
 height:${props => props.height};
 border-radius:10px;
 align-items:center;
-margin-top:10px;
-margin-bottom:10px;
-width:100%;
+margin-top:20px;
+margin-bottom:50px;
+width:95%;
 `
 
 // divider
@@ -30,7 +32,7 @@ background-color:#21aab5;
 const TaskHeader = styled.Pressable`
 flex-direction:row;
 width:100%;
-height:80px;
+height:70px;
 align-items:center;  
 background-color:white;
 border-top-left-radius:10px;
@@ -73,7 +75,7 @@ export const Task = ({
     // states to change the height of the task card.
     const [height, setHeight] = useState('5%')
     const [card, setCard] = useState(true)
-
+    const [anim, setAnim]=useState('')
     // state to display the content of the card only when its expanded.
     const [display, setDisplay] = useState('none')
 
@@ -83,8 +85,9 @@ export const Task = ({
     {
         if(card)
         {
-            setHeight('70%')
+            setHeight('60%')
             setDisplay('flex')
+            setAnim("bounceInUp")
         }
         else{
             setHeight('5%')
@@ -97,7 +100,13 @@ export const Task = ({
         style={{  shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
-        shadowRadius: 3,}}
+        shadowRadius: 3,
+        transform: [
+            
+            {skewX:"15deg"},
+            {skewY:'0deg'}
+          ]
+        }}
         >
            
            <TaskHeader onPress={ () =>
@@ -107,21 +116,28 @@ export const Task = ({
             }}
             >
                 <Divider/>
-                <Text>
+                <Text style={{fontSize:25, margin:"5%"}}>
                 {title}
                 </Text>
             </TaskHeader>
           
        
-            <Content display={display}
+            <Animatable.View 
+             animation={anim}
+             display={display}
              style={{  shadowColor: '#171717',
              shadowOffset: {width: -2, height: 4},
              shadowOpacity: 0.2,
              shadowRadius: 3,
+             flexDirection:"row",
+             width:"100%",
+             height:"80%",
+             justifyContent:"space-between",
+             backgroundColor:Configurations.colors.secCol
             }}
             >
                 <Divider/>
-                <View style={{alignItems:'center', width:'95%', justifyContent:'space-evenly'}}>
+                <View animation={anim} style={{alignItems:'center', width:'95%', justifyContent:'space-evenly', }}>
                     <ContentCell> 
             
                         <Foundation name="calendar" size={45} color={Configurations.colors.lightBg} />
@@ -148,7 +164,7 @@ export const Task = ({
                     </ContentCell>
                 </View>
 
-            </Content>
+            </Animatable.View>
 
         </TaskCont>
         
