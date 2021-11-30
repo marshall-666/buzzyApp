@@ -15,6 +15,7 @@ const CreateGroupScreen = ({
     const [dbResult, setDbResult] = useState()
     const [grpName, setGrpName] = useState("")
     const [grpDiscp, setGrpDiscp] = useState("")
+    const [grpMem, setGrpMem] = useState("")
     
     
     const handlePress = () => {
@@ -41,18 +42,10 @@ const CreateGroupScreen = ({
             })
             console.log(dbResult)
         }
-        
-       
             
         
-        
-        // createGroup()
-    
-    
-  
-    
-
-   
+        console.log(grpMem)
+        // createGroup  
     
     return (
         // <KeyboardAvoidingView behavior={Platform.OS === 'ios'? 'position' : 'height'} style={styles.container}>
@@ -62,8 +55,13 @@ const CreateGroupScreen = ({
                     handlePress={handlePress}
                     nameVal={grpName}
                     discpVal={grpDiscp}
+                    memVal={grpMem}
                     onGrpVal={(e)=>{setGrpName(e)}}
                     onDiscpVal={(d)=>{ setGrpDiscp(d)}}
+                    onMemVal={(m)=>{
+                                        setGrpMem(m)
+                                        // console.log(grpMem)
+                                    }}
                     
                 
                 />

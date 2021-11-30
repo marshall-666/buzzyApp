@@ -55,16 +55,25 @@ left:5%
 `
 const TaskCreatingScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(taskCategory)
-const [taskName, setTaskName] = useState('');
+  const [taskName, setTaskName] = useState('');
   const [location, setLocation] = useState('');
   const [dbResult, setDbResult] = useState()
-const [Value, setValue] = useState('Course')
+  const [Value, setValue] = useState('Course')
   const { user,users } = useContext(AuthenticatedUserContext);
-const [endTime,setEndTime] =useState('Pick end Time')
+  const [endTime,setEndTime] =useState('Pick end Time')
   const [startTime,setStartTime] =useState('Pick start Time')
   const [desc,setDesc] =useState('')
   const [category_id,setCategory_id] =useState('')
 
+
+  
+  const [dbResultGrp, setDbResultGrp] = useState()
+  const [grpList, setGrpList] = useState([])
+  const [grpName, setGrpName]= useState('No Group Selected')
+  const [grpId, setGrpId] = useState('0')
+
+  const groups =[]
+  let index = 0
 
   const onHandleCreate =async () => {
    
@@ -90,7 +99,7 @@ const [endTime,setEndTime] =useState('Pick end Time')
     start_t: startTime,
     end_t: endTime,
     loca: location,
-    group_id: '1',
+    group_id: grpId,
     user_id: '1',
 }
 
@@ -98,16 +107,68 @@ const [endTime,setEndTime] =useState('Pick end Time')
 await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
-    console.log(dbResult)
+    // console.log(dbResult)
 })
-console.log(createTask)
+// console.log(createTask)
       navigation.navigate('Taskboard')
-console.log(category_id)
+  // console.log(category_id)
 
     }
-    console.log(Value)
+    // console.log(Value)
   
-    // console.log(category_id)
+    console.log(category_id)
+
+   
+
+
+
+
+
+
+
+    useEffect(()=>
+  {
+    const loadGroups = async()=>
+    {
+
+            var loadGroupList = {
+                op: 'get_group_ls',
+                user_id: '1',
+            }
+
+            talktoserver(loadGroupList).then((rd) => {
+                setDbResultGrp(rd)
+            })
+
+            for (let i=0 ; i<= dbResultGrp.length; i++)
+            {
+                // console.log(dbResultGrp[i].groups)
+                if(groups.length < dbResultGrp.length)
+                {
+                    groups.push(dbResultGrp[i].groups)
+                }
+
+            }
+            // console.log(groups)
+            let newObject = groups.map(function(obj){
+              return{
+                  key: index++,
+                  groupId: obj.groupid,
+                  label: obj.grpName
+                
+              }
+
+            })
+            newObject.unshift({ key: index++, section: true, label: 'Type', groupId: index  })
+            // console.log(newObject)
+            setGrpList(newObject)
+            // console.log(grpList)
+          }
+          loadGroups()
+        },[Value])
+
+// console.log(grpId)
+
 
 
   return (
@@ -144,6 +205,12 @@ console.log(category_id)
             desc={desc} setDesc={setDesc}
             category_id={ category_id}
             setCategory_id={ setCategory_id}
+            dummyList={grpList}
+            grpNameVal={grpName}
+            // grpDisp={grpListDisp}
+            handleGroups={(item)=>{
+              setGrpName(item.label)
+              setGrpId(item.groupId)}}
  />
 
       </Wrapper>

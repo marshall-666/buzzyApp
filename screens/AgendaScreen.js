@@ -143,9 +143,9 @@ useEffect (()=>{
       setEVENTS(dailyEvents[ChosenDay])
       
  
+      console.log(dayTaskArray)
   }      
     GetEvents()
-
 },[dbResult])
 
   // useEffect (()=>{ 
@@ -230,13 +230,6 @@ useEffect (()=>{
   const renderItem = (item)=>
   {
     return (
-        // <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
-        //     <Text> {item.name}</Text>
-        //     <Text> {item.dueDaTE}</Text>
-
-        //   </View>
-
-        
         <IndividualEventCard
           EventBackgroundColor="#EC8B1A"/>
     )

@@ -95,7 +95,7 @@ const DashboardScreen = ({navigation }) => {
   },[dbResult])
 
 
-
+// console.log('hi')
 // useEffect to load the tasks for cards and regular tasks
 
 
@@ -250,6 +250,7 @@ const DashboardScreen = ({navigation }) => {
   var today = new Date();
 
  
+// const scrollY = React.useRef(new Animated.Value(0)).current;
 
   return (
   
@@ -261,7 +262,8 @@ const DashboardScreen = ({navigation }) => {
       backgroundColor: primCol,
     }}>
 
-      <Wrapper> 
+      <Wrapper
+          > 
     
       <ToDate/>
  
@@ -366,6 +368,8 @@ const DashboardScreen = ({navigation }) => {
           <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
       { courses ?
         <FlatList 
+        
+        
           // initialNumToRender={3}
           contentContainerStyle={{ maxWidth:'100%',}}
           data = {courseTasks}
