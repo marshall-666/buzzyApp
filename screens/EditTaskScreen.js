@@ -13,6 +13,7 @@ import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 
+
 const colors = Configurations.colors
 
 const taskCategory = [
