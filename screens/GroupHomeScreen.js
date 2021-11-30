@@ -10,7 +10,7 @@ import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 import talktoserver from "../api/talktoserver"
 import IndividualEventCard from '../comps/IndividualEventCard';
-import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider'
+
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -40,7 +40,6 @@ const GroupHomeScreen = ({
     const [grpName, setGrpName]=useState()
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
-    const { user, users } = useContext(AuthenticatedUserContext);
 
     useEffect(()=>{
        
