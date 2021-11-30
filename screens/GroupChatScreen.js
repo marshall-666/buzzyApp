@@ -19,7 +19,8 @@ const GroupChatScreen = ({
     
     const load_msgls = 'load_msgls'
     const add_msg = 'add_msg'
-    const user_id = '1'
+    const user_id = 'aaaaaaaaaa'
+    // const user_id = user.uid
     const group_id = '1'
 
     useEffect(()=>{
@@ -74,7 +75,7 @@ const GroupChatScreen = ({
     }
 
     const renderItem =({item})=> (
-        item.send_id === user_id ? 
+        item.sender_id === user_id ? 
         <MyChatLine message={item.message}/>
         :
         <ChatLine sender={item.sender} message={item.message}/>
