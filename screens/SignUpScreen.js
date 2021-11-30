@@ -72,7 +72,16 @@ const SignUpScreen = ({ navigation }) => {
   }
   const submitPress = async () => {
     const auth = getAuth();
-    if (email !== '' && password !== '') {
+    if( newName == ''){
+      alert("user name is required")
+    }else if  (email == ''){
+      alert("email is missed")
+    } else if  (password == ''){
+      alert("email is missed")
+    } 
+    
+    if (email !== '' && password !== ''&&  newName !== '') {
+      
       try {
         const result = await createUserWithEmailAndPassword(
           auth,
@@ -223,6 +232,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
           leftIcon='school'
           placeholder='BCIT'
+          defaultValue='BCIT'
           autoCapitalize='none'
           autoFocus={true}
           value={school}
@@ -240,6 +250,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
           leftIcon='book-open'
           placeholder='MDDD'
+          defaultValue='MDDD'
           autoCapitalize='none'
           value={program}
           onChangeText={text => setProgram(text)}
