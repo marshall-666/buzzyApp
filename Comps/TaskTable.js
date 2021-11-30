@@ -117,7 +117,7 @@ const groups =[]
 
 
 
-useEffect(()=>{if ( Value=== 'Courses')
+if ( Value=== 'Courses')
 {
   category_id= '2'
   setListDisp('none')
@@ -134,7 +134,7 @@ else if (Value=== 'Groups')
   category_id='3'
   setListDisp('none')
 }
-},[Value])
+
 
 
 
