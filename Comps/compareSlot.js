@@ -299,7 +299,7 @@ var Schedule2 = [
 ];
 
 let ScheduleCom = Schedule2.concat(Schedule)
-
+console.log(ScheduleCom)
 
 const set = new Set();
 const ScheduleAll = ScheduleCom.filter(item => !set.has(item.name) ? set.add(item.name) : false );
