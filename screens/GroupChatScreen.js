@@ -10,9 +10,9 @@ const GroupChatScreen = ({
 
     const routeData = route.params
 
-    const [chatdata, setChatData] = useState()
+    const [chatdata, setChatData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [chatMessage, setChatMessage] = useState()
+    const [chatMessage, setChatMessage] = useState(null)
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
     const flatListChat = useRef(null)
@@ -24,14 +24,23 @@ const GroupChatScreen = ({
     const group_id = '1'
 
     useEffect(()=>{
-        var loadChats = {
-            op: load_msgls,
-            user_id: user_id,
-            group_id: group_id,
-        }
-        talktoserver(loadChats).then((rd) => {
-            setChatData(rd)
-        })
+
+        const chatinterval = setInterval(()=>{
+            var loadChats = {
+                op: load_msgls,
+                user_id: user_id,
+                group_id: group_id,
+            }
+    
+            talktoserver(loadChats).then((rd) => {
+                setChatData(rd)
+            }).then(() => {
+                setIsLoading(false)
+            })
+        }, 1000)
+
+        return () => clearInterval(chatinterval)
+
     }, [])
 
     useEffect(()=>{
@@ -45,21 +54,24 @@ const GroupChatScreen = ({
         })
     }, [chatUpdated])
 
-    console.log(chatdata)
-
     const updateChat = (t) => {
-        var addChat = {
-            op: add_msg,
-            sender_id: user_id,
-            group_id: group_id,
-            message: t,
+
+        if(t != null){
+            var addChat = {
+                op: add_msg,
+                sender_id: user_id,
+                group_id: group_id,
+                message: t,
+            }
+            talktoserver(addChat).then((rd) => {
+                if(rd == 'Msg added'){
+                    setChatUpdated(!chatUpdated)
+                }
+            })   
+        } else {
+            console.log('Message is null')
         }
         
-        talktoserver(addChat).then((rd) => {
-            if(rd == 'Msg added'){
-                setChatUpdated(!chatUpdated)
-            }
-        })   
     }
 
     const renderItem =({item})=> (
@@ -70,28 +82,47 @@ const GroupChatScreen = ({
     )
 
     return (
+        
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'position' : 'height'}
             style={styles.container}>
+            
+            { isLoading ?
+            <View style={{
+                width: '100%',
+                height: '80%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingHorizontal: 10,
+                backgroundColor: '#F5F5E1',
+                }}
+            >
+                <Text>Loading...</Text>
+            </View> 
+            :
             <View style={styles.midDiv}>
                 <FlatList
                     ref={flatListChat}
-                    // onContentSizeChange={()=>{
-                    //     flatListChat.current.scrollToEnd()
-                    // }}
+                    onContentSizeChange={()=>{
+                        flatListChat.current.scrollToEnd()
+                    }}
                     data={chatdata}
                     renderItem={renderItem}
                     keyExtractor={item=>item.id}
                 />
             </View>
+            }
+
+
+
+            <View style={{width:'100%', paddingVertical:10, alignItems: 'center'}}>
+                <MessageInput 
+                updateChat={updateChat} 
+                chatMessage={chatMessage} 
+                setChatMessage={setChatMessage}
+                />
+            </View>
             <View style={styles.navbarWrap}>
-                <View style={{width: '100%', height: 90, paddingBottom: 25, paddingTop:10, alignItems:'center'}}>
-                    <MessageInput 
-                    updateChat={updateChat} 
-                    chatMessage={chatMessage} 
-                    setChatMessage={setChatMessage}
-                    />
-                </View>
                 <NavBar/>
             </View> 
         </KeyboardAvoidingView>
@@ -102,16 +133,15 @@ export default GroupChatScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        alignItems: 'center',
+        width: '100%',
         justifyContent: 'flex-start',
         backgroundColor: '#94BDD4',
     },
     midDiv: {
         width: '100%',
+        height: '80%',
         paddingHorizontal: 10,
-        marginBottom: 5,
-        backgroundColor: '#F5F5E1'
+        backgroundColor: '#F5F5E1',
     },
     myChatContainer:{
         flexDirection: 'row',
@@ -126,7 +156,7 @@ const styles = StyleSheet.create({
         minHeight: 40,
         marginHorizontal: 10,
         marginVertical: 5,
-        backgroundColor: '#85A5E8',
+        backgroundColor: '#F2E5B6',
         borderRadius: 10,
         alignItems: 'center',
         padding: 10,
@@ -139,14 +169,22 @@ const styles = StyleSheet.create({
         marginTop: 5,
         justifyContent:'flex-start',
     },
+    chatlineContainer: {
+        flexDirection: 'row', 
+        // width: '80%', 
+        minHeight: 40,
+        marginHorizontal: 10,
+        marginVertical: 5,
+        backgroundColor: '#85A5E8',
+        borderRadius: 10,
+        alignItems: 'center',
+        padding: 10
+    },
     navbarWrap: {
         width:'100%',
-        position: 'absolute',
-        bottom: 10,
-        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#94BDD4',
-        // paddingBottom: 10
+        paddingVertical: 10
     }
 })
 
@@ -157,8 +195,8 @@ const ChatLine =({
     return(
         <View style={styles.chatContainer}>
             <View>
-                <Text>{sender}</Text>
-                <View>
+                <Text style={{fontSize: 11, marginLeft: 5}}>{sender}::</Text>
+                <View style={styles.chatlineContainer}>
                     <Text>{message}</Text>
                 </View>
             </View>
