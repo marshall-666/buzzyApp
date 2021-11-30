@@ -1,5 +1,5 @@
 // import styled from "@emotion/styled-base";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Text, StyleSheet, TouchableOpacity, View, Button, TextInput } from 'react-native';
 import Styled from "styled-components/native";
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -7,6 +7,8 @@ import {AppTimePicker1, AppTimePicker2} from "./AppTimePicker";
 import RecBtn from "./RecBtn";
 import { Configurations } from '../PropConfig/Props'
 import ModalSelector from 'react-native-modal-selector'
+import talktoserver from "../api/talktoserver"
+
 
 
 const CardCon = Styled.View`
@@ -48,6 +50,12 @@ const PickerCon = Styled.View`
 width:100%;
 margin-top:10px
 `
+const PickerConTwo = Styled.View`
+width:100%;
+margin-top:10px;
+display: ${(props) => props.display};
+
+`
 const TimeCon = Styled.View`
 height:14%;
 `
@@ -75,13 +83,24 @@ const TaskTable = ({
  bgC,
  txtC,
  category_id,
- setCategory_id
+ dummyList,
+ grpNameVal,
+ grpDisp='flex',
+ setCategory_id,
+ handleGroups= ()=>{}
 }) => {
+  const [dbResultGrp, setDbResultGrp] = useState()
+  const [grpList, setGrpList] = useState([])
+  const [grpName, setGrpName]= useState('No Group Selected')
+  const [grpId, setGrpId] = useState('0')
+  const [grpListDisp, setListDisp] = useState('none')
   // const [selectedValue, setSelectedValue] = useState('Courses')
   // const [Value, setValue] = useState('')
 // const [endTime,setEndTime] =useState('Pick end Time')
   // const [startTime,setStartTime] =useState('Pick start Time')
  
+  
+
   let index = 0;
   const data = [
     { key: index++, section: true, label: 'Type' },
@@ -92,20 +111,35 @@ const TaskTable = ({
     // Can also add additional custom keys which are passed to the onChange callback
     // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
+
  
-  if ( Value=== 'Courses'){
-    category_id= '2'
- }else if (Value=== 'Groups')
- {   category_id='1'}
- else {
-  category_id='3'
- }
+const groups =[]
 
 
-  
- 
-  console.log(Value)
-  console.log(category_id)
+
+
+    if ( Value=== 'Courses')
+    {
+      setCategory_id( '2')
+      // setListDisp('none')
+      // console.log('hiiii')
+    }
+    
+    else if (Value=== 'Groups')
+        {
+          setCategory_id('1')
+          // setListDisp('flex')
+        }
+    
+        else {
+          setCategory_id('3')
+      // setListDisp('none')
+    }
+
+
+
+
+
 
 
   return (
@@ -136,9 +170,11 @@ const TaskTable = ({
             data={data}
             initValue="Coures"
             // onValueChange={(label) => setSelectedValue(label)}
-            onChange={(item)=>{ setValue(item.label)
+            onChange={(item)=>{ 
+              
+              setValue(item.label)
              
-            
+             
             
             
             }}
@@ -159,6 +195,38 @@ const TaskTable = ({
           </ModalSelector>
             
         </PickerCon>
+
+        <PickerConTwo display={grpListDisp} >
+        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+          Please Select a group 
+        </TextInput2>
+          <ModalSelector
+            data={dummyList}
+            initValue="No group Selected"
+            // onValueChange={(label) => setSelectedValue(label)}
+            onChange={handleGroups
+              // setGrpName(item.label)
+              // setGrpId(item.groupId)
+            }
+            borderBottomWidth="none" 
+            >
+             <TextInput
+                        style={{
+                        borderWidth:1, 
+                        borderColor:'#ccc', 
+                        padding:2, 
+                        height:35, 
+                        fontSize:18, 
+                        textAlign:'center',
+                        color:Configurations.colors.secCol}}
+                        editable={false}
+                        placeholder="no group selected"
+                        value={grpNameVal}
+                        
+                         />
+          </ModalSelector>
+            
+        </PickerConTwo>
         {/* <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
          
          value={selectedValue}
@@ -202,7 +270,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={Configurations.colors.butCol}/>
+        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={bgC}/>
       </ButtonCon>
 
     </CardCon>

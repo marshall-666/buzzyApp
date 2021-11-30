@@ -1,5 +1,5 @@
 // imports from dependancies ==========
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
@@ -23,6 +23,7 @@ import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const colors = Configurations.colors;
@@ -72,7 +73,7 @@ const primCol = Configurations.colors.primCol
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
   const [dbResult, setDbResult] = useState()
-  
+  const { user,users } = useContext(AuthenticatedUserContext);
   const [grpTasks, setGrpTasks] = useState([])
   const [courseTasks, setCourseTasks] = useState([])
   const [eventTasks, setEventTasks] = useState([])
@@ -94,7 +95,7 @@ const DashboardScreen = ({navigation }) => {
   },[dbResult])
 
 
-
+// console.log('hi')
 // useEffect to load the tasks for cards and regular tasks
 
 
@@ -249,6 +250,7 @@ const DashboardScreen = ({navigation }) => {
   var today = new Date();
 
  
+// const scrollY = React.useRef(new Animated.Value(0)).current;
 
   return (
   
@@ -260,7 +262,8 @@ const DashboardScreen = ({navigation }) => {
       backgroundColor: primCol,
     }}>
 
-      <Wrapper> 
+      <Wrapper
+          > 
     
       <ToDate/>
  
@@ -362,9 +365,11 @@ const DashboardScreen = ({navigation }) => {
         </View>
         </TaskBtnCont>
 
-          
+          <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
       { courses ?
         <FlatList 
+        
+        
           // initialNumToRender={3}
           contentContainerStyle={{ maxWidth:'100%',}}
           data = {courseTasks}

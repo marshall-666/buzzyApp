@@ -1,5 +1,5 @@
 // imports from dependancies ==========
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
 import { Timeline} from 'react-native-calendars'
 import styled from 'styled-components/native';
@@ -15,6 +15,7 @@ import talktoserver from "../api/talktoserver"
 import { SelectedDay } from '../data/test';
 import { Configurations } from '../PropConfig/Props'
 import { Events } from '../data/Events';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 // import {taskCategory} from '../data/category'
 
 const colors = Configurations.colors;
@@ -63,7 +64,7 @@ const AgendaScreen = ({navigation, route }) => {
   const [movie, setMovie] = useState('')
   const [taskColor, setTaskColor] =useState(colors.butCol)
   const ChosenDay = route.params.day
-
+  const { user,users } = useContext(AuthenticatedUserContext);
   const [dbResult, setDbResult] = useState()
 
  
@@ -142,9 +143,9 @@ useEffect (()=>{
       setEVENTS(dailyEvents[ChosenDay])
       
  
+      console.log(dayTaskArray)
   }      
     GetEvents()
-
 },[dbResult])
 
   // useEffect (()=>{ 
@@ -229,13 +230,6 @@ useEffect (()=>{
   const renderItem = (item)=>
   {
     return (
-        // <View style ={{backgroundColor:'white', margin:10, alignItems:'center', height: 50 }}>
-        //     <Text> {item.name}</Text>
-        //     <Text> {item.dueDaTE}</Text>
-
-        //   </View>
-
-        
         <IndividualEventCard
           EventBackgroundColor="#EC8B1A"/>
     )

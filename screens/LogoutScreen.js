@@ -12,6 +12,8 @@ import { ErrorInfo } from '../comps/ErrorInfo'
 import LottieView from 'lottie-react-native';
 import fireAuth from '../firebase/fireAuth';
 import { Avatar, Layout } from '@ui-kitten/components';
+import { doc, setDoc,updateDoc,getDoc } from "firebase/firestore";
+import { db } from '../firebase/fireStore';
 
 
 const LogoWrapper = styled.View`
@@ -50,8 +52,18 @@ width:100%;
 `
 const LogoutScreen = ({ navigation }) => {
 
-
+  const [image, setImage] = useState('');
+  
   const { user,users } = useContext(AuthenticatedUserContext);
+  useEffect(() => {
+    const getUser = async () => {const auth = getAuth();
+      const user = auth.currentUser;
+      const usersDocRef = doc(db, "users", user.uid );
+      const data = await getDoc(usersDocRef);
+    setImage( data.data().img)
+    }
+    getUser()
+  }, [user])
   const handleSignOut = async () => {
     try {
       await fireAuth.signOut();
@@ -60,7 +72,7 @@ const LogoutScreen = ({ navigation }) => {
       console.log(error);
     }
   };
-const image =users.img
+// const image =users.img
   return (
     <View style={styles.container}>
        <Image source={{uri:image}} style={styles.tinyLogo} />

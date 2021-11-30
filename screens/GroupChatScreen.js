@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext  } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } from 'react-native'
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
 import styled from 'styled-components/native'
 import LottieView from 'lottie-react-native';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -25,13 +26,13 @@ const GroupChatScreen = ({
     route,
     navigation
 }) => {
-
+    const { user,users } = useContext(AuthenticatedUserContext);
     const [chatdata, setChatData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [chatMessage, setChatMessage] = useState()
     const [chatUpdated, setChatUpdated] = useState(false)
     const [dbResult, setDbResult] = useState()
-    // const [dbResult, setDbResult] = useState()
+   
   const [load, setLoad] = useState(true)
 
     let user_id = '1'
