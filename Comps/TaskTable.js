@@ -73,14 +73,15 @@ const TaskTable = ({
   setValue,
  desc,setDesc,
  bgC,
- txtC
-
+ txtC,
+ category_id,
+ setCategory_id
 }) => {
   // const [selectedValue, setSelectedValue] = useState('Courses')
   // const [Value, setValue] = useState('')
 // const [endTime,setEndTime] =useState('Pick end Time')
   // const [startTime,setStartTime] =useState('Pick start Time')
-  
+ 
   let index = 0;
   const data = [
     { key: index++, section: true, label: 'Type' },
@@ -92,14 +93,19 @@ const TaskTable = ({
     // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
  
- 
-  // console.log(startTime)
-  // console.log(endTime)
+  if ( Value=== 'Courses'){
+    category_id= '2'
+ }else if (Value=== 'Groups')
+ {   category_id='1'}
+ else {
+  category_id='3'
+ }
+
 
   
  
-  // console.log(Value)
-  // console.log(category_id)
+  console.log(Value)
+  console.log(category_id)
 
 
   return (
@@ -130,7 +136,12 @@ const TaskTable = ({
             data={data}
             initValue="Coures"
             // onValueChange={(label) => setSelectedValue(label)}
-            onChange={(item)=>{ setValue(item.label)}}
+            onChange={(item)=>{ setValue(item.label)
+             
+            
+            
+            
+            }}
             borderBottomWidth="none" 
             >
              <TextInput
@@ -153,7 +164,6 @@ const TaskTable = ({
          value={selectedValue}
          
         >
-
         </TextInput3> */}
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Location
@@ -192,7 +202,7 @@ const TaskTable = ({
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} />
+        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={Configurations.colors.butCol}/>
       </ButtonCon>
 
     </CardCon>

@@ -10,7 +10,7 @@ import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 import talktoserver from "../api/talktoserver"
 import IndividualEventCard from '../comps/IndividualEventCard';
- 
+
 
 const NavBarCon = styled.View`
 position:absolute;

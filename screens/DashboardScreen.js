@@ -30,6 +30,7 @@ const secCol = colors.secCol;
 const accent = colors.butCol;
 
 
+
 const Wrapper = styled.ScrollView`
 
 `
@@ -394,6 +395,7 @@ const DashboardScreen = ({navigation }) => {
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+                  IconDisplay='none'
                   /> }
                   
         /> : null
