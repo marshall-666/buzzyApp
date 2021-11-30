@@ -101,7 +101,7 @@ await talktoserver(createTask).then((rd) => {
     console.log(dbResult)
 })
 console.log(createTask)
-      // navigation.navigate('Taskboard')
+      navigation.navigate('Taskboard')
 console.log(category_id)
 
     }

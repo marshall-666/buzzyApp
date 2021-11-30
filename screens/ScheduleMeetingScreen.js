@@ -62,6 +62,7 @@ const TaskboardScreen = ({ navigation }) => {
   const [showAbbey, setShowAbbey] = useState(false)
   const [showGroup, setShowGroup] = useState(false)
   const [showAll, setShowAll] = useState(true)
+  const [showTest, setShowTest] = useState(false)
   const [dbResult, setDbResult] = useState()
   // const [Schedule, setSchedule] = useState([])
 
@@ -99,7 +100,6 @@ const Schedule=[];
       endTime: new Date("2021/12/08 02:20 PM")
     }
   ];
-  
   const slotTue = []
   const slotMon = []
   const slotWed = []
@@ -370,6 +370,11 @@ const Schedule=[];
             const result = result4.concat(Nick)
             Schedule.push(...result)
             }
+            else if (showTest==true){
+    
+              const result = Courses.concat(dbResult)
+              Schedule.push(...result)
+              }
             else
             {
               Schedule.push(...Courses)}
@@ -379,15 +384,15 @@ const Schedule=[];
   });
  
  
-  console.log(Schedule.length)
-  // var loadSlots = {
-  //   op: 'load_slot',
-  //   group_id: '1',
-  // }
+  // console.log(Schedule.length)
+  var loadSlots = {
+    op: 'load_slot',
+    group_id: '1',
+  }
 
-  // talktoserver(loadSlots).then((rd) => {
-  //   setDbResult(rd)
-  // })
+  talktoserver(loadSlots).then((rd) => {
+    setDbResult(rd)
+  })
  
   // console.log(dbResult)
   // console.log(Schedule)
@@ -884,6 +889,7 @@ const Schedule=[];
     setShowLevi(false)
     setShowJody(false)
     setShowAll(false)
+    setShowTest(false)
 
   }
   const AbbeyPress = () => {
@@ -894,6 +900,7 @@ const Schedule=[];
     setShowLevi(false)
     setShowJody(false)
     setShowAll(false)
+    setShowTest(false)
 
   }
   const NickPress = () => {
@@ -904,6 +911,7 @@ const Schedule=[];
     setShowLevi(false)
     setShowJody(false)
     setShowAll(false)
+    setShowTest(false)
 
   }
   const WarrenPress = () => {
@@ -914,6 +922,7 @@ const Schedule=[];
     setShowLevi(false)
     setShowJody(false)
     setShowAll(false)
+    setShowTest(false)
 
   }
   
@@ -925,6 +934,7 @@ const Schedule=[];
     setShowLevi(true)
     setShowJody(false)
     setShowAll(false)
+    setShowTest(false)
 
 
   }
@@ -936,6 +946,18 @@ const Schedule=[];
     setShowLevi(false)
     setShowJody(true)
     setShowAll(false)
+    setShowTest(false)
+
+  }
+  const TestPress = () => {
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(false)
+    setShowAll(false)
+    setShowTest(true)
 
   }
 
@@ -1021,6 +1043,13 @@ const Schedule=[];
             name='Jody'
             img={users.img}
             onBtnPress={JodyPress}
+          />
+          <TaskBtn
+            displayBtn='none'
+            displayImg='flex'
+            name='Tester'
+            img={users.img}
+            onBtnPress={TestPress}
           />
         </ScrollView >
 
@@ -1481,6 +1510,81 @@ const Schedule=[];
 
       </TaskCardsWrapper>) : null}
       {showJody ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showTest ? (<TaskCardsWrapper>
         <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
         {
           <FlatList
