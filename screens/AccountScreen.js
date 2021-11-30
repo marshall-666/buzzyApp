@@ -22,7 +22,6 @@ display:flex;
 flex-wrap:wrap;
 flex-direction:row;
 justify-content:center;
-
 width:75%;
 height:20%
 `
@@ -274,7 +273,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginTop: 50,
+    marginTop: '5.5%',
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',

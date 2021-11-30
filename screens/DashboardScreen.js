@@ -23,11 +23,12 @@ import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
-
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 const colors = Configurations.colors;
 const secCol = colors.secCol;
 const accent = colors.butCol;
+const { user, users } = useContext(AuthenticatedUserContext);
 
 
 const Wrapper = styled.ScrollView`
@@ -394,6 +395,7 @@ const DashboardScreen = ({navigation }) => {
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+                  IconDisplay='none'
                   /> }
                   
         /> : null

@@ -20,6 +20,7 @@ left:5%
 `
 
 const lightBg = Configurations.colors.lightBg
+const butCol = Configurations.colors.butCol
 
 const ScheduleMeetingStepFiveScreen = ({navigation,route,
 // meetingTimeAppear="November 20th",
@@ -85,7 +86,7 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
 
                 <View style={{display:'flex', flexDirection:'row', }}>
             
-            <RecBtn text="Back" width="140" height="50" onRecBtnPress={()=>{navigation.navigate('MeetingStep2'
+            <RecBtn text="Back" width="140" height="50" bgC={butCol} onRecBtnPress={()=>{navigation.navigate('MeetingStep2'
             ,{
                
                 id: id,
@@ -101,7 +102,7 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
             }
             
             )}}/>
-            <RecBtn text="Done" width="140" height="50" onRecBtnPress={DonePress}/>
+            <RecBtn text="Done" width="140" height="50" onRecBtnPress={DonePress} bgC={butCol}/>
               </View>
             </View>
             <NavBarCon>    
