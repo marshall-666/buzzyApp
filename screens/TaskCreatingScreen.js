@@ -76,8 +76,8 @@ const TaskCreatingScreen = ({ navigation }) => {
   let index = 0
 
   const onHandleCreate =async () => {
-    
-   setDoc(doc(db, "tasks", user.uid), {
+   
+   await setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
         meeting:{
@@ -86,13 +86,11 @@ const TaskCreatingScreen = ({ navigation }) => {
         startTime: startTime,
         endTime:endTime,
         category:Value,
+        category_id:category_id,
         descrip:desc
         }
       });
-    
-    
-
-
+     
  var createTask = {
     op: 'create_task',
     tkname: taskName,
@@ -113,9 +111,12 @@ await talktoserver(createTask).then((rd) => {
 })
 console.log(createTask)
       navigation.navigate('Taskboard')
+console.log(category_id)
+
     }
+    console.log(Value)
   
-    console.log(category_id)
+    // console.log(category_id)
 
    
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
@@ -10,6 +10,7 @@ import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
 import {Test} from '../data/test'
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const lightBg = Configurations.colors.lightBg
@@ -19,6 +20,7 @@ const [dbResult, setDbResult] = useState()
 const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
+const { user,users } = useContext(AuthenticatedUserContext);
 
 
 useEffect(()=>{
@@ -59,10 +61,10 @@ useEffect(()=>{
         
             <View style={styles.head}>
                 <Text style={{fontSize:22}} >
-                    You are currently in
+                    You are currently in 
                 </Text>
                 <Text style={{fontSize:22}} >
-                    3 Groups
+                    3 Groups  --{users.name}--
                 </Text>
             </View>
             <View style={styles.lowerDiv}>

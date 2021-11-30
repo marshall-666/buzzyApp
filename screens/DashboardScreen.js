@@ -1,5 +1,5 @@
 // imports from dependancies ==========
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
@@ -23,7 +23,7 @@ import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
-import Animated from 'react-native-reanimated';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const colors = Configurations.colors;
@@ -73,7 +73,7 @@ const primCol = Configurations.colors.primCol
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
   const [dbResult, setDbResult] = useState()
-  
+  const { user,users } = useContext(AuthenticatedUserContext);
   const [grpTasks, setGrpTasks] = useState([])
   const [courseTasks, setCourseTasks] = useState([])
   const [eventTasks, setEventTasks] = useState([])
@@ -365,7 +365,7 @@ const scrollY = React.useRef(new Animated.Value(0)).current;
         </View>
         </TaskBtnCont>
 
-          
+          <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
       { courses ?
         <FlatList 
         
