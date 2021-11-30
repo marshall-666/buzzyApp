@@ -14,6 +14,7 @@ import { Available } from '../comps/Available'
 import { Days } from '../data/AvailableTime'
 import talktoserver from "../api/talktoserver"
 
+
 const TaskButtonsWrapper = styled.View`
 margin-top:10%;
 margin-bottom:5%;
@@ -54,13 +55,19 @@ const TaskboardScreen = ({ navigation }) => {
   const [groups, setGroups] = useState(groupsData)
   const [events, setEvents] = useState(eventsData)
   const [showcourses, setShowCourses] = useState(showcourses)
-  const [showSchedule, setShowSchedule] = useState(false)
+  const [showLevi, setShowLevi] = useState(false)
+  const [showWarren, setShowWarren] = useState(false)
+  const [showNick, setShowNick] = useState(false)
+  const [showJody, setShowJody] = useState(false)
+  const [showAbbey, setShowAbbey] = useState(false)
+  const [showGroup, setShowGroup] = useState(false)
   const [showAll, setShowAll] = useState(true)
+  const [showTest, setShowTest] = useState(false)
   const [dbResult, setDbResult] = useState()
+  // const [Schedule, setSchedule] = useState([])
 
-
- 
-  const Schedule = [
+const Schedule=[];
+  const Courses = [
     {
       title: "businessCom",
       startTime: new Date("2021/12/06 9:30 AM"),
@@ -71,7 +78,7 @@ const TaskboardScreen = ({ navigation }) => {
       startTime: new Date("2021/12/06 01:30 PM"),
       endTime: new Date("2021/12/06 04:20 PM"),
     },
-   
+  
     {
       title: "Asset Design and intergration",
       startTime: new Date("2021/12/07 09:30 AM"),
@@ -91,13 +98,18 @@ const TaskboardScreen = ({ navigation }) => {
       title: "Web dev3",
       startTime: new Date("2021/12/08 12:30 PM"),
       endTime: new Date("2021/12/08 02:20 PM")
-    },
+    }
   ];
-
   const slotTue = []
   const slotMon = []
   const slotWed = []
-  var ScheduleLevi = [  
+
+  var Levi = [
+    {
+      title: " lunch",
+      startTime: new Date("2021/12/06 12:40 PM"),
+      endTime: new Date("2021/12/06 01:10 PM"),
+    },
     {
       title: "Communting",
       startTime: new Date("2021/12/06 04:30 PM"),
@@ -140,8 +152,13 @@ const TaskboardScreen = ({ navigation }) => {
     },
 
   ];
-  if (setShowSchedule === true){
-    Schedule.push( {
+  var Warren = [
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 08:00 AM"),
+      endTime: new Date("2021/12/06 09:00 AM"),
+    },
+    {
       title: "Communting",
       startTime: new Date("2021/12/06 04:30 PM"),
       endTime: new Date("2021/12/06 05:20 PM"),
@@ -150,6 +167,11 @@ const TaskboardScreen = ({ navigation }) => {
       title: " do assignment",
       startTime: new Date("2021/12/06 06:50 PM"),
       endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 08:00 AM"),
+      endTime: new Date("2021/12/07 09:00 AM"),
     },
     {
       title: "Communting",
@@ -181,10 +203,198 @@ const TaskboardScreen = ({ navigation }) => {
       startTime: new Date("2021/12/08 10:00 PM"),
       endTime: new Date("2021/12/08 11:20 PM")
     },
-)
-  }
+
+  ];
+  var Nick = [
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 08:00 AM"),
+      endTime: new Date("2021/12/06 09:00 AM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 08:00 AM"),
+      endTime: new Date("2021/12/07 09:00 AM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/07 10:00 PM"),
+      endTime: new Date("2021/12/07 11:20 PM")
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 06:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/08 10:00 PM"),
+      endTime: new Date("2021/12/08 11:20 PM")
+    },
+
+  ];
+  var Abbey = [
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 08:00 AM"),
+      endTime: new Date("2021/12/07 09:00 AM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
+    },
+    {
+      title: " do assignment2",
+      startTime: new Date("2021/12/07 10:00 PM"),
+      endTime: new Date("2021/12/07 11:20 PM")
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 06:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+
+  ];
+  var Jody = [
+    {
+      title: " lunch",
+      startTime: new Date("2021/12/07 12:40 PM"),
+      endTime: new Date("2021/12/07 01:10 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/06 04:30 PM"),
+      endTime: new Date("2021/12/06 05:20 PM"),
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/06 06:50 PM"),
+      endTime: new Date("2021/12/06 09:30 PM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 08:00 AM"),
+      endTime: new Date("2021/12/07 09:00 AM"),
+    },
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/07 04:30 PM"),
+      endTime: new Date("2021/12/07 05:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/07 06:50 PM"),
+      endTime: new Date("2021/12/07 09:30 PM")
+    },
    
-  console.log(Schedule)
+    {
+      title: "Communting",
+      startTime: new Date("2021/12/08 04:30 PM"),
+      endTime: new Date("2021/12/08 06:20 PM")
+    },
+    {
+      title: " do assignment",
+      startTime: new Date("2021/12/08 06:50 PM"),
+      endTime: new Date("2021/12/08 09:30 PM")
+    },
+
+  ];
+  if (showLevi==true){
+  const result = Courses.concat(Levi)
+  Schedule.push(...result)
+  }
+  else if (showWarren==true){
+    const result = Courses.concat(Warren)
+    Schedule.push(...result)
+    }
+    else if (showNick==true){
+      const result = Courses.concat(Nick)
+      Schedule.push(...result)
+      } else if (showAbbey==true){
+        const result = Courses.concat(Abbey)
+        Schedule.push(...result)
+        } else if (showJody==true){
+          const result = Courses.concat(Jody)
+          Schedule.push(...result)
+          }else if (showGroup==true){
+            const result1 = Courses.concat(Levi)
+            const result2 = result1.concat(Warren)
+            const result3 = result2.concat(Abbey)
+            const result4 = result3.concat(Jody)
+            const result = result4.concat(Nick)
+            Schedule.push(...result)
+            }
+            else if (showTest==true){
+    
+              const result = Courses.concat(dbResult)
+              Schedule.push(...result)
+              }
+            else
+            {
+              Schedule.push(...Courses)}
+ 
+  Schedule.sort(function (a, b) {
+    return a.startTime - b.startTime;
+  });
+ 
+ 
+  // console.log(Schedule.length)
+  var loadSlots = {
+    op: 'load_slot',
+    group_id: '1',
+  }
+
+  talktoserver(loadSlots).then((rd) => {
+    setDbResult(rd)
+  })
+ 
+  // console.log(dbResult)
   // console.log(Schedule)
   // var indiSlots = {
   //     op: 'indi_slot',
@@ -199,7 +409,7 @@ const TaskboardScreen = ({ navigation }) => {
   // console.log(result)
   // console.log(Schedule)
   // }
-  // console.log(Schedule)
+ 
 
   function slotFitsMon(meeting) {
     if (Schedule.length == 0) return true;
@@ -671,44 +881,89 @@ const TaskboardScreen = ({ navigation }) => {
     format: 'rgb' // e.g. 'rgb(225,200,20)'
   });
 
-  const AbbeyPress = () => {
-    setShowSchedule(false)
+  const GroupPress = () => {
+    setShowGroup(true)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(false)
     setShowAll(false)
-  
+    setShowTest(false)
+
+  }
+  const AbbeyPress = () => {
+    setShowGroup(false)
+    setShowAbbey(true)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(false)
+    setShowAll(false)
+    setShowTest(false)
+
   }
   const NickPress = () => {
-    setShowSchedule(false)
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(true)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(false)
     setShowAll(false)
-  
+    setShowTest(false)
+
   }
   const WarrenPress = () => {
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(true)
+    setShowLevi(false)
+    setShowJody(false)
     setShowAll(false)
-   
-    setShowSchedule(false)
-  }
-  const GroupPress = () => {
-  
-    setShowSchedule(false)
-    setShowAll(false)
-  
-  }
-  const LeviPress = () => {
+    setShowTest(false)
 
-    // loadSchedule()
+  }
   
-    setShowSchedule(true)
+  const LeviPress = () => {
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(true)
+    setShowJody(false)
     setShowAll(false)
-    
+    setShowTest(false)
+
+
   }
   const JodyPress = () => {
-    setShowSchedule(false)
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(true)
     setShowAll(false)
- 
+    setShowTest(false)
+
+  }
+  const TestPress = () => {
+    setShowGroup(false)
+    setShowAbbey(false)
+    setShowNick(false)
+    setShowWarren(false)
+    setShowLevi(false)
+    setShowJody(false)
+    setShowAll(false)
+    setShowTest(true)
+
   }
 
 
   const [selectedId, setSelectedId] = useState(null);
-
+  // console.log(Schedule)
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? Configurations.colors.secCol : Configurations.colors.primCol;
     const color = item.id === selectedId ? 'white' : 'black';
@@ -789,6 +1044,13 @@ const TaskboardScreen = ({ navigation }) => {
             img={users.img}
             onBtnPress={JodyPress}
           />
+          <TaskBtn
+            displayBtn='none'
+            displayImg='flex'
+            name='Tester'
+            img={users.img}
+            onBtnPress={TestPress}
+          />
         </ScrollView >
 
       </TaskButtonsWrapper>
@@ -813,7 +1075,83 @@ const TaskboardScreen = ({ navigation }) => {
                     data=
                     {
                       <FlatList
-                        
+
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showGroup ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+
                         contentContainerStyle={{ width: 300 }}
                         data={slotMon}
                         renderItem={renderItem}
@@ -871,7 +1209,7 @@ const TaskboardScreen = ({ navigation }) => {
       </TaskCardsWrapper>) : null}
 
       {/* {welcome ?  <Text style={styles.title}> {newarray}</Text>: null  } */}
-      {showSchedule ? (<TaskCardsWrapper>
+      {showAbbey ? (<TaskCardsWrapper>
         <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
         {
           <FlatList
@@ -946,8 +1284,381 @@ const TaskboardScreen = ({ navigation }) => {
         }
 
       </TaskCardsWrapper>) : null}
+      {showNick ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
 
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
 
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showWarren ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showLevi ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showJody ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
+      {showTest ? (<TaskCardsWrapper>
+        <Text style={{ textAlign: 'center', fontSize: 28, color: Configurations.colors.secCol }}>Step 1/3</Text>
+        {
+          <FlatList
+            contentContainerStyle={{ maxHeight: 100 }}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            // alwaysBounceHorizontal={true}
+            data={Days}
+            renderItem={({ item }) => {
+              if (item.day === "Monday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotMon}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+
+              else if (item.day === "Tuesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotTue}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+              else if (item.day === "Wednesday") {
+                return (
+                  <Available
+                    monthName={item.month}
+                    // day={item.day}
+                    date={item.date}
+                    weekday={item.day}
+                    data=
+                    {
+                      <FlatList
+                        contentContainerStyle={{ width: 300 }}
+                        data={slotWed}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                      />
+                    }
+                  />
+                )
+              }
+            }
+
+            }
+          />
+        }
+
+      </TaskCardsWrapper>) : null}
       <NavBarCon>
         <NavBar />
       </NavBarCon>

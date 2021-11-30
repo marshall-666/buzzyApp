@@ -10,7 +10,7 @@ import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 import talktoserver from "../api/talktoserver"
 import IndividualEventCard from '../comps/IndividualEventCard';
- 
+
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -146,7 +146,7 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('MembersSchedule', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>

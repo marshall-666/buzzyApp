@@ -13,7 +13,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { getStorage, ref, getDownloadURL, uploadBytes,uploadBytesResumable } from "firebase/storage";
 // import fstorage from '../firebase/fireStorage';
 import { db } from '../firebase/fireStore';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc,updateDoc,getDoc } from "firebase/firestore";
 
 
 const LogoWrapper = styled.View`
@@ -57,7 +57,7 @@ const AccountScreen = ({ navigation }) => {
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
   const [password, setPassword] = useState('');
-  // const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   // const [url, setUrl] = useState("");
 
 
@@ -71,7 +71,16 @@ const AccountScreen = ({ navigation }) => {
       }
     })();
   }, []);
-  // useEffect(()=>{ setImage(result.uri); },[user])
+ 
+  useEffect(() => {
+    const getUser = async () => {const auth = getAuth();
+      const user = auth.currentUser;
+      const usersDocRef = doc(db, "users", user.uid );
+      const data = await getDoc(usersDocRef);
+    setImage( data.data().img)
+    }
+    getUser()
+  }, [])
 
   const updateImg = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -83,9 +92,9 @@ const AccountScreen = ({ navigation }) => {
     // console.log(JSON.stringify(result));
 
     if (!result.cancelled) {
-      // setImage(result.uri);
+      setImage(result.uri);
       Upload(result.uri)
-      // console.log(result)
+      console.log(result)
     }
   };
 
@@ -123,11 +132,9 @@ const AccountScreen = ({ navigation }) => {
       .catch((error) => {
         // Handle any errors
       });
-
-
-
-      
+      useEffect(()=>{ setImage(users.img); },[url])
   }
+
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
       setRightIcon('eye-off');
@@ -138,13 +145,15 @@ const AccountScreen = ({ navigation }) => {
     }
   };
   const { user, users } = useContext(AuthenticatedUserContext);
-  const image = users.img
+  
+  // const image =user.img
+  
   return (
     <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={-250}
       style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol }}>
       <LogoWrapper>
         <Text style={styles.User}> {users.name}</Text>
-        <Image source={{ uri: image }} style={styles.tinyLogo} />
+        <Image source={{ uri:image }} style={styles.tinyLogo} />
       </LogoWrapper>
       <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
       <View style={styles.inpuTable}>
@@ -244,7 +253,12 @@ const AccountScreen = ({ navigation }) => {
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.button}>
-          <RecBtn text="updates image" height="75" width="200" onRecBtnPress={updateImg} />
+          <RecBtn 
+              bgC={Configurations.colors.butCol}
+              text="updates image" 
+              height="75" 
+              width="200" 
+              onRecBtnPress={updateImg} />
         </Text>
       </View>
     </KeyboardAvoidingView>
@@ -262,13 +276,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'yellow',
     marginLeft: -30,
-    marginTop: 275
+    marginTop: "57.5%"
   },
   User: {
     fontSize: 24,
     fontWeight: 'bold',
     color: Configurations.colors.secCol,
-    marginTop: 20,
+    marginTop: '5.5%',
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',

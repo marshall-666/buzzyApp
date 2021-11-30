@@ -24,7 +24,7 @@ export const Days = [
     id: 1,
     day: 'Monday',
     date:'6th',
-    month: 'Docmnber',
+    month: 'December',
     times: [{from:"9:30 AM", to:"11:30 AM"}, {from:"12:30 PM", to:"3:30 PM"}, {from:"9:30 AM", to:"11:30 AM"},]
   },
 
@@ -32,14 +32,14 @@ export const Days = [
     id: 2,
     day: 'Tuesday',
     date:'7th',
-    month: 'Docmnber'
+    month: 'December'
   },
   
   {
     id: 3,
     day: 'Wednesday',
     date: '8th',
-    month: 'Docmnber'
+    month: 'December'
   },
  
 ]

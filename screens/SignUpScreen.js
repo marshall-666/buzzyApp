@@ -90,6 +90,30 @@ const SignUpScreen = ({ navigation }) => {
           isOnline: true,
         });
       
+        var registerUser = {
+          op: 'register_user',
+          fb_uid:result.user.uid,
+          uname: newName,
+          psword: 'psword',
+          email: email,
+          org: 'school',
+          pro: 'program',
+          img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
+        }
+        console.log(registerUser)
+        talktoserver(registerUser).then((rd) => {
+          setDbResult(rd)
+        })
+        console.log(dbResult)
+        console.log(registerUser)
+
+
+
+
+
+
+
+
       }
       catch (error) {
         const errorCode = error.code;
@@ -98,22 +122,7 @@ const SignUpScreen = ({ navigation }) => {
         setSignupError(errorCode, errorMessage);
       };
     };
-    var registerUser = {
-      op: 'register_user',
-      fb_uid: 'result.user.uid',
-      uname: 'newName',
-      psword: 'psword',
-      email: 'email',
-      org: 'school',
-      pro: 'program',
-      img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
-    }
-    console.log(registerUser)
-    talktoserver(registerUser).then((rd) => {
-      setDbResult(rd)
-    })
-    console.log(dbResult)
-    console.log(registerUser)
+   
   }
 
   const handlePasswordVisibility = () => {
@@ -134,7 +143,7 @@ const SignUpScreen = ({ navigation }) => {
       <LogoWrapper>
         <Image source={require("../assets/honeycomb.png")} style={styles.honeycomb} />
         <Image source={require("../assets/BuzzyBeeLogo.png")} style={styles.logo} />
-        <Text style={styles.Logoin}>SignUp</Text>
+        <Text style={styles.SignUp}>SignUp</Text>
       </LogoWrapper>
       <TaskCardArea style={{ position: 'Iabsolute', zIndex: 3 }} />
       {page1 ? (<View style={styles.inpuTable}>
@@ -197,7 +206,7 @@ const SignUpScreen = ({ navigation }) => {
           handlePasswordVisibility={handlePasswordVisibility}
         />
         <Text style={styles.button}>
-          <RecBtn text="Continue" height="75" width="200" onRecBtnPress={continuePress} />
+          <RecBtn text="Continue" height="75" width="200" onRecBtnPress={continuePress} bgC={Configurations.colors.butCol}/>
         </Text>
       </View>) : null}
       {page2 ? (<View style={styles.inpuTable}>
@@ -256,8 +265,8 @@ const SignUpScreen = ({ navigation }) => {
         {signupError ? <Text> <ErrorInfo error={signupError} visible={true} /></Text> : null}
 
         <Text style={styles.button}>
-          <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} />
-          <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} />
+          <RecBtn text="Back" height="75" width="120" onRecBtnPress={backPress} bgC={Configurations.colors.butCol}/>
+          <RecBtn text="Submit" height="75" width="150" onRecBtnPress={submitPress} bgC={Configurations.colors.butCol} />
         </Text>
       </View>) : null}
       <View style={styles.container3}>
@@ -279,9 +288,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'yellow',
     marginLeft: -30,
-    marginTop: 350
+    marginTop: '75%'
   },
-  Logoin: {
+  SignUp: {
     position: 'absolute',
     zIndex: 3,
     fontSize: 48,

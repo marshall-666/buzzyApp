@@ -1,24 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } from 'react-native'
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
 
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const GroupChatScreen = ({
     route,
     navigation
 }) => {
-
-    const routeData = route.params
-
+    const { user } = useContext(AuthenticatedUserContext);
     const [chatdata, setChatData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [chatMessage, setChatMessage] = useState(null)
     const [chatUpdated, setChatUpdated] = useState(false)
-    const [dbResult, setDbResult] = useState()
     const flatListChat = useRef(null)
-
     
     const load_msgls = 'load_msgls'
     const add_msg = 'add_msg'
@@ -82,6 +79,7 @@ const GroupChatScreen = ({
         :
         <ChatLine sender={item.sender} message={item.message}/>
     )
+    
 
     return (
         

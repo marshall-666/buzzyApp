@@ -66,9 +66,9 @@ const [endTime,setEndTime] =useState('Pick end Time')
   const [category_id,setCategory_id] =useState('')
 
 
-
-  const onHandleCreate = () => {
-      setDoc(doc(db, "tasks", user.uid), {
+  const onHandleCreate =async () => {
+   
+   await setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
         meeting:{
@@ -77,17 +77,12 @@ const [endTime,setEndTime] =useState('Pick end Time')
         startTime: startTime,
         endTime:endTime,
         category:Value,
+        category_id:category_id,
         descrip:desc
         }
       });
-      if ( Value=== 'Courses'){
-        setCategory_id('2')
-     }else if (Value=== 'Groups')
-     {    setCategory_id('1')}
-     else {
-      setCategory_id('3')
-     }
-var createTask = {
+     
+ var createTask = {
     op: 'create_task',
     tkname: taskName,
     descrip: desc,
@@ -98,19 +93,22 @@ var createTask = {
     group_id: '1',
     user_id: '1',
 }
-console.log(category_id)
-console.log(createTask)
 
- talktoserver(createTask).then((rd) => {
+
+await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
     console.log(dbResult)
 })
-
+console.log(createTask)
       navigation.navigate('Taskboard')
+console.log(category_id)
+
     }
+    console.log(Value)
   
-    
+    // console.log(category_id)
+
 
   return (
 
@@ -144,6 +142,8 @@ console.log(createTask)
             endTime={endTime} 
             setEndTime={setEndTime}
             desc={desc} setDesc={setDesc}
+            category_id={ category_id}
+            setCategory_id={ setCategory_id}
  />
 
       </Wrapper>

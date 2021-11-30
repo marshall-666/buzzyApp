@@ -1,5 +1,5 @@
 // imports from dependancies ==========
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
@@ -23,11 +23,13 @@ import {category} from '../data/category'
 import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const colors = Configurations.colors;
 const secCol = colors.secCol;
 const accent = colors.butCol;
+
 
 
 const Wrapper = styled.ScrollView`
@@ -71,7 +73,7 @@ const primCol = Configurations.colors.primCol
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
   const [dbResult, setDbResult] = useState()
-  
+  const { user,users } = useContext(AuthenticatedUserContext);
   const [grpTasks, setGrpTasks] = useState([])
   const [courseTasks, setCourseTasks] = useState([])
   const [eventTasks, setEventTasks] = useState([])
@@ -361,7 +363,7 @@ const DashboardScreen = ({navigation }) => {
         </View>
         </TaskBtnCont>
 
-          
+          <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
       { courses ?
         <FlatList 
           // initialNumToRender={3}
@@ -394,6 +396,7 @@ const DashboardScreen = ({navigation }) => {
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
+                  IconDisplay='none'
                   /> }
                   
         /> : null
