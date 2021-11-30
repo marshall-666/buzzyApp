@@ -117,23 +117,26 @@ const groups =[]
 
 
 
-if ( Value=== 'Courses')
-{
-  category_id= '2'
-  setListDisp('none')
-  console.log('hiiii')
-}
 
-else if (Value=== 'Groups')
+    if ( Value=== 'Courses')
     {
-      category_id='1'
-      setListDisp('flex')
+      setCategory_id( '2')
+      // setListDisp('none')
+      // console.log('hiiii')
+    }
+    
+    else if (Value=== 'Groups')
+        {
+          setCategory_id('1')
+          // setListDisp('flex')
+        }
+    
+        else {
+          setCategory_id('3')
+      // setListDisp('none')
     }
 
-    else {
-  category_id='3'
-  setListDisp('none')
-}
+
 
 
 
@@ -267,7 +270,7 @@ else if (Value=== 'Groups')
         </TimeCon>
       </TextCon>
       <ButtonCon>
-        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={Configurations.colors.butCol}/>
+        <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={bgC}/>
       </ButtonCon>
 
     </CardCon>

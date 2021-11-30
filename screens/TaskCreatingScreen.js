@@ -107,16 +107,16 @@ const TaskCreatingScreen = ({ navigation }) => {
 await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
-    console.log(dbResult)
+    // console.log(dbResult)
 })
-console.log(createTask)
+// console.log(createTask)
       navigation.navigate('Taskboard')
-console.log(category_id)
+  // console.log(category_id)
 
     }
-    console.log(Value)
+    // console.log(Value)
   
-    // console.log(category_id)
+    console.log(category_id)
 
    
 
@@ -160,7 +160,7 @@ console.log(category_id)
 
             })
             newObject.unshift({ key: index++, section: true, label: 'Type', groupId: index  })
-            console.log(newObject)
+            // console.log(newObject)
             setGrpList(newObject)
             // console.log(grpList)
           }

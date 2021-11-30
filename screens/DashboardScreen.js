@@ -250,7 +250,7 @@ const DashboardScreen = ({navigation }) => {
   var today = new Date();
 
  
-const scrollY = React.useRef(new Animated.Value(0)).current;
+// const scrollY = React.useRef(new Animated.Value(0)).current;
 
   return (
   

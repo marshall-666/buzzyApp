@@ -95,28 +95,29 @@ const EditTaskScreen = ({ navigation, route }) =>
       setRectText('Confirm?')
       setTxtCol(colors.lightBg)
       // navigation.navigate('Dashboard')
-      if(rectCol == colors.secCol)
+      if(rectCol == 'red')
       {
         navigation.navigate('Dashboard')
       }
         
         
       
-      if ( Value=== 'Courses')
-      {
-        setCategory_id('2')
-      }
-      
-      else if (Value=== 'Groups')
-      {
-        setCategory_id('1')
-      
-      }
-      else 
-      {
-        setCategory_id('3')
-      }
+      // if ( Value=== 'Courses')
+      // {
+      //   setCategory_id('2')
+      //   console.log(category_id)
 
+      // }
+      
+      // else if (Value=== 'Groups')
+      // {
+      //   setCategory_id('1')
+      
+      // }
+      // else 
+      // {
+      //   setCategory_id('3')
+      // }
 
         var updateTask = {
             op: 'update_task',
@@ -136,7 +137,7 @@ const EditTaskScreen = ({ navigation, route }) =>
                 setDbResult(rd)
             }
         )
-        console.log(dbResult)
+        // console.log(dbResult)
     }
         
        
@@ -156,7 +157,7 @@ const EditTaskScreen = ({ navigation, route }) =>
             // setValue(dbResultTask[0].cname)
             // setLocation(dbResultTask[0].locat)
         })
-        console.log(selectedTask)
+        // console.log(selectedTask)
         // console.log(dbResultTask[0].tname)
     },[])
     useEffect(async ()=>{
@@ -212,7 +213,7 @@ const EditTaskScreen = ({ navigation, route }) =>
             loadGroups()
           },[Value])
   
-  console.log(grpId)
+  // console.log(grpId)
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
@@ -254,6 +255,8 @@ const EditTaskScreen = ({ navigation, route }) =>
             setDesc=            {setDesc}
             text=               {rectText}
             onRecBtnPress=      {UpdateTask}
+            category_id=        {category_id}
+            setCategory_id=     {setCategory_id}
             bgC =               {rectCol}
             txtC=               {txtCol}
             dummyList=          {grpList}
