@@ -67,7 +67,7 @@ const [endTime,setEndTime] =useState('Pick end Time')
 
 
 
-  const onHandleCreate = async() => {
+  const onHandleCreate =async () => {
     
    setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
@@ -101,7 +101,7 @@ const [endTime,setEndTime] =useState('Pick end Time')
 }
 
 
-await  talktoserver(createTask).then((rd) => {
+await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
     console.log(dbResult)

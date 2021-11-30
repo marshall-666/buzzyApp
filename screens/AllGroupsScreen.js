@@ -10,7 +10,6 @@ import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
 import {Test} from '../data/test'
-import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const lightBg = Configurations.colors.lightBg
@@ -20,7 +19,7 @@ const [dbResult, setDbResult] = useState()
 const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
-const { user, users } = useContext(AuthenticatedUserContext);
+
 
 useEffect(()=>{
     

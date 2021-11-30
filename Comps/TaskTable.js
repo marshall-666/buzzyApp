@@ -93,19 +93,19 @@ const TaskTable = ({
     // { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
   ];
  
-//   if ( Value=== 'Courses'){
-//     category_id= '2'
-//  }else if (Value=== 'Groups')
-//  {   category_id='1'}
-//  else {
-//   category_id='3'
-//  }
+  if ( Value=== 'Courses'){
+    category_id= '2'
+ }else if (Value=== 'Groups')
+ {   category_id='1'}
+ else {
+  category_id='3'
+ }
 
 
   
  
-  // console.log(Value)
-  // console.log(category_id)
+  console.log(Value)
+  console.log(category_id)
 
 
   return (
