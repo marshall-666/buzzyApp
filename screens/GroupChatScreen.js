@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, TextInput } fro
 import NavBar from '../comps/NavBar'
 import talktoserver from "../api/talktoserver"
 
+
+
 const GroupChatScreen = ({
     route,
     navigation
