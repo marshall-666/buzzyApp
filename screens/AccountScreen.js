@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, View, Text, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { Button, View, Text, Image, StyleSheet, KeyboardAvoidingView, Platform, Animated } from 'react-native';
 import styled from 'styled-components/native';
 import TaskCardArea from '../comps/taskCardArea';
 import InputField from '../comps/InputField'

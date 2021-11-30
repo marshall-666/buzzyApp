@@ -55,7 +55,7 @@ height:100%
 width:100%
 left:5%
 `
-const TaskCreatingScreen = ({ navigation, route }) => 
+const EditTaskScreen = ({ navigation, route }) => 
 {
 
     const selectedTask = route.params
@@ -74,6 +74,15 @@ const TaskCreatingScreen = ({ navigation, route }) =>
         const [rectCol, setRectCol] = useState(colors.butCol)
         const [rectText, setRectText] = useState('Update Task')
         const [txtCol, setTxtCol] = useState('black')
+
+
+        const [dbResultGrp, setDbResultGrp] = useState()
+        const [grpList, setGrpList] = useState([])
+        const [grpName, setGrpName]= useState('No Group Selected')
+        const [grpId, setGrpId] = useState('0')
+        const [grpListDisp, setListDisp] = useState('none')
+        const groups =[]
+        let index = 0
         // states to take in the exisisting values of the task
 
 
@@ -107,6 +116,8 @@ const TaskCreatingScreen = ({ navigation, route }) =>
       {
         setCategory_id('3')
       }
+
+
         var updateTask = {
             op: 'update_task',
             tk_id: selectedTask,
@@ -116,7 +127,7 @@ const TaskCreatingScreen = ({ navigation, route }) =>
             start_t: startTime,
             end_t: endTime,
             loca: location,
-            group_id: '1',
+            group_id: grpId,
             user_id: '1',
         }
         
@@ -160,7 +171,48 @@ const TaskCreatingScreen = ({ navigation, route }) =>
         // console.log(dbResultTask[0].end_t)
     },[dbResultTask])
 
-
+    useEffect(()=>
+    {
+      const loadGroups = async()=>
+      {
+  
+              var loadGroupList = {
+                  op: 'get_group_ls',
+                  user_id: '1',
+              }
+  
+              talktoserver(loadGroupList).then((rd) => {
+                  setDbResultGrp(rd)
+              })
+  
+              for (let i=0 ; i<= dbResultGrp.length; i++)
+              {
+                  // console.log(dbResultGrp[i].groups)
+                  if(groups.length < dbResultGrp.length)
+                  {
+                      groups.push(dbResultGrp[i].groups)
+                  }
+  
+              }
+              // console.log(groups)
+              let newObject = groups.map(function(obj){
+                return{
+                    key: index++,
+                    groupId: obj.groupid,
+                    label: obj.grpName
+                  
+                }
+  
+              })
+              newObject.unshift({ key: index++, section: true, label: 'Type', groupId: index })
+              // console.log(newObject)
+              setGrpList(newObject)
+              // console.log(grpList)
+            }
+            loadGroups()
+          },[Value])
+  
+  console.log(grpId)
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
@@ -188,22 +240,29 @@ const TaskCreatingScreen = ({ navigation, route }) =>
 
         </TaskButtonWrapper>
         <TaskTable  
-            setTaskName=    {setTaskName}  
-            setLocation=    {setLocation}  
-            taskName=       {taskName}   
-            location=       {location} 
-            Value=          {Value} 
-            setValue=       {setValue} 
-            startTime=      {startTime} 
-            setStartTime=   {setStartTime}
-            endTime=        {endTime} 
-            setEndTime=     {setEndTime}
-            desc=           {desc} 
-            setDesc=        {setDesc}
-            text=           {rectText}
-            onRecBtnPress=  {UpdateTask}
-            bgC =           {rectCol}
-            txtC=           {txtCol}
+            setTaskName=        {setTaskName}  
+            setLocation=        {setLocation}  
+            taskName=           {taskName}   
+            location=           {location} 
+            Value=              {Value} 
+            setValue=           {setValue} 
+            startTime=          {startTime} 
+            setStartTime=       {setStartTime}
+            endTime=            {endTime} 
+            setEndTime=         {setEndTime}
+            desc=               {desc} 
+            setDesc=            {setDesc}
+            text=               {rectText}
+            onRecBtnPress=      {UpdateTask}
+            bgC =               {rectCol}
+            txtC=               {txtCol}
+            dummyList=          {grpList}
+            grpNameVal=         {grpName}
+            // grpDisp={grpListDisp}
+            handleGroups= {(item)=>{
+              setGrpName(item.label)
+              setGrpId(item.groupId)}}
+            // groupList=      {testData}
 
  />
 
@@ -228,4 +287,4 @@ const styles=StyleSheet.create({
   }
 })
 
-export default TaskCreatingScreen
+export default EditTaskScreen

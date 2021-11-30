@@ -142,9 +142,9 @@ useEffect (()=>{
       setEVENTS(dailyEvents[ChosenDay])
       
  
+      console.log(dayTaskArray)
   }      
     GetEvents()
-
 },[dbResult])
 
   // useEffect (()=>{ 

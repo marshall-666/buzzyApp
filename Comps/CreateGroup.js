@@ -70,9 +70,10 @@ export const  CreateGroup = ({
     handlePress=()=>{},
     nameVal="",
     discpVal="",
-    memVal="sometin",
+    memVal="",
     onGrpVal = ()=>{},
-    onDiscpVal=()=>{}
+    onDiscpVal=()=>{},
+    onMemVal = ()=>{}
 
 })=> {
 
@@ -114,8 +115,8 @@ export const  CreateGroup = ({
                     <InputBox 
                         placeholder="Enter Group Member's Emails" 
                         placeholderTextColor="lightgrey"
-                        // value={memVal}
-                        // onChange={onChangeVal} 
+                        value={memVal}
+                        onChangeText={onMemVal} 
                         />
                 </InputContainer>
             
