@@ -21,17 +21,18 @@ const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
 const { user,users } = useContext(AuthenticatedUserContext);
-
+const {grmpNum, setNumGrp} = useState('0')
 
 useEffect(()=>{
     
     var loadGroupList = {
         op: 'get_group_ls',
-        user_id: '1',
+        user_id: user.uid,
     }
     
     talktoserver(loadGroupList).then((rd) => {
         setDbResult(rd)
+        setNumGrp(dbResult.length)
     })
 },[])
 console.log('=======================')
@@ -44,7 +45,6 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 useEffect(()=>{
 
     console.log(dbResult)
-    
 }, [dbResult])
 
     
@@ -64,14 +64,14 @@ useEffect(()=>{
                     You are currently in 
                 </Text>
                 <Text style={{fontSize:22}} >
-                    3 Groups  --{users.name}--
+                    {grmpNum} Groups  
                 </Text>
             </View>
             <View style={styles.lowerDiv}>
 
                 <View style={styles.thread}>   
                     <FlatList 
-                        contentContainerStyle={{ maxWidth:'100%'}}
+                        contentContainerStyle={{ maxWidth:'100%', maxHeight:'80%'}}
                         scrollEnabled={true}
                         data={dbResult}
                         renderItem={({item})=> <GroupThread 
@@ -87,14 +87,21 @@ useEffect(()=>{
                     
                 </View>
                    
-                <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-                    <Pressable
+                <View style=
+                {{
+                    flexDirection:'row', 
+                    justifyContent:'space-around',
+                    padding: 10,
+                    
+                    
+                    }}>
+                    {/* <Pressable
                         onPress={()=>{navigation.navigate('JoinGroup')}} 
                         style={styles.joinCreate} >
                             <Text> 
                                 Join a Group 
                             </Text>
-                    </Pressable>
+                    </Pressable> */}
                     
                     <Pressable
                         onPress={()=>{navigation.navigate('CreateGroup')}} 

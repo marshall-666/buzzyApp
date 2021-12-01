@@ -100,14 +100,14 @@ const TaskCreatingScreen = ({ navigation }) => {
     end_t: endTime,
     loca: location,
     group_id: grpId,
-    user_id: '1',
+    user_id: user.uid,
 }
 
 
 await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
-    // console.log(dbResult)
+    console.log(dbResult)
 })
 // console.log(createTask)
       navigation.navigate('Taskboard')
@@ -116,7 +116,7 @@ await talktoserver(createTask).then((rd) => {
     }
     // console.log(Value)
   
-    console.log(category_id)
+    // console.log(category_id)
 
    
 
@@ -133,7 +133,7 @@ await talktoserver(createTask).then((rd) => {
 
             var loadGroupList = {
                 op: 'get_group_ls',
-                user_id: '1',
+                user_id: user.uid,
             }
 
             talktoserver(loadGroupList).then((rd) => {
@@ -207,6 +207,7 @@ await talktoserver(createTask).then((rd) => {
             setCategory_id={ setCategory_id}
             dummyList={grpList}
             grpNameVal={grpName}
+            bgC= {Configurations.colors.butCol}
             // grpDisp={grpListDisp}
             handleGroups={(item)=>{
               setGrpName(item.label)

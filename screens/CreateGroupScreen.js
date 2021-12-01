@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 import AppHeader from '../comps/AppHeader'
 import { CreateGroup } from '../comps/CreateGroup'
@@ -12,14 +13,28 @@ const lightBg = Configurations.colors.lightBg
 const CreateGroupScreen = ({
     navigation
 }) => {
+    
+    const { user, users } = useContext(AuthenticatedUserContext);
     const [dbResult, setDbResult] = useState()
     const [grpName, setGrpName] = useState("")
     const [grpDiscp, setGrpDiscp] = useState("")
     const [grpMem, setGrpMem] = useState("")
-    
+    const [butCol, setButCol]= useState(Configurations.colors.butCol)
+    const [txtCol, setTxtCol]= useState('black')
+    const [txt, setTxt]= useState('Create Group')
     
     const handlePress = () => {
-        // navigation.navigate('GroupHome')
+        
+        setButCol(Configurations.colors.secCol)
+        setTxt("Confirm?")
+        setTxtCol("white")
+        
+        if (txtCol == 'white')
+        {
+            navigation.navigate('AllGroups') 
+
+        }
+
         console.log(grpName)
         console.log(grpDiscp)
         newGroup()
@@ -33,13 +48,16 @@ const CreateGroupScreen = ({
                     op: 'create_group',
                     gname:grpName,
                     descrip: grpDiscp,
-                    member_id: '1',
-                    is_admin: '1',
+                    member_id: user.uid,
+                    is_admin: user.uid,
+                    invi_mems: grpMem,
+
                 }
 
             talktoserver(createGroup).then((rd) => {
                 setDbResult(rd)
             })
+            
             console.log(dbResult)
         }
             
@@ -52,6 +70,9 @@ const CreateGroupScreen = ({
         <View style={styles.container}>
             <View style={styles.midDiv}>
                 <CreateGroup 
+                    bgCol={butCol}
+                    txtCol={txtCol}
+                    txt={txt}
                     handlePress={handlePress}
                     nameVal={grpName}
                     discpVal={grpDiscp}

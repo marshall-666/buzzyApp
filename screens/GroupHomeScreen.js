@@ -33,6 +33,8 @@ const GroupHomeScreen = ({
     //Group Information Retrieval Start
 
     const groupInfo = route.params
+    console.log(groupInfo.id)
+    const SelectGrpId = groupInfo.id
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
     const [memsIdObj, setMemsIdObj]=useState({})
@@ -41,6 +43,7 @@ const GroupHomeScreen = ({
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
 
+    const [grpTaskArr, setGrpTaskArr] = useState([])
     useEffect(()=>{
        
             setGrpName(groupInfo.name)
@@ -53,13 +56,11 @@ const GroupHomeScreen = ({
         
                 memsObj.name=groupInfo.members[i].name
                 memsIdObj.id=groupInfo.members[i].id
-               
-                if(memsArray.length < groupInfo.members.length){
 
-                    memsArray.push(memsObj.name)
-                }
+                if(memsArray.length < groupInfo.members.length)
+                {memsArray.push(memsObj.name)}
             }
-           
+            // console.log(memsIdObj)
         }
             
         loadGroupMembers()
@@ -70,33 +71,36 @@ const GroupHomeScreen = ({
 
     // Task Information retrieval Start
     
-    const [dbTaskResult, setDbTaskResult] = useState()
+
     
+    const [dbResult, setDbResult] = useState()
 
 
+  
 
 
     useEffect(()=>{
-        var loadTaskDetail = {
-            op: 'get_task_detail',
-            tk_id:groupid, 
-            }
-        
-        talktoserver(loadTaskDetail).then((rd) => {
-            setDbTaskResult(rd)
-          
 
-        })
+                var loadTaskList = {
+                    op: 'get_tasks_ls',
+                    user_id: 'aaaaaaaaaa',
+                }
+
+                talktoserver(loadTaskList).then((rd) => {
+                    setDbResult(rd)
+                })
+                // console.log(dbResult)
+                const filterGrpTask = async()=>
+                {
+                    const groupTaskArray = dbResult.filter(function(el)
+                      {
+                        return el.gp_id == groupid
+                      })
+                      setGrpTaskArr(groupTaskArray)
+                      console.log(grpTaskArr)
+                }
+        filterGrpTask()        // console.log(dbResult)
     },[])
-
-    useEffect(()=>{
-      
-
-        
-    },[dbTaskResult])
-
-
-
 
     return (
         <View style={styles.container}>
@@ -172,12 +176,12 @@ const GroupHomeScreen = ({
                         <FlatList
                         contentContainerStyle={{maxWidth:'100%'}}
                         scrollEnabled={true}
-                        data={dbTaskResult}
+                        data={grpTaskArr}
                         renderItem={({item})=> <IndividualEventCard 
-                                                EventTitle={item.tname}
-                                                EventDescrip={item.tdes}
-                                                EventStartTime={item.start_t}
-                                                EventEndTime={item.end_t}
+                                                EventTitle={item.title}
+                                                EventDescrip={item.summary}
+                                                EventStartTime={item.start}
+                                                EventEndTime={item.end}
                                                 IconDisplay="none"
                                                 />}
                         />
