@@ -12,9 +12,9 @@ import fireStore from '../firebase/fireStore';
 import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
+import { category } from '../data/category'
 
 
-const colors = Configurations.colors
 
 const taskCategory = [
   {
@@ -55,6 +55,9 @@ height:100%
 width:100%
 left:5%
 `
+const colors = Configurations.colors;
+const secCol = colors.secCol;
+const accent = colors.butCol;
 const EditTaskScreen = ({ navigation, route }) => 
 {
 
@@ -74,13 +77,19 @@ const EditTaskScreen = ({ navigation, route }) =>
         const [rectCol, setRectCol] = useState(colors.butCol)
         const [rectText, setRectText] = useState('Update Task')
         const [txtCol, setTxtCol] = useState('black')
-
-
+        const [grpTasks, setGrpTasks] = useState([])
+        const [courseTasks, setCourseTasks] = useState([])
+        const [eventTasks, setEventTasks] = useState([])
+        const [coursebgc, setCourseBgc] = useState(false)
+        const [eventbgc, setEventBgc] = useState(false)
+        const [groupbgc, setGroupBgc] = useState(false)
         const [dbResultGrp, setDbResultGrp] = useState()
         const [grpList, setGrpList] = useState([])
         const [grpName, setGrpName]= useState('No Group Selected')
         const [grpId, setGrpId] = useState('0')
         const [grpListDisp, setListDisp] = useState('none')
+  const [newDaysObject, setNewDaysObject]= useState({})
+
         const groups =[]
         let index = 0
         // states to take in the exisisting values of the task
@@ -172,6 +181,20 @@ const EditTaskScreen = ({ navigation, route }) =>
         // console.log(dbResultTask[0].end_t)
     },[dbResultTask])
 
+    useEffect (()=>{
+    
+      var loadTaskList = {
+        op: 'get_tasks_ls',
+        user_id: user.uid, // CONNECT THIS TO LOGGED IN USER(Fire Auth)
+    }
+    
+      talktoserver(loadTaskList).then((rd) => {
+        setDbResult(rd)
+      })
+    
+    },[dbResult])
+
+
     useEffect(()=>
     {
       const loadGroups = async()=>
@@ -179,7 +202,7 @@ const EditTaskScreen = ({ navigation, route }) =>
   
               var loadGroupList = {
                   op: 'get_group_ls',
-                  user_id: 'aaaaaaaaaa',
+                  user_id: user.uid,
               }
   
               talktoserver(loadGroupList).then((rd) => {
@@ -212,7 +235,86 @@ const EditTaskScreen = ({ navigation, route }) =>
             }
             loadGroups()
           },[Value])
+          useEffect (()=>{
   
+    
+            const GetDays = async ()=>{
+            const whatever = {
+              
+              day:'2021-11-10',
+              start:'2021-11-10 11:30',
+              end:'2021-11-10 12:30',
+              title:'something to test',
+              summary:'does it work?' 
+          
+            }
+                const daysObject = dbResult
+                // console.log(daysObject)
+                const newArray=[]
+                const groupTask = []
+                for(let i=0; i<daysObject.length; i++)
+                {
+                  newArray.push(daysObject[i].day)
+                  
+                }      
+                
+                let newObject = newArray.map(function(obj)
+                {
+                    return{
+                      [obj]:[]
+                    }
+                })
+              
+                const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
+                
+                let dailyEvents = {}
+          
+                Object.keys(eventDays).forEach((day) => 
+                  {
+                    dailyEvents[day] =  
+                        {
+                          marked: true, 
+                          dotColor: colors.butCol, 
+                        };
+                  }
+                );
+                   
+                // ================================================================
+                  const courseTaskArray = daysObject.filter(function(el)
+                      {
+                        return el.task_category == 'course'
+                      })
+                      setCourseTasks(courseTaskArray)
+                      
+                  const groupTaskArray = daysObject.filter(function(el)
+                      {
+                        return el.task_category == 'group'
+                      })
+                      setGrpTasks(groupTaskArray)
+                    
+                  const eventTaskArray = daysObject.filter(function(el)
+                      {
+                        return el.task_category == 'personal'
+                      })
+                      setEventTasks(eventTaskArray)
+                // ================================================================
+          
+          
+          
+                var today = new Date();
+          
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    
+          
+                setNewDaysObject(dailyEvents)
+              }
+              GetDays()
+          
+          
+              const taskList = dbResult
+              // console.log(dbResultTask[0].cname)
+             
+          },[dbResult])
   // console.log(grpId)
   return (
 
@@ -230,17 +332,33 @@ const EditTaskScreen = ({ navigation, route }) =>
       </View>
       <Wrapper>
         <TaskButtonWrapper>
-          {
-            tasks.map((o, i) => (
-              <TaskButtonWrapper key={i}>
-                <TaskBtn id={o.id} taskNum={o.taskNum} taskCate={o.taskCate} margin={0} />
-              </TaskButtonWrapper>
-            )
-            )
-          }
+        <TaskBtn 
+    //  textColor={textColorC ? "#ffffff" : "black"} 
+     taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} 
+     taskNum={courseTasks.length} 
+     taskCate={category.taskCategory.Course.taskCate}  
+    //  onBtnPress={coursePress}
+  />
+    
+  <TaskBtn 
+    // textColor={textColorG ? "#ffffff" : "black"} 
+    taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  
+    taskNum={grpTasks.length} 
+    taskCate={category.taskCategory.Group.taskCate}   
+    // onBtnPress={groupPress}
+  />
+  
+  <TaskBtn 
+    // textColor={textColorE ? "#ffffff" : "black"} 
+    taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} 
+    taskNum={eventTasks.length} 
+    taskCate={category.taskCategory.Event.taskCate}  
+    // onBtnPress={eventPress}
+  />
 
         </TaskButtonWrapper>
         <TaskTable  
+            title='Edit Task'
             setTaskName=        {setTaskName}  
             setLocation=        {setLocation}  
             taskName=           {taskName}   
