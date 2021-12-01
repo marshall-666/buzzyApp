@@ -24,7 +24,7 @@ import { ToDate } from '../comps/ToDate';
 import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-
+import {diveIn, diveOut} from '../assets/animations/animations'
 
 const colors = Configurations.colors;
 const secCol = colors.secCol;
@@ -198,7 +198,7 @@ const DashboardScreen = ({navigation }) => {
   
   const [selected, setSelected] = useState({});
   const [selectCol, setSelectCol] = useState('#F5F5E1')
-  
+  const [anim, setAnim] = useState()
   
   
   const onDayPress = day => {
@@ -333,6 +333,9 @@ const DashboardScreen = ({navigation }) => {
         <TaskBtnCont>
         <View style={styles.shadows}> 
           <TaskBtn 
+              animation={anim}
+              delay={1000}
+              duration={3000}
               taskNum={courseTasks.length} 
               taskCate={category.taskCategory.Course.taskCate}
               taskBtnColor={ courses ? colors.secCol : 'white' }

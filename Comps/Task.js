@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { View, Text,Pressable } from 'react-native'
+import { View, Text,Pressable, Animated } from 'react-native'
 import styled from 'styled-components/native'
 import { Ionicons } from '@expo/vector-icons'; 
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -32,7 +32,7 @@ background-color:#21aab5;
 const TaskHeader = styled.Pressable`
 flex-direction:row;
 width:100%;
-height:70px;
+height:80px;
 align-items:center;  
 background-color:white;
 border-top-left-radius:10px;
@@ -96,23 +96,23 @@ export const Task = ({
     }
     
       return (
-        <TaskCont height={height} 
+        <Animated.View height={height} 
         style={{  shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        transform: [
-            
-            {skewX:"15deg"},
-            {skewY:'0deg'}
-          ]
+        borderRadius:10,
+        alignItems:"center",
+        marginTop:20,
+        marginBottom:50,
+        width:"95%"
         }}
         >
-           
+    
            <TaskHeader onPress={ () =>
             {
-               setCard(!card) 
-               taskHeight()
+                setCard(!card) 
+                taskHeight()
             }}
             >
                 <Divider/>
@@ -166,7 +166,7 @@ export const Task = ({
 
             </Animatable.View>
 
-        </TaskCont>
+        </Animated.View>
         
 
 

@@ -50,6 +50,51 @@ export const CourseData  =
     location:"SE3",
     prof:"Daemon Baldwin",
   },
+  {
+    id: 3,
+    course:"Dodgeball",
+    CourseDay:"Fridays",
+    time:"2:30-3:30",
+    location:"SE3",
+    prof:"Daemon Baldwin",
+  },
+  
+  {
+    id: 3,
+    course:"Dodgeball",
+    CourseDay:"Fridays",
+    time:"2:30-3:30",
+    location:"SE3",
+    prof:"Daemon Baldwin",
+  },
+  {
+    id: 3,
+    course:"Dodgeball",
+    CourseDay:"Fridays",
+    time:"2:30-3:30",
+    location:"SE3",
+    prof:"Daemon Baldwin",
+  },
+  
+  {
+    id: 3,
+    course:"Dodgeball",
+    CourseDay:"Fridays",
+    time:"2:30-3:30",
+    location:"SE3",
+    prof:"Daemon Baldwin",
+  },
+  
+  {
+    id: 3,
+    course:"Dodgeball",
+    CourseDay:"Fridays",
+    time:"2:30-3:30",
+    location:"SE3",
+    prof:"Daemon Baldwin",
+  },
+  
+  
   
   
   ]

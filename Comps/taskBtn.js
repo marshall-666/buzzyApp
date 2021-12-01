@@ -2,7 +2,7 @@ import styled from "@emotion/styled-base";
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, View ,Image} from 'react-native';
 import  Styled from "styled-components/native";
-
+import * as Animatable from 'react-native-animatable';
 
 const BtnCon = Styled.View`
 width:${(props)=>props.width}px;
@@ -58,7 +58,7 @@ const TaskBtn = ({
   displayImg='none'
 }) => {
   return (
-    <View>
+    <Animatable.View>
     <TouchableOpacity
     onPress={onBtnPress}
     ><ImgCon  bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayImg={displayImg} >
@@ -84,7 +84,7 @@ const TaskBtn = ({
 
     </TouchableOpacity>
     {/* <TaskInput>{taskCate}</TaskInput> */}
-     </View>
+     </Animatable.View>
   );
 };
 const styles = StyleSheet.create({

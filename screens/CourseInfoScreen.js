@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, FlatList, Image, ImageBackground} from 'react-native';
+import { Button, View, Text, FlatList, Image, ImageBackground, Animated, StatusBar} from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar'
 import { Task } from '../comps/Task';
 import {CourseData} from '../data/CourseData';
 import { Configurations } from '../PropConfig/Props';
+// import Animated from 'react-native-reanimated';
+import { scrollParent } from 'dom-helpers';
 
 
 
@@ -16,17 +18,16 @@ display:flex;
 height:100%;
 width:100%;
 flex-direction:column;
-justify-content:space-between;
+justify-content:flex-end;
 `;
 
 const CourseCardWrapper =styled.View`
-height:85%;
+height:100%;
 align-items:center;
 flex-direction:column;
 justify-content:center;
+align-items:center;
 background-color:${Configurations.colors.primCol};
-border-top-right-radius: 25px;
-border-top-left-radius: 25px;
 overflow:hidden;
 `
 
@@ -40,40 +41,78 @@ width:100%
 left:5%
 `
 
+const SPACING = 20;
+const ITEM_SIZE = 80;
+
+
 
 const CourseInfoScreen = () => {
  
-  
+  const scrollY = React.useRef(new Animated.Value(0)).current;
+
   return (
   
     <Wrapper>
-        <View style={{width:'100%', alignItems:'center', height:'30%',justifyContent:'space-evenly'}}>
-          <Image style={{width:'50%', height:"50%"}}source={require('../assets/coolBee.png')}/>
-          <Text style={{fontSize:25}}>Your buzzy course information!</Text>
-        </View>
+        
        
           <CourseCardWrapper>
-          <View style={{width:'100%'}}>   
-            <ImageBackground style={{width:'100%', top:"-5%"}}source={require('../assets/fileCabinet.jpg')}>   
-                <FlatList
+          <Animated.View style={{width:'100%'}}>   
+             
+                <Animated.FlatList
+                onScroll={Animated.event(
+                  [{nativeEvent:{contentOffset:{y :scrollY}}}],
+                  {useNativeDriver: true}
+                )}
                 contentContainerStyle={{ 
-                  height:"150%",
-                  display:"flex",
+                  padding:SPACING,
+                  paddingTop: StatusBar.currentHeight || 42
                 }}
                 data={CourseData}
-                renderItem={({item})=> <Task 
+                renderItem={({item, index})=>{ 
+                
+                const inputRange = [
+                  -1,
+                  0,
+                  ITEM_SIZE * index,
+                  ITEM_SIZE * (index + 2)
+                ]
+                const opacityInputRange = [
+                  -1,
+                  0,
+                  ITEM_SIZE * index,
+                  ITEM_SIZE * (index + 0.5)
+                ]
+
+                const scale = scrollY.interpolate({
+                  inputRange,
+                  outputRange: [1, 1, 1, 0]
+                })
+
+                const opacity = scrollY.interpolate({
+                  inputRange: opacityInputRange,
+                  outputRange: [1, 1, 1, 0]
+                })
+
+                
+
+                return <Animated.View style={opacity, {transform:[{scale}]}}>
+                
+                <Task 
                 title={item.course}
                 time={item.CourseDay}
                 location={item.location}
                 instructor={item.prof}
                 courseTime={item.time}
-                />}
+                />
+                </Animated.View>
+                }}
               />
-            </ImageBackground>    
+        
        
 
-          </View>
+          </Animated.View>
           </CourseCardWrapper>
+           
             <NavBarCon>
                 <NavBar/>
             </NavBarCon>
