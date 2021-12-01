@@ -17,7 +17,7 @@ height:60px;
 display:flex;
 background-color:${(props) => props.backgroundColor};
 flex-direction:row;
-border-radius: 30px;
+border-radius: 15px;
 justify-content:space-evenly;
 align-items:center;
 `
@@ -67,7 +67,7 @@ const NavBar = ({
         </TouchableOpacity>
       </YellowCircle>    
       
-      <TouchableOpacity onPress={()=>{navigation.navigate('GroupChat')}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('ChatGroupList')}}>
       <Octicons name="comment-discussion" size={35} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>

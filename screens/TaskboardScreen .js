@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet,FlatList } from 'react-native';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar';
@@ -51,18 +51,18 @@ top:30%
 height:52.5%;
 width:100%;
 `
-
-
-
+const colors = Configurations.colors;
+const secCol = colors.secCol;
+const accent = colors.butCol;
 const TaskboardScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState(category)
-  const [courses, setCourses] = useState(coursesData)
-  const [groups, setGroups] = useState(groupsData)
-  const [events, setEvents] = useState(eventsData)
+  const [courses, setCourses] = useState(false)
+  const [groups, setGroups] = useState(false)
+  const [events, setEvents] = useState(false)
   const [showcourses, setShowCourses] = useState(showcourses)
-  const [course, setCourse] = useState(false)
-  const [group, setGroup] = useState(false)
-  const [event, setEvent] = useState(false)
+  // const [course, setCourse] = useState(false)
+  // const [group, setGroup] = useState(false)
+  // const [event, setEvent] = useState(false)
   const [coursebgc, setCourseBgc] = useState(false)
   const [eventbgc, setEventBgc] = useState(false)
   const [groupbgc, setGroupBgc] = useState(false)
@@ -71,7 +71,10 @@ const TaskboardScreen = ({ navigation }) => {
   const [textColorE, setTextColorE] = useState(false)
   const [welcome, setWelcome] = useState(true)
   const [dbResult, setDbResult] = useState()
-
+  const [grpTasks, setGrpTasks] = useState([])
+  const [courseTasks, setCourseTasks] = useState([])
+  const [eventTasks, setEventTasks] = useState([])
+  const [newDaysObject, setNewDaysObject]= useState({})
     
 useEffect(()=>{
 
@@ -90,6 +93,8 @@ useEffect(()=>{
 },[])
 
 
+
+
   const { user,users } = useContext(AuthenticatedUserContext);
 
   // const randomColors = () => {
@@ -104,11 +109,106 @@ useEffect(()=>{
     luminosity: 'bright',
     format: 'rgb' // e.g. 'rgb(225,200,20)'
   });
+  
+  useEffect (()=>{
+    
+    var loadTaskList = {
+      op: 'get_tasks_ls',
+      user_id: user.uid, // CONNECT THIS TO LOGGED IN USER(Fire Auth)
+  }
+  
+    talktoserver(loadTaskList).then((rd) => {
+      setDbResult(rd)
+    })
+
+},[dbResult])
+
+  
+  useEffect (()=>{
+  
+    
+    const GetDays = async ()=>{
+    const whatever = {
+      
+      day:'2021-11-10',
+      start:'2021-11-10 11:30',
+      end:'2021-11-10 12:30',
+      title:'something to test',
+      summary:'does it work?' 
+
+    }
+        const daysObject = dbResult
+        // console.log(daysObject)
+        const newArray=[]
+        const groupTask = []
+        for(let i=0; i<daysObject.length; i++)
+        {
+          newArray.push(daysObject[i].day)
+          
+        }      
+        
+        let newObject = newArray.map(function(obj)
+        {
+            return{
+              [obj]:[]
+            }
+        })
+      
+        const eventDays = newObject.reduce(((r,c)=>Object.assign(r,c)),{})
+        
+        let dailyEvents = {}
+  
+        Object.keys(eventDays).forEach((day) => 
+          {
+            dailyEvents[day] =  
+                {
+                  marked: true, 
+                  dotColor: colors.butCol, 
+                };
+          }
+        );
+           
+        // ================================================================
+          const courseTaskArray = daysObject.filter(function(el)
+              {
+                return el.task_category == 'course'
+              })
+              setCourseTasks(courseTaskArray)
+              
+          const groupTaskArray = daysObject.filter(function(el)
+              {
+                return el.task_category == 'group'
+              })
+              setGrpTasks(groupTaskArray)
+            
+          const eventTaskArray = daysObject.filter(function(el)
+              {
+                return el.task_category == 'personal'
+              })
+              setEventTasks(eventTaskArray)
+        // ================================================================
+
+
+
+        var today = new Date();
+
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            
+
+        setNewDaysObject(dailyEvents)
+      }
+      GetDays()
+
+
+      const taskList = dbResult
+      // console.log(dbResultTask[0].cname)
+     
+  },[dbResult])
 
   const coursePress = () => {
-    setCourse(true)
-    setGroup(false)
-    setEvent(false)
+    setCourses(true)
+    setGroups(false)
+    setEvents(false)
     setCourseBgc(true)
     setEventBgc(false)
     setGroupBgc(false)
@@ -120,9 +220,9 @@ useEffect(()=>{
 
   }
   const groupPress = () => {
-    setGroup(true)
-    setCourse(false)
-    setEvent(false)
+    setGroups(true)
+    setCourses(false)
+    setEvents(false)
     setGroupBgc(true)
     setEventBgc(false)
     setCourseBgc(false)
@@ -132,9 +232,9 @@ useEffect(()=>{
     setWelcome(false)
   }
   const eventPress = () => {
-    setEvent(true)
-    setCourse(false)
-    setGroup(false)
+    setEvents(true)
+    setCourses(false)
+    setGroups(false)
     setCourseBgc(false)
     setEventBgc(true)
     setGroupBgc(false)
@@ -159,7 +259,7 @@ useEffect(()=>{
   <TaskBtn 
      textColor={textColorC ? "#ffffff" : "black"} 
      taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} 
-     taskNum={category.taskCategory.Course.taskNum} 
+     taskNum={courseTasks.length} 
      taskCate={category.taskCategory.Course.taskCate}  
      onBtnPress={coursePress}
   />
@@ -167,7 +267,7 @@ useEffect(()=>{
   <TaskBtn 
     textColor={textColorG ? "#ffffff" : "black"} 
     taskBtnColor={groupbgc?"#3D5A80":"#E5E5E5"}  
-    taskNum={category.taskCategory.Group.taskNum} 
+    taskNum={grpTasks.length} 
     taskCate={category.taskCategory.Group.taskCate}   
     onBtnPress={groupPress}
   />
@@ -175,7 +275,7 @@ useEffect(()=>{
   <TaskBtn 
     textColor={textColorE ? "#ffffff" : "black"} 
     taskBtnColor={eventbgc?"#3D5A80":"#E5E5E5"} 
-    taskNum={category.taskCategory.Event.taskNum} 
+    taskNum={eventTasks.length} 
     taskCate={category.taskCategory.Event.taskCate}  
     onBtnPress={eventPress}
   />
@@ -187,17 +287,17 @@ useEffect(()=>{
    
 
      
-  { course ? (<TaskCardsWrapper>
+  { courses ? (<TaskCardsWrapper>
     {
-      courses.map((o, i) => 
+      courseTasks.map((o, i) => 
       (
         <CourseEventCard  
           key={i} id={o.id} 
-          EventTitle={o.EventTitle} 
-          EventDescrip={o.EventDescrip} 
-          EventStartTime={o.EventStartTime} 
-          EventDueTime={o.EventDueTime} 
-          EventBackgroundColor= {randomColor()} 
+          EventTitle={o.title} 
+          EventDescrip={o.summary} 
+          EventStartTime={o.start} 
+          EventDueTime={o.end} 
+          // EventBackgroundColor= {randomColor()} 
           />
 
       ))
@@ -205,18 +305,18 @@ useEffect(()=>{
       </TaskCardsWrapper>) : null}
 
 
-  { group ? (<TaskCardsWrapper>
+  { groups ? (<TaskCardsWrapper>
     {
-      dbResult.map((o, i) => 
+      grpTasks.map((o, i) => 
       ( 
      
         <IndividualEventCard  
           key={i} id={o.id} 
-          EventTitle={o.tname} 
-          EventDescrip={o.tdes} 
-          EventStartTime={o.start_t} 
-          EventDueTime={o.end_t} 
-          EventBackgroundColor= {randomColor()}
+          EventTitle={o.title} 
+          EventDescrip={o.summary} 
+          EventStartTime={o.start} 
+          EventDueTime={o.end} 
+          // EventBackgroundColor= {randomColor()}
         />
 
       ))
@@ -224,22 +324,24 @@ useEffect(()=>{
       </TaskCardsWrapper>) : null}
 
 
-      { event ? (<TaskCardsWrapper>
+      { events ? (<TaskCardsWrapper>
       {
-        events.map((o, i) => 
+        eventTasks.map((o, i) => 
         (
       
           <IndividualEventCard  
           key={i} id={o.id} 
-          EventTitle={o.EventTitle} 
-          EventDescrip={o.EventDescrip} 
-          EventStartTime={o.EventStartTime} 
-          EventDueTime={o.EventDueTime} 
-          EventBackgroundColor= {randomColor()}/>
+          EventTitle={o.title} 
+          EventDescrip={o.summary} 
+          EventStartTime={o.start} 
+          EventDueTime={o.end}  
+          // EventBackgroundColor= {randomColor()}
+          />
 
         ))
       }
       </TaskCardsWrapper>) : null}
+     
       <NavBarCon>
       <NavBar  
           addEventPress={()=>navigation.navigate('TaskCreating')}
