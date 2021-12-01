@@ -77,7 +77,7 @@ const SignUpScreen = ({ navigation }) => {
     }else if  (email == ''){
       alert("email is missed")
     } else if  (password == ''){
-      alert("email is missed")
+      alert("password is missed")
     } 
     
     if (email !== '' && password !== ''&&  newName !== '') {

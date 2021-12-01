@@ -66,6 +66,12 @@ const LoginScreen = ({ navigation }) => {
   };
   const onLoginPress = async () => {
     const auth = getAuth();
+   
+     if  (email == ''){
+      alert("email is missed")
+    } else if  (password == ''){
+      alert("password is missed")
+    } 
     if (email !== '' && password !== '') {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
