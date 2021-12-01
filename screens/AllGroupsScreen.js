@@ -64,7 +64,7 @@ useEffect(()=>{
                     You are currently in 
                 </Text>
                 <Text style={{fontSize:22}} >
-                    3 Groups  --{users.name}--
+                    3 Groups  
                 </Text>
             </View>
             <View style={styles.lowerDiv}>

@@ -61,6 +61,29 @@ function Taskboard() {
     </Drawer.Navigator>
   );
 }
+function ChatChannel() {
+
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+        drawerType: "back",
+        drawerPosition: "right",
+        drawerStyle: {
+          backgroundColor: Configurations.colors.backCol,
+          width: 160,
+          justifyContent:'center'
+        },
+        
+      }} 
+      >
+      <Drawer.Screen name='Back' component={GroupChatScreen} />
+      <Drawer.Screen name='Course' component={CourseInfoScreen} />
+      <Drawer.Screen name="Account" component={AccountScreen} />
+      <Drawer.Screen name="Logout" component={LogoutScreen} />
+    </Drawer.Navigator>
+  );
+}
 function Dashboard() {
   return (
     <Drawer.Navigator
@@ -215,7 +238,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
-      <Stack.Screen name="GroupChat" component={GroupChatScreen} />
+      <Stack.Screen name="GroupChat" component={ChatChannel} />
 
       <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
     
