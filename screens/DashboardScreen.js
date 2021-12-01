@@ -365,7 +365,7 @@ const DashboardScreen = ({navigation }) => {
         </View>
         </TaskBtnCont>
 
-          <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
+         
       { courses ?
         <FlatList 
         
