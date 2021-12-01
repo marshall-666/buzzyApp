@@ -61,7 +61,7 @@ function Taskboard() {
     </Drawer.Navigator>
   );
 }
-function ChatChannel() {
+function ChatGroupList() {
 
   return (
     <Drawer.Navigator
@@ -77,7 +77,7 @@ function ChatChannel() {
         
       }} 
       >
-      <Drawer.Screen name='Back' component={GroupChatScreen} />
+      <Drawer.Screen name='Back' component={ChatGroupListScreen} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
@@ -210,7 +210,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       <Stack.Screen name="AllChats" component={AllChats} />
-      <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
+      <Stack.Screen name="ChatGroupList" component={ChatGroupList} />
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
       {/* dashboard flow ends */}
       {/* Taskmamagement schedules */}
@@ -239,7 +239,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
-      <Stack.Screen name="GroupChat" component={ChatChannel} />
+      <Stack.Screen name="GroupChat" component={GroupChatScreen} />
 
       <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
     
