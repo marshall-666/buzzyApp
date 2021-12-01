@@ -85,7 +85,7 @@ const DashboardScreen = ({navigation }) => {
     
       var loadTaskList = {
         op: 'get_tasks_ls',
-        user_id: '1', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
+        user_id: user.uid, // CONNECT THIS TO LOGGED IN USER(Fire Auth)
     }
     
       talktoserver(loadTaskList).then((rd) => {
@@ -365,7 +365,7 @@ const DashboardScreen = ({navigation }) => {
         </View>
         </TaskBtnCont>
 
-          <Text style={{fontSize:30, color:'red', textAlign:'center'}}> Hello {users.name} {users.uid} </Text>
+         
       { courses ?
         <FlatList 
         

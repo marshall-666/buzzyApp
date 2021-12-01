@@ -116,26 +116,29 @@ const TaskTable = ({
 const groups =[]
 
 
+useEffect (()=>{
+  if ( Value=== 'Courses')
+  {
+    setCategory_id( '2')
+    setListDisp('none')
+    // console.log('hiiii')
+  }
+  
+  else if (Value=== 'Groups')
+      {
+        setCategory_id('1')
+        setListDisp('flex')
+      }
+  
+      else {
+        setCategory_id('3')
+      setListDisp('none')
+  }
 
 
-    if ( Value=== 'Courses')
-    {
-      setCategory_id( '2')
-      // setListDisp('none')
-      // console.log('hiiii')
-    }
+},[Value])
+
     
-    else if (Value=== 'Groups')
-        {
-          setCategory_id('1')
-          // setListDisp('flex')
-        }
-    
-        else {
-          setCategory_id('3')
-      // setListDisp('none')
-    }
-
 
 
 
