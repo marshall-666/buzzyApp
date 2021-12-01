@@ -273,6 +273,24 @@ talktoserver(loadChats).then((rd) => {
     setDbResult(rd)
 })
 
+//=======================================
+//  Load Chat room groups
+//=======================================
+
+import talktoserver from "../api/talktoserver"
+
+
+const [dbResult, setDbResult] = useState()
+
+var loadChatGroups = {
+    op: 'load_chatgroups',
+    user_id: '',
+}
+
+talktoserver(loadChatGroups).then((rd) => {
+    setDbResult(rd)
+})
+
 //======================================
 //  Load all group members time slots
 //=======================================
