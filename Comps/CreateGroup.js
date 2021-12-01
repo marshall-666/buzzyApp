@@ -111,7 +111,7 @@ export const  CreateGroup = ({
                 </InputContainer>
             
                 <InputContainer>
-                    <SubTxt> Invite Members </SubTxt>
+                    <SubTxt>Invite Members(Separate the emails using a ,) </SubTxt>
                     <InputBox 
                         placeholder="Enter Group Member's Emails" 
                         placeholderTextColor="lightgrey"

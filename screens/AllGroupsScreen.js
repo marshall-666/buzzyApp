@@ -27,7 +27,7 @@ useEffect(()=>{
     
     var loadGroupList = {
         op: 'get_group_ls',
-        user_id: '1',
+        user_id: 'aaaaaaaaaa',
     }
     
     talktoserver(loadGroupList).then((rd) => {
@@ -71,7 +71,7 @@ useEffect(()=>{
 
                 <View style={styles.thread}>   
                     <FlatList 
-                        contentContainerStyle={{ maxWidth:'100%'}}
+                        contentContainerStyle={{ maxWidth:'100%', maxHeight:'80%'}}
                         scrollEnabled={true}
                         data={dbResult}
                         renderItem={({item})=> <GroupThread 
@@ -87,7 +87,14 @@ useEffect(()=>{
                     
                 </View>
                    
-                <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+                <View style=
+                {{
+                    flexDirection:'row', 
+                    justifyContent:'space-around',
+                    padding: 10,
+                    
+                    
+                    }}>
                     <Pressable
                         onPress={()=>{navigation.navigate('JoinGroup')}} 
                         style={styles.joinCreate} >

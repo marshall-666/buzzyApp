@@ -179,7 +179,7 @@ const EditTaskScreen = ({ navigation, route }) =>
   
               var loadGroupList = {
                   op: 'get_group_ls',
-                  user_id: '1',
+                  user_id: 'aaaaaaaaaa',
               }
   
               talktoserver(loadGroupList).then((rd) => {
