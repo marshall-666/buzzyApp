@@ -43,10 +43,10 @@ console.log('=======================')
 console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 
-useEffect(()=>{
+// useEffect(()=>{
 
-    console.log(dbResult)
-}, [dbResult])
+//     console.log(dbResult)
+// }, [dbResult])
 
     
 // useEffect(()=>

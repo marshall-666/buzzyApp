@@ -34,7 +34,7 @@ const GroupHomeScreen = ({
     //Group Information Retrieval Start
 
     const groupInfo = route.params
-    // console.log(groupInfo.id)
+    console.log(groupInfo.id)
     const SelectGrpId = groupInfo.id
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
