@@ -73,7 +73,10 @@ export const  CreateGroup = ({
     memVal="",
     onGrpVal = ()=>{},
     onDiscpVal=()=>{},
-    onMemVal = ()=>{}
+    onMemVal = ()=>{},
+    bgCol= Configurations.colors.butCol,
+     txt = "Create Group",
+     txtCol = 'black'
 
 })=> {
 
@@ -120,8 +123,8 @@ export const  CreateGroup = ({
                         />
                 </InputContainer>
             
-            <ButPress onPress={handlePress}>
-                <Text>Create Group</Text>
+            <ButPress style={{backgroundColor:bgCol}} onPress={handlePress}>
+                <Text style={{color:txtCol}}>{txt}</Text>
             </ButPress>
             </OptCont>
 

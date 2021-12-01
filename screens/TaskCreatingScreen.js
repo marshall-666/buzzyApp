@@ -133,7 +133,7 @@ await talktoserver(createTask).then((rd) => {
 
             var loadGroupList = {
                 op: 'get_group_ls',
-                user_id: '1',
+                user_id: user.uid,
             }
 
             talktoserver(loadGroupList).then((rd) => {
@@ -207,6 +207,7 @@ await talktoserver(createTask).then((rd) => {
             setCategory_id={ setCategory_id}
             dummyList={grpList}
             grpNameVal={grpName}
+            bgC= {Configurations.colors.butCol}
             // grpDisp={grpListDisp}
             handleGroups={(item)=>{
               setGrpName(item.label)
