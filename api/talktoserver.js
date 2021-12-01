@@ -32,6 +32,7 @@ const talktoserver = async (param) => {
         dataRqInbox.append('descrip', param.descrip)
         dataRqInbox.append('member_id', param.member_id)
         dataRqInbox.append('is_admin', param.is_admin)
+        dataRqInbox.append('invi_mems', param.invi_mems)
 
     } else if(param.op == 'get_group_ls'){
 
