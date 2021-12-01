@@ -32,6 +32,7 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalU
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import IndividualMemberScreen from '../screens/IndividualMemberScreen';
 import ChatGroupListScreen from '../screens/ChatGroupListScreen'
+// import ChatGroupListScreen from '../screens/ChatGrouplistScreen'
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -211,6 +212,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       <Stack.Screen name="AllChats" component={AllChats} />
       <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
+      {/* <Stack.Screen name="ChatGroupList" component={ChatGrouplistScreen} /> */}
       
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
       {/* dashboard flow ends */}
