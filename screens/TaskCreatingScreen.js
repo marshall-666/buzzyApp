@@ -100,11 +100,7 @@ const TaskCreatingScreen = ({ navigation }) => {
     end_t: endTime,
     loca: location,
     group_id: grpId,
-<<<<<<< HEAD
-    user_id: 'aaaaaaaaaa',
-=======
     user_id: user.uid,
->>>>>>> 5ffa374ddac8fdc7df87cf7ab7018281a1e3a585
 }
 
 

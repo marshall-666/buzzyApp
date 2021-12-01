@@ -85,11 +85,7 @@ const DashboardScreen = ({navigation }) => {
     
       var loadTaskList = {
         op: 'get_tasks_ls',
-<<<<<<< HEAD
-        user_id: 'aaaaaaaaaa', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
-=======
         user_id: user.uid, // CONNECT THIS TO LOGGED IN USER(Fire Auth)
->>>>>>> 5ffa374ddac8fdc7df87cf7ab7018281a1e3a585
     }
     
       talktoserver(loadTaskList).then((rd) => {
