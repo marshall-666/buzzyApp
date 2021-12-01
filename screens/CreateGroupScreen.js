@@ -50,11 +50,14 @@ const CreateGroupScreen = ({
                     descrip: grpDiscp,
                     member_id: user.uid,
                     is_admin: user.uid,
+                    invi_mems: grpMem,
+
                 }
 
             talktoserver(createGroup).then((rd) => {
                 setDbResult(rd)
             })
+            
             console.log(dbResult)
         }
             
