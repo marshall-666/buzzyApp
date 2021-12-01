@@ -211,6 +211,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       <Stack.Screen name="AllChats" component={AllChats} />
       <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
+      
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
       {/* dashboard flow ends */}
       {/* Taskmamagement schedules */}
@@ -239,7 +240,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="MeetingStep3"options={{ title:'Meeting'}} component={ScheduleMeetingStepFourScreen} />
       <Stack.Screen name="MeetingStep4"options={{ title:'Meeting'}} component={ScheduleMeetingStepFiveScreen} />
       {/* Other group flows */}
-      <Stack.Screen name="GroupChat" component={ChatChannel} />
+      <Stack.Screen name="GroupChat" component={GroupChatScreen} />
 
       <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
     

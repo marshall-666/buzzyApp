@@ -26,8 +26,6 @@ const ChatGroupListScreen = ({navigation}) => {
         
     },[])
 
-    console.log(dbGroupLs)
-
     const renderItem = ({item})=> 
         <GroupThread 
             groupName={item.grpName}

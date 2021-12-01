@@ -13,8 +13,6 @@ const GroupChatScreen = ({
 
     const routeId = route.params.gid
 
-    console.log(routeId)
-
     const { user } = useContext(AuthenticatedUserContext);
     const [chatdata, setChatData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
