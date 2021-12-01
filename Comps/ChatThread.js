@@ -3,7 +3,11 @@ import { Text, Image, View, Pressable, ActivityIndicator } from "react-native";
 import { useNavigation } from '@react-navigation/core';
 
 
- export const ChatThread = ({chatRoom})=>
+ export const ChatThread = ({
+     
+
+
+ })=>
  {
 
     const navigation = useNavigation();
@@ -20,7 +24,7 @@ import { useNavigation } from '@react-navigation/core';
                 
                 <Image
                     style={{height:100, width:100, borderRadius: 100}} 
-                    source={{uri:user.imageUri}}/>
+                    source={{uri:'https://placekitten.com/50/50'}}/>
                 <View style={{justifyContent:'center'}}>
                     <View>
                         <Text> {user.name} </Text>
