@@ -1,12 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
-<<<<<<< HEAD
 import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView, ImageBackground } from 'react-native';
-import AppHeader from '../comps/AppHeader';
-import TaskBtn from '../comps/taskBtn';
-import styled from 'styled-components/native';
-=======
-import { View, StyleSheet, FlatList } from 'react-native';
->>>>>>> ca7c55b3d5763f88538196a823cb73acc9de09b7
 import NavBar from '../comps/NavBar';
 import { GroupThread } from '../comps/GroupThread';
 import {Configurations} from '../PropConfig/Props'
