@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { ScrollView, StyleSheet, Text, View, FlatList, Pressable, Image, SectionList } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
@@ -10,6 +10,7 @@ import { Members } from '../data/Members'
 import styled from 'styled-components/native'
 import talktoserver from "../api/talktoserver"
 import IndividualEventCard from '../comps/IndividualEventCard';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 
 const NavBarCon = styled.View`
@@ -33,7 +34,7 @@ const GroupHomeScreen = ({
     //Group Information Retrieval Start
 
     const groupInfo = route.params
-    console.log(groupInfo.id)
+    // console.log(groupInfo.id)
     const SelectGrpId = groupInfo.id
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
@@ -42,6 +43,7 @@ const GroupHomeScreen = ({
     const [grpName, setGrpName]=useState()
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
+    const { user, users } = useContext(AuthenticatedUserContext);
 
     const [grpTaskArr, setGrpTaskArr] = useState([])
     useEffect(()=>{
@@ -83,7 +85,7 @@ const GroupHomeScreen = ({
 
                 var loadTaskList = {
                     op: 'get_tasks_ls',
-                    user_id: 'aaaaaaaaaa',
+                    user_id: user.uid,
                 }
 
                 talktoserver(loadTaskList).then((rd) => {
@@ -97,7 +99,7 @@ const GroupHomeScreen = ({
                         return el.gp_id == groupid
                       })
                       setGrpTaskArr(groupTaskArray)
-                      console.log(grpTaskArr)
+                    //   console.log(grpTaskArr)
                 }
         filterGrpTask()        // console.log(dbResult)
     },[])

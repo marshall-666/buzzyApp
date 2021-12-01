@@ -110,6 +110,11 @@ const talktoserver = async (param) => {
         dataRqInbox.append('user_id', param.user_id)
         dataRqInbox.append('subject_id', param.subject_id)
         
+    } else if(param.op == 'load_chatgroups') {
+
+        dataRqInbox.append('op', param.op)
+        dataRqInbox.append('user_id', param.user_id)
+
     }
 
     const response = await fetch(API_URL, {
