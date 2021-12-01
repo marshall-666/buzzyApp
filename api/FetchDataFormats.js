@@ -62,6 +62,7 @@ var createGroup = {
     descrip: '',
     member_id: '',
     is_admin: '',
+    invi_mems: '',
 }
 
 talktoserver(createGroup).then((rd) => {
