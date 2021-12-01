@@ -62,7 +62,7 @@ function Taskboard() {
     </Drawer.Navigator>
   );
 }
-function ChatChannel() {
+function ChatGroupList() {
 
   return (
     <Drawer.Navigator
@@ -78,7 +78,7 @@ function ChatChannel() {
         
       }} 
       >
-      <Drawer.Screen name='Back' component={GroupChatScreen} />
+      <Drawer.Screen name='Back' component={ChatGroupListScreen} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />
@@ -213,6 +213,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="AllChats" component={AllChats} />
       <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
       {/* <Stack.Screen name="ChatGroupList" component={ChatGrouplistScreen} /> */}
+
       
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
       {/* dashboard flow ends */}
