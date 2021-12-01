@@ -95,7 +95,7 @@ const EditTaskScreen = ({ navigation, route }) =>
       setRectText('Confirm?')
       setTxtCol(colors.lightBg)
       // navigation.navigate('Dashboard')
-      if(rectCol == 'red')
+      if(rectCol == colors.secCol)
       {
         navigation.navigate('Dashboard')
       }

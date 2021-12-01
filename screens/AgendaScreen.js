@@ -76,7 +76,7 @@ if(ChosenDay)
 
     var loadTaskList = {
       op: 'get_tasks_ls',
-      user_id: '1', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
+      user_id: 'aaaaaaaaaa', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
   }
   
     talktoserver(loadTaskList).then((rd) => {

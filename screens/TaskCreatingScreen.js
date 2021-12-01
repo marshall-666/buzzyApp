@@ -100,14 +100,14 @@ const TaskCreatingScreen = ({ navigation }) => {
     end_t: endTime,
     loca: location,
     group_id: grpId,
-    user_id: '1',
+    user_id: 'aaaaaaaaaa',
 }
 
 
 await talktoserver(createTask).then((rd) => {
     setDbResult(rd) 
    
-    // console.log(dbResult)
+    console.log(dbResult)
 })
 // console.log(createTask)
       navigation.navigate('Taskboard')
@@ -116,7 +116,7 @@ await talktoserver(createTask).then((rd) => {
     }
     // console.log(Value)
   
-    console.log(category_id)
+    // console.log(category_id)
 
    
 
