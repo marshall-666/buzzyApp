@@ -210,12 +210,9 @@ export default function TaskboardStack() {
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       <Stack.Screen name="AllChats" component={AllChats} />
-<<<<<<< HEAD
       <Stack.Screen name="ChatGroupList" component={ChatGroupList} />
-=======
-      <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
+     
       
->>>>>>> 9563130edfe606130b09694aaa04ea6eed13c3f4
       {/* <Stack.Screen name="MembersSchedule" component={MembersScheduleScreen} /> */}
       {/* dashboard flow ends */}
       {/* Taskmamagement schedules */}
