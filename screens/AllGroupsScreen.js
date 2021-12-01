@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
-import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
+import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -10,8 +10,17 @@ import {Configurations} from '../PropConfig/Props'
 import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
 import {Test} from '../data/test'
-import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import { useFonts } from "expo-font";
 
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+const NavBarCon = styled.View`
+position:absolute;
+z-index:2;
+top:92%;
+height:100%
+width:100%
+left:5%
+`
 
 const lightBg = Configurations.colors.lightBg
 const AllGroupsScreen = ({navigation}) => {
@@ -21,7 +30,7 @@ const [ gName, setGName] = useState()
 // const [ grp, setGrpName] = useState()
 const [grpArray, setGrpArray]=useState([])
 const { user,users } = useContext(AuthenticatedUserContext);
-const {grmpNum, setNumGrp} = useState('0')
+const [grmpNum, setNumGrp] = useState('0')
 
 useEffect(()=>{
     
@@ -32,7 +41,7 @@ useEffect(()=>{
     
     talktoserver(loadGroupList).then((rd) => {
         setDbResult(rd)
-        setNumGrp(dbResult.length)
+        
     })
 },[])
 console.log('=======================')
@@ -43,11 +52,21 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
 
 useEffect(()=>{
+  const groupNum =  async()=>{
 
-    console.log(dbResult)
+        for (let i = 0; i<=dbResult.length;i++)
+        {
+            setNumGrp(i)
+        }
+    }
+    groupNum()
+    // console.log(dbResult)
 }, [dbResult])
 
-    
+let [fontsLoaded]= useFonts({
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+  })  
 // useEffect(()=>
 // {
 //     const groupInfo = async () =>
@@ -58,25 +77,36 @@ useEffect(()=>{
 // },[dbResult])
     return (
         <View style={styles.header}>
-        
-            <View style={styles.head}>
-                <Text style={{fontSize:22}} >
-                    You are currently in 
-                </Text>
-                <Text style={{fontSize:22}} >
-                    {grmpNum} Groups  
-                </Text>
-            </View>
+            
+            
+                <View style={styles.imgCont}>
+                    <Image style ={{width:150, height:150}}source={require('../assets/images/leaf.png')}/>
+                        <View>
+                            
+                            <Text style={styles.headerText} >
+                                You are currently in 
+                            </Text>
+                            <Text style={styles.headerText} >
+                                {grmpNum} Groups  
+                            </Text>
+
+                        </View>
+                </View>
+            
             <View style={styles.lowerDiv}>
 
-                <View style={styles.thread}>   
+           
+
+
                     <FlatList 
-                        contentContainerStyle={{ maxWidth:'100%', maxHeight:'80%'}}
+                        
+                        contentContainerStyle={{ maxWidth:'100%' }}
                         scrollEnabled={true}
                         data={dbResult}
                         renderItem={({item})=> <GroupThread 
                                                         groupName={item.groups.grpName}
                                                         groupMembersNum={item.groups.mem_count}
+                                                        ff="Poppins-Medium"
                                                         // groupImg={item.groups.imageUri}
                                                         onPress={()=>{ navigation.navigate('GroupHome', {name: item.groups.grpName,
                                                          numOfMem: item.groups.mem_count ,
@@ -85,23 +115,16 @@ useEffect(()=>{
                                                         })}}/>}
                         />
                     
-                </View>
                    
                 <View style=
                 {{
                     flexDirection:'row', 
                     justifyContent:'space-around',
-                    padding: 10,
+                    padding: 20,
                     
                     
                     }}>
-                    {/* <Pressable
-                        onPress={()=>{navigation.navigate('JoinGroup')}} 
-                        style={styles.joinCreate} >
-                            <Text> 
-                                Join a Group 
-                            </Text>
-                    </Pressable> */}
+                    
                     
                     <Pressable
                         onPress={()=>{navigation.navigate('CreateGroup')}} 
@@ -112,10 +135,16 @@ useEffect(()=>{
                     </Pressable>
 
                 </View>
+
+
         <View style={styles.navCont}>
 
             <NavBar/>
+
         </View>
+
+        
+
         </View>
      </View>
     )
@@ -128,7 +157,7 @@ const styles = StyleSheet.create({
     {
         alignItems:'center',
         justifyContent:'center',
-        height:150,
+        
         
     },
     header:
@@ -137,13 +166,26 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         height:'100%'
     },
+    headerText:
+    {
+        fontSize:22, 
+        fontFamily:'Poppins-Medium',
+        color: Configurations.colors.secCol
+    },
+    imgCont:
+    {
+        flexDirection:'row', 
+        width:'100%', 
+        justifyContent:'space-around', 
+        alignItems:'center'
+    },
     thread:
     {   
         alignItems:'center',
     },
     lowerDiv: {
         justifyContent:'space-between',
-        backgroundColor: Configurations.colors.primCol,
+        backgroundColor: Configurations.colors.lightBg,
         height:'80%',
             
     },
@@ -157,7 +199,9 @@ const styles = StyleSheet.create({
     navCont:
     {
         alignItems:'center',
-        marginBottom: 10
+        marginBottom: 5,
+        justifyContent:'center',
+        
     }
 
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
-import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
+import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
@@ -59,33 +59,36 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 // },[dbResult])
     return (
         <View style={styles.header}>
-        
+            <ImageBackground
+                source={require('../assets/images/leaf.png')}
+                style={StyleSheet.absoluteFillObject}
+                blurRadius={110}>
             
                 
                     <FlatList 
-                        contentContainerStyle={{ maxWidth:'100%', maxHeight:'80%'}}
+                        contentContainerStyle={{ maxWidth:'100%', alignItems:'center'}}
                         scrollEnabled={true}
                         data={dbResult}
                         renderItem={({item})=> <GroupThread 
                                                         groupName={item.groups.grpName}
                                                         groupMembersNum={item.groups.mem_count}
                                                         // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupChat', {name: item.groups.grpName,
-                                                         numOfMem: item.groups.mem_count ,
-                                                         members: item.groups.members,
-                                                         id:item.groups.groupid
+                                                        onPress={()=>{ navigation.navigate('GroupChat', 
+                                                        {
+                                                            name: item.groups.grpName,
+                                                            numOfMem: item.groups.mem_count ,
+                                                            members: item.groups.members,
+                                                            id:item.groups.groupid
                                                         })}}/>}
                         />
                     
                 
-                   
+                 </ImageBackground>  
                 <View style=
                 {{
                     flexDirection:'row', 
                     justifyContent:'space-around',
                     padding: 10,
-                    
-                    
                     }}>
                     
                     

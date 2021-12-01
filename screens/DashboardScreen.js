@@ -4,6 +4,7 @@ import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from '
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
 import axios from 'axios';
+import { useFonts } from "expo-font";
 
 // Component imports===============
 import TaskBtn from '../comps/taskBtn';
@@ -176,10 +177,13 @@ const DashboardScreen = ({navigation }) => {
 
 
         setNewDaysObject(dailyEvents)
+
+
+    
       }
       GetDays()
 
-
+      
       const taskList = dbResult
       // console.log(dbResultTask[0].cname)
      
@@ -188,7 +192,10 @@ const DashboardScreen = ({navigation }) => {
   // console.log(dbResult)
 
   
-  
+  let [fontsLoaded]= useFonts({
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+  })
   // state for switching between courses groups and events
   const [courses, setCourses] = useState(true);
   const [groups, setGroups] = useState(false);
@@ -263,9 +270,11 @@ const DashboardScreen = ({navigation }) => {
     }}>
 
       <Wrapper
+      contentContainerStyle={{justifyContent:'space-around'}}
           > 
     
-      <ToDate/>
+      <ToDate
+        ff="Poppins-Medium"/>
  
           
         <Calendar 
@@ -279,7 +288,7 @@ const DashboardScreen = ({navigation }) => {
             textSectionTitleDisabledColor: '#d9e1e8',
             selectedDayBackgroundColor: '#F5F5E1',
             selectedDayTextColor: 'black',
-            todayTextColor: 'white',
+            todayTextColor: 'yellow',
             dayTextColor: '#2d4150',
             textDisabledColor: '#d9e1e8',
             dotColor: '#00adf5',
@@ -288,15 +297,15 @@ const DashboardScreen = ({navigation }) => {
             disabledArrowColor: '#d9e1e8',
             monthTextColor: colors.secCol,
             indicatorColor: 'blue',
-            // textDayFontFamily: 'monospace',
-            // textMonthFontFamily: 'monospace',
-            // textDayHeaderFontFamily: 'monospace',
+            textDayFontFamily: 'Galvji',
+            textMonthFontFamily: 'Galvji',
+            textDayHeaderFontFamily: 'Galvji',
             // textDayFontWeight: '300',
-            textMonthFontWeight: 'bold',
+            
             // textDayHeaderFontWeight: '300',
             textDayFontSize: 16,
             textMonthFontSize: 16,
-            textDayHeaderFontSize: 16
+            textDayHeaderFontSize: 13
           }}
 
 
@@ -338,6 +347,7 @@ const DashboardScreen = ({navigation }) => {
               taskBtnColor={ courses ? colors.secCol : 'white' }
               textColor= {courses ? 'white' : colors.secCol }
               onBtnPress={coursePress}  
+              fe='Poppins-Medium'
           />
         </View>  
 
@@ -348,7 +358,8 @@ const DashboardScreen = ({navigation }) => {
               taskCate={category.taskCategory.Group.taskCate}
               taskBtnColor={ groups ? colors.secCol : 'white' }
               textColor= {groups ? 'white' : colors.secCol }
-
+              fe='Poppins-Medium'
+              
               onBtnPress={groupPress}   
           />
         </View>
@@ -359,19 +370,20 @@ const DashboardScreen = ({navigation }) => {
               taskCate={category.taskCategory.Event.taskCate}
               taskBtnColor={ events ? colors.secCol : 'white' }
               textColor= {events ? 'white' : colors.secCol }
+              fe='Poppins-Medium'
               onBtnPress={eventPress}  
 
           />
         </View>
         </TaskBtnCont>
 
-         
+    <View >     
       { courses ?
+        
         <FlatList 
         
-        
           // initialNumToRender={3}
-          contentContainerStyle={{ maxWidth:'100%',}}
+          contentContainerStyle={{ maxWidth:'100%', }}
           data = {courseTasks}
 
           renderItem={({item})=> 
@@ -382,6 +394,8 @@ const DashboardScreen = ({navigation }) => {
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
                   IconDisplay="none" 
+                  ff="Poppins-Medium"
+                  fe= "Poppins-Regular"
                   onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
                   /> }
@@ -399,6 +413,8 @@ const DashboardScreen = ({navigation }) => {
                   EventDescrip = {item.summary}
                   EventStartTime={item.start}
                   EventDueTime = {item.end} 
+                  ff="Poppins-Medium"
+                  fe= "Poppins-Regular"
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
                   IconDisplay='none'
                   /> }
@@ -417,18 +433,20 @@ const DashboardScreen = ({navigation }) => {
                 EventStartTime={item.start}
                 EventDueTime = {item.end}
                 IconDisplay =   'none' 
+                ff="Poppins-Medium"
+                fe= "Poppins-Regular"
                 onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
 
                    /> }
         /> : null
       }
         {/* <IndividualEventCard EventBackgroundColor={colors.accColOne}/> */}
-          
+       </View>   
     </Wrapper>
     
-      <NavBarCon>
+      <View style={{alignItems:'center', marginBottom:10}}>
           <NavBar/>
-      </NavBarCon>
+      </View>
 
     </View>
    

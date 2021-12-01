@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {View, TouchableOpacity, Text, StyleSheet, Pressable} from 'react-native';
 import Styled from "styled-components/native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import {AppLoading} from "expo"
+
 
 
 const CardCont = Styled.Pressable`
@@ -53,11 +55,23 @@ const IndividualEventCard = ({
     EventDueTime="",
     IconDisplay="flex",
     onCardPress=()=>{},
-    onEditPress = ()=>{}
+    onEditPress = ()=>{},
+    ff,
+    fe
 
 
 }) => {
+      
+
   const navigation = useNavigation();
+  
+
+
+  
+
+
+
+  
   return (
     <View style=
     {{
@@ -73,12 +87,12 @@ const IndividualEventCard = ({
     <EventColour EventBackgroundColor={EventBackgroundColor}></EventColour>
     <TextCont>
      
-      <Text style={{fontSize:24,}}>{EventTitle.substr(0,15)}</Text>
+      <Text style={{fontSize:22,fontFamily:ff}}>{EventTitle.substr(0,20)}</Text>
 
       
-      <Text style={{fontSize:14}}>{EventDescrip}</Text> 
-      <Text style={{fontSize:14}}>{EventStartTime}</Text> 
-      <Text style={{fontSize:14}}>{EventDueTime}</Text>  
+      <Text style={{fontSize:14,fontFamily:fe}}>{EventDescrip}</Text> 
+      <Text style={{fontSize:14,fontFamily:fe}}>{EventStartTime}</Text> 
+      <Text style={{fontSize:14,fontFamily:fe}}>{EventDueTime}</Text>  
     </TextCont>
     
     <IconCont >
