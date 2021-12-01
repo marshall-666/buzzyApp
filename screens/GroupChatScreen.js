@@ -118,7 +118,7 @@ const GroupChatScreen = ({
 
 
 
-            <View style={{width:'100%', paddingVertical:10, alignItems: 'center'}}>
+            <View style={{width:'100%', paddingVertical:17.5, alignItems: 'center'}}>
                 <MessageInput 
                 updateChat={updateChat} 
                 chatMessage={chatMessage} 
