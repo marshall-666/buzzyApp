@@ -211,7 +211,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="GroupHome" component={GroupHomeScreen} />
       <Stack.Screen name="SingleChatThread" component={SingleChatThread} />
       <Stack.Screen name="AllChats" component={AllChats} />
-      <Stack.Screen name="ChatGroupList" component={ChatGroupListScreen} />
+      <Stack.Screen name="ChatGroupList" component={ChatGroupList} />
       {/* <Stack.Screen name="ChatGroupList" component={ChatGrouplistScreen} /> */}
 
       
