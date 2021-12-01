@@ -1,62 +1,47 @@
 import React, { useEffect, useState,useContext } from 'react'
+<<<<<<< HEAD
 import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import TaskBtn from '../comps/taskBtn';
 import styled from 'styled-components/native';
+=======
+import { View, StyleSheet, FlatList } from 'react-native';
+>>>>>>> ca7c55b3d5763f88538196a823cb73acc9de09b7
 import NavBar from '../comps/NavBar';
 import { GroupThread } from '../comps/GroupThread';
-import {GroupsData} from '../data/GroupsData';
 import {Configurations} from '../PropConfig/Props'
-import { useNavigation } from '@react-navigation/core';
 import talktoserver from "../api/talktoserver"
-import {Test} from '../data/test'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-import { ChatThread } from '../comps/ChatThread';
 
 const lightBg = Configurations.colors.lightBg
 const primCol = Configurations.colors.primCol
+
 const ChatGroupListScreen = ({navigation}) => {
     
-const [dbResult, setDbResult] = useState()
-const [ gName, setGName] = useState()
-// const [ grp, setGrpName] = useState()
-const [grpArray, setGrpArray]=useState([])
-const { user,users } = useContext(AuthenticatedUserContext);
-const {grmpNum, setNumGrp} = useState('0')
+    const [dbGroupLs, setDbGroupLs] = useState()
+    const { user} = useContext(AuthenticatedUserContext);
 
-useEffect(()=>{
-    
-    var loadGroupList = {
-        op: 'get_group_ls',
-        user_id: user.uid,
-    }
-    
-    talktoserver(loadGroupList).then((rd) => {
-        setDbResult(rd)
-        setNumGrp(dbResult.length)
-    })
-},[])
-console.log('=======================')
-// console.log(dbResult)
-// console.log('------------------------')
-// console.log(dbResult.groups[0].group)
-console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
+    useEffect(()=>{
 
+        var loadChatGroups = {
+            op: 'load_chatgroups',
+            user_id: user.uid,
+        }
+        talktoserver(loadChatGroups).then((rd) => {
+            setDbGroupLs(rd)
+        })
+        
+    },[])
 
-// useEffect(()=>{
+    const renderItem = ({item})=> 
+        <GroupThread 
+            groupName={item.grpName}
+            groupMembersNum={''}
+            onPress={() => {
+                navigation.navigate('GroupChat', {gid: item.groupid})
+            }}
+        />
 
-//     console.log(dbResult)
-// }, [dbResult])
-
-    
-// useEffect(()=>
-// {
-//     const groupInfo = async () =>
-//     {
-//         setGrpName(dbResult[0].gname)
-//     }
-// groupInfo()
-// },[dbResult])
     return (
         <View style={styles.header}>
             <ImageBackground
@@ -96,7 +81,6 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxx')
 
                 </View>
         <View style={styles.navCont}>
-
             <NavBar/>
         </View>
         

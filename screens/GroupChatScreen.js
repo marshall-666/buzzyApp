@@ -10,6 +10,9 @@ const GroupChatScreen = ({
     route,
     navigation
 }) => {
+
+    const routeId = route.params.gid
+
     const { user } = useContext(AuthenticatedUserContext);
     const [chatdata, setChatData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -20,10 +23,9 @@ const GroupChatScreen = ({
     const load_msgls = 'load_msgls'
     const add_msg = 'add_msg'
 
-    const user_id = 'aaaaaaaaaa'
-    // const user_id = user.uid
+    const user_id = user.uid
     
-    const group_id = '1'
+    const group_id = routeId
 
     useEffect(()=>{
 

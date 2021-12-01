@@ -87,7 +87,8 @@ const TaskTable = ({
  grpNameVal,
  grpDisp='flex',
  setCategory_id,
- handleGroups= ()=>{}
+ handleGroups= ()=>{},
+ title='Create Task'
 }) => {
   const [dbResultGrp, setDbResultGrp] = useState()
   const [grpList, setGrpList] = useState([])
@@ -148,7 +149,7 @@ useEffect (()=>{
   return (
     <CardCon bgc={Configurations.colors.primCol} height={height} width={width}>
       <TextCon>
-        <TextInput1 tColor={Configurations.colors.secCol}   ><Text>Create Task </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
+        <TextInput1 tColor={Configurations.colors.secCol}   ><Text>{title} </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
         </TextInput1>
         <TextInput2 style={{ color: Configurations.colors.secCol }} >
           Task Name
