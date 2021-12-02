@@ -297,6 +297,7 @@ useEffect(()=>{
           EventDescrip={o.summary} 
           EventStartTime={o.start} 
           EventDueTime={o.end} 
+          IconDisplay='none'
           // EventBackgroundColor= {randomColor()} 
           />
 
@@ -316,6 +317,7 @@ useEffect(()=>{
           EventDescrip={o.summary} 
           EventStartTime={o.start} 
           EventDueTime={o.end} 
+          IconDisplay='none'
           // EventBackgroundColor= {randomColor()}
         />
 
@@ -335,6 +337,7 @@ useEffect(()=>{
           EventDescrip={o.summary} 
           EventStartTime={o.start} 
           EventDueTime={o.end}  
+          IconDisplay='none'
           // EventBackgroundColor= {randomColor()}
           />
 

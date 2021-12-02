@@ -31,6 +31,7 @@ import { Entypo } from '@expo/vector-icons'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import IndividualMemberScreen from '../screens/IndividualMemberScreen';
+import TaskboardScreenNew from '../screens/TaskboardScreenNew ';
 // import ChatGroupListScreen from '../screens/ChatGroupListScreen'
 import ChatGroupListScreen from '../screens/ChatGrouplistScreen'
 const Stack = createNativeStackNavigator();
@@ -55,7 +56,7 @@ function Taskboard() {
         
       }} 
       >
-      <Drawer.Screen name='Back' component={TaskboardScreen} />
+      <Drawer.Screen name='Back' component={TaskboardScreenNew} />
       <Drawer.Screen name='Course' component={CourseInfoScreen} />
       <Drawer.Screen name="Account" component={AccountScreen} />
       <Drawer.Screen name="Logout" component={LogoutScreen} />

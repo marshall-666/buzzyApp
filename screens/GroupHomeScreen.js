@@ -206,6 +206,7 @@ const GroupHomeScreen = ({
                         scrollEnabled={true}
                         data={grpTaskArr}
                         renderItem={({item})=> <IndividualEventCard 
+                                                onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
                                                 EventTitle={item.title}
                                                 EventDescrip={item.summary}
                                                 EventStartTime={item.start}
