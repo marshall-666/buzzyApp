@@ -26,7 +26,9 @@ import { Events } from '../data/Events';
 import {GroupEventCard} from '../comps/GroupEventCard';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 const colors = Configurations.colors;
 const secCol = colors.secCol;
 const accent = colors.butCol;
