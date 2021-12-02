@@ -13,7 +13,7 @@ import { doc, setDoc,serverTimestamp  } from "firebase/firestore";
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 import { category } from '../data/category'
-
+import { useFonts } from "expo-font";
 
 
 const taskCategory = [
@@ -37,6 +37,7 @@ const taskCategory = [
 const Wrapper = styled.ScrollView`
 height:30%;
 width:100%
+background-color:#94BDD4;
 `
 const TaskButtonWrapper = styled.View`
 justify-content:center
@@ -316,6 +317,10 @@ const EditTaskScreen = ({ navigation, route }) =>
              
           },[dbResult])
   // console.log(grpId)
+  let [fontsLoaded]= useFonts({
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+  })
   return (
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
@@ -330,7 +335,8 @@ const EditTaskScreen = ({ navigation, route }) =>
       <View style={styles.header}>
        
       </View>
-      <Wrapper>
+      <Wrapper
+        >
         <TaskButtonWrapper>
         <TaskBtn 
     //  textColor={textColorC ? "#ffffff" : "black"} 
@@ -379,6 +385,7 @@ const EditTaskScreen = ({ navigation, route }) =>
             txtC=               {txtCol}
             dummyList=          {grpList}
             grpNameVal=         {grpName}
+            ff="Poppins-Medium"
             // grpDisp={grpListDisp}
             handleGroups= {(item)=>{
               setGrpName(item.label)
@@ -408,4 +415,9 @@ const styles=StyleSheet.create({
   }
 })
 
+
+// {{shadowColor: '#5B7797',
+//         shadowOffset: {width: 10, height: 8},
+//         shadowOpacity: 1,
+//         shadowRadius: 7,}}
 export default EditTaskScreen

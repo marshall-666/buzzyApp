@@ -9,10 +9,10 @@ import { Configurations } from '../PropConfig/Props'
 const primCol = Configurations.colors.primCol
 const butCol = Configurations.colors.butCol
 const CardCont = styled.View`
-background-color:${primCol};
-width:100%;
+border:3px solid #94BDD4;
+width:90%;
 height:90%;
-
+justify-content:space-around;
 border-radius:5px;
 align-items:center;
 padding:20px;
@@ -26,7 +26,7 @@ justify-content:space-around;
 `
 
 const ButPress = styled.Pressable`
-height:45px;
+height:55px;
 width:150px;
 background-color:${butCol};
 justify-content:center;
@@ -57,7 +57,7 @@ const InputBox = styled.TextInput`
 width:80%;
 height:45px;
 border-bottom-width:3px;
-border-bottom-color:white;
+border-bottom-color:#94BDD4;
 color:white;
 `
 const InputContainer = styled.View`
@@ -76,7 +76,9 @@ export const  CreateGroup = ({
     onMemVal = ()=>{},
     bgCol= Configurations.colors.butCol,
      txt = "Create Group",
-     txtCol = 'black'
+     txtCol = 'black',
+     ff ='Galvji',
+     fe ='Galvji'
 
 })=> {
 
@@ -85,7 +87,7 @@ export const  CreateGroup = ({
         <CardCont>
             
             <HeadCont>
-                <HeadTxt>
+                <HeadTxt style={{fontFamily:ff,color:Configurations.colors.secCol}} >
                     Create A Group
                 </HeadTxt>
             </HeadCont>
@@ -94,19 +96,21 @@ export const  CreateGroup = ({
             <OptCont>
             
                 <InputContainer>
-                    <SubTxt> Group Name </SubTxt>
+                    <SubTxt style={{fontFamily:ff,color:Configurations.colors.secCol}}> Group Name </SubTxt>
                     <InputBox 
+                        style={{fontFamily:fe, fontSize:16}}
                         placeholder="Name" 
-                        placeholderTextColor="lightgrey" 
+                        placeholderTextColor="grey" 
                         value={nameVal} 
                         onChangeText={onGrpVal}/>
                 </InputContainer>
             
                 <InputContainer>
-                    <SubTxt> Description </SubTxt>
+                    <SubTxt style={{fontFamily:ff,color:Configurations.colors.secCol}}> Description </SubTxt>
                     <InputBox 
+                        style={{fontFamily:fe, fontSize:16}}
                         placeholder="What is This Group For" 
-                        placeholderTextColor="lightgrey" 
+                        placeholderTextColor="grey" 
                         value={discpVal} 
                         onChangeText={onDiscpVal} 
                     
@@ -114,19 +118,27 @@ export const  CreateGroup = ({
                 </InputContainer>
             
                 <InputContainer>
-                    <SubTxt>Invite Members(Separate the emails using a , with no space between them)  </SubTxt>
+                    <SubTxt style={{fontFamily:ff, color:Configurations.colors.secCol}}>Invite Members </SubTxt>
+                    <SubTxt style={{fontFamily:fe, fontSize:13,color:Configurations.colors.secCol}}>
+                        (Separate the emails using a , with no space between them)   
+                    </SubTxt>
                     <InputBox 
+                        style={{fontFamily:fe, fontSize:16}}
                         placeholder="Enter Group Member's Emails" 
-                        placeholderTextColor="lightgrey"
+                        placeholderTextColor="grey"
                         value={memVal}
                         onChangeText={onMemVal} 
-                        />
+                    />
                 </InputContainer>
             
-            <ButPress style={{backgroundColor:bgCol}} onPress={handlePress}>
-                <Text style={{color:txtCol}}>{txt}</Text>
-            </ButPress>
             </OptCont>
+            <View>
+
+
+                <ButPress style={{backgroundColor:bgCol}} onPress={handlePress}>
+                    <Text style={{color:txtCol, fontFamily:ff, fontSize:18}}>{txt}</Text>
+                </ButPress>
+            </View>
 
         </CardCont>
     )

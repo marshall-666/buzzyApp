@@ -14,6 +14,7 @@ color:${Configurations.colors.secCol}
 
  const  AppTimePicker1 = ({
   startTime, setStartTime,
+  ff='Galvji'
  }
  ) => {
   const [date, setDate] = useState(new Date());
@@ -74,7 +75,7 @@ color:${Configurations.colors.secCol}
       <View style={styles.buttonCon}>
       <View style={{marginRight:20}}> 
         <TouchableOpacity style={styles.button} onPress={showDatepicker} >
-        <Text><Fontisto name="date" size={30} color={Configurations.colors.secCol} /></Text>
+        <Text style={{fontFamily:ff,fontSize:20 }}><Fontisto name="date" size={30} color={Configurations.colors.secCol} /></Text>
         </TouchableOpacity>
       </View>
 
@@ -112,6 +113,7 @@ color:${Configurations.colors.secCol}
 
  const AppTimePicker2 = ({
   endTime, setEndTime,
+  ff='Galvji'
   
  }
  ) => {
@@ -172,7 +174,7 @@ color:${Configurations.colors.secCol}
       <View style={styles.buttonCon}>
       <View style={{marginRight:20}}> 
         <TouchableOpacity style={styles.button} onPress={showDatepicker} >
-        <Text><Fontisto name="date" size={30} color={Configurations.colors.secCol} /></Text>
+        <Text style={{fontFamily:ff}}><Fontisto name="date" size={30} color={Configurations.colors.secCol} /></Text>
         </TouchableOpacity>
       </View>
 
