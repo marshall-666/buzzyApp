@@ -10,7 +10,7 @@ import { NavigationContainer,useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  {Configurations} from'../PropConfig/Props'
 import { Octicons } from '@expo/vector-icons'; 
-
+import { Ionicons } from '@expo/vector-icons'; 
 const BarCont = Styled.View`
 width:90%;
 height:60px;
@@ -29,7 +29,7 @@ align-items:center;
 height:70px;
 width:70px;
 top:-6%;
-border:6px solid #94BDD4
+border:2.5px solid #3D5A80
 `
 
 
@@ -48,7 +48,7 @@ const NavBar = ({
 
   // const onEventPress = () => {navigation.navigate('TaskCreating')}
   return (
-  <BarCont backgroundColor={Configurations.colors.secCol}>
+  <BarCont backgroundColor='rgba(61, 90, 128, 1)'>
       <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
       <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
@@ -58,7 +58,7 @@ const NavBar = ({
       </TouchableOpacity>
       
       <YellowCircle 
-      circleBackgroundColor={Configurations.colors.butCol}
+      circleBackgroundColor="#F5F5E1"
       style={{
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2
       }}>
@@ -67,7 +67,7 @@ const NavBar = ({
         </TouchableOpacity>
       </YellowCircle>    
       
-      <TouchableOpacity onPress={()=>{navigation.navigate('ChatGroupList')}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('ChatGrouplist')}}>
       <Octicons name="comment-discussion" size={35} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{navigation.navigate('AllGroups')}}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
-import { View, StyleSheet, FlatList } from 'react-native';
+import { Button, View, Text, StyleSheet, Image, FlatList, Pressable, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import NavBar from '../comps/NavBar';
 import { GroupThread } from '../comps/GroupThread';
 import {Configurations} from '../PropConfig/Props'
@@ -37,12 +37,32 @@ const ChatGroupListScreen = ({navigation}) => {
 
     return (
         <View style={styles.header}>
-            <FlatList 
-                contentContainerStyle={{ maxWidth:'100%', maxHeight:'80%'}}
-                scrollEnabled={true}
-                data={dbGroupLs}
-                renderItem={renderItem}
-            />       
+            <ImageBackground
+                source={require('../assets/images/leaf.png')}
+                style={StyleSheet.absoluteFillObject}
+                blurRadius={110}>
+            
+                
+                    <FlatList 
+                        contentContainerStyle={{ maxWidth:'100%', alignItems:'center'}}
+                        scrollEnabled={true}
+                        data={dbGroupLs}
+                        renderItem={renderItem}
+                        />
+                    
+                
+                 </ImageBackground>  
+                <View style=
+                {{
+                    flexDirection:'row', 
+                    justifyContent:'space-around',
+                    padding: 10,
+                    }}>
+                    
+                    
+                    
+
+                </View>
         <View style={styles.navCont}>
             <NavBar/>
         </View>

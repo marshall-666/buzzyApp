@@ -30,11 +30,14 @@ display:${(props)=>props.displayImg}
 `
 const TextInput =Styled.Text`
 font-size:32px;
-color:${(props)=>props.textColor}
+color:${(props)=>props.textColor};
+font-family :${(props)=>props.fe};
 `
 const TaskInput =Styled.Text`
 font-size:14px;
 color:${(props)=>props.textColor}
+font-family :${(props)=>props.fe};
+
 `
 const NameInput =Styled.Text`
 font-size:18px;
@@ -55,13 +58,22 @@ const TaskBtn = ({
   name="",
   img='https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
   displayBtn='flex',
-  displayImg='none'
+  displayImg='none',
+  fe ="Galvji"
 }) => {
   return (
     <View>
     <TouchableOpacity
     onPress={onBtnPress}
-    ><ImgCon  bgc={taskBtnColor} bradius={bradius} height={height} width={width} margin={margin} displayImg={displayImg} >
+    >
+      
+      <ImgCon  
+          bgc={taskBtnColor} 
+          bradius={bradius} 
+          height={height} 
+          width={width} 
+          margin={margin} 
+          displayImg={displayImg} >
        <Image style={styles.tinyLogo} source={{uri:img}}/>
        </ImgCon>
     <BtnCon style={{
@@ -77,8 +89,8 @@ const TaskBtn = ({
         margin={margin} 
         displayBtn={displayBtn} >
    
-        <TextInput textColor={textColor}>{taskNum}</TextInput>
-        <TaskInput textColor={textColor}>{taskCate}</TaskInput>
+        <TextInput fe={fe} textColor={textColor}>{taskNum}</TextInput>
+        <TaskInput fe ={fe} textColor={textColor}>{taskCate}</TaskInput>
     </BtnCon>
     <NameInput textColor={textColor}>{name}</NameInput>
 
