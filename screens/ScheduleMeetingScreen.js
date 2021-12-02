@@ -49,7 +49,7 @@ const Item = ({ item, onPress, backgroundColor, textColor, navigation }) => (
     <Text style={[styles.title2, textColor]}>{item.title}</Text>
   </Pressable>
 );
-const TaskboardScreen = ({ navigation }) => {
+const ScheduleMeetingScreen = ({ navigation, route }) => {
   const [tasks, setTasks] = useState(category)
   const [courses, setCourses] = useState(coursesData)
   const [groups, setGroups] = useState(groupsData)
@@ -66,7 +66,10 @@ const TaskboardScreen = ({ navigation }) => {
   const [dbResult, setDbResult] = useState()
   // const [Schedule, setSchedule] = useState([])
 
-const Schedule=[];
+  const { groupId, groupName, memsArray, members } = route.params
+
+  
+  const Schedule = [];
   const Courses = [
     {
       title: "businessCom",
@@ -78,7 +81,7 @@ const Schedule=[];
       startTime: new Date("2021/12/06 01:30 PM"),
       endTime: new Date("2021/12/06 04:20 PM"),
     },
-  
+
     {
       title: "Asset Design and intergration",
       startTime: new Date("2021/12/07 09:30 AM"),
@@ -332,7 +335,7 @@ const Schedule=[];
       startTime: new Date("2021/12/07 06:50 PM"),
       endTime: new Date("2021/12/07 09:30 PM")
     },
-   
+
     {
       title: "Communting",
       startTime: new Date("2021/12/08 04:30 PM"),
@@ -345,55 +348,74 @@ const Schedule=[];
     },
 
   ];
-  if (showLevi==true){
-  const result = Courses.concat(Levi)
-  Schedule.push(...result)
+  if (showLevi == true) {
+    const result = Courses.concat(Levi)
+    Schedule.push(...result)
   }
-  else if (showWarren==true){
+  else if (showWarren == true) {
     const result = Courses.concat(Warren)
     Schedule.push(...result)
-    }
-    else if (showNick==true){
-      const result = Courses.concat(Nick)
-      Schedule.push(...result)
-      } else if (showAbbey==true){
-        const result = Courses.concat(Abbey)
-        Schedule.push(...result)
-        } else if (showJody==true){
-          const result = Courses.concat(Jody)
-          Schedule.push(...result)
-          }else if (showGroup==true){
-            const result1 = Courses.concat(Levi)
-            const result2 = result1.concat(Warren)
-            const result3 = result2.concat(Abbey)
-            const result4 = result3.concat(Jody)
-            const result = result4.concat(Nick)
-            Schedule.push(...result)
-            }
-            else if (showTest==true){
-    
-              const result = Courses.concat(dbResult)
-              Schedule.push(...result)
-              }
-            else
-            {
-              Schedule.push(...Courses)}
- 
+  }
+  else if (showNick == true) {
+    const result = Courses.concat(Nick)
+    Schedule.push(...result)
+  } else if (showAbbey == true) {
+    const result = Courses.concat(Abbey)
+    Schedule.push(...result)
+  } else if (showJody == true) {
+    const result = Courses.concat(Jody)
+    Schedule.push(...result)
+  } else if (showGroup == true&& members.length===5) {
+    const result1 = Courses.concat(Levi)
+    const result2 = result1.concat(Warren)
+    const result3 = result2.concat(Abbey)
+    const result4 = result3.concat(Jody)
+    const result = result4.concat(Nick)
+    Schedule.push(...result)
+  }else if (showGroup == true&& members.length===4) {
+    const result1 = Courses.concat(Levi)
+    const result2 = result1.concat(Warren)
+    const result3 = result2.concat(Abbey)
+    const result = result3.concat(Nick)
+    Schedule.push(...result)
+  }else if (showGroup == true&& members.length===3) {
+    const result1 = Courses.concat(Levi)
+    const result2 = result1.concat(Warren)
+    const result = result2.concat(Abbey)
+    Schedule.push(...result)
+  }else if (showGroup == true&& members.length===2) {
+    const result1 = Courses.concat(Levi)
+    const result = result1.concat(Warren)
+    Schedule.push(...result)
+  }
+  else if (showGroup == true&& members.length===1) {
+    const result = Courses.concat(Levi)
+    Schedule.push(...result)
+  }
+  else if (showTest == true) {
+
+    const result = Courses.concat(dbResult)
+    Schedule.push(...result)
+  }
+  else {
+    Schedule.push(...Courses)
+  }
+
   Schedule.sort(function (a, b) {
     return a.startTime - b.startTime;
   });
- 
- 
+
+
   // console.log(Schedule.length)
   var loadSlots = {
     op: 'load_slot',
-    group_id: '1',
+    group_id: groupId,
   }
 
   talktoserver(loadSlots).then((rd) => {
     setDbResult(rd)
   })
- 
+
   // console.log(dbResult)
   // console.log(Schedule)
   // var indiSlots = {
@@ -409,7 +431,7 @@ const Schedule=[];
   // console.log(result)
   // console.log(Schedule)
   // }
- 
+
 
   function slotFitsMon(meeting) {
     if (Schedule.length == 0) return true;
@@ -439,8 +461,8 @@ const Schedule=[];
     [{
       id: Date.parse("2021/12/06 8:30 AM"),
       title: "Monday 08:30-09:20",
-      startTime: new Date("2021/12/06 8:30:00 AM"),
-      endTime: new Date("2021/12/06 9:20:00 AM"),
+      startTime: new Date("2021/12/06 8:30:00 "),
+      endTime: new Date("2021/12/06 9:20:00 "),
       Wday: 'Monday',
       mm: 'December',
       dd: '06'
@@ -925,7 +947,7 @@ const Schedule=[];
     setShowTest(false)
 
   }
-  
+
   const LeviPress = () => {
     setShowGroup(false)
     setShowAbbey(false)
@@ -1007,50 +1029,51 @@ const Schedule=[];
           <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Group'
+            name={groupName}
             onBtnPress={GroupPress}
           />
 
-          <TaskBtn
+          {members[0]  ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Abbey'
+            name={members[0].name}
             onBtnPress={AbbeyPress}
-          />
+          /> : null}
 
-          <TaskBtn
+          {members[1]  ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Nick'
+            name={members[1].name}
             onBtnPress={NickPress}
-          />
-          <TaskBtn
+          /> : null}
+          {members[2]  ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Warren'
+            name={members[2].name}
             onBtnPress={WarrenPress}
-          />
-          <TaskBtn
+          /> : null}
+
+          {members[3] ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Levi'
+            name={members[3].name}
             img={users.img}
             onBtnPress={LeviPress}
-          />
-          <TaskBtn
+          /> : null}
+          {members[4]  ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Jody'
+            name={members[4].name}
             img={users.img}
             onBtnPress={JodyPress}
-          />
-          <TaskBtn
+          /> : null}
+          {members[5]  ? <TaskBtn
             displayBtn='none'
             displayImg='flex'
-            name='Tester'
+            name={members[5].name}
             img={users.img}
             onBtnPress={TestPress}
-          />
+          /> : null}
         </ScrollView >
 
       </TaskButtonsWrapper>
@@ -1720,4 +1743,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskboardScreen
+export default ScheduleMeetingScreen

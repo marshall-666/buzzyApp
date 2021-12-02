@@ -29,7 +29,9 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
     const [inputTitle2, setInputTitle2] = useState('')
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
-
+   
+   
+   
     return (
         <KeyboardAvoidingView  behavior="height"  keyboardVerticalOffset={75} style={styles.container} >
         <View
@@ -60,8 +62,8 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
                         setLocation={setLocation}
                         // handlePress={()=>{navigation.navigate('ScheduleMeetingStepFour')}}
                         Next={
-                            () => {
-                                navigation.navigate('MeetingStep4',
+                            () => {navigation.navigate('MeetingStep4'
+                                ,
 
                             {
                                 id: id,

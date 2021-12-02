@@ -47,7 +47,7 @@ const GroupHomeScreen = ({
     const [memsArray, setMemsArray]=useState([])
     const [memsIdObj, setMemsIdObj]=useState({})
     const [memsObj, setMemsObj]=useState({})
-    const [grpName, setGrpName]=useState()
+    // const [grpName, setGrpName]=useState()
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
     const { user, users } = useContext(AuthenticatedUserContext);
@@ -55,8 +55,8 @@ const GroupHomeScreen = ({
     const [grpTaskArr, setGrpTaskArr] = useState([])
     useEffect(()=>{
        
-            setGrpName(groupInfo.name)
-            setGrpMemNum(groupInfo.numOfMem)   
+            // setGrpName(groupName)
+            setGrpMemNum(numOfMem)   
             
             const loadGroupMembers = async()=>
             {
@@ -69,7 +69,7 @@ const GroupHomeScreen = ({
                 if(memsArray.length < groupInfo.members.length)
                 {memsArray.push(memsObj.name)}
             }
-            // console.log(memsIdObj)
+            
         }
             
         loadGroupMembers()
@@ -104,7 +104,7 @@ const GroupHomeScreen = ({
                 {
                     const groupTaskArray = dbResult.filter(function(el)
                       {
-                        return el.gp_id == groupid
+                        return el.gp_id == groupId
                       })
                       setGrpTaskArr(groupTaskArray)
                     //   console.log(grpTaskArr)
@@ -160,7 +160,7 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}>
-                            {grpName}
+                            {groupName} 
                         </Text>
                         
 
@@ -187,7 +187,7 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}> 
-                                Upcoming Events for {grpName}
+                                Upcoming Events for {groupName} 
                         </Text>
                         <FlatList
                         contentContainerStyle={{maxWidth:'100%'}}
