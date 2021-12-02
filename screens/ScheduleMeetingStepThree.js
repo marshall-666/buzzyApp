@@ -30,10 +30,7 @@ const ScheduleMeetingStepThreeScreen = ({ navigation, route,
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
    
-    var d =startTime
-    // console.log(d.toString())
-    // console.log(startTime)
-    console.log(d.toISOString().slice(0, 10)+ " " + d.toISOString().slice(11, -1))
+   
    
     return (
         <KeyboardAvoidingView  behavior="height"  keyboardVerticalOffset={75} style={styles.container} >
