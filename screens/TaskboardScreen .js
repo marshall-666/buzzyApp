@@ -251,7 +251,7 @@ useEffect(()=>{
       flex: 1, 
       alignItems: 'center', 
       justifyContent: 'flex-start',
-      backgroundColor: Configurations.colors.backCol  }}>
+      backgroundColor: Configurations.colors.primCol  }}>
     
     
     <TaskButtonsWrapper>

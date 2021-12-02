@@ -87,6 +87,8 @@ const CreateGroupScreen = ({
                 
                 />
             </View>
+            
+            
             <NavBar/>
         </View>
         // </KeyboardAvoidingView>
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         backgroundColor:lightBg
     },
     midDiv: {

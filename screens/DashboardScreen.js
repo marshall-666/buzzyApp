@@ -316,9 +316,9 @@ const DashboardScreen = ({navigation }) => {
           onDayPress={onDayPress}
             style=
               {{
-                maxWidth: 400,
-                width:400,
-                height: 400,
+                maxWidth: '100%',
+                width:'100%',
+                height: 350,
               }}
             // markingType={'multi-dot'}
             markedDates= {{
@@ -397,7 +397,7 @@ const DashboardScreen = ({navigation }) => {
                   IconDisplay="none" 
                   ff="Poppins-Medium"
                   fe= "Poppins-Regular"
-                  onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
+                  // onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
                   onEditPress={()=>{navigation.navigate('EditTask', item.id)}}
                   /> }
 

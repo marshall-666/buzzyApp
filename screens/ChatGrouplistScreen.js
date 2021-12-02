@@ -5,6 +5,7 @@ import { GroupThread } from '../comps/GroupThread';
 import {Configurations} from '../PropConfig/Props'
 import talktoserver from "../api/talktoserver"
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import { useFonts } from "expo-font";
 
 const lightBg = Configurations.colors.lightBg
 const primCol = Configurations.colors.primCol
@@ -25,22 +26,27 @@ const ChatGroupListScreen = ({navigation}) => {
         })
         
     },[])
-
+    let [fontsLoaded]= useFonts({
+        'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+        'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+      })
     const renderItem = ({item})=> 
         <GroupThread 
             groupName={item.grpName}
             groupMembersNum={''}
+            ff ="Poppins-Medium"
+            fe="Poppins-Regular"
             onPress={() => {
                 navigation.navigate('GroupChat', {gid: item.groupid})
             }}
         />
-
+        
     return (
         <View style={styles.header}>
             <ImageBackground
                 source={require('../assets/images/leaf.png')}
                 style={StyleSheet.absoluteFillObject}
-                blurRadius={110}>
+                blurRadius={80}>
             
                 
                     <FlatList 

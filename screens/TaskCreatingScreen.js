@@ -13,6 +13,7 @@ import { doc, setDoc,serverTimestamp ,collection,addDoc } from "firebase/firesto
 import { db } from '../firebase/fireStore';
 import talktoserver from "../api/talktoserver"
 import { category } from '../data/category'
+import { useFonts } from "expo-font";
 
 
 
@@ -35,7 +36,6 @@ const taskCategory = [
 ]
 
 const Wrapper = styled.ScrollView`
-height:30%;
 width:100%
 `
 const TaskButtonWrapper = styled.View`
@@ -89,7 +89,13 @@ const TaskCreatingScreen = ({ navigation }) => {
   let index = 0
 
   const onHandleCreate =async () => {
+    
+    let [fontsLoaded]= useFonts({
+      'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+      'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+    })
    
+
    await setDoc(doc(db, "tasks", user.uid), {
         uid: user.uid,
         id: user.uid,
@@ -293,11 +299,9 @@ useEffect (()=>{
 
     <KeyboardAvoidingView   behavior="height" keyboardVerticalOffset={-150}
     style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: Configurations.colors.backCol  }}>
-      <View style={styles.header}>
-       
-      </View>
+      
       <Wrapper>
-        <TaskButtonWrapper>
+        {/* <TaskButtonWrapper>
         <TaskBtn 
      textColor={textColorC ? "#ffffff" : "black"} 
      taskBtnColor={coursebgc?"#3D5A80":"#E5E5E5"} 
@@ -322,7 +326,7 @@ useEffect (()=>{
     // onBtnPress={eventPress}
   />
 
-        </TaskButtonWrapper>
+        </TaskButtonWrapper> */}
         <TaskTable 
             onRecBtnPress={onHandleCreate} 
             setTaskName={setTaskName}  
@@ -340,6 +344,7 @@ useEffect (()=>{
             setCategory_id={ setCategory_id}
             dummyList={grpList}
             grpNameVal={grpName}
+            ff="Poppins-Medium"
             bgC= {Configurations.colors.butCol}
             // grpDisp={grpListDisp}
             handleGroups={(item)=>{

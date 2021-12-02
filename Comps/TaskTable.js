@@ -15,10 +15,9 @@ const CardCon = Styled.View`
 width:${(props) => props.width};
 height:${(props) => props.height}px;
 background-color:${(props) => props.bgc};
-justify-content:center;
+justify-content:space-around;
 align-items:center;
-border-top-left-radius:25px ;
-border-top-right-radius:25px;
+padding-top:25px;
 display:flex
 flex-wrap:wrap;
 flex-direction:row;
@@ -27,8 +26,7 @@ const TextCon = Styled.View`
 display:flex;
 height:80%;
 width:300px;
-justify-content:flex-start;
-flex-direction:column;
+justify-content:space-between;
 flex-wrap:wrap;
 `
 
@@ -44,6 +42,7 @@ padding-top:5%
 `
 const TextInput3 = Styled.TextInput`
 width:100%;
+font-size:16px;
 
 `
 const PickerCon = Styled.View`
@@ -52,20 +51,24 @@ margin-top:10px
 `
 const PickerConTwo = Styled.View`
 width:100%;
-margin-top:10px;
+
 display: ${(props) => props.display};
+justify-content:space-around;
 
 `
 const TimeCon = Styled.View`
-height:14%;
+height:35%;
+justify-content:space-around;
+
 `
 const ButtonCon = Styled.View`
-margin-top:-75px
+align-items:center;
+margin-top:10%;
 `
 const TaskTable = ({
 
   text = 'Create ',
-  height = 900,
+  height = 1200,
   width = "100%",
   onRecBtnPress = () => { },
   taskName,
@@ -88,7 +91,8 @@ const TaskTable = ({
  grpDisp='flex',
  setCategory_id,
  handleGroups= ()=>{},
- title='Create Task'
+ title='Create Task',
+ ff="Galvji"
 }) => {
   const [dbResultGrp, setDbResultGrp] = useState()
   const [grpList, setGrpList] = useState([])
@@ -149,24 +153,25 @@ useEffect (()=>{
   return (
     <CardCon bgc={Configurations.colors.primCol} height={height} width={width}>
       <TextCon>
-        <TextInput1 tColor={Configurations.colors.secCol}   ><Text>{title} </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
+        <TextInput1 tColor={Configurations.colors.secCol}>
+          <Text style={{fontFamily:ff}} >
+            {title}
+            </Text> <FontAwesome5 name="edit" size={22} color={Configurations.colors.secCol} />
+          
         </TextInput1>
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
           Task Name
         </TextInput2>
         <TextInput3
+        
           style=
-          {{
-            height: 40,
-            borderBottomWidth: 1,
-            borderBottomColor: 'white',
-          }}
+          {styles.inputStyle}
           onChangeText={(text) => { setTaskName(text) }}
           value={taskName}
           placeholder="Type the task name"
         >
-        </TextInput3>
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+        </TextInput3 >
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
           Task Category
         </TextInput2>
         <PickerCon>
@@ -187,21 +192,24 @@ useEffect (()=>{
              <TextInput
                         style={{
                         borderWidth:1, 
-                        borderColor:'#ccc', 
+                        borderColor:Configurations.colors.secCol, 
                         padding:2, 
                         height:35, 
                         fontSize:18, 
                         textAlign:'center',
-                        color:Configurations.colors.secCol}}
+                        color:Configurations.colors.secCol,
+
+                      }}
                         editable={false}
                         placeholder=""
-                        value={Value} />
+                        value={Value}
+                         />
           </ModalSelector>
             
         </PickerCon>
 
         <PickerConTwo display={grpListDisp} >
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol, marginBottom:10}} >
           Please Select a group 
         </TextInput2>
           <ModalSelector
@@ -215,14 +223,16 @@ useEffect (()=>{
             borderBottomWidth="none" 
             >
              <TextInput
-                        style={{
-                        borderWidth:1, 
-                        borderColor:'#ccc', 
-                        padding:2, 
-                        height:35, 
-                        fontSize:18, 
-                        textAlign:'center',
-                        color:Configurations.colors.secCol}}
+                      style=
+                      {{
+                          borderWidth:1, 
+                          borderColor:Configurations.colors.secCol, 
+                          padding:2, 
+                          height:35, 
+                          fontSize:18, 
+                          textAlign:'center',
+                          color:Configurations.colors.secCol
+                      }}
                         editable={false}
                         placeholder="no group selected"
                         value={grpNameVal}
@@ -237,45 +247,47 @@ useEffect (()=>{
          
         >
         </TextInput3> */}
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
           Location
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
+        <TextInput3 style={styles.inputStyle}
           placeholder="Type the Location"
           onChangeText={(text) => { setLocation(text) }}
           value={location}
           // defaultValue={text}
         ></TextInput3>
-         <TextInput2 style={{ color: Configurations.colors.secCol }} >
+         <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
+           
          Description
         </TextInput2>
-        <TextInput3 style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'white', color: Configurations.colors.secCol }}
+        <TextInput3 style=
+          {styles.inputStyle}
           placeholder="Describ your propose"
           onChangeText={(text) => { setDesc(text) }}
           value={desc}
           // defaultValue={text}
         ></TextInput3>
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+        <TimeCon>
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
           Start Time
         </TextInput2> 
-        <TimeCon>
           <AppTimePicker1
             startTime={startTime} setStartTime={setStartTime} 
             />
           
-        </TimeCon>
-        <TextInput2 style={{ color: Configurations.colors.secCol }} >
+
+        <TextInput2 style={{fontFamily:ff, color:Configurations.colors.secCol}} >
           End Time
         </TextInput2>
-        <TimeCon>
+        
           <AppTimePicker2
            endTime={endTime}  setEndTime={setEndTime}  
            />
         </TimeCon>
-      </TextCon>
       <ButtonCon>
         <RecBtn txtC={txtC} bgC={bgC} style={{}} onRecBtnPress={onRecBtnPress} text={text} bgC={bgC}/>
       </ButtonCon>
+      </TextCon>
 
     </CardCon>
   );
@@ -283,5 +295,25 @@ useEffect (()=>{
 };
 
 
+const styles=StyleSheet.create({
+  
+  
+  
+  inputStyle: 
+      {
+            height: 40,
+            borderBottomWidth: 3,
+            borderBottomColor: 'white',
+            fontSize:16,
+            fontFamily:'Galvji'
+      },
 
+  labelStyle:
+      {
+            color: Configurations.colors.secCol ,
+
+      }
+            
+
+})
 export default TaskTable;
