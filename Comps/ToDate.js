@@ -1,6 +1,6 @@
 import { light } from '@eva-design/eva';
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,ImageBackground } from 'react-native'
 import { Configurations } from '../PropConfig/Props';
 
 const lightBg = Configurations.colors.lightBg;
@@ -33,11 +33,14 @@ months[10]= "November";
 months[11]= "December";
 let month = months[d.getDay()];
 
-export const ToDate = () => {
+export const ToDate = ({ff}) => {
     return (
         <View style={styles.dateHeader}>
-            <Text style={{fontSize:60, fontWeight:'500'}}> { d.getDate()}</Text>
-            <Text style={{fontSize:24}}> {day}</Text>
+            
+                            
+                <Text style={{fontSize:60, fontFamily:ff}}> { d.getDate()}</Text>
+                <Text style={{fontSize:24, fontFamily:ff}}> {day}</Text>
+            
         </View>
     )
 }
