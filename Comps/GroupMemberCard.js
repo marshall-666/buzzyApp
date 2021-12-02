@@ -26,7 +26,7 @@ display:flex;
 flex-direction:row;
 width:75%;
 align-items:center;
-justify-content:space-evenly;
+justify-content:flex-start;
 
 `;
 
@@ -34,6 +34,7 @@ const TextCont = Styled.View`
 display:flex;
 flex-direction:column;
 justify-content:flex-end;
+margin:5%;
 `;
 
 
@@ -47,30 +48,26 @@ width:32%;
 `
 
  export const GroupMemberCard = ({
-     person= "whatevr"
+     person= "whatevr",
+     ff=''
  })=>
  {
     const navigation = useNavigation();
    
     return(
-        <CardCont backgroundColor='#ffffff' style={{ shadowColor: '#000000',
-        shadowOpacity: 25,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 4,}}>
+        <CardCont backgroundColor='#ffffff80' style={{shadowColor: '#000000',
+      }}>
             
                 <MidCont onPress={()=>{navigation.navigate('IndividualMemberScreen')}}>  
                     <Image
                     style={{height:80, width:80, borderRadius: 10}} 
                     source={{uri:'https://i.pravatar.cc/300'}}/>    
                     <TextCont>    
-                        <Text style={{fontSize:20}}>{person}</Text>
+                        <Text style={{fontSize:20, fontFamily:ff}}>{person}</Text>
                     </TextCont>       
                 </MidCont>
         
-                <IconCont style={{borderLeftColor:"black", borderLeftWidth:0.5}} onPress={()=>{navigation.navigate('IndividualMemberScreen')}}>
+                <IconCont  onPress={()=>{navigation.navigate('IndividualMemberScreen')}}>
                 <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
                 </IconCont>
                 

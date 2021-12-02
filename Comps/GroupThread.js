@@ -32,7 +32,8 @@ display:flex;
 flex-direction:row;
 width:75%;
 align-items:center;
-justify-content:space-evenly;
+justify-content:flex-start
+padding:1%;
 `;
 
 const TextCont = Styled.View`

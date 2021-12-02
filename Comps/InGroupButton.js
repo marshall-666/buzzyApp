@@ -2,16 +2,18 @@ import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View, TouchableOpacity } from 'react-native'
 import { Octicons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { Configurations } from '../PropConfig/Props';
 
 const InGroupButton = ({
     btnText='CHAT',
     handleBtnOnPress=()=>{},
-    icon="comment-discussion"
+    icon="comment-discussion",
+    ff=''
 }) => {
     return (
         <TouchableOpacity onPress={handleBtnOnPress}>
             <View style= {styles.container} >
-                <Text style={{color: '#3D5A80',  textAlign: 'center'}}>{btnText}</Text>
+                <Text style={{color: '#3D5A80',  textAlign: 'center', fontFamily:ff}}>{btnText}</Text>
                 <Octicons name={icon} size={35} color="black" />
             </View>
         </TouchableOpacity>    
@@ -29,8 +31,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         margin: 10,
-        borderRadius: 15,
-        shadowColor: '#000000',
+        borderRadius: 10,
+        shadowColor: Configurations.colors.secCol,
         shadowOpacity: 25,
         shadowOffset: {
             width: 0,

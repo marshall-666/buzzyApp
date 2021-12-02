@@ -29,7 +29,7 @@ const ChatGroupListScreen = ({navigation}) => {
     const renderItem = ({item})=> 
         <GroupThread 
             groupName={item.grpName}
-            groupMembersNum={''}
+            groupMembersNum={item.mem_count}
             onPress={() => {
                 navigation.navigate('GroupChat', {gid: item.groupid})
             }}
@@ -40,7 +40,7 @@ const ChatGroupListScreen = ({navigation}) => {
             <ImageBackground
                 source={require('../assets/images/leaf.png')}
                 style={StyleSheet.absoluteFillObject}
-                blurRadius={110}>
+                blurRadius={90}>
             
                 
                     <FlatList 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react'
-import { ScrollView, StyleSheet, Text, View, FlatList, Pressable, Image, SectionList } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, FlatList, Pressable, Image, SectionList, ImageBackground } from 'react-native'
 import NavBar from '../comps/NavBar'
 import MembersInGroupCard from '../comps/MembersInGroupCard'
 import { GroupMemberCard } from '../comps/GroupMemberCard'
@@ -11,12 +11,15 @@ import styled from 'styled-components/native'
 import talktoserver from "../api/talktoserver"
 import IndividualEventCard from '../comps/IndividualEventCard';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import { Configurations } from '../PropConfig/Props'
+import { useFonts } from "expo-font";
+
 
 
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92%;
+top:90%;
 height:100%
 width:100%
 left:5%
@@ -30,11 +33,15 @@ const GroupHomeScreen = ({
 }) => {
 
     
+    let [fontsLoaded]= useFonts({
+        'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+        'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+      })
+      // state
     
     //Group Information Retrieval Start
 
     const groupInfo = route.params
-    console.log(groupInfo.id)
     const SelectGrpId = groupInfo.id
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
@@ -76,13 +83,14 @@ const GroupHomeScreen = ({
 
     
     const [dbResult, setDbResult] = useState()
-
+    const [isLoading, setIsLoading] = useState(true)
 
   
 
 
     useEffect(()=>{
 
+        
                 var loadTaskList = {
                     op: 'get_tasks_ls',
                     user_id: user.uid,
@@ -102,31 +110,31 @@ const GroupHomeScreen = ({
                     //   console.log(grpTaskArr)
                 }
         filterGrpTask()        // console.log(dbResult)
-    },[])
+    },[dbResult])
 
     return (
         <View style={styles.container}>
-            <ScrollView style={{flex: 1}}>
+            <ImageBackground
+              source={require('../assets/images/blueHex.png')}
+              style={{height:'100%', width:'100%', position:'absolute', }}
+              blurRadius={90}>
+
+            
+            <ScrollView style={{flex: 1}} contentContainerStyle={{alignItems:'center'}}>
 
                 <View style={styles.midDiv}>
-                    
                     <View style={styles.topDiv}>   
                         <View style={styles.textCont}>
-                            <Text style={{fontSize: 30}}>{grpName}</Text>
-                            <Text>{grpMemNum} Members</Text>
+                            <Text style={{fontSize: 30, fontFamily:"Poppins-Medium"}}>{grpName}</Text>
+                            <Text style={{fontFamily:"Poppins-Regular"}}>{grpMemNum} Members</Text>
                         </View>    
                             <Image source={require("../assets/BuzzyBeeLogo.png")} />
                     </View>     
                     
-                    <Pressable onPress={onSchedulePress}>
-                        <View>
-                            <Text>Schedule Meeting</Text>
-                        </View>
-                    </Pressable>
+                  
                 </View>
 
-                <View style={styles.lowerDiv}>
-                    
+                
                     <View style={styles.membersView}>
                         
                         <FlatList  
@@ -135,15 +143,17 @@ const GroupHomeScreen = ({
                             data={memsArray}
                             renderItem={({item})=> <GroupMemberCard 
                             person={item}
+                            ff="Poppins-Regular"
                             />}
                         />
-                        
-                        
+                    
+                    
                     </View>
                     
                     <View style={{width: '100%', alignItems: 'center', marginBottom: 40}}>
                         <Text style=
                             {{
+                                fontFamily:"Poppins-Medium",
                                 fontSize: 24, 
                                 padding: 28, 
                                 color: '#ffffff', 
@@ -156,9 +166,13 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {info: MembersData.name})}} btnText={'MEETING'}
+                            ff='Poppins-Medium'
+                            icon="clock"/>
                             <InGroupButton 
-                                handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
+                                handleBtnOnPress = {()=>{navigation.navigate('ChatGrouplist')}}
+                                ff='Poppins-Medium'
+                                />
                         </View>
                             
                     
@@ -185,17 +199,18 @@ const GroupHomeScreen = ({
                                                 EventStartTime={item.start}
                                                 EventEndTime={item.end}
                                                 IconDisplay="none"
+                                                ff='Poppins-Medium'
+                                                fe='Poppins-Regular'
                                                 />}
                         />
                     </View>
                                 
 
-                </View>
             </ScrollView>
+            </ImageBackground>
             <NavBarCon>
                 <NavBar/>
             </NavBarCon>
-            
         </View>
     )
 }
@@ -219,10 +234,15 @@ const styles = StyleSheet.create({
     },
     
     midDiv: {
-        width: '100%',
+        width: '90%',
         padding: 30,
+        backgroundColor:'rgba(148, 189, 212, 0.5)',
+        marginTop:"10%",
+        marginBottom:"5%",
+        borderRadius:10
         
     },
+        
     
     lowerDiv: {
         width: '100%',

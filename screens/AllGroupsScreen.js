@@ -80,14 +80,14 @@ let [fontsLoaded]= useFonts({
             
             
                 <View style={styles.imgCont}>
-                    <Image style ={{width:150, height:150}}source={require('../assets/images/leaf.png')}/>
+                    <Image style ={{width:130, height:130}}source={require('../assets/images/leaf.png')}/>
                         <View>
                             
                             <Text style={styles.headerText} >
                                 You are currently in 
                             </Text>
                             <Text style={styles.headerText} >
-                                {grmpNum} Groups  
+                                {grmpNum} Group(s)  
                             </Text>
 
                         </View>
@@ -176,8 +176,9 @@ const styles = StyleSheet.create({
     {
         flexDirection:'row', 
         width:'100%', 
-        justifyContent:'space-around', 
-        alignItems:'center'
+        justifyContent:'space-between', 
+        alignItems:'center',
+        padding:"5%"
     },
     thread:
     {   
@@ -199,8 +200,9 @@ const styles = StyleSheet.create({
     navCont:
     {
         alignItems:'center',
-        marginBottom: 5,
+        marginBottom: '7%',
         justifyContent:'center',
+        marginTop:15
         
     }
 

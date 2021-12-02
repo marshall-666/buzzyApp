@@ -52,9 +52,9 @@ const NavBar = ({
       <TouchableOpacity onPress={()=>{navigation.navigate('Dashboard')}}>
       <Foundation name="home" size={35} color="white"/>
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=>{navigation.navigate('CourseInfo')}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Taskboard')}}>
         
-      <MaterialIcons name="class" size={30} color="white" />
+        <FontAwesome5 name="tasks" size={30} color="white" />
       </TouchableOpacity>
       
       <YellowCircle 

@@ -25,7 +25,7 @@ const lightBg = Configurations.colors.lightBg
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92.5%;
+top:90%;
 height:100%
 width:100%
 left:5%
@@ -91,7 +91,7 @@ return (
                 source={{uri:imgSrc}}/>
                 
                 
-                <View style={{width:"100%", alignItems:'center', top:"-5%"}}>
+                <View style={{width:"100%", alignItems:'center', top:"-5%",justifyContent:'space-evenly'}}>
                     <Text style={{fontSize:25, color:Configurations.colors.secCol}}>{user}</Text>
                     <Text></Text>
                     <View style={styles.memberRoleLabelCont}>
@@ -109,21 +109,7 @@ return (
                     </View>
                     </View>
 
-                    <View style={styles.IconCont}>
-                        <Foundation name="calendar" size={50} color="green" 
-                        style={{
-                            shadowColor: '#171717',
-                            shadowOffset: {width: -2, height: 4},
-                            shadowOpacity: 0.2,
-                            shadowRadius: 3,
-                        }} />
-                        <Ionicons name="ios-chatbubble-ellipses-sharp" size={40} color="blue" style={{
-                            shadowColor: '#171717',
-                            shadowOffset: {width: -2, height: 4},
-                            shadowOpacity: 0.2,
-                            shadowRadius: 3,
-                        }} />
-                    </View>
+                   
                 
 
                     <View style={styles.memberInfoCont}>    

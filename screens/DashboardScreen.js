@@ -267,6 +267,8 @@ const DashboardScreen = ({navigation }) => {
       alignItems: 'center', 
       justifyContent: 'flex-start', 
       backgroundColor: primCol,
+      
+      maxWidth:"100%"
     }}>
 
       <Wrapper
@@ -316,8 +318,8 @@ const DashboardScreen = ({navigation }) => {
           onDayPress={onDayPress}
             style=
               {{
-                maxWidth: 400,
-                width:400,
+                maxWidth: '100%',
+                width:'100%',
                 height: 400,
               }}
             // markingType={'multi-dot'}

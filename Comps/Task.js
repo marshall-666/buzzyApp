@@ -70,7 +70,9 @@ export const Task = ({
     time = "Sometime",
     location="sw14",
     instructor="Henry Leung",
-    courseTime=""
+    courseTime="",
+    ff='',
+    fe=''
 })=> {
     // states to change the height of the task card.
     const [height, setHeight] = useState('5%')
@@ -105,7 +107,7 @@ export const Task = ({
         alignItems:"center",
         marginTop:20,
         marginBottom:50,
-        width:"95%"
+        width:"95%",
         }}
         >
     
@@ -116,7 +118,7 @@ export const Task = ({
             }}
             >
                 <Divider/>
-                <Text style={{fontSize:25, margin:"5%"}}>
+                <Text style={{fontSize:25, margin:"5%", fontFamily:ff}}>
                 {title}
                 </Text>
             </TaskHeader>

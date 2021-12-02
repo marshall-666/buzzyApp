@@ -38,7 +38,7 @@ height:100%;
 const NavBarCon = styled.View`
 position:absolute;
 z-index:2;
-top:92%;
+top:90%;
 height:100%
 width:100%
 left:5%
