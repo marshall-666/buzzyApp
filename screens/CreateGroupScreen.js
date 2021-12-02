@@ -31,7 +31,7 @@ const CreateGroupScreen = ({
         
         if (txtCol == 'white')
         {
-            navigation.navigate('AllGroups') 
+            navigation.navigate('Dashboard') 
 
         }
 

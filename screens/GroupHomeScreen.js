@@ -41,7 +41,8 @@ const GroupHomeScreen = ({
     
     //Group Information Retrieval Start
 
-    const {groupInfo,groupName , groupId,members,numOfMem} = route.params
+    const {groupName , groupId,members,numOfMem} = route.params
+    const groupInfo = route.params
     // const SelectGrpId = groupInfo.id
     // const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
@@ -51,8 +52,8 @@ const GroupHomeScreen = ({
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
     const { user, users } = useContext(AuthenticatedUserContext);
-
     const [grpTaskArr, setGrpTaskArr] = useState([])
+    
     useEffect(()=>{
        
             // setGrpName(groupName)
@@ -68,15 +69,17 @@ const GroupHomeScreen = ({
 
                 if(memsArray.length < groupInfo.members.length)
                 {memsArray.push(memsObj.name)}
+
+                console.log(groupInfo)
             }
             
         }
             
+        console.log(memsArray)
         loadGroupMembers()
        
       
     },[groupInfo])
-
 
     // Task Information retrieval Start
     

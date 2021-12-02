@@ -262,7 +262,7 @@ useEffect (()=>{
         </TextInput2>
         <TextInput3 style=
           {styles.inputStyle}
-          placeholder="Describ your propose"
+          placeholder="Describe your purpose"
           onChangeText={(text) => { setDesc(text) }}
           value={desc}
           // defaultValue={text}

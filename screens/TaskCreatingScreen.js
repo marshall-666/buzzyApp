@@ -130,14 +130,9 @@ await talktoserver(createTask).then((rd) => {
 })
 // console.log(createTask)
       navigation.navigate('Dashboard')
-  // console.log(category_id)
 
     }
-    // console.log(Value)
-  
-    // console.log(category_id)
 
-   
     useEffect(()=>{
 
       
@@ -168,7 +163,6 @@ useEffect (()=>{
   })
 
 },[dbResult])
-
 
 
     useEffect(()=>
