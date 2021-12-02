@@ -34,10 +34,11 @@ const GroupHomeScreen = ({
     //Group Information Retrieval Start
 
     const  {groupInfo,numOfMem ,groupId, groupName,members} = route.params
-    console.log(groupName)
-    // console.log(groupInfo.id)
-    const SelectGrpId = id
-    const groupid =route.params.id
+  
+            // console.log(members[1].name)  
+            // console.log(groupInfo.id)
+    // const SelectGrpId = id
+    // const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
     const [memsIdObj, setMemsIdObj]=useState({})
     const [memsObj, setMemsObj]=useState({})
@@ -63,7 +64,7 @@ const GroupHomeScreen = ({
                 if(memsArray.length < groupInfo.members.length)
                 {memsArray.push(memsObj.name)}
             }
-            // console.log(memsIdObj)
+            
         }
             
         loadGroupMembers()
@@ -97,7 +98,7 @@ const GroupHomeScreen = ({
                 {
                     const groupTaskArray = dbResult.filter(function(el)
                       {
-                        return el.gp_id == groupid
+                        return el.gp_id == groupId
                       })
                       setGrpTaskArr(groupTaskArray)
                     //   console.log(grpTaskArr)
@@ -121,7 +122,7 @@ const GroupHomeScreen = ({
                     
                     <Pressable onPress={onSchedulePress}>
                         <View>
-                            <Text>Schedule Meeting</Text>
+                            <Text>Schedule Meeting </Text>
                         </View>
                     </Pressable>
                 </View>
@@ -151,20 +152,23 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}>
-                            {groupName}
+                            {groupName} 
                         </Text>
                         
 
                         <View style={{flexDirection: 'row'}}>
                             
                             <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting',
-                             {
+                             { 
+                                groupInfo: groupInfo,
                                 groupId:groupId,
                                 groupName:groupName,
-                                numOfMem:numOfMem
+                                numOfMem:numOfMem,
+                                memsArray:memsArray,
+                                members:members
                             
-                            
-                            })}} btnText={'MEETING'} icon="clock"/>
+                            }
+                            )}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>
@@ -181,7 +185,7 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}> 
-                                Upcoming Events for {groupName}
+                                Upcoming Events for {groupName} 
                         </Text>
                         <FlatList
                         contentContainerStyle={{maxWidth:'100%'}}
