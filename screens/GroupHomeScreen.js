@@ -41,9 +41,9 @@ const GroupHomeScreen = ({
     
     //Group Information Retrieval Start
 
-    const groupInfo = route.params
-    const SelectGrpId = groupInfo.id
-    const groupid =route.params.id
+    const {groupInfo,groupName , groupId,members,numOfMem} = route.params
+    // const SelectGrpId = groupInfo.id
+    // const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
     const [memsIdObj, setMemsIdObj]=useState({})
     const [memsObj, setMemsObj]=useState({})
@@ -125,7 +125,7 @@ const GroupHomeScreen = ({
                 <View style={styles.midDiv}>
                     <View style={styles.topDiv}>   
                         <View style={styles.textCont}>
-                            <Text style={{fontSize: 30, fontFamily:"Poppins-Medium"}}>{grpName}</Text>
+                            <Text style={{fontSize: 30, fontFamily:"Poppins-Medium"}}>{groupName}</Text>
                             <Text style={{fontFamily:"Poppins-Regular"}}>{grpMemNum} Members</Text>
                         </View>    
                             <Image source={require("../assets/BuzzyBeeLogo.png")} />
@@ -166,7 +166,19 @@ const GroupHomeScreen = ({
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {info: MembersData.name})}} btnText={'MEETING'}
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {
+                                info: MembersData.name,
+                                members:members,
+                                groupInfo:groupInfo,
+                                groupName:groupName ,
+                                 groupId:groupId,
+                               numOfMem:numOfMem
+                                
+                            
+                            
+                            
+                            
+                            })}} btnText={'MEETING'}
                             ff='Poppins-Medium'
                             icon="clock"/>
                             <InGroupButton 

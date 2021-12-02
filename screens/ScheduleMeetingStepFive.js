@@ -27,7 +27,7 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
 // meetingTimeAppear="November 20th",
 // date="November 20th"
 }) => {
-    const { meetingSlot, Wday, mm, dd,inputTitle,description, startTime, endTime,location} = route.params;
+    const { meetingSlot, Wday, mm, dd,inputTitle,description, startTime, endTime,location,id} = route.params;
     const { user, users } = useContext(AuthenticatedUserContext);
    
     let NewstartTime = startTime.toISOString().slice(0, 10)+ " " + startTime.toISOString().slice(11, -1)
