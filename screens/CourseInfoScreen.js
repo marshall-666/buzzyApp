@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text, FlatList, Image, ImageBackground, Animated, StatusBar} from 'react-native';
+import { Button, View, Text, FlatList, Image, ImageBackground, Animated, StatusBar, StyleSheet} from 'react-native';
 import AppHeader from '../comps/AppHeader';
 import styled from 'styled-components/native';
 import NavBar from '../comps/NavBar'
@@ -8,10 +8,6 @@ import {CourseData} from '../data/CourseData';
 import { Configurations } from '../PropConfig/Props';
 // import Animated from 'react-native-reanimated';
 import { scrollParent } from 'dom-helpers';
-
-
-
-const image = { uri: '' };
 
 const Wrapper = styled.View`
 display:flex;
@@ -53,10 +49,12 @@ const CourseInfoScreen = () => {
   return (
   
     <Wrapper>
-        
-       
-          <CourseCardWrapper>
-          <Animated.View style={{width:'100%'}}>   
+        <ImageBackground   
+        source={require('../assets/purpleFlower.jpg')}
+        style={StyleSheet.absoluteFillObject}
+        blurRadius={80}
+        />
+          <Animated.View style={{flex:1}}>   
              
                 <Animated.FlatList
                 onScroll={Animated.event(
@@ -96,7 +94,7 @@ const CourseInfoScreen = () => {
                 
 
                 return <Animated.View style={opacity, {transform:[{scale}]}}>
-                
+         
                 <Task 
                 title={item.course}
                 time={item.CourseDay}
@@ -110,12 +108,12 @@ const CourseInfoScreen = () => {
         
        
 
-          </Animated.View>
-          </CourseCardWrapper>
-           
             <NavBarCon>
                 <NavBar/>
             </NavBarCon>
+          </Animated.View>
+
+           
     </Wrapper>
    
 

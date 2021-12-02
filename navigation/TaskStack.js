@@ -31,8 +31,7 @@ import { Entypo } from '@expo/vector-icons'
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import IndividualMemberScreen from '../screens/IndividualMemberScreen';
-import ChatGroupListScreen from '../screens/ChatGroupListScreen'
-// import ChatGroupListScreen from '../screens/ChatGrouplistScreen'
+import ChatGroupListScreen from '../screens/ChatGrouplistScreen'
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -246,6 +245,7 @@ export default function TaskboardStack() {
       <Stack.Screen name="GroupChat" component={GroupChatScreen} />
 
       <Stack.Screen name="IndividualMemberScreen" component={IndividualMemberScreen} />
+      <Stack.Screen name="ChatGroupListScreen" component={ChatGroupListScreen} />
     
     
     </Stack.Navigator>

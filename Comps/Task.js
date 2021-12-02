@@ -34,7 +34,7 @@ flex-direction:row;
 width:100%;
 height:80px;
 align-items:center;  
-background-color:white;
+background-color:#ffffff90;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
 overflow:hidden;
