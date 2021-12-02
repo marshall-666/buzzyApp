@@ -305,7 +305,8 @@ const DashboardScreen = ({navigation }) => {
             // textDayHeaderFontWeight: '300',
             textDayFontSize: 16,
             textMonthFontSize: 16,
-            textDayHeaderFontSize: 13
+            textDayHeaderFontSize: 13,
+            dotStyle:{width:12, height:3}
           }}
 
 

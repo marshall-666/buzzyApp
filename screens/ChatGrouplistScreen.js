@@ -46,18 +46,8 @@ const ChatGroupListScreen = ({navigation}) => {
                     <FlatList 
                         contentContainerStyle={{ maxWidth:'100%', alignItems:'center'}}
                         scrollEnabled={true}
-                        data={dbResult}
-                        renderItem={({item})=> <GroupThread 
-                                                        groupName={item.groups.grpName}
-                                                        groupMembersNum={item.groups.mem_count}
-                                                        // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupChat', 
-                                                        {
-                                                            name: item.groups.grpName,
-                                                            numOfMem: item.groups.mem_count ,
-                                                            members: item.groups.members,
-                                                            id:item.groups.groupid
-                                                        })}}/>}
+                        data={dbGroupLs}
+                        renderItem={renderItem}
                         />
                     
                 
