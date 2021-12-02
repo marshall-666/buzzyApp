@@ -108,10 +108,10 @@ let [fontsLoaded]= useFonts({
                                                         groupMembersNum={item.groups.mem_count}
                                                         ff="Poppins-Medium"
                                                         // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {name: item.groups.grpName,
+                                                        onPress={()=>{ navigation.navigate('GroupHome', {groupName: item.groups.grpName,
                                                          numOfMem: item.groups.mem_count ,
                                                          members: item.groups.members,
-                                                         id:item.groups.groupid
+                                                         groupId:item.groups.groupid
                                                         })}}/>}
                         />
                     

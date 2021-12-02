@@ -1,4 +1,4 @@
-import React , { useState}from 'react'
+import React , { useState, useContext}from 'react'
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import NavBar from '../comps/NavBar';
 import {Configurations} from '../PropConfig/Props'
@@ -9,6 +9,7 @@ import styled from 'styled-components/native';
 import RecBtn from '../comps/RecBtn';
 import LottieView from 'lottie-react-native';
 import talktoserver from "../api/talktoserver"
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 const NavBarCon = styled.View`
 position:absolute;
@@ -27,6 +28,11 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
 // date="November 20th"
 }) => {
     const { meetingSlot, Wday, mm, dd,inputTitle,description, startTime, endTime,location} = route.params;
+    const { user, users } = useContext(AuthenticatedUserContext);
+   
+    let NewstartTime = startTime.toISOString().slice(0, 10)+ " " + startTime.toISOString().slice(11, -1)
+    let NewendTime = endTime.toISOString().slice(0, 10)+ " " + endTime.toISOString().slice(11, -1)
+   
 
   const [dbResult, setDbResult] = useState()
 
@@ -39,11 +45,11 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
             tkname: inputTitle,
             descrip: description,
             category_id: '1',
-            start_t: startTime,
-            end_t: endTime,
+            start_t: NewstartTime,
+            end_t: NewendTime,
             loca: location,
             group_id: '1',
-            user_id: '1',
+            user_id: user.uid,
         }
        
         console.log(createTask)
@@ -86,7 +92,8 @@ const ScheduleMeetingStepFiveScreen = ({navigation,route,
 
                 <View style={{display:'flex', flexDirection:'row', }}>
             
-            <RecBtn text="Back" width="140" height="50" bgC={butCol} onRecBtnPress={()=>{navigation.navigate('MeetingStep2'
+            <RecBtn text="Back" width="140" height="50" bgC={butCol} onRecBtnPress={
+                ()=>{navigation.navigate('MeetingStep2'
             ,{
                
                 id: id,
