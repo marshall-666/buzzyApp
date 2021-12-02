@@ -58,7 +58,7 @@ width:80%;
 height:45px;
 border-bottom-width:3px;
 border-bottom-color:#94BDD4;
-color:white;
+color:black;
 `
 const InputContainer = styled.View`
 align-items:flex-start;
