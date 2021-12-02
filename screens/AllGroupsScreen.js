@@ -78,10 +78,10 @@ useEffect(()=>{
                                                         groupName={item.groups.grpName}
                                                         groupMembersNum={item.groups.mem_count}
                                                         // groupImg={item.groups.imageUri}
-                                                        onPress={()=>{ navigation.navigate('GroupHome', {name: item.groups.grpName,
+                                                        onPress={()=>{ navigation.navigate('GroupHome', {groupName: item.groups.grpName,
                                                          numOfMem: item.groups.mem_count ,
                                                          members: item.groups.members,
-                                                         id:item.groups.groupid
+                                                         groupId:item.groups.groupid
                                                         })}}/>}
                         />
                     

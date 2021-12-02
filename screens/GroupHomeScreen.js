@@ -33,14 +33,15 @@ const GroupHomeScreen = ({
     
     //Group Information Retrieval Start
 
-    const groupInfo = route.params
-    console.log(groupInfo.id)
-    const SelectGrpId = groupInfo.id
+    const  {groupInfo,numOfMem ,groupId, groupName,members} = route.params
+    console.log(groupName)
+    // console.log(groupInfo.id)
+    const SelectGrpId = id
     const groupid =route.params.id
     const [memsArray, setMemsArray]=useState([])
     const [memsIdObj, setMemsIdObj]=useState({})
     const [memsObj, setMemsObj]=useState({})
-    const [grpName, setGrpName]=useState()
+    // const [grpName, setGrpName]=useState()
     const [grpMemNum, setGrpMemNum]=useState()
     const [grpMems, setGrpMems]=useState()
     const { user, users } = useContext(AuthenticatedUserContext);
@@ -48,8 +49,8 @@ const GroupHomeScreen = ({
     const [grpTaskArr, setGrpTaskArr] = useState([])
     useEffect(()=>{
        
-            setGrpName(groupInfo.name)
-            setGrpMemNum(groupInfo.numOfMem)   
+            // setGrpName(groupName)
+            setGrpMemNum(numOfMem)   
             
             const loadGroupMembers = async()=>
             {
@@ -112,7 +113,7 @@ const GroupHomeScreen = ({
                     
                     <View style={styles.topDiv}>   
                         <View style={styles.textCont}>
-                            <Text style={{fontSize: 30}}>{grpName}</Text>
+                            <Text style={{fontSize: 30}}>{groupName}</Text>
                             <Text>{grpMemNum} Members</Text>
                         </View>    
                             <Image source={require("../assets/BuzzyBeeLogo.png")} />
@@ -150,13 +151,20 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}>
-                            {grpName}
+                            {groupName}
                         </Text>
                         
 
                         <View style={{flexDirection: 'row'}}>
                             
-                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting', {info: MembersData.name})}} btnText={'MEETING'} icon="clock"/>
+                            <InGroupButton handleBtnOnPress =  {()=>{navigation.navigate('ScheduleMeeting',
+                             {
+                                groupId:groupId,
+                                groupName:groupName,
+                                numOfMem:numOfMem
+                            
+                            
+                            })}} btnText={'MEETING'} icon="clock"/>
                             <InGroupButton 
                                 handleBtnOnPress = {()=>{navigation.navigate('SingleChatThread')}}/>
                         </View>
@@ -173,7 +181,7 @@ const GroupHomeScreen = ({
                                 width: '100%', 
                                 textAlign: 'center'
                             }}> 
-                                Upcoming Events for {grpName}
+                                Upcoming Events for {groupName}
                         </Text>
                         <FlatList
                         contentContainerStyle={{maxWidth:'100%'}}

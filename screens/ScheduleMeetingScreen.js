@@ -49,7 +49,7 @@ const Item = ({ item, onPress, backgroundColor, textColor, navigation }) => (
     <Text style={[styles.title2, textColor]}>{item.title}</Text>
   </Pressable>
 );
-const TaskboardScreen = ({ navigation }) => {
+const TaskboardScreen = ({ navigation, route}) => {
   const [tasks, setTasks] = useState(category)
   const [courses, setCourses] = useState(coursesData)
   const [groups, setGroups] = useState(groupsData)
@@ -65,7 +65,9 @@ const TaskboardScreen = ({ navigation }) => {
   const [showTest, setShowTest] = useState(false)
   const [dbResult, setDbResult] = useState()
   // const [Schedule, setSchedule] = useState([])
+ const  { groupName, groupId} = route.params
 
+  
 const Schedule=[];
   const Courses = [
     {
@@ -387,9 +389,9 @@ const Schedule=[];
   // console.log(Schedule.length)
   var loadSlots = {
     op: 'load_slot',
-    group_id: '1',
+    group_id: groupId,
   }
-
+console.log(id)
   talktoserver(loadSlots).then((rd) => {
     setDbResult(rd)
   })
