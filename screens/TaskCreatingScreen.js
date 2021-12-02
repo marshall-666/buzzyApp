@@ -88,12 +88,12 @@ const TaskCreatingScreen = ({ navigation }) => {
   const groups =[]
   let index = 0
 
+  let [fontsLoaded]= useFonts({
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
+  })
   const onHandleCreate =async () => {
     
-    let [fontsLoaded]= useFonts({
-      'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
-      'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf')
-    })
    
 
    await setDoc(doc(db, "tasks", user.uid), {
@@ -129,7 +129,7 @@ await talktoserver(createTask).then((rd) => {
     console.log(dbResult)
 })
 // console.log(createTask)
-      navigation.navigate('Taskboard')
+      navigation.navigate('Dashboard')
   // console.log(category_id)
 
     }
