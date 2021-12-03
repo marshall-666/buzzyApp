@@ -1,6 +1,6 @@
 // imports from dependancies ==========
 import React, { useState, useEffect } from 'react';
-import { Button, View, Text,ScrollView, FlatList, Pressable } from 'react-native';
+import { Button, View, Text,ScrollView, FlatList, Pressable, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import styled from 'styled-components/native';
 import axios from 'axios';
@@ -71,43 +71,69 @@ const primCol = Configurations.colors.primCol
 const DashboardScreen = ({navigation }) => {
   const [newDaysObject, setNewDaysObject]= useState({})
   const [dbResult, setDbResult] = useState()
+  const [dbResultTask, setDbResultTask] = useState()
+  
+  const [grpTasks, setGrpTasks] = useState([])
+  const [courseTasks, setCourseTasks] = useState([])
+  const [eventTasks, setEventTasks] = useState([])
+  // const courseTasks = []
+  const individualTasks =[]
 
+// use effect function for loading the tasks to the calendar
   useEffect (()=>{
 
       var loadTaskList = {
         op: 'get_tasks_ls',
-        user_id: '1',
+        user_id: '1', // CONNECT THIS TO LOGGED IN USER(Fire Auth)
     }
     
       talktoserver(loadTaskList).then((rd) => {
         setDbResult(rd)
       })
 
-  },[dbResult])
-  
+  },[])
+// ================
+
+
+// useEffect to load the tasks for cards and regular tasks
+  useEffect(()=>{
+
+
+    var loadTaskDetail = 
+    {
+        op: 'get_task_detail',
+        tk_id: '1',
+    }
+
+    talktoserver(loadTaskDetail).then((rd) => 
+    {
+        setDbResultTask(rd)
+    })
+  },[])
+
   useEffect (()=>{
   
-  
-    const GetDays = async ()=>{
-const whatever = {
-  
-  day:'2021-11-10',
-  start:'2021-11-10 11:30',
-  end:'2021-11-10 12:30',
-  title:'something to test',
-  summary:'does it work?' 
-
-}
     
-console.log(dbResult)
+    const GetDays = async ()=>{
+    const whatever = {
+      
+      day:'2021-11-10',
+      start:'2021-11-10 11:30',
+      end:'2021-11-10 12:30',
+      title:'something to test',
+      summary:'does it work?' 
+
+    }
+    
 
         
         const daysObject = dbResult
         const newArray=[]
-
+        const groupTask = []
         for(let i=0; i<daysObject.length; i++)
         {
           newArray.push(daysObject[i].day)
+          
         }      
         
         let newObject = newArray.map(function(obj)
@@ -137,9 +163,37 @@ console.log(dbResult)
         setNewDaysObject(dailyEvents)
       }
       GetDays()
-  },[])
 
 
+      const taskList = dbResultTask
+      // console.log(dbResultTask[0].cname)
+      const getTasks = async()=>
+      {
+        for (let i=0 ; i<= taskList.length; i++)
+        {
+          if (taskList[i].cname == 'group')
+          {
+            // grpTasks.push(taskList)
+            setGrpTasks(taskList)
+            // console.log(grpTasks)
+          }
+            
+          else if (taskList[i].cname == 'courses')
+          {
+            setCourseTasks(taskList)
+          }
+          else if (taskList[i].cname == 'events')
+          {
+            setEventTasks(taskList)
+          }
+          // console.log(taskList[i].cname)
+        }
+      }
+      
+      getTasks()
+  },[dbResult,dbResultTask])
+
+  // console.log(dbResult)
 
   
   // state for switching between courses groups and events
@@ -280,6 +334,7 @@ console.log(dbResult)
 
           {/* functions on 211-230============= */}
         <TaskBtnCont>
+        <View style={styles.shadows}> 
           <TaskBtn 
               taskNum={category.taskCategory.Course.taskNum} 
               taskCate={category.taskCategory.Course.taskCate}
@@ -287,7 +342,10 @@ console.log(dbResult)
               textColor= {courses ? 'white' : colors.secCol }
               onBtnPress={coursePress}  
           />
-          
+        </View>  
+
+
+        <View style={styles.shadows}>
           <TaskBtn 
               taskNum={category.taskCategory.Group.taskNum} 
               taskCate={category.taskCategory.Group.taskCate}
@@ -296,7 +354,9 @@ console.log(dbResult)
 
               onBtnPress={groupPress}   
           />
+        </View>
 
+        < View style={styles.shadows}>
           <TaskBtn 
               taskNum={category.taskCategory.Event.taskNum} 
               taskCate={category.taskCategory.Event.taskCate}
@@ -305,20 +365,21 @@ console.log(dbResult)
               onBtnPress={eventPress}  
 
           />
+        </View>
         </TaskBtnCont>
 
           
       { courses ?
         <FlatList 
           contentContainerStyle={{ maxWidth:'100%'}}
-          data = {coursesData}
+          data = {courseTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
                   EventBackgroundColor="#EC8B1A"
-                  EventTitle={item.EventTitle}
-                  EventDescrip = {item.EventDescrip}
-                  EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime}
+                  EventTitle={item.tname}
+                  EventDescrip = {item.tdes}
+                  EventStartTime={item.start_t}
+                  EventDueTime = {item.end_t}
                   IconDisplay="none" 
                   onCardPress=  {()=>{navigation.navigate('CourseInfo')}}
                   /> }
@@ -327,25 +388,25 @@ console.log(dbResult)
       { groups ?
         <FlatList 
           contentContainerStyle={{ maxWidth:'100%'}}
-          data = {groupsData}
+          data = {grpTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
-                  EventTitle={item.EventTitle}
-                  EventDescrip = {item.EventDescrip}
-                  EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime} /> }
+                  EventTitle={item.tname}
+                  EventDescrip = {item.tdes}
+                  EventStartTime={item.start_t}
+                  EventDueTime = {item.end_t} /> }
         /> : null
       }
       { events ?
         <FlatList 
           contentContainerStyle={{ maxWidth:'100%'}}
-          data = {eventsData}
+          data = {eventTasks}
           renderItem={({item})=> 
                 <IndividualEventCard 
-                  EventTitle={item.EventTitle}
-                  EventDescrip = {item.EventDescrip}
-                  EventStartTime={item.EventStartTime}
-                  EventDueTime = {item.EventDueTime}
+                  EventTitle={item.tname}
+                  EventDescrip = {item.tdes}
+                  EventStartTime={item.start_t}
+                  EventDueTime = {item.end_t}
                   IconDisplay="none" /> }
         /> : null
       }
@@ -363,6 +424,17 @@ console.log(dbResult)
   );
 }
 
+const styles = StyleSheet.create({
+
+  shadows: 
+    {
+      shadowColor: '#5B7797',
+      shadowOffset: {width: 10, height: 8},
+      shadowOpacity: 1,
+      shadowRadius: 7,
+    }
+ 
+});
 
 export default DashboardScreen
 

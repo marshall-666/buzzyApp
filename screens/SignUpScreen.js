@@ -10,7 +10,7 @@ import { db } from '../firebase/fireStore';
 import { collection, getDocs, addDoc, doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import ErrorInfo from '../comps/ErrorInfo'
-
+import talktoserver from '../api/talktoserver';
 
 
 const LogoWrapper = styled.View`
@@ -61,8 +61,7 @@ const SignUpScreen = ({ navigation }) => {
   const [page1, setPage1] = useState(true)
   const [page2, setPage2] = useState(false)
   const [signupError, setSignupError] = useState('');
-
-
+  const [dbResult, setDbResult] = useState()
   const continuePress = () => {
     setPage1(false)
     setPage2(true)
@@ -73,9 +72,10 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   const submitPress = async () => {
+  
 
     const auth = getAuth();
-    if ( email !== '' && password !== '') {
+    if (email !== '' && password !== '') {
 
       try {
         const result = await createUserWithEmailAndPassword(
@@ -90,9 +90,30 @@ const SignUpScreen = ({ navigation }) => {
           email: email,
           school: school,
           program: program,
-          set: set ,
+          set: set,
           isOnline: true,
         });
+       
+        var registerUser = {
+          op: 'register_user',
+          fb_uid: result.user.uid,
+          uname: newName,
+          psword: 123456,
+          email: email,
+          org: school,
+          pro: program,
+          img_url: 'https://firebasestorage.googleapis.com/v0/b/buzzybee-d0af8.appspot.com/o/BuzzyBeeLogo.png?alt=media&token=e3d22cb8-f55f-49f1-a697-2f09f6c798ee',
+        }
+        console.log(registerUser)
+        talktoserver(registerUser).then((rd) => {
+          setDbResult(rd)
+          
+        })
+        console.log(dbResult)
+
+        console.log(registerUser)
+
+
       }
       catch (error) {
         const errorCode = error.code;

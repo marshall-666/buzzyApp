@@ -23,23 +23,23 @@ export const Days = [
   {
     id: 1,
     day: 'Monday',
-    date:'20th',
-    month: 'November',
+    date:'6th',
+    month: 'Docmnber',
     times: [{from:"9:30 AM", to:"11:30 AM"}, {from:"12:30 PM", to:"3:30 PM"}, {from:"9:30 AM", to:"11:30 AM"},]
   },
 
   {
     id: 2,
     day: 'Tuesday',
-    date:'25th',
-    month: 'November'
+    date:'7th',
+    month: 'Docmnber'
   },
   
   {
     id: 3,
     day: 'Wednesday',
-    date: '28th',
-    month: 'November'
+    date: '8th',
+    month: 'Docmnber'
   },
  
 ]
